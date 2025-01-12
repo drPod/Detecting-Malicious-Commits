@@ -9,18 +9,81 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 import pandas as pd
-from ratelimit import limits, sleep_and_retry
+from collections import deque
+from dotenv import load_dotenv
+import threading
+from dataclasses import dataclass
+from time import time, sleep
+
+
+@dataclass
+class Token:
+    key: str
+    last_used: float = 0
+    requests_remaining: int = 5000
+    reset_time: float = time() + 3600
+    lock: threading.Lock = threading.Lock()
+
+
+class TokenManager:
+    def __init__(self, tokens: List[str]):
+        self.tokens = deque([Token(key=token) for token in tokens])
+        self.lock = threading.Lock()
+
+    def get_available_token(self) -> Token:
+        while True:
+            with self.lock:
+                # Rotate to try each token
+                for _ in range(len(self.tokens)):
+                    token = self.tokens[0]
+                    current_time = time()
+
+                    # Check if token is ready for use
+                    with token.lock:
+                        if current_time > token.reset_time:
+                            # Reset quota if reset_time has passed
+                            token.requests_remaining = 5000
+                            token.reset_time = current_time + 3600
+
+                        if (
+                            token.requests_remaining > 0
+                            and current_time - token.last_used >= 1.0
+                        ):
+                            # Token is available
+                            token.last_used = current_time
+                            token.requests_remaining -= 1
+                            self.tokens.rotate(
+                                -1
+                            )  # Move to next token for next request
+                            return token
+
+                    self.tokens.rotate(-1)
+
+                # If no token is immediately available, wait a bit
+                min_wait = min(
+                    token.last_used + 1.0 - current_time for token in self.tokens
+                )
+                if min_wait > 0:
+                    sleep(min_wait)
+
+    def update_token_limits(self, token: Token, headers: Dict):
+        """Update token rate limits based on GitHub API response headers"""
+        with token.lock:
+            token.requests_remaining = int(
+                headers.get("X-RateLimit-Remaining", token.requests_remaining)
+            )
+            token.reset_time = float(headers.get("X-RateLimit-Reset", token.reset_time))
 
 
 class GitHubDataCollector:
     def __init__(
         self,
-        github_token: str,
+        token_manager: TokenManager,
         nvd_data_dir: str = "nvd_data",
         repo_data_dir: str = "repo_data",
         max_workers: int = 5,
     ):
-        self.github_token = github_token
+        self.token_manager = token_manager
         self.nvd_data_dir = Path(nvd_data_dir)
         self.repo_data_dir = Path(repo_data_dir)
         self.repo_data_dir.mkdir(parents=True, exist_ok=True)
@@ -34,24 +97,39 @@ class GitHubDataCollector:
         )
         self.logger = logging.getLogger(__name__)
 
-        # GitHub API setup
-        self.headers = {
-            "Authorization": f"token {github_token}",
-            "Accept": "application/vnd.github.v3+json",
-        }
-
-        # Cache for repository data to minimize API calls
+        # Cache for repository data
         self.repo_cache = {}
+        self.repo_cache_lock = threading.Lock()
 
-    @sleep_and_retry
-    @limits(calls=30, period=60)  # GitHub API rate limit: 5000 requests per hour
     def _github_request(self, url: str) -> dict:
-        """Make a rate-limited request to GitHub API"""
-        response = requests.get(url, headers=self.headers)
-        if response.status_code == 404:
-            return None
-        response.raise_for_status()
-        return response.json()
+        """Make a rate-limited request to GitHub API using token rotation"""
+        while True:
+            token = self.token_manager.get_available_token()
+
+            headers = {
+                "Authorization": f"token {token.key}",
+                "Accept": "application/vnd.github.v3+json",
+            }
+
+            try:
+                response = requests.get(url, headers=headers)
+                self.token_manager.update_token_limits(token, response.headers)
+
+                if response.status_code == 404:
+                    return None
+                response.raise_for_status()
+                return response.json()
+
+            except requests.exceptions.RequestException as e:
+                if (
+                    response.status_code == 403
+                    and "rate limit exceeded" in response.text.lower()
+                ):
+                    # Rate limit exceeded, token will be skipped in next rotation
+                    with token.lock:
+                        token.requests_remaining = 0
+                        continue
+                raise
 
     def get_author_stats(
         self, owner: str, repo: str, author_login: str
@@ -415,18 +493,39 @@ class GitHubDataCollector:
                     self.logger.error(f"Error saving results for {file_path}: {str(e)}")
 
 
-def main():
-    # Load GitHub token from environment
-    github_token = os.getenv("GITHUB_TOKEN")
-    if not github_token:
-        raise ValueError("Please set GITHUB_TOKEN environment variable")
+def load_github_tokens() -> List[str]:
+    """Load GitHub tokens from .env file"""
+    load_dotenv()
+    tokens = []
+    i = 1
+    while True:
+        token = os.getenv(f"GITHUB_TOKEN_{i}")
+        if token:
+            tokens.append(token)
+            i += 1
+        else:
+            break
 
-    # Initialize collector
+    if not tokens:
+        raise ValueError("No GitHub tokens found in .env file")
+
+    return tokens
+
+
+def main():
+    # Load GitHub tokens from .env
+    tokens = load_github_tokens()
+    print(f"Loaded {len(tokens)} GitHub tokens")
+
+    # Initialize token manager and collector
+    token_manager = TokenManager(tokens)
     collector = GitHubDataCollector(
-        github_token=github_token,
+        token_manager=token_manager,
         nvd_data_dir="nvd_data",
         repo_data_dir="repo_data",
-        max_workers=5,
+        max_workers=min(
+            len(tokens) * 2, 10
+        ),  # Scale workers with tokens, but cap at 10
     )
 
     # Run collection
