@@ -1,0 +1,26 @@
+Total CVEs analyzed: 46704
+CVEs with commit timing data: 6735
+Percentage with timing data: 14.42%
+
+Timing Statistics:
+
+Most Common Days:
+day_of_week
+Tuesday      1242
+Wednesday    1171
+Monday       1150
+Thursday     1115
+Friday       1005
+Name: count, dtype: int64
+
+Most Common Hours (UTC):
+hour
+14    434
+16    424
+15    388
+12    364
+13    361
+Name: count, dtype: int64
+
+Percentage of commits during working hours (9-5 UTC, Mon-Fri): 41.93%
+Percentage of commits during off hours: 58.07%

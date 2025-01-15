@@ -1,0 +1,3 @@
+Total CVEs: 46704
+CVEs with commit data: 6735
+Percentage with commit data: 14.42%
