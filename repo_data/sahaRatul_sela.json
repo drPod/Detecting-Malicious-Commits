@@ -1,0 +1,35 @@
+{
+  "name": "sela",
+  "owner": "sahaRatul",
+  "created_at": "2015-07-08T18:33:00Z",
+  "updated_at": "2024-11-22T09:47:26Z",
+  "pushed_at": "2020-04-11T17:35:26Z",
+  "size": 628,
+  "stars": 210,
+  "forks": 23,
+  "open_issues": 11,
+  "watchers": 210,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 80481,
+    "CMake": 9272,
+    "Shell": 1020
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:29:45.169983"
+}

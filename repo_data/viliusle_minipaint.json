@@ -1,0 +1,36 @@
+{
+  "name": "miniPaint",
+  "owner": "viliusle",
+  "created_at": "2013-07-30T14:11:26Z",
+  "updated_at": "2025-01-13T08:29:33Z",
+  "pushed_at": "2024-11-14T20:08:00Z",
+  "size": 22806,
+  "stars": 2807,
+  "forks": 648,
+  "open_issues": 37,
+  "watchers": 2807,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 977855,
+    "CSS": 54481,
+    "PHP": 17843,
+    "HTML": 4689
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:28:25.008980"
+}

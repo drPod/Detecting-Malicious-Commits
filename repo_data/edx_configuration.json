@@ -1,0 +1,42 @@
+{
+  "name": "configuration",
+  "owner": "edx",
+  "created_at": "2024-05-06T14:02:19Z",
+  "updated_at": "2025-01-14T07:20:37Z",
+  "pushed_at": "2025-01-14T10:41:56Z",
+  "size": 22667,
+  "stars": 2,
+  "forks": 2,
+  "open_issues": 11,
+  "watchers": 2,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Jinja": 474206,
+    "Python": 445889,
+    "Shell": 173492,
+    "Dockerfile": 51787,
+    "Groovy": 6980,
+    "Makefile": 6831,
+    "Vim Script": 1123,
+    "C": 1034,
+    "SCSS": 396,
+    "JavaScript": 42
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T18:29:02.603782"
+}

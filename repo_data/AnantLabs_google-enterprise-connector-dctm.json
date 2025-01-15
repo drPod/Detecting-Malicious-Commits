@@ -1,0 +1,34 @@
+{
+  "name": "google-enterprise-connector-dctm",
+  "owner": "AnantLabs",
+  "created_at": "2015-03-21T19:38:16Z",
+  "updated_at": "2017-09-13T13:31:13Z",
+  "pushed_at": "2015-03-21T19:40:49Z",
+  "size": 5456,
+  "stars": 0,
+  "forks": 0,
+  "open_issues": 1,
+  "watchers": 0,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Java": 594922,
+    "JavaScript": 4487
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T19:33:18.607093"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "quilt",
+  "owner": "Shopify",
+  "created_at": "2018-03-27T19:20:06Z",
+  "updated_at": "2025-01-10T07:28:17Z",
+  "pushed_at": "2025-01-10T02:26:54Z",
+  "size": 33959,
+  "stars": 1699,
+  "forks": 225,
+  "open_issues": 128,
+  "watchers": 1699,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "a11y_tests_class_improvement",
+    "apollo-3-migration"
+  ],
+  "languages": {
+    "TypeScript": 3200936,
+    "Ruby": 77661,
+    "JavaScript": 40863,
+    "Shell": 626,
+    "CSS": 625,
+    "Handlebars": 94,
+    "Procfile": 85
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:42:11.806459"
+}

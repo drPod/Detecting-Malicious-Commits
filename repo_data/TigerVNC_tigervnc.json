@@ -1,0 +1,43 @@
+{
+  "name": "tigervnc",
+  "owner": "TigerVNC",
+  "created_at": "2014-06-25T12:48:26Z",
+  "updated_at": "2025-01-14T11:44:26Z",
+  "pushed_at": "2025-01-14T11:44:21Z",
+  "size": 25050,
+  "stars": 5359,
+  "forks": 970,
+  "open_issues": 175,
+  "watchers": 5359,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 2105004,
+    "Java": 1745894,
+    "C": 1008908,
+    "CMake": 70519,
+    "Roff": 50879,
+    "Makefile": 32567,
+    "Objective-C++": 17412,
+    "Perl": 12443,
+    "Shell": 11196,
+    "Objective-C": 1780,
+    "Python": 1378
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:43:04.443892"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "stegdetect",
+  "owner": "abeluck",
+  "created_at": "2013-04-09T09:32:34Z",
+  "updated_at": "2024-12-28T13:10:00Z",
+  "pushed_at": "2018-10-31T08:44:08Z",
+  "size": 1435,
+  "stars": 409,
+  "forks": 111,
+  "open_issues": 3,
+  "watchers": 409,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 1576696,
+    "Objective-C": 1233101,
+    "Shell": 137106,
+    "C++": 67123,
+    "Roff": 59734,
+    "Makefile": 57080,
+    "Assembly": 25680,
+    "SAS": 13756,
+    "WebAssembly": 13560,
+    "Module Management System": 13253,
+    "Smalltalk": 6201,
+    "HTML": 4329,
+    "M4": 3748,
+    "Perl": 2088
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T18:24:43.968256"
+}

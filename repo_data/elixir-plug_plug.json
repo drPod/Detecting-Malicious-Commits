@@ -1,0 +1,35 @@
+{
+  "name": "plug",
+  "owner": "elixir-plug",
+  "created_at": "2013-11-15T10:30:47Z",
+  "updated_at": "2025-01-14T12:15:21Z",
+  "pushed_at": "2024-12-22T20:55:48Z",
+  "size": 2952,
+  "stars": 2887,
+  "forks": 589,
+  "open_issues": 9,
+  "watchers": 2887,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Elixir": 569748,
+    "HTML": 29342,
+    "Erlang": 15979
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:59:07.646824"
+}

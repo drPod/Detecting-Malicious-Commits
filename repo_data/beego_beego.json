@@ -1,0 +1,36 @@
+{
+  "name": "beego",
+  "owner": "beego",
+  "created_at": "2012-02-29T02:32:08Z",
+  "updated_at": "2025-01-14T14:46:26Z",
+  "pushed_at": "2025-01-12T07:08:35Z",
+  "size": 11851,
+  "stars": 31768,
+  "forks": 5626,
+  "open_issues": 11,
+  "watchers": 31768,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Go": 1831956,
+    "Makefile": 2990,
+    "Shell": 559,
+    "Smarty": 359
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:47:43.889980"
+}

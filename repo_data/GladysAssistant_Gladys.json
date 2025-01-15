@@ -1,0 +1,38 @@
+{
+  "name": "Gladys",
+  "owner": "GladysAssistant",
+  "created_at": "2015-06-05T11:10:33Z",
+  "updated_at": "2025-01-13T14:14:29Z",
+  "pushed_at": "2025-01-13T08:43:08Z",
+  "size": 33724,
+  "stars": 2742,
+  "forks": 288,
+  "open_issues": 17,
+  "watchers": 2742,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 5786303,
+    "CSS": 31671,
+    "HTML": 7500,
+    "Dockerfile": 1137
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:01:21.163894"
+}

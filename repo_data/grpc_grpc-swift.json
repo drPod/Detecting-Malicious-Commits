@@ -1,0 +1,38 @@
+{
+  "name": "grpc-swift",
+  "owner": "grpc",
+  "created_at": "2016-09-21T17:35:31Z",
+  "updated_at": "2025-01-13T14:02:52Z",
+  "pushed_at": "2025-01-13T14:02:47Z",
+  "size": 18431,
+  "stars": 2073,
+  "forks": 419,
+  "open_issues": 103,
+  "watchers": 2073,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "cgrpc",
+    "main",
+    "release/1.x"
+  ],
+  "languages": {
+    "Swift": 1340902,
+    "Shell": 16441
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:06:04.208414"
+}

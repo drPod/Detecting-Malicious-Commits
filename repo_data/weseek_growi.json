@@ -1,0 +1,48 @@
+{
+  "name": "growi",
+  "owner": "weseek",
+  "created_at": "2017-02-16T17:15:47Z",
+  "updated_at": "2025-01-09T02:31:17Z",
+  "pushed_at": "2025-01-10T10:29:36Z",
+  "size": 153070,
+  "stars": 1336,
+  "forks": 218,
+  "open_issues": 74,
+  "watchers": 1336,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "dev/4.5.x",
+    "dev/5.1.x",
+    "dev/6.0.x",
+    "dev/6.1.x",
+    "dev/6.2.x",
+    "dev/6.3.x",
+    "dev/7.0.x"
+  ],
+  "languages": {
+    "TypeScript": 3883371,
+    "JavaScript": 1623383,
+    "SCSS": 165562,
+    "EJS": 28044,
+    "Dockerfile": 3421,
+    "HCL": 2058,
+    "Shell": 1906,
+    "HTML": 501
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4948,
+    "avg_commits_per_week": 95.15384615384616,
+    "days_active_last_year": 270
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:19:46.286133"
+}

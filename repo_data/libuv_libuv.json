@@ -1,0 +1,46 @@
+{
+  "name": "libuv",
+  "owner": "libuv",
+  "created_at": "2013-11-30T00:29:56Z",
+  "updated_at": "2025-01-14T13:50:35Z",
+  "pushed_at": "2025-01-14T13:50:26Z",
+  "size": 17515,
+  "stars": 24653,
+  "forks": 3628,
+  "open_issues": 179,
+  "watchers": 24653,
+  "has_security_policy": false,
+  "default_branch": "v1.x",
+  "protected_branches": [
+    "master",
+    "v0.6",
+    "v0.8",
+    "v0.10",
+    "v1.x",
+    "v1.45.x"
+  ],
+  "languages": {
+    "C": 3060282,
+    "M4": 36963,
+    "CMake": 28623,
+    "Makefile": 21982,
+    "Python": 2623,
+    "Shell": 2489,
+    "Batchfile": 1312
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T20:50:48.686914"
+}

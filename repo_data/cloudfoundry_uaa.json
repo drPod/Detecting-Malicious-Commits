@@ -1,0 +1,45 @@
+{
+  "name": "uaa",
+  "owner": "cloudfoundry",
+  "created_at": "2012-02-07T22:40:55Z",
+  "updated_at": "2025-01-09T18:54:27Z",
+  "pushed_at": "2025-01-14T11:33:08Z",
+  "size": 73827,
+  "stars": 1603,
+  "forks": 828,
+  "open_issues": 41,
+  "watchers": 1603,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "74.5.x"
+  ],
+  "languages": {
+    "Java": 11398730,
+    "JavaScript": 391991,
+    "CSS": 236864,
+    "HTML": 165995,
+    "Go": 65313,
+    "Shell": 41156,
+    "SCSS": 29547,
+    "Ruby": 7266,
+    "Starlark": 3041,
+    "Makefile": 752,
+    "Vim Snippet": 455
+  },
+  "commit_activity": {
+    "total_commits_last_year": 820,
+    "avg_commits_per_week": 15.76923076923077,
+    "days_active_last_year": 213
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:34:23.483420"
+}

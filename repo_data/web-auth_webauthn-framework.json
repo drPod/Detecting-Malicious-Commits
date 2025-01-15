@@ -1,0 +1,36 @@
+{
+  "name": "webauthn-framework",
+  "owner": "web-auth",
+  "created_at": "2018-11-22T19:39:31Z",
+  "updated_at": "2025-01-13T14:20:54Z",
+  "pushed_at": "2025-01-04T10:30:06Z",
+  "size": 7888,
+  "stars": 437,
+  "forks": 59,
+  "open_issues": 17,
+  "watchers": 437,
+  "has_security_policy": false,
+  "default_branch": "5.1.x",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 862052,
+    "Twig": 88409,
+    "TypeScript": 10516,
+    "JavaScript": 6194
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:25:34.604595"
+}

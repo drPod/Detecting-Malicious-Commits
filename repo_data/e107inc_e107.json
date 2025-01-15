@@ -1,0 +1,42 @@
+{
+  "name": "e107",
+  "owner": "e107inc",
+  "created_at": "2012-11-16T19:49:01Z",
+  "updated_at": "2025-01-13T23:35:38Z",
+  "pushed_at": "2025-01-13T23:35:33Z",
+  "size": 93949,
+  "stars": 324,
+  "forks": 213,
+  "open_issues": 662,
+  "watchers": 324,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 10485316,
+    "JavaScript": 1136648,
+    "CSS": 973571,
+    "HTML": 20946,
+    "Scala": 20715,
+    "Clojure": 14453,
+    "SaltStack": 3602,
+    "SuperCollider": 3212,
+    "Go": 1300,
+    "BlitzBasic": 161
+  },
+  "commit_activity": {
+    "total_commits_last_year": 110,
+    "avg_commits_per_week": 2.1153846153846154,
+    "days_active_last_year": 44
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:12:18.206807"
+}

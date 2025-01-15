@@ -1,0 +1,39 @@
+{
+  "name": "uthenticode",
+  "owner": "trailofbits",
+  "created_at": "2020-04-11T02:36:25Z",
+  "updated_at": "2025-01-04T04:08:17Z",
+  "pushed_at": "2024-10-28T15:01:50Z",
+  "size": 595,
+  "stars": 141,
+  "forks": 33,
+  "open_issues": 10,
+  "watchers": 141,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 57835,
+    "CMake": 5911,
+    "Makefile": 929,
+    "Shell": 892,
+    "Dockerfile": 805
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T20:54:20.446118"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "fossology",
+  "owner": "fossology",
+  "created_at": "2014-01-13T11:22:57Z",
+  "updated_at": "2025-01-13T06:36:01Z",
+  "pushed_at": "2025-01-13T12:20:11Z",
+  "size": 312721,
+  "stars": 823,
+  "forks": 432,
+  "open_issues": 408,
+  "watchers": 823,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 5338838,
+    "HTML": 4849334,
+    "C": 2307166,
+    "Twig": 468314,
+    "JavaScript": 376242,
+    "Shell": 357946,
+    "C++": 340045,
+    "CMake": 172361,
+    "Python": 141004,
+    "Roff": 115240,
+    "CSS": 20577,
+    "Makefile": 9729,
+    "Perl": 5058,
+    "Dockerfile": 4679,
+    "PLpgSQL": 3785,
+    "Java": 3759,
+    "PureBasic": 3579
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T14:45:14.925228"
+}

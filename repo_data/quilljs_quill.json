@@ -1,0 +1,40 @@
+{
+  "name": "quill",
+  "owner": "quilljs",
+  "created_at": "2012-07-30T23:23:18Z",
+  "updated_at": "2025-01-14T15:16:33Z",
+  "pushed_at": "2024-11-30T12:21:23Z",
+  "size": 18249,
+  "stars": 44313,
+  "forks": 3429,
+  "open_issues": 484,
+  "watchers": 44313,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 582079,
+    "MDX": 169366,
+    "JavaScript": 79455,
+    "SCSS": 41676,
+    "Stylus": 17007,
+    "CSS": 12696,
+    "HTML": 5394,
+    "Shell": 520
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T16:37:11.086626"
+}

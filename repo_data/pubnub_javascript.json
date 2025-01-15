@@ -1,0 +1,36 @@
+{
+  "name": "javascript",
+  "owner": "pubnub",
+  "created_at": "2013-02-19T23:19:36Z",
+  "updated_at": "2025-01-02T13:02:22Z",
+  "pushed_at": "2025-01-08T08:07:25Z",
+  "size": 38043,
+  "stars": 554,
+  "forks": 402,
+  "open_issues": 28,
+  "watchers": 554,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "TypeScript": 1376142,
+    "JavaScript": 736960
+  },
+  "commit_activity": {
+    "total_commits_last_year": 30,
+    "avg_commits_per_week": 0.5769230769230769,
+    "days_active_last_year": 27
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T18:34:35.007871"
+}

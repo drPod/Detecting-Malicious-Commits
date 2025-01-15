@@ -1,0 +1,40 @@
+{
+  "name": "libvpx",
+  "owner": "webmproject",
+  "created_at": "2014-08-13T19:03:21Z",
+  "updated_at": "2025-01-14T04:00:45Z",
+  "pushed_at": "2025-01-14T04:00:41Z",
+  "size": 72175,
+  "stars": 907,
+  "forks": 343,
+  "open_issues": 2,
+  "watchers": 907,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C": 12838403,
+    "C++": 1662532,
+    "Assembly": 930605,
+    "Makefile": 212452,
+    "Shell": 183901,
+    "Perl": 172373,
+    "Python": 64929,
+    "Processing": 26539
+  },
+  "commit_activity": {
+    "total_commits_last_year": 330,
+    "avg_commits_per_week": 6.346153846153846,
+    "days_active_last_year": 151
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T20:48:11.965963"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Medusa",
+  "owner": "pymedusa",
+  "created_at": "2016-02-23T06:02:11Z",
+  "updated_at": "2025-01-14T13:43:59Z",
+  "pushed_at": "2025-01-14T12:30:48Z",
+  "size": 223267,
+  "stars": 1827,
+  "forks": 275,
+  "open_issues": 460,
+  "watchers": 1827,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "develop"
+  ],
+  "languages": {
+    "Python": 3633983,
+    "JavaScript": 1313697,
+    "Vue": 1194800,
+    "CSS": 146101,
+    "Mako": 36222,
+    "Shell": 16518,
+    "SCSS": 13224,
+    "Dockerfile": 1514,
+    "HTML": 223
+  },
+  "commit_activity": {
+    "total_commits_last_year": 62,
+    "avg_commits_per_week": 1.1923076923076923,
+    "days_active_last_year": 13
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:11:16.530384"
+}

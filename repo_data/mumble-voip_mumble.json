@@ -1,0 +1,51 @@
+{
+  "name": "mumble",
+  "owner": "mumble-voip",
+  "created_at": "2011-02-26T01:30:08Z",
+  "updated_at": "2025-01-14T11:25:37Z",
+  "pushed_at": "2025-01-13T14:56:52Z",
+  "size": 120180,
+  "stars": 6528,
+  "forks": 1135,
+  "open_issues": 466,
+  "watchers": 6528,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 3626942,
+    "CMake": 163434,
+    "Python": 133940,
+    "C": 91958,
+    "Objective-C++": 78396,
+    "Slice": 41816,
+    "SCSS": 28197,
+    "Shell": 16546,
+    "C#": 10537,
+    "Roff": 8269,
+    "Batchfile": 4383,
+    "PowerShell": 4308,
+    "Perl": 3604,
+    "HLSL": 3048,
+    "GLSL": 1990,
+    "PostScript": 1954,
+    "Objective-C": 929
+  },
+  "commit_activity": {
+    "total_commits_last_year": 417,
+    "avg_commits_per_week": 8.01923076923077,
+    "days_active_last_year": 109
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:10:20.048674"
+}

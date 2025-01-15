@@ -1,0 +1,48 @@
+{
+  "name": "winscp",
+  "owner": "winscp",
+  "created_at": "2016-06-22T17:19:44Z",
+  "updated_at": "2025-01-14T08:53:15Z",
+  "pushed_at": "2025-01-11T00:04:18Z",
+  "size": 109669,
+  "stars": 2815,
+  "forks": 335,
+  "open_issues": 0,
+  "watchers": 2815,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 19975534,
+    "C++": 6628819,
+    "Shell": 773635,
+    "Pascal": 664492,
+    "Makefile": 441581,
+    "HTML": 381113,
+    "C#": 363462,
+    "Assembly": 213491,
+    "Roff": 144330,
+    "M4": 114694,
+    "Inno Setup": 77323,
+    "CMake": 61769,
+    "Python": 8063,
+    "Batchfile": 6482,
+    "XSLT": 3325,
+    "CSS": 3027
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:47:35.245486"
+}

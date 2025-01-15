@@ -1,0 +1,41 @@
+{
+  "name": "setup-kubectl",
+  "owner": "Azure",
+  "created_at": "2019-09-04T10:28:20Z",
+  "updated_at": "2024-12-25T20:04:52Z",
+  "pushed_at": "2025-01-13T10:41:15Z",
+  "size": 21778,
+  "stars": 134,
+  "forks": 50,
+  "open_issues": 6,
+  "watchers": 134,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "releases/v1",
+    "releases/v2",
+    "releases/v3",
+    "releases/v4.0.0"
+  ],
+  "languages": {
+    "TypeScript": 12161,
+    "Python": 1957,
+    "JavaScript": 353
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:20:14.925710"
+}

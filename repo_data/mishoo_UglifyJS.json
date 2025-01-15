@@ -1,0 +1,35 @@
+{
+  "name": "UglifyJS",
+  "owner": "mishoo",
+  "created_at": "2012-08-27T09:31:03Z",
+  "updated_at": "2025-01-14T09:37:34Z",
+  "pushed_at": "2024-11-22T08:11:38Z",
+  "size": 19132,
+  "stars": 13219,
+  "forks": 1245,
+  "open_issues": 40,
+  "watchers": 13219,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 3789588,
+    "Shell": 36177,
+    "HTML": 13612
+  },
+  "commit_activity": {
+    "total_commits_last_year": 74,
+    "avg_commits_per_week": 1.4230769230769231,
+    "days_active_last_year": 42
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:21:23.085754"
+}

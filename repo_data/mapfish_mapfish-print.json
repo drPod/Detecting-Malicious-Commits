@@ -1,0 +1,50 @@
+{
+  "name": "mapfish-print",
+  "owner": "mapfish",
+  "created_at": "2011-11-08T22:24:04Z",
+  "updated_at": "2025-01-14T07:46:05Z",
+  "pushed_at": "2025-01-14T07:49:02Z",
+  "size": 273137,
+  "stars": 186,
+  "forks": 416,
+  "open_issues": 204,
+  "watchers": 186,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "3.27",
+    "3.28",
+    "3.29",
+    "3.30",
+    "3.31",
+    "master"
+  ],
+  "languages": {
+    "Java": 2303000,
+    "JavaScript": 495445,
+    "Scheme": 44064,
+    "HTML": 17511,
+    "Shell": 7376,
+    "CSS": 5588,
+    "Dockerfile": 4720,
+    "Python": 3315,
+    "Makefile": 2960,
+    "Batchfile": 2618,
+    "XSLT": 1877
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-2-clause"
+  },
+  "collected_at": "2025-01-14T19:59:29.169504"
+}

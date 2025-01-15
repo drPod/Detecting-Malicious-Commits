@@ -1,0 +1,34 @@
+{
+  "name": "postcss",
+  "owner": "postcss",
+  "created_at": "2013-09-24T23:06:48Z",
+  "updated_at": "2025-01-14T10:55:29Z",
+  "pushed_at": "2025-01-14T10:55:25Z",
+  "size": 10792,
+  "stars": 28616,
+  "forks": 1568,
+  "open_issues": 23,
+  "watchers": 28616,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 178423,
+    "JavaScript": 122251
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:48:49.645762"
+}

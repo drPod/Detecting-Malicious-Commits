@@ -1,0 +1,36 @@
+{
+  "name": "mercurius",
+  "owner": "mercurius-js",
+  "created_at": "2018-09-11T14:41:29Z",
+  "updated_at": "2025-01-14T13:17:55Z",
+  "pushed_at": "2025-01-14T09:30:08Z",
+  "size": 1471,
+  "stars": 2386,
+  "forks": 240,
+  "open_issues": 60,
+  "watchers": 2386,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 400535,
+    "TypeScript": 15042,
+    "HTML": 7555,
+    "Shell": 658
+  },
+  "commit_activity": {
+    "total_commits_last_year": 30,
+    "avg_commits_per_week": 0.5769230769230769,
+    "days_active_last_year": 16
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:33:04.125838"
+}

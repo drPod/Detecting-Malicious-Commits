@@ -1,0 +1,33 @@
+{
+  "name": "framework",
+  "owner": "matyhtf",
+  "created_at": "2022-04-20T13:47:12Z",
+  "updated_at": "2024-11-23T00:04:49Z",
+  "pushed_at": "2023-06-07T09:01:18Z",
+  "size": 468,
+  "stars": 7,
+  "forks": 4,
+  "open_issues": 0,
+  "watchers": 7,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 1117044
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T13:23:48.691073"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "goproxy",
+  "owner": "elazarl",
+  "created_at": "2012-03-22T22:05:00Z",
+  "updated_at": "2025-01-14T12:37:16Z",
+  "pushed_at": "2025-01-13T13:10:33Z",
+  "size": 469,
+  "stars": 6124,
+  "forks": 1116,
+  "open_issues": 81,
+  "watchers": 6124,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Go": 193342,
+    "HTML": 27807,
+    "Shell": 626
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T22:14:49.970111"
+}

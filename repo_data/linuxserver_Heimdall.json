@@ -1,0 +1,39 @@
+{
+  "name": "Heimdall",
+  "owner": "linuxserver",
+  "created_at": "2018-01-26T12:04:05Z",
+  "updated_at": "2025-01-13T20:50:20Z",
+  "pushed_at": "2024-11-05T11:23:43Z",
+  "size": 33416,
+  "stars": 8050,
+  "forks": 559,
+  "open_issues": 20,
+  "watchers": 8050,
+  "has_security_policy": false,
+  "default_branch": "2.x",
+  "protected_branches": [
+    "2.x",
+    "master"
+  ],
+  "languages": {
+    "PHP": 1600136,
+    "Blade": 77582,
+    "SCSS": 21847,
+    "JavaScript": 7607
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T16:30:18.363992"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Announcements",
+  "owner": "aspnet",
+  "created_at": "2015-04-10T23:31:39Z",
+  "updated_at": "2025-01-05T12:34:31Z",
+  "pushed_at": "2024-12-05T22:50:28Z",
+  "size": 61,
+  "stars": 1656,
+  "forks": 80,
+  "open_issues": 445,
+  "watchers": 1656,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {},
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:29:02.611213"
+}

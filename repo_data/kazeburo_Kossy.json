@@ -1,0 +1,35 @@
+{
+  "name": "Kossy",
+  "owner": "kazeburo",
+  "created_at": "2011-11-11T03:17:05Z",
+  "updated_at": "2024-07-04T12:57:24Z",
+  "pushed_at": "2023-11-13T02:24:43Z",
+  "size": 449,
+  "stars": 35,
+  "forks": 14,
+  "open_issues": 3,
+  "watchers": 35,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Perl": 72003
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:48:09.246809"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "NotrinosERP",
+  "owner": "notrinos",
+  "created_at": "2021-01-03T04:38:58Z",
+  "updated_at": "2025-01-09T09:14:45Z",
+  "pushed_at": "2023-03-21T02:45:30Z",
+  "size": 5599,
+  "stars": 114,
+  "forks": 54,
+  "open_issues": 3,
+  "watchers": 114,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 4064328,
+    "JavaScript": 79232,
+    "CSS": 76622
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T21:37:39.724709"
+}

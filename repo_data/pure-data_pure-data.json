@@ -1,0 +1,52 @@
+{
+  "name": "pure-data",
+  "owner": "pure-data",
+  "created_at": "2014-08-18T09:36:46Z",
+  "updated_at": "2025-01-14T17:44:59Z",
+  "pushed_at": "2025-01-14T09:08:30Z",
+  "size": 63073,
+  "stars": 1632,
+  "forks": 248,
+  "open_issues": 574,
+  "watchers": 1632,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "0.53-2",
+    "0.54",
+    "deken",
+    "develop",
+    "l10n",
+    "longclassnames",
+    "master",
+    "pa-v19.7.0"
+  ],
+  "languages": {
+    "C": 5069394,
+    "C++": 637423,
+    "Tcl": 539118,
+    "PostScript": 130649,
+    "Shell": 54409,
+    "M4": 40912,
+    "Makefile": 40480,
+    "NSIS": 24349,
+    "Gnuplot": 8945,
+    "Emacs Lisp": 297,
+    "Awk": 233
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:34:47.085473"
+}

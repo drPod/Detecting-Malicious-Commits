@@ -1,0 +1,36 @@
+{
+  "name": "pango",
+  "owner": "bratsche",
+  "created_at": "2009-04-01T18:19:24Z",
+  "updated_at": "2024-07-06T15:37:48Z",
+  "pushed_at": "2009-04-18T19:38:15Z",
+  "size": 5964,
+  "stars": 17,
+  "forks": 4,
+  "open_issues": 0,
+  "watchers": 17,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 2090222,
+    "Perl": 1236,
+    "Shell": 639,
+    "C++": 482
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T22:55:02.367058"
+}

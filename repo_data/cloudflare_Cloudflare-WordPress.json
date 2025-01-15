@@ -1,0 +1,38 @@
+{
+  "name": "Cloudflare-WordPress",
+  "owner": "cloudflare",
+  "created_at": "2016-05-27T22:25:28Z",
+  "updated_at": "2025-01-06T16:19:39Z",
+  "pushed_at": "2024-09-25T04:29:27Z",
+  "size": 16342,
+  "stars": 218,
+  "forks": 85,
+  "open_issues": 17,
+  "watchers": 218,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "PHP": 176652,
+    "JavaScript": 40957,
+    "CSS": 12636,
+    "Shell": 1511
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T14:06:47.565055"
+}

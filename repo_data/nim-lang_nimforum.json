@@ -1,0 +1,39 @@
+{
+  "name": "nimforum",
+  "owner": "nim-lang",
+  "created_at": "2012-05-04T22:52:25Z",
+  "updated_at": "2025-01-03T21:49:33Z",
+  "pushed_at": "2024-11-17T12:04:17Z",
+  "size": 1333,
+  "stars": 764,
+  "forks": 70,
+  "open_issues": 129,
+  "watchers": 764,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Nim": 211199,
+    "HTML": 15655,
+    "SCSS": 13241,
+    "Shell": 341,
+    "Dockerfile": 293
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:40:41.411079"
+}

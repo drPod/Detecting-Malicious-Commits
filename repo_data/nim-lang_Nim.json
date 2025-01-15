@@ -1,0 +1,45 @@
+{
+  "name": "Nim",
+  "owner": "nim-lang",
+  "created_at": "2010-08-16T20:38:58Z",
+  "updated_at": "2025-01-14T12:40:53Z",
+  "pushed_at": "2025-01-14T12:24:39Z",
+  "size": 122364,
+  "stars": 16739,
+  "forks": 1481,
+  "open_issues": 2036,
+  "watchers": 16739,
+  "has_security_policy": false,
+  "default_branch": "devel",
+  "protected_branches": [
+    "devel"
+  ],
+  "languages": {
+    "Nim": 12852556,
+    "HTML": 243923,
+    "Python": 66641,
+    "C": 57643,
+    "CSS": 54694,
+    "C++": 24135,
+    "NSIS": 10651,
+    "Shell": 8792,
+    "Assembly": 4495,
+    "Batchfile": 2946,
+    "GDB": 1096
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1184,
+    "avg_commits_per_week": 22.76923076923077,
+    "days_active_last_year": 271
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:19:23.165441"
+}

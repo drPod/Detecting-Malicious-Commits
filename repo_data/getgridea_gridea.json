@@ -1,0 +1,39 @@
+{
+  "name": "gridea",
+  "owner": "getgridea",
+  "created_at": "2018-03-23T02:13:21Z",
+  "updated_at": "2025-01-14T13:19:43Z",
+  "pushed_at": "2023-07-26T01:07:03Z",
+  "size": 12125,
+  "stars": 10065,
+  "forks": 804,
+  "open_issues": 578,
+  "watchers": 10065,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 142463,
+    "Less": 134478,
+    "Vue": 132448,
+    "EJS": 46815,
+    "JavaScript": 26864,
+    "HTML": 9232,
+    "CSS": 285
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:00:03.337364"
+}

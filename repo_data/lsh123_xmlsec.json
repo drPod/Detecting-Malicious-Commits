@@ -1,0 +1,42 @@
+{
+  "name": "xmlsec",
+  "owner": "lsh123",
+  "created_at": "2016-01-28T17:21:23Z",
+  "updated_at": "2025-01-09T22:28:29Z",
+  "pushed_at": "2025-01-09T22:28:28Z",
+  "size": 20250,
+  "stars": 136,
+  "forks": 100,
+  "open_issues": 12,
+  "watchers": 136,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 5444286,
+    "Shell": 213359,
+    "M4": 106744,
+    "JavaScript": 20994,
+    "Makefile": 15445,
+    "Perl": 7422,
+    "Batchfile": 1864,
+    "XSLT": 1386
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:01:41.728282"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "AIBattle-disabled-",
+  "owner": "Dovgalyuk",
+  "created_at": "2014-12-19T20:19:09Z",
+  "updated_at": "2016-04-13T15:10:49Z",
+  "pushed_at": "2015-10-29T13:24:43Z",
+  "size": 2255,
+  "stars": 1,
+  "forks": 1,
+  "open_issues": 3,
+  "watchers": 1,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 311087,
+    "C++": 198341,
+    "HTML": 169228,
+    "JavaScript": 53127,
+    "CSS": 21911,
+    "TeX": 16641,
+    "CMake": 5682,
+    "Pascal": 863,
+    "Batchfile": 724,
+    "ApacheConf": 448,
+    "Shell": 399
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T20:14:29.166953"
+}

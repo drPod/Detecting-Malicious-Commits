@@ -1,0 +1,35 @@
+{
+  "name": "squirrelly",
+  "owner": "squirrellyjs",
+  "created_at": "2017-10-14T02:33:59Z",
+  "updated_at": "2024-12-31T06:04:44Z",
+  "pushed_at": "2024-07-02T01:15:38Z",
+  "size": 3998,
+  "stars": 649,
+  "forks": 83,
+  "open_issues": 22,
+  "watchers": 649,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 78910,
+    "JavaScript": 14147,
+    "HTML": 11294
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4,
+    "avg_commits_per_week": 0.07692307692307693,
+    "days_active_last_year": 2
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:18:51.326978"
+}

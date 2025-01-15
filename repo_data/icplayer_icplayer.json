@@ -1,0 +1,37 @@
+{
+  "name": "icplayer",
+  "owner": "icplayer",
+  "created_at": "2013-02-25T08:53:47Z",
+  "updated_at": "2025-01-10T11:53:20Z",
+  "pushed_at": "2025-01-14T07:34:28Z",
+  "size": 123087,
+  "stars": 40,
+  "forks": 25,
+  "open_issues": 54,
+  "watchers": 40,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 12717686,
+    "Java": 2490932,
+    "CSS": 215471,
+    "HTML": 60876,
+    "Python": 1000
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:25:23.170070"
+}

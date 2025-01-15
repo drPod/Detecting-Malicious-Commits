@@ -1,0 +1,49 @@
+{
+  "name": "posthog",
+  "owner": "posthog",
+  "created_at": "2020-01-23T22:46:58Z",
+  "updated_at": "2025-01-14T22:37:49Z",
+  "pushed_at": "2025-01-14T22:37:47Z",
+  "size": 1482496,
+  "stars": 23200,
+  "forks": 1431,
+  "open_issues": 1656,
+  "watchers": 23200,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 20117034,
+    "TypeScript": 16958628,
+    "Rust": 1284396,
+    "C++": 664465,
+    "JavaScript": 288907,
+    "SCSS": 283999,
+    "HTML": 98890,
+    "Shell": 81804,
+    "Go": 37960,
+    "Perl": 35898,
+    "MDX": 29788,
+    "ANTLR": 23258,
+    "Dockerfile": 13228,
+    "PLpgSQL": 9521,
+    "EJS": 4605,
+    "Smarty": 1517,
+    "C": 285
+  },
+  "commit_activity": {
+    "total_commits_last_year": 6931,
+    "avg_commits_per_week": 133.28846153846155,
+    "days_active_last_year": 302
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T22:45:23.648838"
+}

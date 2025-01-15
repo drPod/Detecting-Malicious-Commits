@@ -1,0 +1,42 @@
+{
+  "name": "sd-webui-infinite-image-browsing",
+  "owner": "zanllp",
+  "created_at": "2023-03-07T18:26:27Z",
+  "updated_at": "2025-01-14T18:39:39Z",
+  "pushed_at": "2025-01-14T18:56:30Z",
+  "size": 22472,
+  "stars": 1050,
+  "forks": 128,
+  "open_issues": 70,
+  "watchers": 1050,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 198340,
+    "Vue": 161773,
+    "Python": 144297,
+    "JavaScript": 12668,
+    "SCSS": 6365,
+    "Rust": 4077,
+    "HTML": 734,
+    "CSS": 51
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T22:24:10.130855"
+}

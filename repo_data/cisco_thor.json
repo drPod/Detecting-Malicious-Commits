@@ -1,0 +1,37 @@
+{
+  "name": "thor",
+  "owner": "cisco",
+  "created_at": "2015-07-15T16:00:20Z",
+  "updated_at": "2024-12-18T01:25:51Z",
+  "pushed_at": "2018-08-08T19:06:20Z",
+  "size": 1168,
+  "stars": 698,
+  "forks": 103,
+  "open_issues": 20,
+  "watchers": 698,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 1961873,
+    "C++": 160683,
+    "Objective-C": 30323,
+    "Shell": 9652,
+    "Makefile": 3806
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-2-clause"
+  },
+  "collected_at": "2025-01-14T17:58:38.284369"
+}

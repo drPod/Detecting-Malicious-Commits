@@ -1,0 +1,36 @@
+{
+  "name": "community.kubernetes",
+  "owner": "ansible-collections",
+  "created_at": "2020-01-23T17:45:41Z",
+  "updated_at": "2024-10-30T18:28:27Z",
+  "pushed_at": "2021-11-08T12:14:55Z",
+  "size": 2071,
+  "stars": 265,
+  "forks": 104,
+  "open_issues": 0,
+  "watchers": 265,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "stable-1.2"
+  ],
+  "languages": {
+    "Makefile": 1205
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T15:48:55.485710"
+}

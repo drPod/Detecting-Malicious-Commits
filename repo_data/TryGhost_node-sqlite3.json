@@ -1,0 +1,42 @@
+{
+  "name": "node-sqlite3",
+  "owner": "TryGhost",
+  "created_at": "2011-02-14T21:50:01Z",
+  "updated_at": "2025-01-14T09:13:06Z",
+  "pushed_at": "2024-12-04T23:14:27Z",
+  "size": 91948,
+  "stars": 6259,
+  "forks": 818,
+  "open_issues": 177,
+  "watchers": 6259,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "PLpgSQL": 528281,
+    "JavaScript": 107836,
+    "C++": 103186,
+    "Python": 1725,
+    "Makefile": 1488,
+    "C": 1249,
+    "Dockerfile": 607,
+    "HTML": 251
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T22:18:39.245876"
+}

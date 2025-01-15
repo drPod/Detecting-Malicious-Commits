@@ -1,0 +1,41 @@
+{
+  "name": "shields",
+  "owner": "badges",
+  "created_at": "2013-01-30T07:41:54Z",
+  "updated_at": "2025-01-14T17:42:15Z",
+  "pushed_at": "2025-01-13T18:36:41Z",
+  "size": 384826,
+  "stars": 24141,
+  "forks": 5516,
+  "open_issues": 363,
+  "watchers": 24141,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "historical",
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 2650242,
+    "CSS": 1569,
+    "Dockerfile": 891,
+    "HTML": 866,
+    "TypeScript": 635,
+    "Procfile": 31
+  },
+  "commit_activity": {
+    "total_commits_last_year": 640,
+    "avg_commits_per_week": 12.307692307692308,
+    "days_active_last_year": 144
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "cc0-1.0"
+  },
+  "collected_at": "2025-01-14T19:09:58.767223"
+}

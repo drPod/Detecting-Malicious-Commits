@@ -1,0 +1,35 @@
+{
+  "name": "microsoft-authentication-library-for-dotnet",
+  "owner": "AzureAD",
+  "created_at": "2015-10-19T18:53:15Z",
+  "updated_at": "2025-01-14T17:17:25Z",
+  "pushed_at": "2025-01-14T17:17:23Z",
+  "size": 38534,
+  "stars": 1420,
+  "forks": 345,
+  "open_issues": 226,
+  "watchers": 1420,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C#": 8224887,
+    "PowerShell": 79501,
+    "Java": 6853
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:27:14.127006"
+}

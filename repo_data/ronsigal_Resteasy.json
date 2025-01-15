@@ -1,0 +1,40 @@
+{
+  "name": "Resteasy",
+  "owner": "ronsigal",
+  "created_at": "2012-01-12T21:30:45Z",
+  "updated_at": "2020-03-13T06:19:51Z",
+  "pushed_at": "2024-03-23T17:39:50Z",
+  "size": 73598,
+  "stars": 0,
+  "forks": 2,
+  "open_issues": 0,
+  "watchers": 0,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "3.0",
+    "3.0.19.SPx"
+  ],
+  "languages": {
+    "Java": 10462264,
+    "JavaScript": 17914,
+    "Python": 4868,
+    "Shell": 1606,
+    "HTML": 1550
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:29:24.845445"
+}

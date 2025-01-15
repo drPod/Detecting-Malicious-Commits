@@ -1,0 +1,47 @@
+{
+  "name": "sudo",
+  "owner": "sudo-project",
+  "created_at": "2016-05-03T13:41:24Z",
+  "updated_at": "2025-01-14T12:51:41Z",
+  "pushed_at": "2025-01-11T21:38:41Z",
+  "size": 215573,
+  "stars": 1218,
+  "forks": 226,
+  "open_issues": 27,
+  "watchers": 1218,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "C": 5677215,
+    "Shell": 678768,
+    "Makefile": 615304,
+    "Roff": 420421,
+    "M4": 243119,
+    "Yacc": 75763,
+    "Perl": 53461,
+    "Lex": 38443,
+    "Pascal": 28666,
+    "Python": 27031,
+    "C++": 7720,
+    "Puppet": 5732,
+    "Dockerfile": 3343
+  },
+  "commit_activity": {
+    "total_commits_last_year": 140,
+    "avg_commits_per_week": 2.6923076923076925,
+    "days_active_last_year": 80
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:06:44.047272"
+}

@@ -1,0 +1,37 @@
+{
+  "name": "formie",
+  "owner": "verbb",
+  "created_at": "2020-07-18T22:58:52Z",
+  "updated_at": "2025-01-14T10:13:04Z",
+  "pushed_at": "2025-01-14T10:13:00Z",
+  "size": 118116,
+  "stars": 97,
+  "forks": 73,
+  "open_issues": 237,
+  "watchers": 97,
+  "has_security_policy": false,
+  "default_branch": "craft-5",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 3751448,
+    "HTML": 793616,
+    "JavaScript": 500158,
+    "Vue": 409768,
+    "SCSS": 328829
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:57:23.247149"
+}

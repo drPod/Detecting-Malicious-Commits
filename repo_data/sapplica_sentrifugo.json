@@ -1,0 +1,41 @@
+{
+  "name": "sentrifugo",
+  "owner": "sapplica",
+  "created_at": "2014-06-09T12:10:56Z",
+  "updated_at": "2025-01-09T17:29:13Z",
+  "pushed_at": "2021-07-02T11:35:43Z",
+  "size": 154686,
+  "stars": 499,
+  "forks": 430,
+  "open_issues": 317,
+  "watchers": 499,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 40960708,
+    "HTML": 8762246,
+    "CSS": 3181156,
+    "JavaScript": 3076380,
+    "C#": 22881,
+    "Shell": 12743,
+    "ApacheConf": 757,
+    "ASP": 98,
+    "Batchfile": 21
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T15:32:36.051672"
+}

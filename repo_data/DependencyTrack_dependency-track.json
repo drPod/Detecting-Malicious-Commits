@@ -1,0 +1,61 @@
+{
+  "name": "dependency-track",
+  "owner": "DependencyTrack",
+  "created_at": "2013-07-16T19:16:43Z",
+  "updated_at": "2025-01-14T15:10:43Z",
+  "pushed_at": "2025-01-14T08:59:48Z",
+  "size": 104716,
+  "stars": 2782,
+  "forks": 590,
+  "open_issues": 798,
+  "watchers": 2782,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "1.0-stable",
+    "2.0-dev-springboot",
+    "3.0.x",
+    "3.1.x",
+    "3.2.x",
+    "3.3.x",
+    "3.4.x",
+    "3.5.x",
+    "3.6.x",
+    "3.7.x",
+    "3.8.x",
+    "4.0.x",
+    "4.1.x",
+    "4.2.x",
+    "4.3.x",
+    "4.4.x",
+    "4.5.x",
+    "4.6.x",
+    "4.7.x",
+    "4.8.x",
+    "4.9.x",
+    "4.10.x",
+    "4.11.x",
+    "4.12.x"
+  ],
+  "languages": {
+    "Java": 5250498,
+    "Dockerfile": 4101,
+    "Shell": 3756,
+    "HTML": 488
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:39:47.406871"
+}

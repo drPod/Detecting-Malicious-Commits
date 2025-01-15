@@ -1,0 +1,41 @@
+{
+  "name": "uppy",
+  "owner": "transloadit",
+  "created_at": "2015-11-16T12:32:33Z",
+  "updated_at": "2025-01-14T12:52:39Z",
+  "pushed_at": "2025-01-14T12:53:47Z",
+  "size": 404253,
+  "stars": 29375,
+  "forks": 2016,
+  "open_issues": 159,
+  "watchers": 29375,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 1465870,
+    "JavaScript": 454241,
+    "SCSS": 99458,
+    "Svelte": 5791,
+    "HTML": 5199,
+    "Shell": 5146,
+    "Makefile": 2843,
+    "Dockerfile": 1107,
+    "Vue": 382
+  },
+  "commit_activity": {
+    "total_commits_last_year": 648,
+    "avg_commits_per_week": 12.461538461538462,
+    "days_active_last_year": 141
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:46:06.450691"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "camaleon-cms",
+  "owner": "owen2345",
+  "created_at": "2015-07-09T16:21:45Z",
+  "updated_at": "2025-01-14T10:42:19Z",
+  "pushed_at": "2025-01-14T10:42:15Z",
+  "size": 56013,
+  "stars": 1219,
+  "forks": 288,
+  "open_issues": 17,
+  "watchers": 1219,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Ruby": 662319,
+    "JavaScript": 593921,
+    "HTML": 363388,
+    "SCSS": 310518,
+    "CSS": 77685,
+    "Dockerfile": 1086
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:09:59.327878"
+}

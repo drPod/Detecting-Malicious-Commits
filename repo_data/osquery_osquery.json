@@ -1,0 +1,48 @@
+{
+  "name": "osquery",
+  "owner": "osquery",
+  "created_at": "2014-07-29T20:27:33Z",
+  "updated_at": "2025-01-14T15:12:51Z",
+  "pushed_at": "2025-01-02T18:06:21Z",
+  "size": 26037,
+  "stars": 22137,
+  "forks": 2467,
+  "open_issues": 621,
+  "watchers": 22137,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "experimental",
+    "master"
+  ],
+  "languages": {
+    "C++": 8838696,
+    "C": 2981769,
+    "CMake": 740815,
+    "Python": 221823,
+    "Objective-C++": 197626,
+    "PowerShell": 48035,
+    "Shell": 30438,
+    "Assembly": 10278,
+    "Roff": 4267,
+    "Thrift": 3263,
+    "Dockerfile": 2665,
+    "Makefile": 1106,
+    "Objective-C": 866
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:39:52.926030"
+}

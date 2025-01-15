@@ -1,0 +1,42 @@
+{
+  "name": "create-magento-app",
+  "owner": "scandipwa",
+  "created_at": "2020-11-10T17:25:32Z",
+  "updated_at": "2024-12-16T16:45:56Z",
+  "pushed_at": "2024-12-16T16:45:50Z",
+  "size": 8416,
+  "stars": 32,
+  "forks": 21,
+  "open_issues": 15,
+  "watchers": 32,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 792348,
+    "PHP": 197360,
+    "C": 94261,
+    "Dockerfile": 73306,
+    "Shell": 51134,
+    "Makefile": 30843,
+    "C++": 21254,
+    "VCL": 8787
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "osl-3.0"
+  },
+  "collected_at": "2025-01-14T15:45:15.085891"
+}

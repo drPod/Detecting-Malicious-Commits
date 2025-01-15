@@ -1,0 +1,39 @@
+{
+  "name": "libbitcoin-system",
+  "owner": "libbitcoin",
+  "created_at": "2013-05-15T05:35:30Z",
+  "updated_at": "2025-01-13T21:34:44Z",
+  "pushed_at": "2025-01-13T21:34:41Z",
+  "size": 24912,
+  "stars": 1309,
+  "forks": 389,
+  "open_issues": 12,
+  "watchers": 1309,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 6072432,
+    "C": 154530,
+    "M4": 136213,
+    "Shell": 94145,
+    "CMake": 47939,
+    "Makefile": 39216,
+    "Batchfile": 5926
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:40:06.452318"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "x-ui",
+  "owner": "vaxilu",
+  "created_at": "2021-05-18T03:32:01Z",
+  "updated_at": "2025-01-14T11:54:20Z",
+  "pushed_at": "2024-08-19T10:14:30Z",
+  "size": 15938,
+  "stars": 17110,
+  "forks": 7670,
+  "open_issues": 54,
+  "watchers": 17110,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 1394340,
+    "HTML": 81934,
+    "Go": 80095,
+    "Shell": 22897,
+    "CSS": 4466,
+    "Dockerfile": 372,
+    "Less": 74
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:49:18.127918"
+}

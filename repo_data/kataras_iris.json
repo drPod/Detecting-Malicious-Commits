@@ -1,0 +1,41 @@
+{
+  "name": "iris",
+  "owner": "kataras",
+  "created_at": "2016-01-30T04:36:48Z",
+  "updated_at": "2025-01-14T11:37:16Z",
+  "pushed_at": "2025-01-07T04:57:55Z",
+  "size": 17573,
+  "stars": 25321,
+  "forks": 2469,
+  "open_issues": 130,
+  "watchers": 25321,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Go": 2649466,
+    "JavaScript": 98505,
+    "HTML": 60408,
+    "CSS": 15415,
+    "Dockerfile": 2408,
+    "Pug": 1236,
+    "templ": 87
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T22:21:28.686501"
+}

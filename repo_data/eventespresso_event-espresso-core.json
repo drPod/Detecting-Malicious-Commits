@@ -1,0 +1,40 @@
+{
+  "name": "event-espresso-core",
+  "owner": "eventespresso",
+  "created_at": "2012-12-20T04:38:57Z",
+  "updated_at": "2025-01-07T15:58:03Z",
+  "pushed_at": "2025-01-07T15:57:58Z",
+  "size": 1370708,
+  "stars": 122,
+  "forks": 87,
+  "open_issues": 16,
+  "watchers": 122,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "dev",
+    "master"
+  ],
+  "languages": {
+    "PHP": 13974577,
+    "JavaScript": 1629416,
+    "CSS": 666732,
+    "HTML": 105263,
+    "Hack": 1314
+  },
+  "commit_activity": {
+    "total_commits_last_year": 21,
+    "avg_commits_per_week": 0.40384615384615385,
+    "days_active_last_year": 16
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:24:33.642726"
+}

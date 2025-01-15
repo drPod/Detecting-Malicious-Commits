@@ -1,0 +1,37 @@
+{
+  "name": "RSSHub",
+  "owner": "DIYgod",
+  "created_at": "2018-04-02T14:43:21Z",
+  "updated_at": "2025-01-14T12:00:05Z",
+  "pushed_at": "2025-01-14T08:38:49Z",
+  "size": 327515,
+  "stars": 34752,
+  "forks": 7676,
+  "open_issues": 336,
+  "watchers": 34752,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 9820093,
+    "JavaScript": 1133550,
+    "Dockerfile": 7866,
+    "Shell": 606,
+    "HTML": 418
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4516,
+    "avg_commits_per_week": 86.84615384615384,
+    "days_active_last_year": 360
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:46:03.088933"
+}

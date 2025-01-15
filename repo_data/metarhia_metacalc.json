@@ -1,0 +1,35 @@
+{
+  "name": "metacalc",
+  "owner": "metarhia",
+  "created_at": "2022-05-12T20:37:53Z",
+  "updated_at": "2024-09-02T04:04:26Z",
+  "pushed_at": "2024-09-02T04:04:46Z",
+  "size": 137,
+  "stars": 10,
+  "forks": 7,
+  "open_issues": 12,
+  "watchers": 10,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "JavaScript": 8433
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:12:38.607005"
+}

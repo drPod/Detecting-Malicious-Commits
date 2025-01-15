@@ -1,0 +1,40 @@
+{
+  "name": "server",
+  "owner": "ONLYOFFICE",
+  "created_at": "2016-03-18T15:28:23Z",
+  "updated_at": "2025-01-03T21:45:09Z",
+  "pushed_at": "2025-01-14T13:05:21Z",
+  "size": 48287,
+  "stars": 197,
+  "forks": 242,
+  "open_issues": 1,
+  "watchers": 197,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "develop",
+    "hotfix/v1.0.0"
+  ],
+  "languages": {
+    "JavaScript": 917847,
+    "HTML": 26443,
+    "Makefile": 5804,
+    "PLpgSQL": 2918,
+    "TSQL": 1116
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T14:00:03.249130"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "cskefu",
+  "owner": "chatopera",
+  "created_at": "2018-08-31T07:15:45Z",
+  "updated_at": "2025-01-14T06:48:56Z",
+  "pushed_at": "2024-12-07T02:40:30Z",
+  "size": 37548,
+  "stars": 2744,
+  "forks": 911,
+  "open_issues": 234,
+  "watchers": 2744,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop",
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 2844028,
+    "Java": 2516392,
+    "Pug": 1543979,
+    "HTML": 497475,
+    "CSS": 281259,
+    "Shell": 23743,
+    "Smarty": 12324,
+    "PHP": 3831,
+    "Dockerfile": 1731
+  },
+  "commit_activity": {
+    "total_commits_last_year": 16,
+    "avg_commits_per_week": 0.3076923076923077,
+    "days_active_last_year": 8
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:21:53.088294"
+}

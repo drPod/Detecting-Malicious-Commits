@@ -1,0 +1,34 @@
+{
+  "name": "Vulnerabilities-in-MPC-Framework",
+  "owner": "FudanMPL",
+  "created_at": "2024-04-22T02:09:07Z",
+  "updated_at": "2024-12-01T07:34:08Z",
+  "pushed_at": "2024-05-08T02:07:02Z",
+  "size": 37621,
+  "stars": 4,
+  "forks": 0,
+  "open_issues": 0,
+  "watchers": 4,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C++": 7634,
+    "CMake": 243
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T15:00:14.210102"
+}

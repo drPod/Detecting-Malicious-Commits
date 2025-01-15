@@ -1,0 +1,39 @@
+{
+  "name": "xterm-snapshots",
+  "owner": "ThomasDickey",
+  "created_at": "2016-08-07T10:42:17Z",
+  "updated_at": "2025-01-08T04:58:22Z",
+  "pushed_at": "2025-01-07T23:30:57Z",
+  "size": 12819,
+  "stars": 53,
+  "forks": 18,
+  "open_issues": 0,
+  "watchers": 53,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 2968976,
+    "HTML": 639953,
+    "Roff": 499030,
+    "Perl": 362636,
+    "Shell": 100641,
+    "Makefile": 33400,
+    "sed": 481
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:38:37.488000"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "libcupsfilters",
+  "owner": "OpenPrinting",
+  "created_at": "2022-11-16T10:26:34Z",
+  "updated_at": "2025-01-14T13:46:43Z",
+  "pushed_at": "2025-01-04T00:16:59Z",
+  "size": 213716,
+  "stars": 8,
+  "forks": 30,
+  "open_issues": 10,
+  "watchers": 8,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 1232408,
+    "C++": 283584,
+    "M4": 46602,
+    "Makefile": 8959,
+    "Shell": 7543,
+    "PostScript": 4338
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T17:34:05.253010"
+}

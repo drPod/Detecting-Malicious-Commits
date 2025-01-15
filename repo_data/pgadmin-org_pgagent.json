@@ -1,0 +1,37 @@
+{
+  "name": "pgagent",
+  "owner": "pgadmin-org",
+  "created_at": "2010-08-18T10:48:17Z",
+  "updated_at": "2025-01-03T10:42:38Z",
+  "pushed_at": "2025-01-06T12:52:31Z",
+  "size": 305,
+  "stars": 109,
+  "forks": 42,
+  "open_issues": 10,
+  "watchers": 109,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PLpgSQL": 90730,
+    "C++": 57861,
+    "CMake": 40729,
+    "C": 1177,
+    "Makefile": 93
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:18:53.965908"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "yubihsm-shell",
+  "owner": "Yubico",
+  "created_at": "2018-11-26T08:11:51Z",
+  "updated_at": "2025-01-10T14:19:17Z",
+  "pushed_at": "2025-01-14T11:32:06Z",
+  "size": 1657,
+  "stars": 95,
+  "forks": 54,
+  "open_issues": 37,
+  "watchers": 95,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 1414254,
+    "Shell": 165328,
+    "CMake": 80751,
+    "PowerShell": 77910,
+    "C++": 21994,
+    "Batchfile": 1866
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:25:46.767826"
+}

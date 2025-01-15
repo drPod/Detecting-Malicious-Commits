@@ -1,0 +1,45 @@
+{
+  "name": "node-sass",
+  "owner": "sass",
+  "created_at": "2012-04-24T18:46:30Z",
+  "updated_at": "2025-01-13T18:30:36Z",
+  "pushed_at": "2024-07-24T21:59:31Z",
+  "size": 25523,
+  "stars": 8503,
+  "forks": 1323,
+  "open_issues": 187,
+  "watchers": 8503,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "v2",
+    "v3"
+  ],
+  "languages": {
+    "C++": 1340896,
+    "JavaScript": 206697,
+    "C": 32763,
+    "Shell": 28685,
+    "M4": 9900,
+    "Makefile": 8472,
+    "Python": 5204,
+    "Perl": 3390,
+    "Ruby": 157
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:16:14.369902"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "idurar-erp-crm",
+  "owner": "idurar",
+  "created_at": "2020-10-17T22:38:36Z",
+  "updated_at": "2025-01-14T18:41:32Z",
+  "pushed_at": "2024-10-04T09:12:51Z",
+  "size": 23141,
+  "stars": 6792,
+  "forks": 2117,
+  "open_issues": 284,
+  "watchers": 6792,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "demo",
+    "dev",
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 594100,
+    "Pug": 28874,
+    "CSS": 8545,
+    "HTML": 583
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:12:36.767871"
+}

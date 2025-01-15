@@ -1,0 +1,38 @@
+{
+  "name": "SpringBlade",
+  "owner": "chillzhuang",
+  "created_at": "2019-01-30T09:02:04Z",
+  "updated_at": "2025-01-14T08:38:16Z",
+  "pushed_at": "2024-11-08T08:16:48Z",
+  "size": 7068,
+  "stars": 6583,
+  "forks": 1344,
+  "open_issues": 18,
+  "watchers": 6583,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PLpgSQL": 503509,
+    "Java": 427332,
+    "Shell": 6800,
+    "Dockerfile": 4192,
+    "HTML": 183,
+    "Batchfile": 18
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:07:26.450898"
+}

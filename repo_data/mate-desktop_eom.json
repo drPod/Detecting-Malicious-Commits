@@ -1,0 +1,41 @@
+{
+  "name": "eom",
+  "owner": "mate-desktop",
+  "created_at": "2011-11-07T17:57:57Z",
+  "updated_at": "2025-01-14T07:44:57Z",
+  "pushed_at": "2024-02-14T00:09:19Z",
+  "size": 16389,
+  "stars": 59,
+  "forks": 32,
+  "open_issues": 58,
+  "watchers": 59,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 1139757,
+    "Makefile": 29456,
+    "Meson": 18232,
+    "M4": 12480,
+    "Perl": 2945,
+    "Shell": 894,
+    "CSS": 168
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T21:52:31.007643"
+}

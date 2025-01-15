@@ -1,0 +1,37 @@
+{
+  "name": "jappix",
+  "owner": "jappix",
+  "created_at": "2012-01-18T16:55:44Z",
+  "updated_at": "2024-09-19T11:47:45Z",
+  "pushed_at": "2020-12-10T08:44:00Z",
+  "size": 26309,
+  "stars": 433,
+  "forks": 143,
+  "open_issues": 80,
+  "watchers": 433,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 2735311,
+    "PHP": 318318,
+    "CSS": 243135,
+    "Shell": 7436,
+    "HTML": 261
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:36:01.333650"
+}

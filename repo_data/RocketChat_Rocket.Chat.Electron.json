@@ -1,0 +1,39 @@
+{
+  "name": "Rocket.Chat.Electron",
+  "owner": "RocketChat",
+  "created_at": "2015-07-08T16:56:41Z",
+  "updated_at": "2025-01-13T09:47:08Z",
+  "pushed_at": "2025-01-13T12:00:10Z",
+  "size": 99509,
+  "stars": 1600,
+  "forks": 716,
+  "open_issues": 235,
+  "watchers": 1600,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "develop"
+  ],
+  "languages": {
+    "TypeScript": 644618,
+    "JavaScript": 8241,
+    "NSIS": 1635,
+    "HTML": 935,
+    "CSS": 132
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:39:23.805029"
+}

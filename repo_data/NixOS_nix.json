@@ -1,0 +1,62 @@
+{
+  "name": "nix",
+  "owner": "NixOS",
+  "created_at": "2012-02-08T10:17:59Z",
+  "updated_at": "2025-01-14T12:52:15Z",
+  "pushed_at": "2025-01-14T13:40:33Z",
+  "size": 75780,
+  "stars": 13291,
+  "forks": 1564,
+  "open_issues": 3532,
+  "watchers": 13291,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "0.6-maintenance",
+    "0.8-maintenance",
+    "0.9-maintenance",
+    "0.10-maintenance",
+    "1.11-maintenance",
+    "2.0-maintenance",
+    "2.1-maintenance",
+    "2.2-maintenance",
+    "2.3-maintenance",
+    "2.4-maintenance",
+    "2.5-maintenance",
+    "2.6-maintenance",
+    "2.7-maintenance",
+    "2.8-maintenance",
+    "2.9-maintenance"
+  ],
+  "languages": {
+    "C++": 3788585,
+    "Shell": 521060,
+    "Nix": 353193,
+    "Meson": 94236,
+    "C": 53321,
+    "Perl": 27346,
+    "Yacc": 18717,
+    "XS": 13072,
+    "Rust": 11498,
+    "Lex": 10146,
+    "Python": 7018,
+    "Emacs Lisp": 598,
+    "Hack": 365,
+    "Ruby": 175
+  },
+  "commit_activity": {
+    "total_commits_last_year": 2883,
+    "avg_commits_per_week": 55.44230769230769,
+    "days_active_last_year": 328
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T13:51:36.208020"
+}

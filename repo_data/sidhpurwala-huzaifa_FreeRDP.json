@@ -1,0 +1,43 @@
+{
+  "name": "FreeRDP",
+  "owner": "sidhpurwala-huzaifa",
+  "created_at": "2014-01-02T06:41:14Z",
+  "updated_at": "2022-09-07T11:06:08Z",
+  "pushed_at": "2022-09-07T11:20:19Z",
+  "size": 16324,
+  "stars": 0,
+  "forks": 0,
+  "open_issues": 0,
+  "watchers": 0,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 7745949,
+    "CMake": 628091,
+    "Objective-C": 455743,
+    "Java": 334783,
+    "HTML": 69427,
+    "C#": 12447,
+    "Shell": 9386,
+    "Perl": 8044,
+    "Python": 1430,
+    "C++": 1293,
+    "Rich Text Format": 937
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T18:49:44.365332"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "jsPDF",
+  "owner": "MrRio",
+  "created_at": "2009-12-06T14:56:32Z",
+  "updated_at": "2025-01-14T17:14:00Z",
+  "pushed_at": "2024-12-25T19:18:25Z",
+  "size": 110249,
+  "stars": 29584,
+  "forks": 4691,
+  "open_issues": 123,
+  "watchers": 29584,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 1374084,
+    "TypeScript": 33841,
+    "HTML": 16059
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:14:06.846803"
+}

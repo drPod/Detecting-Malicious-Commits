@@ -1,0 +1,41 @@
+{
+  "name": "HorizontCMS",
+  "owner": "ttimot24",
+  "created_at": "2016-07-28T17:41:57Z",
+  "updated_at": "2025-01-09T11:20:32Z",
+  "pushed_at": "2025-01-09T20:29:58Z",
+  "size": 72790,
+  "stars": 54,
+  "forks": 20,
+  "open_issues": 10,
+  "watchers": 54,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 9603880,
+    "PHP": 345520,
+    "Blade": 244055,
+    "Vue": 31867,
+    "TypeScript": 3764,
+    "Dockerfile": 1296,
+    "Hack": 633
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:22:56.046039"
+}

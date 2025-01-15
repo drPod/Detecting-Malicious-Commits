@@ -1,0 +1,39 @@
+{
+  "name": "trunk.cocoapods.org",
+  "owner": "CocoaPods",
+  "created_at": "2013-04-06T13:33:05Z",
+  "updated_at": "2024-11-18T21:05:22Z",
+  "pushed_at": "2025-01-13T03:35:27Z",
+  "size": 1674,
+  "stars": 40,
+  "forks": 16,
+  "open_issues": 81,
+  "watchers": 40,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Ruby": 235112,
+    "HTML": 20879,
+    "Slim": 9275,
+    "CSS": 4050,
+    "Procfile": 42
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:38:10.294026"
+}

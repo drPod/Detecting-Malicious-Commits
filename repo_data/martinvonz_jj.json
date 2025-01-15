@@ -1,0 +1,34 @@
+{
+  "name": "jj",
+  "owner": "martinvonz",
+  "created_at": "2020-12-18T04:05:27Z",
+  "updated_at": "2025-01-14T21:14:17Z",
+  "pushed_at": "2025-01-14T21:22:13Z",
+  "size": 36884,
+  "stars": 10480,
+  "forks": 373,
+  "open_issues": 516,
+  "watchers": 10480,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Rust": 5973418,
+    "Nix": 6328
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T22:02:26.288592"
+}

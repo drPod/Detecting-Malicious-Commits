@@ -1,0 +1,41 @@
+{
+  "name": "nonce-disrespect",
+  "owner": "nonce-disrespect",
+  "created_at": "2016-05-18T08:34:33Z",
+  "updated_at": "2024-11-17T08:40:50Z",
+  "pushed_at": "2017-04-10T09:36:32Z",
+  "size": 4461,
+  "stars": 117,
+  "forks": 8,
+  "open_issues": 1,
+  "watchers": 117,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "CSS": 189076,
+    "JavaScript": 172622,
+    "TeX": 121335,
+    "HTML": 38861,
+    "Go": 6359,
+    "C": 4907,
+    "C++": 4798,
+    "Makefile": 2227,
+    "Shell": 288
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "cc0-1.0"
+  },
+  "collected_at": "2025-01-14T21:11:39.169489"
+}

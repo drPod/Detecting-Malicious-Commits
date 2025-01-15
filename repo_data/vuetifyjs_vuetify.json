@@ -1,0 +1,42 @@
+{
+  "name": "vuetify",
+  "owner": "vuetifyjs",
+  "created_at": "2016-09-12T00:39:35Z",
+  "updated_at": "2025-01-14T15:03:04Z",
+  "pushed_at": "2025-01-07T06:38:00Z",
+  "size": 91772,
+  "stars": 40119,
+  "forks": 6958,
+  "open_issues": 828,
+  "watchers": 40119,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "dev"
+  ],
+  "languages": {
+    "TypeScript": 2107297,
+    "Vue": 1539723,
+    "Sass": 224385,
+    "SCSS": 154600,
+    "JavaScript": 73322,
+    "HTML": 1781,
+    "Shell": 194,
+    "Dockerfile": 136
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1048,
+    "avg_commits_per_week": 20.153846153846153,
+    "days_active_last_year": 216
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:27:04.926596"
+}

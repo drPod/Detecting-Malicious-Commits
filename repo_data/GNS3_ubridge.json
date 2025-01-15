@@ -1,0 +1,38 @@
+{
+  "name": "ubridge",
+  "owner": "GNS3",
+  "created_at": "2015-05-15T22:16:06Z",
+  "updated_at": "2025-01-07T01:11:06Z",
+  "pushed_at": "2024-09-18T09:47:48Z",
+  "size": 300,
+  "stars": 116,
+  "forks": 47,
+  "open_issues": 11,
+  "watchers": 116,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "cci-2.0",
+    "master",
+    "upload-artifacts"
+  ],
+  "languages": {
+    "C": 260521,
+    "Makefile": 2740
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T15:01:42.693868"
+}

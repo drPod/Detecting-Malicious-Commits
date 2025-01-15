@@ -1,0 +1,38 @@
+{
+  "name": "mongodb-atlas-kubernetes",
+  "owner": "mongodb",
+  "created_at": "2020-11-03T15:46:02Z",
+  "updated_at": "2025-01-14T14:19:03Z",
+  "pushed_at": "2025-01-14T15:37:50Z",
+  "size": 8281,
+  "stars": 156,
+  "forks": 81,
+  "open_issues": 9,
+  "watchers": 156,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Go": 3197107,
+    "Shell": 49144,
+    "Makefile": 22975,
+    "Dockerfile": 3126
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:43:09.409955"
+}

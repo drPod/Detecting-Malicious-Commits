@@ -1,0 +1,51 @@
+{
+  "name": "asterisk",
+  "owner": "asterisk",
+  "created_at": "2015-04-11T17:07:55Z",
+  "updated_at": "2025-01-13T17:09:18Z",
+  "pushed_at": "2025-01-13T17:09:13Z",
+  "size": 374114,
+  "stars": 2344,
+  "forks": 988,
+  "open_issues": 128,
+  "watchers": 2344,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 36851690,
+    "Python": 358820,
+    "Shell": 260947,
+    "M4": 191704,
+    "Makefile": 139089,
+    "Perl": 111005,
+    "Yacc": 64828,
+    "Mustache": 31730,
+    "Lex": 26043,
+    "XSLT": 15366,
+    "Vim Script": 11793,
+    "HTML": 11310,
+    "Roff": 10448,
+    "JavaScript": 7906,
+    "Tcl": 4198,
+    "PHP": 2106,
+    "Mako": 1730,
+    "CSS": 1031,
+    "Awk": 642
+  },
+  "commit_activity": {
+    "total_commits_last_year": 211,
+    "avg_commits_per_week": 4.0576923076923075,
+    "days_active_last_year": 152
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:58:39.405654"
+}

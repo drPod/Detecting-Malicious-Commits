@@ -1,0 +1,45 @@
+{
+  "name": "babel",
+  "owner": "babel",
+  "created_at": "2014-09-28T13:38:23Z",
+  "updated_at": "2025-01-14T18:30:48Z",
+  "pushed_at": "2025-01-14T18:17:57Z",
+  "size": 122211,
+  "stars": 43365,
+  "forks": 5657,
+  "open_issues": 786,
+  "watchers": 43365,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "5.x",
+    "6.x",
+    "main",
+    "master",
+    "next-8-dev",
+    "next-8-rebased"
+  ],
+  "languages": {
+    "TypeScript": 3640840,
+    "JavaScript": 1609334,
+    "Shell": 31497,
+    "Makefile": 4622,
+    "HTML": 3371,
+    "Batchfile": 43
+  },
+  "commit_activity": {
+    "total_commits_last_year": 647,
+    "avg_commits_per_week": 12.442307692307692,
+    "days_active_last_year": 206
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:44:16.367880"
+}

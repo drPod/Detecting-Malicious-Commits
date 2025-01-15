@@ -1,0 +1,40 @@
+{
+  "name": "node-fetch",
+  "owner": "node-fetch",
+  "created_at": "2015-01-26T07:29:26Z",
+  "updated_at": "2025-01-13T12:55:21Z",
+  "pushed_at": "2024-08-13T22:17:04Z",
+  "size": 1268,
+  "stars": 8820,
+  "forks": 1035,
+  "open_issues": 210,
+  "watchers": 8820,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "1.x",
+    "2.x",
+    "beta",
+    "main",
+    "revert-1739-2.x"
+  ],
+  "languages": {
+    "JavaScript": 199878,
+    "TypeScript": 3341
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:25:35.328784"
+}

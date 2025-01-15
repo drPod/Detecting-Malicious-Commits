@@ -1,0 +1,35 @@
+{
+  "name": "sccm",
+  "owner": "pluginsGLPI",
+  "created_at": "2014-09-08T08:57:15Z",
+  "updated_at": "2025-01-13T08:57:43Z",
+  "pushed_at": "2025-01-13T08:57:38Z",
+  "size": 592,
+  "stars": 37,
+  "forks": 26,
+  "open_issues": 2,
+  "watchers": 37,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "PHP": 72538
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T18:39:59.008511"
+}

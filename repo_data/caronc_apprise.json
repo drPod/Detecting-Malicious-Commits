@@ -1,0 +1,38 @@
+{
+  "name": "apprise",
+  "owner": "caronc",
+  "created_at": "2017-11-25T18:06:38Z",
+  "updated_at": "2025-01-14T16:45:34Z",
+  "pushed_at": "2025-01-09T02:12:13Z",
+  "size": 7944,
+  "stars": 12423,
+  "forks": 436,
+  "open_issues": 77,
+  "watchers": 12423,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Python": 4527617,
+    "Roff": 12986,
+    "Shell": 9853,
+    "HTML": 1913
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-2-clause"
+  },
+  "collected_at": "2025-01-14T20:08:26.529852"
+}

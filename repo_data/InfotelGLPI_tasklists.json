@@ -1,0 +1,38 @@
+{
+  "name": "tasklists",
+  "owner": "InfotelGLPI",
+  "created_at": "2016-01-08T12:40:14Z",
+  "updated_at": "2024-12-30T13:55:56Z",
+  "pushed_at": "2024-12-30T13:55:53Z",
+  "size": 860,
+  "stars": 24,
+  "forks": 10,
+  "open_issues": 14,
+  "watchers": 24,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 256755,
+    "JavaScript": 128761,
+    "CSS": 27427,
+    "Twig": 2717,
+    "Perl": 1337,
+    "Shell": 488
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:05:21.244484"
+}

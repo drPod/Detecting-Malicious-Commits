@@ -1,0 +1,51 @@
+{
+  "name": "sgxwallet",
+  "owner": "skalenetwork",
+  "created_at": "2019-09-04T07:46:31Z",
+  "updated_at": "2024-12-27T11:21:11Z",
+  "pushed_at": "2024-12-27T11:37:11Z",
+  "size": 196100,
+  "stars": 64,
+  "forks": 36,
+  "open_issues": 19,
+  "watchers": 64,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "404-add-support-of-ubuntu-2204",
+    "MANY_THREADS",
+    "SECURE_ENCLAVE_CHANGES",
+    "architecture-docs",
+    "beta",
+    "develop",
+    "master",
+    "more-logs-bls-sign",
+    "stable",
+    "update-README"
+  ],
+  "languages": {
+    "Shell": 976100,
+    "C++": 449449,
+    "C": 124759,
+    "Makefile": 45058,
+    "M4": 21210,
+    "Python": 13354,
+    "CMake": 2456,
+    "Dockerfile": 522
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:33:21.965523"
+}

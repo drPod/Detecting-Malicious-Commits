@@ -1,0 +1,53 @@
+{
+  "name": "stellarium",
+  "owner": "Stellarium",
+  "created_at": "2014-04-13T02:41:56Z",
+  "updated_at": "2025-01-14T12:43:10Z",
+  "pushed_at": "2025-01-14T12:43:06Z",
+  "size": 5042101,
+  "stars": 8074,
+  "forks": 849,
+  "open_issues": 374,
+  "watchers": 8074,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 10296735,
+    "C": 6198080,
+    "GLSL": 3941673,
+    "TeX": 1638265,
+    "CMake": 425199,
+    "JavaScript": 241344,
+    "Inno Setup": 182708,
+    "HTML": 157108,
+    "Python": 74785,
+    "CSS": 51160,
+    "Perl": 34897,
+    "NASL": 16574,
+    "Shell": 15088,
+    "Makefile": 13722,
+    "EJS": 3758,
+    "QMake": 3506,
+    "PostScript": 1093,
+    "Dockerfile": 410,
+    "Batchfile": 109
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4158,
+    "avg_commits_per_week": 79.96153846153847,
+    "days_active_last_year": 271
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T14:00:35.249088"
+}

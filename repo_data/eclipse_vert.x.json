@@ -1,0 +1,45 @@
+{
+  "name": "vert.x",
+  "owner": "eclipse",
+  "created_at": "2011-06-17T14:54:55Z",
+  "updated_at": "2025-01-14T12:09:54Z",
+  "pushed_at": "2025-01-14T08:42:38Z",
+  "size": 117543,
+  "stars": 14377,
+  "forks": 2081,
+  "open_issues": 326,
+  "watchers": 14377,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "3.5",
+    "3.6",
+    "3.7",
+    "3.8",
+    "3.9",
+    "4.x",
+    "4.1",
+    "4.2",
+    "4.3",
+    "4.4"
+  ],
+  "languages": {
+    "Java": 6459461,
+    "HTML": 203
+  },
+  "commit_activity": {
+    "total_commits_last_year": 359,
+    "avg_commits_per_week": 6.903846153846154,
+    "days_active_last_year": 164
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:36:51.086929"
+}

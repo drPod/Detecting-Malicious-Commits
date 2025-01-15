@@ -1,0 +1,36 @@
+{
+  "name": "postgres-nio",
+  "owner": "vapor",
+  "created_at": "2018-09-27T17:18:01Z",
+  "updated_at": "2025-01-08T01:16:28Z",
+  "pushed_at": "2024-12-21T11:06:54Z",
+  "size": 1177,
+  "stars": 339,
+  "forks": 77,
+  "open_issues": 65,
+  "watchers": 339,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Swift": 1299879,
+    "Shell": 7554
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:20:30.767530"
+}

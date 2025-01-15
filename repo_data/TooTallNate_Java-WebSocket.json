@@ -1,0 +1,35 @@
+{
+  "name": "Java-WebSocket",
+  "owner": "TooTallNate",
+  "created_at": "2010-01-20T23:33:04Z",
+  "updated_at": "2025-01-14T07:44:13Z",
+  "pushed_at": "2024-12-15T15:03:08Z",
+  "size": 4190,
+  "stars": 10570,
+  "forks": 2587,
+  "open_issues": 41,
+  "watchers": 10570,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Java": 838003,
+    "HTML": 673666,
+    "Gherkin": 1433
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:44:39.487236"
+}

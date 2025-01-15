@@ -1,0 +1,39 @@
+{
+  "name": "pydantic",
+  "owner": "pydantic",
+  "created_at": "2017-05-03T21:23:58Z",
+  "updated_at": "2025-01-14T12:51:28Z",
+  "pushed_at": "2025-01-14T11:32:34Z",
+  "size": 184602,
+  "stars": 21995,
+  "forks": 1965,
+  "open_issues": 483,
+  "watchers": 21995,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "1.10.X-fixes",
+    "docs-update",
+    "main"
+  ],
+  "languages": {
+    "Python": 3602291,
+    "Makefile": 4558,
+    "Shell": 1851
+  },
+  "commit_activity": {
+    "total_commits_last_year": 706,
+    "avg_commits_per_week": 13.576923076923077,
+    "days_active_last_year": 218
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:20:49.005757"
+}

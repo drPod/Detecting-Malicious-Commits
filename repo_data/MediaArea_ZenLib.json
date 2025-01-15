@@ -1,0 +1,43 @@
+{
+  "name": "ZenLib",
+  "owner": "MediaArea",
+  "created_at": "2014-06-10T07:57:23Z",
+  "updated_at": "2025-01-02T15:19:54Z",
+  "pushed_at": "2025-01-02T15:19:50Z",
+  "size": 1004,
+  "stars": 26,
+  "forks": 40,
+  "open_issues": 5,
+  "watchers": 26,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 504081,
+    "C": 222039,
+    "Shell": 15542,
+    "CMake": 13162,
+    "Batchfile": 12628,
+    "M4": 11901,
+    "QMake": 3819,
+    "Makefile": 3563,
+    "HTML": 138
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "zlib"
+  },
+  "collected_at": "2025-01-14T18:30:25.490240"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "bro",
+  "owner": "bro",
+  "created_at": "2018-12-05T15:30:12Z",
+  "updated_at": "2025-01-08T22:44:55Z",
+  "pushed_at": "2023-03-24T00:40:41Z",
+  "size": 137794,
+  "stars": 168,
+  "forks": 48,
+  "open_issues": 0,
+  "watchers": 168,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 5744981,
+    "Zeek": 4631033,
+    "CMake": 110742,
+    "Yacc": 68545,
+    "Shell": 59447,
+    "Lex": 42201,
+    "Dockerfile": 15777,
+    "Python": 14618,
+    "Makefile": 6130,
+    "C": 4087,
+    "Batchfile": 1008
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:23:31.807878"
+}

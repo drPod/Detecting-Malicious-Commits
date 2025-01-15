@@ -1,0 +1,44 @@
+{
+  "name": "langchainjs",
+  "owner": "langchain-ai",
+  "created_at": "2023-02-06T22:50:27Z",
+  "updated_at": "2025-01-14T13:19:50Z",
+  "pushed_at": "2025-01-13T22:37:28Z",
+  "size": 653692,
+  "stars": 13158,
+  "forks": 2273,
+  "open_issues": 145,
+  "watchers": 13158,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "v0.1",
+    "v0.2"
+  ],
+  "languages": {
+    "TypeScript": 8485231,
+    "Jupyter Notebook": 602661,
+    "HTML": 423960,
+    "JavaScript": 268035,
+    "Shell": 18694,
+    "MDX": 13624,
+    "CSS": 8554,
+    "Python": 667
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:23:45.165715"
+}

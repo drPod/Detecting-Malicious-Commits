@@ -1,0 +1,44 @@
+{
+  "name": "pyoidc",
+  "owner": "OpenIDC",
+  "created_at": "2011-11-10T08:28:04Z",
+  "updated_at": "2025-01-13T09:35:22Z",
+  "pushed_at": "2025-01-13T09:35:19Z",
+  "size": 8326,
+  "stars": 719,
+  "forks": 259,
+  "open_issues": 74,
+  "watchers": 719,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Python": 1466168,
+    "JavaScript": 132438,
+    "Mako": 40054,
+    "HTML": 5179,
+    "Dockerfile": 4776,
+    "Shell": 3535,
+    "Makefile": 2446,
+    "Jinja": 1642,
+    "Elixir": 1461,
+    "CSS": 157
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:42:37.247318"
+}

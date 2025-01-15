@@ -1,0 +1,62 @@
+{
+  "name": "node",
+  "owner": "nodejs",
+  "created_at": "2014-11-26T19:57:11Z",
+  "updated_at": "2025-01-14T13:50:49Z",
+  "pushed_at": "2025-01-14T13:50:54Z",
+  "size": 1221233,
+  "stars": 108898,
+  "forks": 30265,
+  "open_issues": 2078,
+  "watchers": 108898,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "archived-io.js-v0.10",
+    "archived-io.js-v0.12",
+    "canary-base",
+    "main",
+    "v0.7.4-release",
+    "v0.8.16-release",
+    "v0.10",
+    "v0.12",
+    "v1.x",
+    "v3.x",
+    "v4.x",
+    "v5.x",
+    "v6.x",
+    "v7.x",
+    "v8.x",
+    "v9.x"
+  ],
+  "languages": {
+    "JavaScript": 14935002,
+    "C++": 5475414,
+    "Python": 2594676,
+    "C": 674103,
+    "HTML": 163390,
+    "Shell": 113904,
+    "Makefile": 60765,
+    "Batchfile": 45390,
+    "Emacs Lisp": 14363,
+    "Perl": 11715,
+    "R": 8037,
+    "TypeScript": 1968,
+    "Assembly": 157
+  },
+  "commit_activity": {
+    "total_commits_last_year": 2529,
+    "avg_commits_per_week": 48.63461538461539,
+    "days_active_last_year": 353
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:19:17.728456"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "phoenix",
+  "owner": "phoenixframework",
+  "created_at": "2014-01-20T14:14:11Z",
+  "updated_at": "2025-01-14T22:22:31Z",
+  "pushed_at": "2025-01-12T13:35:30Z",
+  "size": 21028,
+  "stars": 21627,
+  "forks": 2895,
+  "open_issues": 74,
+  "watchers": 21627,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Elixir": 1786232,
+    "JavaScript": 237997,
+    "HTML": 32489,
+    "CSS": 20182,
+    "Euphoria": 3493,
+    "Shell": 1651
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T22:40:50.287582"
+}

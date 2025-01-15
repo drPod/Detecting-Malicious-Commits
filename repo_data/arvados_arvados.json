@@ -1,0 +1,51 @@
+{
+  "name": "arvados",
+  "owner": "arvados",
+  "created_at": "2013-04-11T01:06:19Z",
+  "updated_at": "2025-01-14T16:26:29Z",
+  "pushed_at": "2025-01-14T16:26:25Z",
+  "size": 75845,
+  "stars": 399,
+  "forks": 119,
+  "open_issues": 18,
+  "watchers": 399,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Go": 3671565,
+    "TypeScript": 2527658,
+    "Python": 1965642,
+    "Ruby": 1838692,
+    "JavaScript": 1021602,
+    "Shell": 357570,
+    "Java": 225827,
+    "R": 167636,
+    "SaltStack": 166854,
+    "Common Workflow Language": 147028,
+    "PLpgSQL": 99065,
+    "HTML": 48133,
+    "HCL": 37467,
+    "Dockerfile": 26127,
+    "CSS": 24836,
+    "Makefile": 12465,
+    "SCSS": 10403,
+    "Jinja": 2595,
+    "C": 851
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1956,
+    "avg_commits_per_week": 37.61538461538461,
+    "days_active_last_year": 247
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T18:28:35.085664"
+}

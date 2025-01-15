@@ -1,0 +1,56 @@
+{
+  "name": "qutebrowser",
+  "owner": "qutebrowser",
+  "created_at": "2014-06-26T14:59:34Z",
+  "updated_at": "2025-01-13T20:25:55Z",
+  "pushed_at": "2025-01-13T04:22:22Z",
+  "size": 63852,
+  "stars": 10002,
+  "forks": 1018,
+  "open_issues": 1235,
+  "watchers": 10002,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "v0.11.x",
+    "v1.1.x",
+    "v1.2.x",
+    "v1.3.x",
+    "v1.4.x",
+    "v1.5.x",
+    "v1.6.x",
+    "v1.7.x",
+    "v1.8.x",
+    "v1.9.x"
+  ],
+  "languages": {
+    "Python": 4059218,
+    "JavaScript": 771996,
+    "Gherkin": 373139,
+    "HTML": 131743,
+    "Shell": 50490,
+    "NSIS": 41173,
+    "CSS": 4753,
+    "Jinja": 3137,
+    "Batchfile": 2012,
+    "Makefile": 1510,
+    "C++": 456,
+    "QMake": 192
+  },
+  "commit_activity": {
+    "total_commits_last_year": 476,
+    "avg_commits_per_week": 9.153846153846153,
+    "days_active_last_year": 143
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T15:16:35.329343"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "phpMyFAQ",
+  "owner": "thorsten",
+  "created_at": "2009-08-04T19:26:15Z",
+  "updated_at": "2025-01-14T04:55:59Z",
+  "pushed_at": "2025-01-14T04:56:02Z",
+  "size": 56435,
+  "stars": 589,
+  "forks": 255,
+  "open_issues": 19,
+  "watchers": 589,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "PHP": 9489706,
+    "Twig": 348463,
+    "JavaScript": 322766,
+    "SCSS": 19741,
+    "Shell": 9475,
+    "Dockerfile": 2594,
+    "CSS": 1125,
+    "HTML": 205
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1338,
+    "avg_commits_per_week": 25.73076923076923,
+    "days_active_last_year": 282
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:09:52.607446"
+}

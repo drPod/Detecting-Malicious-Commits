@@ -1,0 +1,47 @@
+{
+  "name": "alertmanager",
+  "owner": "prometheus",
+  "created_at": "2013-07-16T15:06:31Z",
+  "updated_at": "2025-01-14T19:40:40Z",
+  "pushed_at": "2025-01-13T16:21:31Z",
+  "size": 41804,
+  "stars": 6768,
+  "forks": 2186,
+  "open_issues": 655,
+  "watchers": 6768,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "release-0.1",
+    "release-0.2",
+    "release-0.3"
+  ],
+  "languages": {
+    "Go": 1299180,
+    "Elm": 225539,
+    "TypeScript": 15132,
+    "HTML": 12371,
+    "Makefile": 6227,
+    "JavaScript": 2957,
+    "Shell": 2750,
+    "CSS": 2085,
+    "Dockerfile": 1323,
+    "Procfile": 621
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T22:51:02.846229"
+}

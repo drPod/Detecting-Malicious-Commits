@@ -1,0 +1,41 @@
+{
+  "name": "flaskBlog",
+  "owner": "DogukanUrker",
+  "created_at": "2022-11-16T20:20:34Z",
+  "updated_at": "2025-01-12T18:55:07Z",
+  "pushed_at": "2025-01-07T07:13:24Z",
+  "size": 204992,
+  "stars": 153,
+  "forks": 56,
+  "open_issues": 2,
+  "watchers": 153,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "v1"
+  ],
+  "languages": {
+    "Python": 342129,
+    "Jinja": 104769,
+    "JavaScript": 5383,
+    "CSS": 3274,
+    "Dockerfile": 1025,
+    "Procfile": 21
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T22:20:03.405425"
+}

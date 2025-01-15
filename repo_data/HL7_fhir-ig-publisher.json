@@ -1,0 +1,35 @@
+{
+  "name": "fhir-ig-publisher",
+  "owner": "HL7",
+  "created_at": "2019-04-01T01:59:07Z",
+  "updated_at": "2025-01-11T02:28:26Z",
+  "pushed_at": "2025-01-09T18:33:45Z",
+  "size": 12509,
+  "stars": 74,
+  "forks": 58,
+  "open_issues": 179,
+  "watchers": 74,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Java": 2547311,
+    "XSLT": 7810,
+    "Python": 4922
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:31:19.648051"
+}

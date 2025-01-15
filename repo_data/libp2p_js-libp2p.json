@@ -1,0 +1,37 @@
+{
+  "name": "js-libp2p",
+  "owner": "libp2p",
+  "created_at": "2015-07-23T21:05:43Z",
+  "updated_at": "2025-01-13T16:47:44Z",
+  "pushed_at": "2025-01-13T17:07:50Z",
+  "size": 78993,
+  "stars": 2375,
+  "forks": 452,
+  "open_issues": 87,
+  "watchers": 2375,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 3374948,
+    "JavaScript": 27193,
+    "Go": 2621,
+    "Makefile": 1463,
+    "Dockerfile": 433
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:57:38.208225"
+}

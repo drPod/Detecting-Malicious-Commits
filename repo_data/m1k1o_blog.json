@@ -1,0 +1,38 @@
+{
+  "name": "blog",
+  "owner": "m1k1o",
+  "created_at": "2016-12-27T20:22:20Z",
+  "updated_at": "2024-12-31T07:12:37Z",
+  "pushed_at": "2024-12-14T16:56:43Z",
+  "size": 4227,
+  "stars": 303,
+  "forks": 31,
+  "open_issues": 10,
+  "watchers": 303,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "PHP": 111211,
+    "JavaScript": 56787,
+    "CSS": 49100,
+    "Dockerfile": 675
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T12:57:25.729705"
+}

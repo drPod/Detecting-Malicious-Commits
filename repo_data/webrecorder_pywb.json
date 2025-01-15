@@ -1,0 +1,40 @@
+{
+  "name": "pywb",
+  "owner": "webrecorder",
+  "created_at": "2013-12-09T03:30:31Z",
+  "updated_at": "2025-01-14T18:13:56Z",
+  "pushed_at": "2024-11-13T22:07:36Z",
+  "size": 34358,
+  "stars": 1433,
+  "forks": 220,
+  "open_issues": 166,
+  "watchers": 1433,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 1712555,
+    "Python": 1134928,
+    "Vue": 56811,
+    "HTML": 44239,
+    "CSS": 3597,
+    "Shell": 2807,
+    "Arc": 2139,
+    "Dockerfile": 619
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T22:17:05.405940"
+}

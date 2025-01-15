@@ -1,0 +1,37 @@
+{
+  "name": "FUDforum",
+  "owner": "fudforum",
+  "created_at": "2020-09-02T18:59:32Z",
+  "updated_at": "2025-01-12T15:47:15Z",
+  "pushed_at": "2025-01-12T15:47:12Z",
+  "size": 846388,
+  "stars": 37,
+  "forks": 10,
+  "open_issues": 0,
+  "watchers": 37,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 1643791,
+    "Perl": 503750,
+    "Raku": 113186,
+    "JavaScript": 27203,
+    "CSS": 8516
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:37:18.049027"
+}

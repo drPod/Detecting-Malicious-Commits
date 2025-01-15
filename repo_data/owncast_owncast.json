@@ -1,0 +1,45 @@
+{
+  "name": "owncast",
+  "owner": "owncast",
+  "created_at": "2020-05-24T00:58:13Z",
+  "updated_at": "2025-01-14T11:01:40Z",
+  "pushed_at": "2025-01-14T06:55:24Z",
+  "size": 934092,
+  "stars": 9693,
+  "forks": 898,
+  "open_issues": 180,
+  "watchers": 9693,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop"
+  ],
+  "languages": {
+    "Go": 761433,
+    "TypeScript": 731531,
+    "JavaScript": 126131,
+    "SCSS": 46065,
+    "MDX": 38762,
+    "CSS": 37239,
+    "Shell": 26779,
+    "Less": 9447,
+    "Earthly": 5847,
+    "Dockerfile": 1316,
+    "VCL": 816
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:53:20.850800"
+}

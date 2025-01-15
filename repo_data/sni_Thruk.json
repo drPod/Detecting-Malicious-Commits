@@ -1,0 +1,42 @@
+{
+  "name": "Thruk",
+  "owner": "sni",
+  "created_at": "2009-11-09T16:35:33Z",
+  "updated_at": "2025-01-13T18:16:17Z",
+  "pushed_at": "2025-01-13T18:16:13Z",
+  "size": 90704,
+  "stars": 413,
+  "forks": 150,
+  "open_issues": 72,
+  "watchers": 413,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Perl": 4527455,
+    "JavaScript": 1431724,
+    "CSS": 83311,
+    "Shell": 46629,
+    "Makefile": 24196,
+    "Dockerfile": 12618,
+    "Raku": 554,
+    "HTML": 374
+  },
+  "commit_activity": {
+    "total_commits_last_year": 748,
+    "avg_commits_per_week": 14.384615384615385,
+    "days_active_last_year": 184
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:42:09.409119"
+}

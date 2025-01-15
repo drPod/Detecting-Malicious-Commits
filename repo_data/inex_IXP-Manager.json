@@ -1,0 +1,51 @@
+{
+  "name": "IXP-Manager",
+  "owner": "inex",
+  "created_at": "2011-05-24T15:36:58Z",
+  "updated_at": "2025-01-09T20:21:57Z",
+  "pushed_at": "2025-01-09T20:21:54Z",
+  "size": 51919,
+  "stars": 384,
+  "forks": 165,
+  "open_issues": 63,
+  "watchers": 384,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "release-v2",
+    "release-v3",
+    "release-v4",
+    "release-v5",
+    "release-v6",
+    "release-v7"
+  ],
+  "languages": {
+    "PHP": 6421792,
+    "Shell": 214847,
+    "Perl": 53128,
+    "Blade": 51974,
+    "JavaScript": 41120,
+    "Hack": 34556,
+    "CSS": 12126,
+    "SCSS": 9671,
+    "Dockerfile": 5782,
+    "Ruby": 3123,
+    "Vue": 565
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:14:38.446995"
+}

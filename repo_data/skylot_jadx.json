@@ -1,0 +1,36 @@
+{
+  "name": "jadx",
+  "owner": "skylot",
+  "created_at": "2013-03-18T17:08:21Z",
+  "updated_at": "2025-01-14T13:26:32Z",
+  "pushed_at": "2025-01-13T20:12:28Z",
+  "size": 23145,
+  "stars": 42516,
+  "forks": 4953,
+  "open_issues": 404,
+  "watchers": 42516,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Java": 4237316,
+    "Smali": 310485,
+    "Kotlin": 117295,
+    "Lex": 15154
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:46:01.887656"
+}

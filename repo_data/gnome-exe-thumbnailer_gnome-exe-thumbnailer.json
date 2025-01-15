@@ -1,0 +1,34 @@
+{
+  "name": "exe-thumbnailer",
+  "owner": "gnome-exe-thumbnailer",
+  "created_at": "2015-04-25T17:10:15Z",
+  "updated_at": "2024-12-19T22:05:27Z",
+  "pushed_at": "2021-12-02T02:47:37Z",
+  "size": 189,
+  "stars": 59,
+  "forks": 5,
+  "open_issues": 7,
+  "watchers": 59,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Shell": 11719,
+    "Roff": 570
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T18:36:53.245435"
+}

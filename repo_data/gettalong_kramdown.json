@@ -1,0 +1,36 @@
+{
+  "name": "kramdown",
+  "owner": "gettalong",
+  "created_at": "2008-11-30T08:32:47Z",
+  "updated_at": "2025-01-12T11:11:14Z",
+  "pushed_at": "2024-11-18T16:41:59Z",
+  "size": 3487,
+  "stars": 1722,
+  "forks": 277,
+  "open_issues": 9,
+  "watchers": 1722,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Ruby": 363976,
+    "HTML": 73840,
+    "Shell": 2818,
+    "Roff": 2025
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T22:59:47.494074"
+}

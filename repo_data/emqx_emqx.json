@@ -1,0 +1,57 @@
+{
+  "name": "emqx",
+  "owner": "emqx",
+  "created_at": "2012-12-17T10:07:44Z",
+  "updated_at": "2025-01-14T18:43:20Z",
+  "pushed_at": "2025-01-14T18:43:15Z",
+  "size": 87896,
+  "stars": 14335,
+  "forks": 2258,
+  "open_issues": 226,
+  "watchers": 14335,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "main-v4.3",
+    "main-v4.4",
+    "main-v4.5",
+    "master",
+    "release-50",
+    "release-51",
+    "release-52",
+    "release-53",
+    "release-54",
+    "release-55",
+    "release-56",
+    "release-57",
+    "release-58",
+    "release-v44"
+  ],
+  "languages": {
+    "Erlang": 16914185,
+    "Shell": 231762,
+    "Elixir": 164136,
+    "C": 57549,
+    "Makefile": 20082,
+    "Python": 12002,
+    "Batchfile": 7428,
+    "HTML": 5527,
+    "Dockerfile": 3743,
+    "Mustache": 3158
+  },
+  "commit_activity": {
+    "total_commits_last_year": 5341,
+    "avg_commits_per_week": 102.71153846153847,
+    "days_active_last_year": 328
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:38:50.931216"
+}

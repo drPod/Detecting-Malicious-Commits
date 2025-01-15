@@ -1,0 +1,40 @@
+{
+  "name": "yaml-cpp",
+  "owner": "jbeder",
+  "created_at": "2015-03-30T02:52:32Z",
+  "updated_at": "2025-01-14T11:39:27Z",
+  "pushed_at": "2024-12-30T17:27:02Z",
+  "size": 4653,
+  "stars": 5264,
+  "forks": 1888,
+  "open_issues": 334,
+  "watchers": 5264,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 4003205,
+    "Python": 432404,
+    "C": 52147,
+    "CMake": 48855,
+    "Starlark": 27237,
+    "Shell": 16855,
+    "SCSS": 2971,
+    "HTML": 2319
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:23:09.805779"
+}

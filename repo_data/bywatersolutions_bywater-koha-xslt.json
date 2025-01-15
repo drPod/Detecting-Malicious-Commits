@@ -1,0 +1,50 @@
+{
+  "name": "bywater-koha-xslt",
+  "owner": "bywatersolutions",
+  "created_at": "2015-12-03T14:04:07Z",
+  "updated_at": "2020-01-23T19:14:17Z",
+  "pushed_at": "2021-03-24T16:59:35Z",
+  "size": 1949473,
+  "stars": 1,
+  "forks": 3,
+  "open_issues": 0,
+  "watchers": 1,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Perl": 8870882,
+    "XSLT": 1538205,
+    "JavaScript": 1117162,
+    "TSQL": 625258,
+    "HTML": 235732,
+    "CSS": 175425,
+    "Pawn": 113544,
+    "Perl 6": 85920,
+    "Shell": 36037,
+    "Python": 23068,
+    "C++": 16706,
+    "Assembly": 14213,
+    "SourcePawn": 10480,
+    "Roff": 7853,
+    "mIRC Script": 6436,
+    "PHP": 5792,
+    "Pascal": 2212,
+    "Makefile": 1149
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:40:52.768505"
+}

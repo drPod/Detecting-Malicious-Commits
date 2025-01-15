@@ -1,0 +1,44 @@
+{
+  "name": "kubevela",
+  "owner": "kubevela",
+  "created_at": "2020-07-03T06:13:20Z",
+  "updated_at": "2025-01-14T08:25:00Z",
+  "pushed_at": "2025-01-13T19:37:35Z",
+  "size": 65014,
+  "stars": 6517,
+  "forks": 908,
+  "open_issues": 527,
+  "watchers": 6517,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "release-0.3",
+    "release-1.0",
+    "release-1.1"
+  ],
+  "languages": {
+    "Go": 4826170,
+    "CUE": 269499,
+    "Mustache": 42169,
+    "Shell": 19709,
+    "Makefile": 16454,
+    "Dockerfile": 1624,
+    "HCL": 1188
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T18:51:43.005927"
+}

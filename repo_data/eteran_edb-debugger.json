@@ -1,0 +1,40 @@
+{
+  "name": "edb-debugger",
+  "owner": "eteran",
+  "created_at": "2015-03-29T00:34:00Z",
+  "updated_at": "2025-01-13T10:18:45Z",
+  "pushed_at": "2024-08-16T07:04:55Z",
+  "size": 10116,
+  "stars": 2738,
+  "forks": 327,
+  "open_issues": 82,
+  "watchers": 2738,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 2203063,
+    "C": 43904,
+    "CMake": 42652,
+    "Roff": 1852,
+    "Shell": 1792,
+    "Assembly": 679
+  },
+  "commit_activity": {
+    "total_commits_last_year": 78,
+    "avg_commits_per_week": 1.5,
+    "days_active_last_year": 16
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T15:41:24.771346"
+}

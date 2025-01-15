@@ -1,0 +1,59 @@
+{
+  "name": "tcpdump",
+  "owner": "the-tcpdump-group",
+  "created_at": "2013-04-14T21:46:15Z",
+  "updated_at": "2025-01-14T07:48:01Z",
+  "pushed_at": "2025-01-13T06:19:33Z",
+  "size": 27691,
+  "stars": 2789,
+  "forks": 860,
+  "open_issues": 115,
+  "watchers": 2789,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "tcpdump-3.5",
+    "tcpdump-3.6",
+    "tcpdump-3.7",
+    "tcpdump-3.8",
+    "tcpdump-3.9",
+    "tcpdump-4.0",
+    "tcpdump-4.1",
+    "tcpdump-4.2",
+    "tcpdump-4.3",
+    "tcpdump-4.4",
+    "tcpdump-4.5",
+    "tcpdump-4.6",
+    "tcpdump-4.7",
+    "tcpdump-4.8",
+    "tcpdump-4.9",
+    "tcpdump-4.99"
+  ],
+  "languages": {
+    "C": 3548298,
+    "CMake": 76892,
+    "Roff": 66849,
+    "Shell": 50525,
+    "M4": 31504,
+    "Perl": 29240,
+    "Makefile": 14259,
+    "Awk": 4120,
+    "GDB": 660
+  },
+  "commit_activity": {
+    "total_commits_last_year": 314,
+    "avg_commits_per_week": 6.038461538461538,
+    "days_active_last_year": 158
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:04:48.453717"
+}

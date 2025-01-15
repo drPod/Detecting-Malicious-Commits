@@ -1,0 +1,37 @@
+{
+  "name": "link-preview-js",
+  "owner": "ospfranco",
+  "created_at": "2016-10-20T23:39:35Z",
+  "updated_at": "2025-01-09T20:12:52Z",
+  "pushed_at": "2025-01-04T18:45:13Z",
+  "size": 1070,
+  "stars": 777,
+  "forks": 125,
+  "open_issues": 3,
+  "watchers": 777,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 27172,
+    "JavaScript": 159,
+    "Shell": 139
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:24:21.566326"
+}

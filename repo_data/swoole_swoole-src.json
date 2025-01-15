@@ -1,0 +1,45 @@
+{
+  "name": "swoole-src",
+  "owner": "swoole",
+  "created_at": "2012-07-21T13:49:59Z",
+  "updated_at": "2025-01-14T09:51:15Z",
+  "pushed_at": "2025-01-09T09:47:26Z",
+  "size": 53231,
+  "stars": 18532,
+  "forks": 3163,
+  "open_issues": 89,
+  "watchers": 18532,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 3805702,
+    "PHP": 2450730,
+    "C": 206814,
+    "M4": 51060,
+    "Shell": 17960,
+    "CMake": 9084,
+    "PLpgSQL": 4955,
+    "Python": 3155,
+    "Go": 620,
+    "Makefile": 618,
+    "JavaScript": 372
+  },
+  "commit_activity": {
+    "total_commits_last_year": 249,
+    "avg_commits_per_week": 4.788461538461538,
+    "days_active_last_year": 101
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T17:05:35.407483"
+}

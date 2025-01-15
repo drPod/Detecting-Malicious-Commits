@@ -1,0 +1,47 @@
+{
+  "name": "jupyterlab-lsp",
+  "owner": "jupyter-lsp",
+  "created_at": "2019-08-17T11:34:22Z",
+  "updated_at": "2025-01-14T14:13:53Z",
+  "pushed_at": "2025-01-14T08:58:59Z",
+  "size": 9589,
+  "stars": 1838,
+  "forks": 148,
+  "open_issues": 206,
+  "watchers": 1838,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 529823,
+    "Python": 170485,
+    "RobotFramework": 99809,
+    "Jupyter Notebook": 16323,
+    "CSS": 16018,
+    "JavaScript": 7945,
+    "R": 538,
+    "Shell": 483,
+    "SCSS": 132,
+    "TeX": 113,
+    "Less": 97,
+    "Dockerfile": 84,
+    "Julia": 44
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T23:03:24.372757"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "qrcp",
+  "owner": "claudiodangelis",
+  "created_at": "2018-01-14T22:35:55Z",
+  "updated_at": "2025-01-14T03:08:37Z",
+  "pushed_at": "2024-12-31T18:02:39Z",
+  "size": 26306,
+  "stars": 10058,
+  "forks": 536,
+  "open_issues": 7,
+  "watchers": 10058,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "release/0.11.0",
+    "release/0.11.1",
+    "release/0.11.2",
+    "release/0.11.3"
+  ],
+  "languages": {
+    "Go": 297498
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:07:23.884123"
+}

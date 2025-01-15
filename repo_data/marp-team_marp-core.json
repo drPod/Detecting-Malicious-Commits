@@ -1,0 +1,37 @@
+{
+  "name": "marp-core",
+  "owner": "marp-team",
+  "created_at": "2018-06-05T15:43:27Z",
+  "updated_at": "2025-01-10T20:29:43Z",
+  "pushed_at": "2024-12-26T20:41:31Z",
+  "size": 3491,
+  "stars": 821,
+  "forks": 133,
+  "open_issues": 10,
+  "watchers": 821,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 148358,
+    "SCSS": 16243,
+    "JavaScript": 7318
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:02:32.048088"
+}

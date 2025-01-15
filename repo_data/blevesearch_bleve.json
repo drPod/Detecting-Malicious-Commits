@@ -1,0 +1,46 @@
+{
+  "name": "bleve",
+  "owner": "blevesearch",
+  "created_at": "2014-04-17T21:02:18Z",
+  "updated_at": "2025-01-14T08:25:44Z",
+  "pushed_at": "2025-01-14T14:12:37Z",
+  "size": 16820,
+  "stars": 10185,
+  "forks": 688,
+  "open_issues": 301,
+  "watchers": 10185,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "7.1-couchbase",
+    "7.2-couchbase",
+    "7.2.x-couchbase",
+    "7.6-couchbase",
+    "7.6.x-couchbase",
+    "alice-couchbase",
+    "cheshire-cat-couchbase",
+    "mad-hatter-couchbase",
+    "master",
+    "vulcan-couchbase"
+  ],
+  "languages": {
+    "Go": 3539048,
+    "Yacc": 7408,
+    "Shell": 241
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:27:17.567578"
+}

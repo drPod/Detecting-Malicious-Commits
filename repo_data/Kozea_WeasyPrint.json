@@ -1,0 +1,35 @@
+{
+  "name": "WeasyPrint",
+  "owner": "Kozea",
+  "created_at": "2011-08-09T14:14:24Z",
+  "updated_at": "2025-01-14T12:00:15Z",
+  "pushed_at": "2025-01-14T16:17:40Z",
+  "size": 34627,
+  "stars": 7367,
+  "forks": 696,
+  "open_issues": 176,
+  "watchers": 7367,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Python": 2257428,
+    "CSS": 41366,
+    "HTML": 18932
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T23:02:21.251888"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "nlgis2",
+  "owner": "IISH",
+  "created_at": "2014-11-24T16:06:49Z",
+  "updated_at": "2020-07-09T09:01:39Z",
+  "pushed_at": "2022-11-04T19:07:55Z",
+  "size": 19433,
+  "stars": 1,
+  "forks": 2,
+  "open_issues": 20,
+  "watchers": 1,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "HTML": 6630038,
+    "Jupyter Notebook": 411540,
+    "Python": 93142,
+    "R": 87471,
+    "TeX": 25321,
+    "CSS": 22909,
+    "JavaScript": 10107,
+    "Perl": 9261,
+    "Dockerfile": 2230,
+    "Shell": 62
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T14:16:08.452658"
+}

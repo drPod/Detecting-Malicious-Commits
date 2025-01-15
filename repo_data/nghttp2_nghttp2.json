@@ -1,0 +1,44 @@
+{
+  "name": "nghttp2",
+  "owner": "nghttp2",
+  "created_at": "2013-07-16T15:12:33Z",
+  "updated_at": "2025-01-14T12:37:12Z",
+  "pushed_at": "2025-01-14T09:17:00Z",
+  "size": 38249,
+  "stars": 4686,
+  "forks": 880,
+  "open_issues": 395,
+  "watchers": 4686,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C++": 2286176,
+    "C": 1682086,
+    "Go": 180283,
+    "Python": 90018,
+    "M4": 74621,
+    "CMake": 66979,
+    "Makefile": 23852,
+    "Shell": 9762,
+    "Dockerfile": 6966,
+    "Ruby": 559
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:27:20.285893"
+}

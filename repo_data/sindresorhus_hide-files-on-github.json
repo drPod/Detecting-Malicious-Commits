@@ -1,0 +1,35 @@
+{
+  "name": "hide-files-on-github",
+  "owner": "sindresorhus",
+  "created_at": "2014-07-29T19:59:14Z",
+  "updated_at": "2025-01-10T17:05:04Z",
+  "pushed_at": "2023-01-04T02:02:34Z",
+  "size": 1342,
+  "stars": 320,
+  "forks": 35,
+  "open_issues": 0,
+  "watchers": 320,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 8637,
+    "CSS": 2270,
+    "HTML": 1057
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:07:24.685189"
+}

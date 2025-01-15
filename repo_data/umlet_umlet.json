@@ -1,0 +1,38 @@
+{
+  "name": "umlet",
+  "owner": "umlet",
+  "created_at": "2015-03-18T08:32:10Z",
+  "updated_at": "2025-01-13T03:33:45Z",
+  "pushed_at": "2024-10-29T13:10:14Z",
+  "size": 65799,
+  "stars": 1502,
+  "forks": 306,
+  "open_issues": 180,
+  "watchers": 1502,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 3578709,
+    "Java": 1990230,
+    "TypeScript": 40881,
+    "HTML": 8963,
+    "CSS": 6241,
+    "Shell": 2617
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:53:35.088193"
+}

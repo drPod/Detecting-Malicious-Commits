@@ -1,0 +1,43 @@
+{
+  "name": "panel-builder",
+  "owner": "moderntribe",
+  "created_at": "2014-07-08T18:13:06Z",
+  "updated_at": "2024-12-12T16:39:08Z",
+  "pushed_at": "2024-04-09T16:40:16Z",
+  "size": 125707,
+  "stars": 10,
+  "forks": 4,
+  "open_issues": 9,
+  "watchers": 10,
+  "has_security_policy": false,
+  "default_branch": "3.3-branch",
+  "protected_branches": [
+    "2.0-branch",
+    "3.0-branch",
+    "3.1-branch",
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 301353,
+    "PHP": 251226,
+    "CSS": 237824,
+    "Less": 152341,
+    "HTML": 47297,
+    "Sass": 11555
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T21:36:11.649538"
+}

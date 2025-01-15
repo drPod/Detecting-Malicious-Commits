@@ -1,0 +1,41 @@
+{
+  "name": "kubernetes-client",
+  "owner": "fabric8io",
+  "created_at": "2015-07-09T15:43:13Z",
+  "updated_at": "2025-01-14T12:31:45Z",
+  "pushed_at": "2025-01-14T12:31:43Z",
+  "size": 507799,
+  "stars": 3443,
+  "forks": 1469,
+  "open_issues": 107,
+  "watchers": 3443,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Java": 33067519,
+    "Groovy": 128938,
+    "Go": 75351,
+    "Mustache": 13713,
+    "Shell": 4798,
+    "Batchfile": 3390,
+    "Makefile": 2766
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T18:13:56.770348"
+}

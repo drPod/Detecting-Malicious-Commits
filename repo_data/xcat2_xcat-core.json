@@ -1,0 +1,50 @@
+{
+  "name": "xcat-core",
+  "owner": "xcat2",
+  "created_at": "2014-12-09T03:21:50Z",
+  "updated_at": "2024-11-27T12:16:53Z",
+  "pushed_at": "2024-11-13T14:51:45Z",
+  "size": 208467,
+  "stars": 372,
+  "forks": 174,
+  "open_issues": 353,
+  "watchers": 372,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Perl": 13823860,
+    "Shell": 1998830,
+    "JavaScript": 1255544,
+    "Python": 315429,
+    "PHP": 63200,
+    "Makefile": 27759,
+    "PowerShell": 24050,
+    "Batchfile": 20625,
+    "CSS": 16524,
+    "HTML": 16218,
+    "C": 10710,
+    "Awk": 10525,
+    "VBScript": 9757,
+    "C++": 6561,
+    "Roff": 1120,
+    "Dockerfile": 552
+  },
+  "commit_activity": {
+    "total_commits_last_year": 82,
+    "avg_commits_per_week": 1.5769230769230769,
+    "days_active_last_year": 42
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "epl-1.0"
+  },
+  "collected_at": "2025-01-14T15:20:23.248219"
+}

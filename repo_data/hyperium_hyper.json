@@ -1,0 +1,43 @@
+{
+  "name": "hyper",
+  "owner": "hyperium",
+  "created_at": "2014-08-30T21:14:33Z",
+  "updated_at": "2025-01-14T16:32:34Z",
+  "pushed_at": "2025-01-07T14:07:09Z",
+  "size": 13493,
+  "stars": 14852,
+  "forks": 1615,
+  "open_issues": 238,
+  "watchers": 14852,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "0.10.x",
+    "0.11.x",
+    "0.12.x",
+    "0.13.x",
+    "0.14.x",
+    "master"
+  ],
+  "languages": {
+    "Rust": 920594,
+    "C": 35088,
+    "Shell": 1523,
+    "Makefile": 428
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:28:57.251289"
+}

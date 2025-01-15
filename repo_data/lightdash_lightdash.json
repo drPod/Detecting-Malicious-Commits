@@ -1,0 +1,37 @@
+{
+  "name": "lightdash",
+  "owner": "lightdash",
+  "created_at": "2021-03-19T09:44:40Z",
+  "updated_at": "2025-01-14T13:23:12Z",
+  "pushed_at": "2025-01-14T13:23:07Z",
+  "size": 141021,
+  "stars": 4145,
+  "forks": 456,
+  "open_issues": 1203,
+  "watchers": 4145,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 10712073,
+    "HTML": 1011035,
+    "JavaScript": 38786,
+    "Shell": 19244,
+    "CSS": 3030
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:24:02.528771"
+}

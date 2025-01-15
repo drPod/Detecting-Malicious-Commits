@@ -1,0 +1,47 @@
+{
+  "name": "civetweb",
+  "owner": "civetweb",
+  "created_at": "2013-10-05T21:37:17Z",
+  "updated_at": "2025-01-14T05:42:51Z",
+  "pushed_at": "2025-01-13T07:17:27Z",
+  "size": 28215,
+  "stars": 2952,
+  "forks": 969,
+  "open_issues": 172,
+  "watchers": 2952,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 1411956,
+    "Lua": 97363,
+    "CMake": 59302,
+    "Batchfile": 53849,
+    "HTML": 49400,
+    "C++": 41405,
+    "Makefile": 19712,
+    "Shell": 18338,
+    "JavaScript": 10907,
+    "Perl": 2542,
+    "Dockerfile": 1874,
+    "QMake": 1030,
+    "PHP": 564,
+    "CSS": 198,
+    "Python": 194
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:19:17.565316"
+}

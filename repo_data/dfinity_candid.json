@@ -1,0 +1,46 @@
+{
+  "name": "candid",
+  "owner": "dfinity",
+  "created_at": "2020-05-04T17:10:42Z",
+  "updated_at": "2025-01-12T22:24:19Z",
+  "pushed_at": "2025-01-06T20:00:46Z",
+  "size": 2283,
+  "stars": 285,
+  "forks": 79,
+  "open_issues": 61,
+  "watchers": 285,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Rust": 661125,
+    "Coq": 45049,
+    "TypeScript": 33842,
+    "JavaScript": 20356,
+    "Nix": 11928,
+    "Motoko": 11118,
+    "CSS": 8698,
+    "HTML": 5781,
+    "Handlebars": 2992,
+    "Shell": 2730,
+    "Python": 1981,
+    "Dune": 32
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T19:36:35.572972"
+}

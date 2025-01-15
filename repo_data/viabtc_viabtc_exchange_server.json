@@ -1,0 +1,38 @@
+{
+  "name": "viabtc_exchange_server",
+  "owner": "viabtc",
+  "created_at": "2017-03-06T02:55:03Z",
+  "updated_at": "2025-01-09T08:57:59Z",
+  "pushed_at": "2021-12-17T13:16:42Z",
+  "size": 778,
+  "stars": 2693,
+  "forks": 1491,
+  "open_issues": 111,
+  "watchers": 2693,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 1056594,
+    "Makefile": 10174,
+    "C++": 5900,
+    "Shell": 3272,
+    "Python": 1793,
+    "Pascal": 388
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:05:37.328972"
+}

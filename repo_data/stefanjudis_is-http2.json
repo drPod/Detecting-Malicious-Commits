@@ -1,0 +1,33 @@
+{
+  "name": "is-http2",
+  "owner": "stefanjudis",
+  "created_at": "2015-11-27T15:55:52Z",
+  "updated_at": "2023-08-20T16:29:44Z",
+  "pushed_at": "2017-12-28T13:48:03Z",
+  "size": 40,
+  "stars": 14,
+  "forks": 4,
+  "open_issues": 2,
+  "watchers": 14,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 5871
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T20:53:07.084607"
+}

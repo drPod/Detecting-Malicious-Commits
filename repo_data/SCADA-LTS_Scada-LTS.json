@@ -1,0 +1,53 @@
+{
+  "name": "Scada-LTS",
+  "owner": "SCADA-LTS",
+  "created_at": "2016-07-06T15:00:08Z",
+  "updated_at": "2025-01-14T14:58:05Z",
+  "pushed_at": "2025-01-13T17:03:36Z",
+  "size": 214790,
+  "stars": 769,
+  "forks": 296,
+  "open_issues": 216,
+  "watchers": 769,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "SLTS-5-submit-AbilIT-developments-libraries-javascript",
+    "SLTS-5-submit-AbilIT-developments-without-js",
+    "archive-develop",
+    "archive-master"
+  ],
+  "languages": {
+    "Java": 10273793,
+    "HTML": 5598778,
+    "JavaScript": 5064232,
+    "Vue": 792262,
+    "CSS": 163895,
+    "PLSQL": 75678,
+    "PHP": 62056,
+    "FreeMarker": 57343,
+    "Python": 15715,
+    "Shell": 13263,
+    "ActionScript": 11286,
+    "SCSS": 8354,
+    "XSLT": 4368,
+    "Sass": 2495,
+    "Makefile": 1250,
+    "Dockerfile": 967
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T19:18:07.169199"
+}

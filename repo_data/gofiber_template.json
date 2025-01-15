@@ -1,0 +1,40 @@
+{
+  "name": "template",
+  "owner": "gofiber",
+  "created_at": "2020-02-14T01:58:52Z",
+  "updated_at": "2025-01-11T18:27:47Z",
+  "pushed_at": "2025-01-10T12:50:29Z",
+  "size": 1250,
+  "stars": 275,
+  "forks": 54,
+  "open_issues": 20,
+  "watchers": 275,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Go": 122275,
+    "HTML": 615,
+    "Pug": 424,
+    "Handlebars": 396,
+    "Mustache": 259,
+    "Slim": 200
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:22:20.525560"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "yaml",
+  "owner": "go-yaml",
+  "created_at": "2014-03-05T18:54:57Z",
+  "updated_at": "2025-01-14T17:20:29Z",
+  "pushed_at": "2024-08-15T20:03:31Z",
+  "size": 1599,
+  "stars": 6944,
+  "forks": 1063,
+  "open_issues": 423,
+  "watchers": 6944,
+  "has_security_policy": false,
+  "default_branch": "v3",
+  "protected_branches": [],
+  "languages": {
+    "Go": 455065
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:22:24.768364"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "dolibarr",
+  "owner": "GPCsolutions",
+  "created_at": "2012-04-16T14:34:07Z",
+  "updated_at": "2021-09-24T17:33:55Z",
+  "pushed_at": "2018-05-23T09:38:00Z",
+  "size": 460512,
+  "stars": 2,
+  "forks": 0,
+  "open_issues": 14,
+  "watchers": 2,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 41347486,
+    "JavaScript": 1649129,
+    "CSS": 457914,
+    "HTML": 342369,
+    "SQLPL": 130859,
+    "Perl": 108444,
+    "Shell": 55339,
+    "Inno Setup": 47985,
+    "C": 22113,
+    "PLpgSQL": 21093,
+    "Makefile": 8320,
+    "C++": 7952,
+    "Batchfile": 1264,
+    "ApacheConf": 751
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T20:17:43.727991"
+}

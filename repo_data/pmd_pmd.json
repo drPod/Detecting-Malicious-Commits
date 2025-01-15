@@ -1,0 +1,51 @@
+{
+  "name": "pmd",
+  "owner": "pmd",
+  "created_at": "2012-07-11T18:03:00Z",
+  "updated_at": "2025-01-14T17:44:36Z",
+  "pushed_at": "2025-01-14T18:13:35Z",
+  "size": 504754,
+  "stars": 4939,
+  "forks": 1501,
+  "open_issues": 574,
+  "watchers": 4939,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "pmd/7.0.x"
+  ],
+  "languages": {
+    "Java": 8273385,
+    "Apex": 1001715,
+    "Kotlin": 955714,
+    "ANTLR": 293978,
+    "PLSQL": 103701,
+    "XSLT": 77523,
+    "Shell": 63234,
+    "HTML": 29014,
+    "JavaScript": 16053,
+    "Scala": 9086,
+    "Batchfile": 7673,
+    "Ruby": 3998,
+    "Modelica": 1346,
+    "CSS": 1241,
+    "C++": 446,
+    "TypeScript": 152
+  },
+  "commit_activity": {
+    "total_commits_last_year": 2145,
+    "avg_commits_per_week": 41.25,
+    "days_active_last_year": 232
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:08:31.014279"
+}

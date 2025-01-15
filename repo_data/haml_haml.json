@@ -1,0 +1,41 @@
+{
+  "name": "haml",
+  "owner": "haml",
+  "created_at": "2008-02-11T22:55:26Z",
+  "updated_at": "2025-01-13T05:54:58Z",
+  "pushed_at": "2024-12-28T15:27:55Z",
+  "size": 10581,
+  "stars": 3766,
+  "forks": 575,
+  "open_issues": 20,
+  "watchers": 3766,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "original-main"
+  ],
+  "languages": {
+    "Ruby": 357999,
+    "Haml": 44905,
+    "HTML": 17666,
+    "Shell": 498,
+    "Slim": 317,
+    "Logos": 166,
+    "RPC": 160
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:19:58.286846"
+}

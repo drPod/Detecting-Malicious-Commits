@@ -1,0 +1,42 @@
+{
+  "name": "IdentityServer4.Admin",
+  "owner": "skoruba",
+  "created_at": "2018-02-10T19:56:05Z",
+  "updated_at": "2025-01-12T16:30:37Z",
+  "pushed_at": "2024-12-04T08:25:35Z",
+  "size": 10267,
+  "stars": 3585,
+  "forks": 1149,
+  "open_issues": 312,
+  "watchers": 3585,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "dev",
+    "master"
+  ],
+  "languages": {
+    "C#": 2467958,
+    "HTML": 363556,
+    "JavaScript": 113212,
+    "CSS": 32615,
+    "PowerShell": 23465,
+    "Dockerfile": 18333,
+    "SCSS": 16379
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:03:36.845584"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "pwntools",
+  "owner": "Gallopsled",
+  "created_at": "2013-04-29T14:43:03Z",
+  "updated_at": "2025-01-14T15:02:12Z",
+  "pushed_at": "2025-01-06T21:43:21Z",
+  "size": 28557,
+  "stars": 12282,
+  "forks": 1724,
+  "open_issues": 124,
+  "watchers": 12282,
+  "has_security_policy": false,
+  "default_branch": "dev",
+  "protected_branches": [
+    "beta",
+    "stable"
+  ],
+  "languages": {
+    "Python": 3050477,
+    "Assembly": 2090837,
+    "C": 1483503,
+    "Shell": 18927,
+    "Dockerfile": 9769,
+    "Mako": 4804,
+    "Makefile": 2356
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:05:51.406181"
+}

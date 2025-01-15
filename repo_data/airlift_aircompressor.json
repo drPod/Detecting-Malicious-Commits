@@ -1,0 +1,37 @@
+{
+  "name": "aircompressor",
+  "owner": "airlift",
+  "created_at": "2012-07-25T02:57:20Z",
+  "updated_at": "2025-01-13T10:29:20Z",
+  "pushed_at": "2025-01-13T02:22:32Z",
+  "size": 75842,
+  "stars": 587,
+  "forks": 116,
+  "open_issues": 21,
+  "watchers": 587,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "release-2.x"
+  ],
+  "languages": {
+    "Java": 906010,
+    "Shell": 4054
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T21:30:20.453236"
+}

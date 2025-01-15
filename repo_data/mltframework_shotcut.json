@@ -1,0 +1,44 @@
+{
+  "name": "shotcut",
+  "owner": "mltframework",
+  "created_at": "2012-04-23T22:37:04Z",
+  "updated_at": "2025-01-14T20:24:57Z",
+  "pushed_at": "2025-01-13T02:36:38Z",
+  "size": 96940,
+  "stars": 11338,
+  "forks": 1154,
+  "open_issues": 45,
+  "watchers": 11338,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 3032182,
+    "QML": 2101101,
+    "JavaScript": 476105,
+    "Shell": 132293,
+    "C": 22736,
+    "CMake": 21795,
+    "Objective-C++": 14445,
+    "Inno Setup": 5408,
+    "Python": 3092,
+    "Roff": 1224,
+    "Makefile": 1081,
+    "QMake": 838
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T21:29:44.685631"
+}

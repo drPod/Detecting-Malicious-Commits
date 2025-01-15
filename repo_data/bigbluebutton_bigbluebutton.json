@@ -1,0 +1,48 @@
+{
+  "name": "bigbluebutton",
+  "owner": "bigbluebutton",
+  "created_at": "2010-05-25T01:42:41Z",
+  "updated_at": "2025-01-14T12:12:39Z",
+  "pushed_at": "2025-01-14T12:12:29Z",
+  "size": 893040,
+  "stars": 8626,
+  "forks": 5969,
+  "open_issues": 743,
+  "watchers": 8626,
+  "has_security_policy": false,
+  "default_branch": "v3.0.x-release",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 4126026,
+    "Scala": 1661584,
+    "TypeScript": 1609907,
+    "Java": 1170092,
+    "Ruby": 394574,
+    "Shell": 281919,
+    "Groovy": 165624,
+    "CSS": 162616,
+    "Go": 113680,
+    "PLpgSQL": 96927,
+    "Python": 75857,
+    "HTML": 26837,
+    "Batchfile": 2375,
+    "Gherkin": 925,
+    "Dockerfile": 59,
+    "PostScript": 36
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3379,
+    "avg_commits_per_week": 64.98076923076923,
+    "days_active_last_year": 265
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-3.0"
+  },
+  "collected_at": "2025-01-14T12:54:33.084574"
+}

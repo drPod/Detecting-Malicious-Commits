@@ -1,0 +1,43 @@
+{
+  "name": "ywoa",
+  "owner": "cloudwebsoft",
+  "created_at": "2019-04-15T23:07:47Z",
+  "updated_at": "2025-01-09T20:39:41Z",
+  "pushed_at": "2023-11-11T01:45:23Z",
+  "size": 253937,
+  "stars": 128,
+  "forks": 51,
+  "open_issues": 12,
+  "watchers": 128,
+  "has_security_policy": false,
+  "default_branch": "oa_git8.0",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 31759876,
+    "Java": 17357150,
+    "HTML": 3183007,
+    "Vue": 3153110,
+    "CSS": 2254418,
+    "TypeScript": 977850,
+    "SCSS": 205860,
+    "Less": 46587,
+    "Python": 21121,
+    "Shell": 1745,
+    "TeX": 744
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:31:10.927559"
+}

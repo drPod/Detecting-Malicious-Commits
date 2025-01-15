@@ -1,0 +1,36 @@
+{
+  "name": "tinyfilemanager",
+  "owner": "prasathmani",
+  "created_at": "2017-07-05T06:31:58Z",
+  "updated_at": "2025-01-14T02:23:43Z",
+  "pushed_at": "2024-11-05T00:22:30Z",
+  "size": 6741,
+  "stars": 5120,
+  "forks": 1696,
+  "open_issues": 237,
+  "watchers": 5120,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "PHP": 224210,
+    "Dockerfile": 664
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T14:27:01.887938"
+}

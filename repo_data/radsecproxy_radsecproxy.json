@@ -1,0 +1,37 @@
+{
+  "name": "radsecproxy",
+  "owner": "radsecproxy",
+  "created_at": "2018-01-09T13:18:07Z",
+  "updated_at": "2025-01-13T07:33:12Z",
+  "pushed_at": "2025-01-13T07:33:07Z",
+  "size": 2297,
+  "stars": 73,
+  "forks": 36,
+  "open_issues": 18,
+  "watchers": 73,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 497696,
+    "Roff": 47694,
+    "M4": 10768,
+    "Shell": 5008,
+    "Makefile": 2305
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T22:57:11.406103"
+}

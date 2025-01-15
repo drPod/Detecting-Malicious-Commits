@@ -1,0 +1,39 @@
+{
+  "name": "runelite",
+  "owner": "runelite",
+  "created_at": "2016-04-30T20:48:02Z",
+  "updated_at": "2025-01-14T20:43:21Z",
+  "pushed_at": "2025-01-13T19:08:49Z",
+  "size": 79826,
+  "stars": 4871,
+  "forks": 5269,
+  "open_issues": 2104,
+  "watchers": 4871,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Java": 13540132,
+    "GLSL": 65440,
+    "C": 26700,
+    "Witcher Script": 2456,
+    "Shell": 761
+  },
+  "commit_activity": {
+    "total_commits_last_year": 819,
+    "avg_commits_per_week": 15.75,
+    "days_active_last_year": 227
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-2-clause"
+  },
+  "collected_at": "2025-01-14T21:40:45.886737"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "auditor-bundle",
+  "owner": "DamienHarper",
+  "created_at": "2018-01-12T14:29:02Z",
+  "updated_at": "2025-01-13T12:06:13Z",
+  "pushed_at": "2024-12-28T09:32:35Z",
+  "size": 1696,
+  "stars": 408,
+  "forks": 122,
+  "open_issues": 35,
+  "watchers": 408,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "1.x",
+    "2.x",
+    "3.x",
+    "4.x",
+    "5.x",
+    "master"
+  ],
+  "languages": {
+    "PHP": 83049,
+    "Twig": 82297,
+    "Makefile": 4189,
+    "JavaScript": 1843,
+    "CSS": 487,
+    "Dockerfile": 474
+  },
+  "commit_activity": {
+    "total_commits_last_year": 49,
+    "avg_commits_per_week": 0.9423076923076923,
+    "days_active_last_year": 21
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:00:27.806654"
+}

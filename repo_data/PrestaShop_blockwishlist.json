@@ -1,0 +1,44 @@
+{
+  "name": "blockwishlist",
+  "owner": "PrestaShop",
+  "created_at": "2014-03-21T09:29:46Z",
+  "updated_at": "2025-01-14T05:29:29Z",
+  "pushed_at": "2025-01-14T05:29:29Z",
+  "size": 6241,
+  "stars": 41,
+  "forks": 111,
+  "open_issues": 11,
+  "watchers": 41,
+  "has_security_policy": false,
+  "default_branch": "dev",
+  "protected_branches": [
+    "dev",
+    "master"
+  ],
+  "languages": {
+    "PHP": 147952,
+    "Vue": 72567,
+    "JavaScript": 68920,
+    "TypeScript": 55822,
+    "Smarty": 30546,
+    "SCSS": 10751,
+    "Twig": 5299,
+    "Shell": 1060,
+    "Makefile": 432
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "afl-3.0"
+  },
+  "collected_at": "2025-01-14T21:53:22.132210"
+}

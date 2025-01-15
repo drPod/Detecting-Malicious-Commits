@@ -1,0 +1,37 @@
+{
+  "name": "matrix-appservice-bridge",
+  "owner": "matrix-org",
+  "created_at": "2015-08-19T14:36:53Z",
+  "updated_at": "2025-01-11T03:59:30Z",
+  "pushed_at": "2024-09-19T13:37:53Z",
+  "size": 7500,
+  "stars": 160,
+  "forks": 73,
+  "open_issues": 65,
+  "watchers": 160,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop"
+  ],
+  "languages": {
+    "TypeScript": 412719,
+    "JavaScript": 138053,
+    "Shell": 3563
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T13:51:12.606146"
+}

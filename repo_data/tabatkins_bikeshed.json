@@ -1,0 +1,41 @@
+{
+  "name": "bikeshed",
+  "owner": "tabatkins",
+  "created_at": "2013-02-26T00:43:52Z",
+  "updated_at": "2025-01-14T00:16:12Z",
+  "pushed_at": "2025-01-10T23:28:57Z",
+  "size": 654179,
+  "stars": 1138,
+  "forks": 201,
+  "open_issues": 454,
+  "watchers": 1138,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "HTML": 112040287,
+    "Bikeshed": 22092955,
+    "Python": 994411,
+    "CSS": 39112,
+    "JavaScript": 35955,
+    "Emacs Lisp": 7559,
+    "Dockerfile": 945,
+    "Shell": 226,
+    "Bluespec": 73
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "cc0-1.0"
+  },
+  "collected_at": "2025-01-14T13:34:59.571924"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Flowinity",
+  "owner": "PrivateUploader",
+  "created_at": "2023-01-11T15:28:32Z",
+  "updated_at": "2025-01-06T13:20:07Z",
+  "pushed_at": "2025-01-06T13:20:13Z",
+  "size": 65840,
+  "stars": 27,
+  "forks": 9,
+  "open_issues": 2,
+  "watchers": 27,
+  "has_security_policy": false,
+  "default_branch": "api-v4",
+  "protected_branches": [
+    "api-v3",
+    "bytedefined",
+    "electrics01",
+    "troplo"
+  ],
+  "languages": {
+    "TypeScript": 2028592,
+    "Vue": 1634803,
+    "CSS": 66881,
+    "JavaScript": 38215,
+    "HTML": 26628,
+    "SCSS": 14396,
+    "EJS": 1248,
+    "Dockerfile": 288,
+    "Shell": 221
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T22:41:26.129189"
+}

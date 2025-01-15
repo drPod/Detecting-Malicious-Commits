@@ -1,0 +1,38 @@
+{
+  "name": "hashbrown-cms",
+  "owner": "HashBrownCMS",
+  "created_at": "2015-11-29T16:30:56Z",
+  "updated_at": "2024-08-28T16:57:02Z",
+  "pushed_at": "2022-06-27T07:36:27Z",
+  "size": 86248,
+  "stars": 157,
+  "forks": 36,
+  "open_issues": 0,
+  "watchers": 157,
+  "has_security_policy": false,
+  "default_branch": "stable",
+  "protected_branches": [
+    "develop",
+    "stable"
+  ],
+  "languages": {
+    "JavaScript": 745473,
+    "SCSS": 83748,
+    "CSS": 5822
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:27:28.607591"
+}

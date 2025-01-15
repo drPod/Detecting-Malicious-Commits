@@ -1,0 +1,57 @@
+{
+  "name": "pyansys-geometry",
+  "owner": "ansys",
+  "created_at": "2022-08-30T06:45:39Z",
+  "updated_at": "2025-01-14T12:04:19Z",
+  "pushed_at": "2025-01-14T13:18:36Z",
+  "size": 306935,
+  "stars": 48,
+  "forks": 15,
+  "open_issues": 56,
+  "watchers": 48,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "blitz",
+    "dependabot/pip/grpc-deps-7a1ac16faf",
+    "feat/debug-mode-run-discovery-script",
+    "feat/driving-dimensions",
+    "feat/enable_import_tests_for_core_service",
+    "feat/enable_prepare_repair_coreservice",
+    "feat/extrude-and-offset-faces",
+    "feat/named-selections-plot",
+    "feat/repair-prepare-tools-linux",
+    "feat/separate-pieces",
+    "feat/split_edges",
+    "fix/adapt_tessellate_tests_to_new_core_service",
+    "fix/extra-edges-test-failing",
+    "fix/temp-body-created-on-intersect",
+    "main",
+    "release/0.1",
+    "release/0.2",
+    "release/0.3",
+    "release/0.4",
+    "release/0.5",
+    "release/0.6",
+    "release/0.7"
+  ],
+  "languages": {
+    "Python": 1282155,
+    "Dockerfile": 4615
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:59:08.529070"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "minetest",
+  "owner": "minetest",
+  "created_at": "2011-08-07T13:48:36Z",
+  "updated_at": "2025-01-14T16:08:31Z",
+  "pushed_at": "2025-01-13T08:39:20Z",
+  "size": 115875,
+  "stars": 11021,
+  "forks": 2054,
+  "open_issues": 1274,
+  "watchers": 11021,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "stable-0.2",
+    "stable-0.3",
+    "stable-0.4",
+    "stable-5"
+  ],
+  "languages": {
+    "C++": 9501309,
+    "Lua": 1036472,
+    "C": 608911,
+    "Java": 231307,
+    "CMake": 102805,
+    "GLSL": 86139,
+    "Objective-C++": 50556,
+    "Shell": 26575,
+    "Python": 14386,
+    "Objective-C": 7833,
+    "Dockerfile": 2642,
+    "Nix": 425,
+    "HTML": 371
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1004,
+    "avg_commits_per_week": 19.307692307692307,
+    "days_active_last_year": 271
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:30:14.368143"
+}

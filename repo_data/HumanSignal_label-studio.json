@@ -1,0 +1,41 @@
+{
+  "name": "label-studio",
+  "owner": "HumanSignal",
+  "created_at": "2019-06-19T02:00:44Z",
+  "updated_at": "2025-01-14T14:19:04Z",
+  "pushed_at": "2025-01-14T14:25:03Z",
+  "size": 2431427,
+  "stars": 20221,
+  "forks": 2485,
+  "open_issues": 922,
+  "watchers": 20221,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 3094087,
+    "Python": 1915934,
+    "TypeScript": 1337502,
+    "SCSS": 350593,
+    "HTML": 71425,
+    "CSS": 47465,
+    "Shell": 15910,
+    "Dockerfile": 7094,
+    "Makefile": 3603
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:37:43.325618"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "vaultwarden",
+  "owner": "dani-garcia",
+  "created_at": "2018-02-17T22:40:20Z",
+  "updated_at": "2025-01-14T13:30:33Z",
+  "pushed_at": "2025-01-13T18:16:10Z",
+  "size": 9921,
+  "stars": 40740,
+  "forks": 1952,
+  "open_issues": 16,
+  "watchers": 40740,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Rust": 1048282,
+    "Handlebars": 127665,
+    "Jinja": 10105,
+    "Shell": 7818,
+    "HCL": 7493,
+    "Python": 3546,
+    "Makefile": 165
+  },
+  "commit_activity": {
+    "total_commits_last_year": 185,
+    "avg_commits_per_week": 3.5576923076923075,
+    "days_active_last_year": 99
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:35:33.807918"
+}

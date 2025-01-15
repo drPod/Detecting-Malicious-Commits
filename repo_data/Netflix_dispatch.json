@@ -1,0 +1,45 @@
+{
+  "name": "dispatch",
+  "owner": "Netflix",
+  "created_at": "2020-02-10T17:21:28Z",
+  "updated_at": "2025-01-14T10:59:39Z",
+  "pushed_at": "2025-01-14T12:48:08Z",
+  "size": 98170,
+  "stars": 5271,
+  "forks": 525,
+  "open_issues": 11,
+  "watchers": 5271,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Python": 2413341,
+    "Vue": 1356383,
+    "JavaScript": 778339,
+    "TypeScript": 49638,
+    "PLpgSQL": 14001,
+    "Dockerfile": 5702,
+    "SCSS": 3588,
+    "CSS": 2223,
+    "Lua": 1677,
+    "Mako": 988,
+    "Shell": 777,
+    "HTML": 765,
+    "Sass": 355
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T21:09:31.164862"
+}

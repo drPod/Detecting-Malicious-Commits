@@ -1,0 +1,39 @@
+{
+  "name": "opencanary",
+  "owner": "thinkst",
+  "created_at": "2015-08-05T14:44:09Z",
+  "updated_at": "2025-01-10T13:36:40Z",
+  "pushed_at": "2024-11-29T08:22:20Z",
+  "size": 3272,
+  "stars": 2365,
+  "forks": 365,
+  "open_issues": 7,
+  "watchers": 2365,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Python": 226728,
+    "CSS": 38493,
+    "HTML": 15952,
+    "Shell": 8634,
+    "JavaScript": 1055
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T20:33:37.894227"
+}

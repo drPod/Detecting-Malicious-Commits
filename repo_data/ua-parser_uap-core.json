@@ -1,0 +1,36 @@
+{
+  "name": "uap-core",
+  "owner": "ua-parser",
+  "created_at": "2014-02-17T14:57:50Z",
+  "updated_at": "2025-01-08T10:26:35Z",
+  "pushed_at": "2024-12-05T11:56:46Z",
+  "size": 7172,
+  "stars": 760,
+  "forks": 451,
+  "open_issues": 126,
+  "watchers": 760,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 15721,
+    "Perl": 1372
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:33:56.769431"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "libevent",
+  "owner": "libevent",
+  "created_at": "2011-06-06T21:42:50Z",
+  "updated_at": "2025-01-14T12:36:12Z",
+  "pushed_at": "2025-01-01T14:16:06Z",
+  "size": 12799,
+  "stars": 11283,
+  "forks": 3405,
+  "open_issues": 116,
+  "watchers": 11283,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "patches-1.4",
+    "patches-2.0",
+    "patches-2.1"
+  ],
+  "languages": {
+    "C": 2705124,
+    "Roff": 118545,
+    "CMake": 113701,
+    "M4": 76952,
+    "Python": 67481,
+    "Shell": 17395,
+    "Makefile": 10366,
+    "sed": 731,
+    "Vim Script": 304
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:44:35.164724"
+}

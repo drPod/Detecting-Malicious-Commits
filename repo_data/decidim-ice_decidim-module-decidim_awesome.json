@@ -1,0 +1,41 @@
+{
+  "name": "decidim-module-decidim_awesome",
+  "owner": "decidim-ice",
+  "created_at": "2020-03-24T20:38:16Z",
+  "updated_at": "2025-01-13T14:10:53Z",
+  "pushed_at": "2025-01-13T14:13:39Z",
+  "size": 29905,
+  "stars": 26,
+  "forks": 28,
+  "open_issues": 60,
+  "watchers": 26,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "release/0.27-stable"
+  ],
+  "languages": {
+    "Ruby": 884260,
+    "HTML": 79825,
+    "JavaScript": 79557,
+    "SCSS": 19312,
+    "Shell": 1573,
+    "Dockerfile": 298
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T22:44:26.604468"
+}

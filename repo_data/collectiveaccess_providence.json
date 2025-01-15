@@ -1,0 +1,45 @@
+{
+  "name": "providence",
+  "owner": "collectiveaccess",
+  "created_at": "2012-05-15T15:28:10Z",
+  "updated_at": "2025-01-13T16:48:04Z",
+  "pushed_at": "2025-01-14T04:33:02Z",
+  "size": 269217,
+  "stars": 307,
+  "forks": 170,
+  "open_issues": 97,
+  "watchers": 307,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 21671887,
+    "JavaScript": 7070785,
+    "CSS": 579609,
+    "TypeScript": 394844,
+    "Less": 187000,
+    "HTML": 132353,
+    "Smarty": 39811,
+    "Pascal": 39096,
+    "Puppet": 20066,
+    "Shell": 14751,
+    "Ruby": 9465,
+    "SCSS": 8625,
+    "Python": 4048
+  },
+  "commit_activity": {
+    "total_commits_last_year": 917,
+    "avg_commits_per_week": 17.634615384615383,
+    "days_active_last_year": 223
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T20:52:54.767057"
+}

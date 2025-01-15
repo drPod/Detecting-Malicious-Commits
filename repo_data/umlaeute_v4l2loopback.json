@@ -1,0 +1,35 @@
+{
+  "name": "v4l2loopback",
+  "owner": "umlaeute",
+  "created_at": "2010-09-24T09:59:39Z",
+  "updated_at": "2025-01-13T17:38:46Z",
+  "pushed_at": "2024-11-26T15:49:28Z",
+  "size": 1228,
+  "stars": 3771,
+  "forks": 538,
+  "open_issues": 53,
+  "watchers": 3771,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C": 171993,
+    "Shell": 8779,
+    "Makefile": 5162
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T19:31:44.206822"
+}

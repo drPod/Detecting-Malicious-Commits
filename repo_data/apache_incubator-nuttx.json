@@ -1,0 +1,43 @@
+{
+  "name": "nuttx",
+  "owner": "apache",
+  "created_at": "2019-12-14T23:27:55Z",
+  "updated_at": "2025-01-14T16:08:33Z",
+  "pushed_at": "2025-01-14T16:08:28Z",
+  "size": 315132,
+  "stars": 3043,
+  "forks": 1223,
+  "open_issues": 569,
+  "watchers": 3043,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 196670971,
+    "Assembly": 2303965,
+    "CMake": 1271705,
+    "Makefile": 1029918,
+    "Python": 835051,
+    "Shell": 340382,
+    "LSL": 248369,
+    "C++": 108368,
+    "Dockerfile": 23399,
+    "Batchfile": 21402,
+    "Perl": 4076
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4510,
+    "avg_commits_per_week": 86.73076923076923,
+    "days_active_last_year": 348
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:24:14.847890"
+}

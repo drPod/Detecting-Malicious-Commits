@@ -1,0 +1,36 @@
+{
+  "name": "pycdc",
+  "owner": "zrax",
+  "created_at": "2011-09-18T04:16:33Z",
+  "updated_at": "2025-01-13T21:53:29Z",
+  "pushed_at": "2024-10-13T16:54:24Z",
+  "size": 903,
+  "stars": 3463,
+  "forks": 673,
+  "open_issues": 187,
+  "watchers": 3463,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 364819,
+    "Python": 65472,
+    "CMake": 2177,
+    "C": 281
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T17:20:42.526214"
+}

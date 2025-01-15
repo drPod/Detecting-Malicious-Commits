@@ -1,0 +1,38 @@
+{
+  "name": "grackle",
+  "owner": "typelevel",
+  "created_at": "2019-09-09T16:26:29Z",
+  "updated_at": "2024-12-31T15:26:31Z",
+  "pushed_at": "2025-01-14T00:24:45Z",
+  "size": 3420,
+  "stars": 179,
+  "forks": 26,
+  "open_issues": 25,
+  "watchers": 179,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "series/0.1"
+  ],
+  "languages": {
+    "Scala": 1603900,
+    "Shell": 1173,
+    "TSQL": 98
+  },
+  "commit_activity": {
+    "total_commits_last_year": 141,
+    "avg_commits_per_week": 2.7115384615384617,
+    "days_active_last_year": 96
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T20:48:43.814746"
+}

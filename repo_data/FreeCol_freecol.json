@@ -1,0 +1,42 @@
+{
+  "name": "freecol",
+  "owner": "FreeCol",
+  "created_at": "2017-08-09T20:19:07Z",
+  "updated_at": "2025-01-13T19:20:42Z",
+  "pushed_at": "2024-11-05T14:24:11Z",
+  "size": 900539,
+  "stars": 605,
+  "forks": 174,
+  "open_issues": 23,
+  "watchers": 605,
+  "has_security_policy": false,
+  "default_branch": "sf-auto-merge",
+  "protected_branches": [
+    "master",
+    "sf-auto-merge"
+  ],
+  "languages": {
+    "Java": 9475279,
+    "HTML": 562712,
+    "Shell": 54770,
+    "Scheme": 25022,
+    "CSS": 20967,
+    "Awk": 412,
+    "Batchfile": 55
+  },
+  "commit_activity": {
+    "total_commits_last_year": 183,
+    "avg_commits_per_week": 3.519230769230769,
+    "days_active_last_year": 83
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T20:50:52.774030"
+}

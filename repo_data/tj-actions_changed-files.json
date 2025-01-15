@@ -1,0 +1,36 @@
+{
+  "name": "changed-files",
+  "owner": "tj-actions",
+  "created_at": "2021-03-05T02:35:53Z",
+  "updated_at": "2025-01-14T15:44:04Z",
+  "pushed_at": "2025-01-13T20:33:21Z",
+  "size": 45735,
+  "stars": 1895,
+  "forks": 201,
+  "open_issues": 2,
+  "watchers": 1895,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 134615,
+    "JavaScript": 445
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:49:21.088770"
+}

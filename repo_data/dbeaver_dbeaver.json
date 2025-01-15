@@ -1,0 +1,40 @@
+{
+  "name": "dbeaver",
+  "owner": "dbeaver",
+  "created_at": "2015-10-21T08:26:28Z",
+  "updated_at": "2025-01-14T19:05:13Z",
+  "pushed_at": "2025-01-14T18:32:40Z",
+  "size": 190888,
+  "stars": 41328,
+  "forks": 3545,
+  "open_issues": 2823,
+  "watchers": 41328,
+  "has_security_policy": false,
+  "default_branch": "devel",
+  "protected_branches": [],
+  "languages": {
+    "Java": 29832954,
+    "C++": 63113,
+    "ANTLR": 44428,
+    "CSS": 21383,
+    "HTML": 12085,
+    "XSLT": 8047,
+    "Batchfile": 3141,
+    "Shell": 591
+  },
+  "commit_activity": {
+    "total_commits_last_year": 2009,
+    "avg_commits_per_week": 38.63461538461539,
+    "days_active_last_year": 249
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T19:14:25.326273"
+}

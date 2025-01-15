@@ -1,0 +1,41 @@
+{
+  "name": "elefant",
+  "owner": "jbroadway",
+  "created_at": "2011-05-04T18:43:58Z",
+  "updated_at": "2024-12-12T14:20:42Z",
+  "pushed_at": "2024-10-16T15:59:21Z",
+  "size": 18797,
+  "stars": 210,
+  "forks": 39,
+  "open_issues": 35,
+  "watchers": 210,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 2484775,
+    "JavaScript": 2001040,
+    "HTML": 630287,
+    "CSS": 194608,
+    "SCSS": 39308,
+    "PLpgSQL": 27578,
+    "CoffeeScript": 2266,
+    "Makefile": 895,
+    "Shell": 267
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:08:02.208123"
+}

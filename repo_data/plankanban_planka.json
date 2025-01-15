@@ -1,0 +1,43 @@
+{
+  "name": "planka",
+  "owner": "plankanban",
+  "created_at": "2019-08-30T20:35:36Z",
+  "updated_at": "2025-01-14T12:35:34Z",
+  "pushed_at": "2025-01-13T19:12:11Z",
+  "size": 48348,
+  "stars": 8368,
+  "forks": 796,
+  "open_issues": 315,
+  "watchers": 8368,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 1354787,
+    "SCSS": 81400,
+    "Shell": 4791,
+    "HTML": 1811,
+    "Smarty": 1772,
+    "Gherkin": 1401,
+    "Dockerfile": 1238,
+    "CSS": 1154,
+    "EJS": 37
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:35:23.091221"
+}

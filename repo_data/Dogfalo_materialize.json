@@ -1,0 +1,37 @@
+{
+  "name": "materialize",
+  "owner": "Dogfalo",
+  "created_at": "2014-09-12T19:35:38Z",
+  "updated_at": "2025-01-14T12:15:18Z",
+  "pushed_at": "2024-12-05T03:16:52Z",
+  "size": 165173,
+  "stars": 38863,
+  "forks": 4737,
+  "open_issues": 793,
+  "watchers": 38863,
+  "has_security_policy": false,
+  "default_branch": "v1-dev",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 460979,
+    "CSS": 154719,
+    "HTML": 25701
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:35:57.246326"
+}

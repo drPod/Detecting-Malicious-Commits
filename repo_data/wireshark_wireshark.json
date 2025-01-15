@@ -1,0 +1,48 @@
+{
+  "name": "wireshark",
+  "owner": "wireshark",
+  "created_at": "2014-06-29T18:37:22Z",
+  "updated_at": "2025-01-14T06:31:56Z",
+  "pushed_at": "2025-01-14T06:31:52Z",
+  "size": 1123592,
+  "stars": 7492,
+  "forks": 1910,
+  "open_issues": 2,
+  "watchers": 7492,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 249769887,
+    "C++": 6560190,
+    "Python": 2875784,
+    "Perl": 854385,
+    "CMake": 707737,
+    "Lua": 390687,
+    "Shell": 297586,
+    "Lex": 193245,
+    "NSIS": 132499,
+    "HTML": 34111,
+    "PowerShell": 27327,
+    "XSLT": 11560,
+    "PostScript": 6954,
+    "Makefile": 4457,
+    "Objective-C": 3844,
+    "Objective-C++": 1390
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3260,
+    "avg_commits_per_week": 62.69230769230769,
+    "days_active_last_year": 357
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:00:32.847054"
+}

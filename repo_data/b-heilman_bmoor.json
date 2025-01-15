@@ -1,0 +1,33 @@
+{
+  "name": "bmoor",
+  "owner": "b-heilman",
+  "created_at": "2012-07-02T11:27:14Z",
+  "updated_at": "2021-10-13T00:29:27Z",
+  "pushed_at": "2023-07-19T04:56:53Z",
+  "size": 1463,
+  "stars": 2,
+  "forks": 3,
+  "open_issues": 1,
+  "watchers": 2,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 90708
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:08:01.013581"
+}

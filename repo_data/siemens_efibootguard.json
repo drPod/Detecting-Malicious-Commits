@@ -1,0 +1,39 @@
+{
+  "name": "efibootguard",
+  "owner": "siemens",
+  "created_at": "2017-06-26T14:44:06Z",
+  "updated_at": "2025-01-13T17:34:54Z",
+  "pushed_at": "2025-01-13T17:34:50Z",
+  "size": 613,
+  "stars": 108,
+  "forks": 35,
+  "open_issues": 1,
+  "watchers": 108,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 231363,
+    "Python": 17520,
+    "Makefile": 12314,
+    "Shell": 10891,
+    "M4": 9896
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:37:56.127844"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "rtslib-fb",
+  "owner": "open-iscsi",
+  "created_at": "2011-11-22T01:02:16Z",
+  "updated_at": "2024-10-07T10:23:18Z",
+  "pushed_at": "2024-10-31T15:26:44Z",
+  "size": 938,
+  "stars": 73,
+  "forks": 90,
+  "open_issues": 28,
+  "watchers": 73,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 187558
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T19:57:18.209488"
+}

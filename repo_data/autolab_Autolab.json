@@ -1,0 +1,46 @@
+{
+  "name": "Autolab",
+  "owner": "autolab",
+  "created_at": "2014-10-25T18:58:53Z",
+  "updated_at": "2025-01-13T18:32:20Z",
+  "pushed_at": "2025-01-13T19:47:35Z",
+  "size": 10064,
+  "stars": 771,
+  "forks": 226,
+  "open_issues": 161,
+  "watchers": 771,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "develop/autolab-3.0",
+    "develop/firewall",
+    "master"
+  ],
+  "languages": {
+    "Ruby": 979618,
+    "HTML": 365392,
+    "JavaScript": 263566,
+    "Java": 261126,
+    "SCSS": 109158,
+    "CSS": 16865,
+    "Shell": 10622,
+    "Dockerfile": 1584,
+    "CoffeeScript": 211,
+    "Python": 34
+  },
+  "commit_activity": {
+    "total_commits_last_year": 105,
+    "avg_commits_per_week": 2.019230769230769,
+    "days_active_last_year": 70
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:21:33.966961"
+}

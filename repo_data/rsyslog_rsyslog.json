@@ -1,0 +1,47 @@
+{
+  "name": "rsyslog",
+  "owner": "rsyslog",
+  "created_at": "2013-06-03T15:57:55Z",
+  "updated_at": "2025-01-13T13:55:11Z",
+  "pushed_at": "2025-01-07T09:10:54Z",
+  "size": 67785,
+  "stars": 2072,
+  "forks": 658,
+  "open_issues": 861,
+  "watchers": 2072,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 5232281,
+    "Shell": 1674170,
+    "JavaScript": 244987,
+    "Makefile": 134903,
+    "M4": 120840,
+    "Python": 60355,
+    "Roff": 41361,
+    "Lex": 20834,
+    "Yacc": 8596,
+    "Perl": 6098,
+    "Java": 2480,
+    "Tcl": 244,
+    "Ruby": 45
+  },
+  "commit_activity": {
+    "total_commits_last_year": 141,
+    "avg_commits_per_week": 2.7115384615384617,
+    "days_active_last_year": 60
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-3.0"
+  },
+  "collected_at": "2025-01-14T18:44:44.365380"
+}

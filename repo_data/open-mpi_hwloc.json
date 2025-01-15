@@ -1,0 +1,60 @@
+{
+  "name": "hwloc",
+  "owner": "open-mpi",
+  "created_at": "2013-09-25T16:25:32Z",
+  "updated_at": "2025-01-13T11:36:46Z",
+  "pushed_at": "2025-01-10T10:07:55Z",
+  "size": 42360,
+  "stars": 582,
+  "forks": 176,
+  "open_issues": 134,
+  "watchers": 582,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master",
+    "v0.9",
+    "v1.0",
+    "v1.1",
+    "v1.2-ompi",
+    "v1.2",
+    "v1.3",
+    "v1.4",
+    "v1.5",
+    "v1.6",
+    "v1.7",
+    "v1.8",
+    "v1.9",
+    "v1.10",
+    "v1.11"
+  ],
+  "languages": {
+    "C": 2809293,
+    "Shell": 154020,
+    "Roff": 148295,
+    "M4": 143154,
+    "Java": 76785,
+    "Makefile": 56747,
+    "JavaScript": 21599,
+    "Perl": 16491,
+    "CMake": 12234,
+    "HTML": 7303,
+    "CSS": 3925,
+    "Batchfile": 3609
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:34:29.724479"
+}

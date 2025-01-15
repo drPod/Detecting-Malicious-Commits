@@ -1,0 +1,44 @@
+{
+  "name": "pacemaker",
+  "owner": "ClusterLabs",
+  "created_at": "2011-09-01T00:08:16Z",
+  "updated_at": "2025-01-10T15:13:10Z",
+  "pushed_at": "2025-01-10T16:53:00Z",
+  "size": 98489,
+  "stars": 1053,
+  "forks": 343,
+  "open_issues": 8,
+  "watchers": 1053,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C": 7208353,
+    "Python": 485905,
+    "XSLT": 211895,
+    "Shell": 165604,
+    "Makefile": 129068,
+    "M4": 100045,
+    "Roff": 26521,
+    "SmPL": 9708,
+    "HTML": 932,
+    "BitBake": 671,
+    "Pascal": 108,
+    "Pawn": 70
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3642,
+    "avg_commits_per_week": 70.03846153846153,
+    "days_active_last_year": 254
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:49:26.848211"
+}

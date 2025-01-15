@@ -1,0 +1,35 @@
+{
+  "name": "LiteDB",
+  "owner": "mbdavid",
+  "created_at": "2014-08-25T13:49:30Z",
+  "updated_at": "2025-01-13T12:02:12Z",
+  "pushed_at": "2024-12-10T14:07:23Z",
+  "size": 46011,
+  "stars": 8725,
+  "forks": 1262,
+  "open_issues": 717,
+  "watchers": 8725,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C#": 1664161
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T16:33:14.527348"
+}

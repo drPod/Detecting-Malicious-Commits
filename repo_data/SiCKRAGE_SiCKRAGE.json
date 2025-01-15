@@ -1,0 +1,42 @@
+{
+  "name": "SiCKRAGE",
+  "owner": "SiCKRAGE",
+  "created_at": "2014-03-10T05:20:31Z",
+  "updated_at": "2025-01-08T07:59:36Z",
+  "pushed_at": "2023-06-06T07:11:59Z",
+  "size": 654924,
+  "stars": 1536,
+  "forks": 654,
+  "open_issues": 0,
+  "watchers": 1536,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "develop",
+    "master"
+  ],
+  "languages": {
+    "Python": 2889583,
+    "Mako": 941629,
+    "JavaScript": 291450,
+    "Shell": 12454,
+    "SCSS": 9744,
+    "Dockerfile": 543,
+    "Batchfile": 92
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:38:13.003249"
+}

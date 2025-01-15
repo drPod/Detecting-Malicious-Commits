@@ -1,0 +1,38 @@
+{
+  "name": "pay",
+  "owner": "pay-rails",
+  "created_at": "2017-02-01T19:50:52Z",
+  "updated_at": "2025-01-13T19:26:06Z",
+  "pushed_at": "2025-01-13T14:57:03Z",
+  "size": 5808,
+  "stars": 2011,
+  "forks": 320,
+  "open_issues": 0,
+  "watchers": 2011,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Ruby": 428205,
+    "HTML": 40496,
+    "JavaScript": 7034,
+    "CSS": 1472,
+    "Shell": 252,
+    "Dockerfile": 148
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:14:37.971395"
+}

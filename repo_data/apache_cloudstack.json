@@ -1,0 +1,51 @@
+{
+  "name": "cloudstack",
+  "owner": "apache",
+  "created_at": "2013-04-29T22:27:12Z",
+  "updated_at": "2025-01-13T14:38:17Z",
+  "pushed_at": "2025-01-14T16:21:53Z",
+  "size": 614356,
+  "stars": 2181,
+  "forks": 1118,
+  "open_issues": 597,
+  "watchers": 2181,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Java": 50993450,
+    "Python": 14849574,
+    "Vue": 4195617,
+    "C#": 2303621,
+    "JavaScript": 1275965,
+    "Shell": 860319,
+    "Groovy": 146445,
+    "Less": 102447,
+    "XSLT": 57429,
+    "HTML": 53921,
+    "CSS": 48717,
+    "Ruby": 22681,
+    "templ": 18526,
+    "Batchfile": 9957,
+    "FreeMarker": 4887,
+    "Dockerfile": 4486,
+    "SCSS": 2161,
+    "Roff": 1424,
+    "Makefile": 1331
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1084,
+    "avg_commits_per_week": 20.846153846153847,
+    "days_active_last_year": 212
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T17:19:59.729687"
+}

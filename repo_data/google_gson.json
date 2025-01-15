@@ -1,0 +1,35 @@
+{
+  "name": "gson",
+  "owner": "google",
+  "created_at": "2015-03-19T18:21:20Z",
+  "updated_at": "2025-01-14T14:36:01Z",
+  "pushed_at": "2025-01-02T15:29:13Z",
+  "size": 13514,
+  "stars": 23484,
+  "forks": 4295,
+  "open_issues": 336,
+  "watchers": 23484,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Java": 1862618
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T21:18:29.407877"
+}

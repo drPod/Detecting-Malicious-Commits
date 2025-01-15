@@ -1,0 +1,47 @@
+{
+  "name": "rundeck",
+  "owner": "rundeck",
+  "created_at": "2010-09-03T22:11:25Z",
+  "updated_at": "2025-01-14T13:56:13Z",
+  "pushed_at": "2025-01-14T16:17:08Z",
+  "size": 214435,
+  "stars": 5615,
+  "forks": 930,
+  "open_issues": 749,
+  "watchers": 5615,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Groovy": 13302212,
+    "Java": 4739121,
+    "JavaScript": 2256651,
+    "Vue": 978967,
+    "TypeScript": 592929,
+    "SCSS": 557900,
+    "Shell": 140078,
+    "CSS": 104081,
+    "Less": 38211,
+    "Dockerfile": 15647,
+    "MDX": 12941,
+    "HTML": 8218,
+    "EJS": 7552,
+    "Makefile": 3562,
+    "Batchfile": 417
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1964,
+    "avg_commits_per_week": 37.76923076923077,
+    "days_active_last_year": 243
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:24:32.773771"
+}

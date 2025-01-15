@@ -1,0 +1,39 @@
+{
+  "name": "neomutt",
+  "owner": "neomutt",
+  "created_at": "2015-12-21T02:12:54Z",
+  "updated_at": "2025-01-14T09:57:10Z",
+  "pushed_at": "2025-01-13T19:26:30Z",
+  "size": 169912,
+  "stars": 3311,
+  "forks": 312,
+  "open_issues": 224,
+  "watchers": 3311,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "C": 8599424,
+    "Tcl": 157624,
+    "Shell": 93753,
+    "Perl": 31089,
+    "Python": 21960
+  },
+  "commit_activity": {
+    "total_commits_last_year": 674,
+    "avg_commits_per_week": 12.961538461538462,
+    "days_active_last_year": 184
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:20:20.846292"
+}

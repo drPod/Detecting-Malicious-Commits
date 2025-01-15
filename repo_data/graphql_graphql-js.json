@@ -1,0 +1,39 @@
+{
+  "name": "graphql-js",
+  "owner": "graphql",
+  "created_at": "2015-06-30T12:16:50Z",
+  "updated_at": "2025-01-14T17:49:34Z",
+  "pushed_at": "2025-01-14T21:07:25Z",
+  "size": 26866,
+  "stars": 20120,
+  "forks": 2034,
+  "open_issues": 150,
+  "watchers": 20120,
+  "has_security_policy": false,
+  "default_branch": "16.x.x",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 1821385,
+    "MDX": 90494,
+    "JavaScript": 48302,
+    "CSS": 8316,
+    "Shell": 1424
+  },
+  "commit_activity": {
+    "total_commits_last_year": 31,
+    "avg_commits_per_week": 0.5961538461538461,
+    "days_active_last_year": 18
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:25:03.255638"
+}

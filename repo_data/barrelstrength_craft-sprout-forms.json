@@ -1,0 +1,43 @@
+{
+  "name": "sprout-forms",
+  "owner": "barrelstrength",
+  "created_at": "2017-09-28T04:19:36Z",
+  "updated_at": "2024-08-02T02:21:03Z",
+  "pushed_at": "2024-05-26T10:39:11Z",
+  "size": 8274,
+  "stars": 18,
+  "forks": 21,
+  "open_issues": 0,
+  "watchers": 18,
+  "has_security_policy": false,
+  "default_branch": "v3",
+  "protected_branches": [
+    "v1",
+    "v2",
+    "v3",
+    "v3.7",
+    "v4",
+    "v5"
+  ],
+  "languages": {
+    "PHP": 769832,
+    "Twig": 241491,
+    "JavaScript": 141837,
+    "SCSS": 10019
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:16:49.008669"
+}

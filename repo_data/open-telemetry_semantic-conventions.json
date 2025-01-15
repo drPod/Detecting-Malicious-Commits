@@ -1,0 +1,43 @@
+{
+  "name": "semantic-conventions",
+  "owner": "open-telemetry",
+  "created_at": "2023-05-09T17:15:53Z",
+  "updated_at": "2025-01-14T19:46:43Z",
+  "pushed_at": "2025-01-14T11:28:14Z",
+  "size": 5732,
+  "stars": 305,
+  "forks": 184,
+  "open_issues": 457,
+  "watchers": 305,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "release/v1.23.x"
+  ],
+  "languages": {
+    "Open Policy Agent": 67128,
+    "Jinja": 15804,
+    "Roff": 12686,
+    "Makefile": 9557,
+    "Shell": 6687,
+    "Go": 1047,
+    "Dockerfile": 519,
+    "Ruby": 12
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T22:30:42.527664"
+}

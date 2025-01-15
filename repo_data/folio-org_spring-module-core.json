@@ -1,0 +1,35 @@
+{
+  "name": "spring-module-core",
+  "owner": "folio-org",
+  "created_at": "2018-10-02T14:04:02Z",
+  "updated_at": "2025-01-09T16:55:55Z",
+  "pushed_at": "2025-01-09T17:12:37Z",
+  "size": 392,
+  "stars": 0,
+  "forks": 1,
+  "open_issues": 0,
+  "watchers": 0,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Java": 212096
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T19:35:51.167084"
+}

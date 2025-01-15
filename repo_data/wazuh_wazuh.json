@@ -1,0 +1,44 @@
+{
+  "name": "wazuh",
+  "owner": "wazuh",
+  "created_at": "2015-08-11T17:39:03Z",
+  "updated_at": "2025-01-14T14:26:05Z",
+  "pushed_at": "2025-01-14T11:10:11Z",
+  "size": 433439,
+  "stars": 11444,
+  "forks": 1715,
+  "open_issues": 2756,
+  "watchers": 11444,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "3.1"
+  ],
+  "languages": {
+    "C++": 7073168,
+    "Python": 3949841,
+    "Shell": 172338,
+    "CMake": 89167,
+    "Makefile": 60295,
+    "Gherkin": 45846,
+    "Go": 16623,
+    "C": 10647,
+    "Dockerfile": 10615,
+    "Perl": 4512
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3942,
+    "avg_commits_per_week": 75.8076923076923,
+    "days_active_last_year": 288
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:33:11.004849"
+}

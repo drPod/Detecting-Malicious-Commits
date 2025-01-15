@@ -1,0 +1,40 @@
+{
+  "name": "aaPanel",
+  "owner": "aaPanel",
+  "created_at": "2019-06-20T08:16:32Z",
+  "updated_at": "2025-01-14T12:59:21Z",
+  "pushed_at": "2024-11-28T10:38:12Z",
+  "size": 43899,
+  "stars": 1891,
+  "forks": 607,
+  "open_issues": 39,
+  "watchers": 1891,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 23123072,
+    "JavaScript": 11022077,
+    "CSS": 2455459,
+    "HTML": 1911221,
+    "Shell": 111645,
+    "PHP": 20796,
+    "Perl": 58,
+    "Raku": 11
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:09:11.968270"
+}

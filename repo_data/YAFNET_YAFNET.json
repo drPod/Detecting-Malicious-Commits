@@ -1,0 +1,40 @@
+{
+  "name": "YAFNET",
+  "owner": "YAFNET",
+  "created_at": "2013-08-15T01:52:32Z",
+  "updated_at": "2025-01-14T13:40:39Z",
+  "pushed_at": "2025-01-13T04:49:09Z",
+  "size": 672652,
+  "stars": 519,
+  "forks": 212,
+  "open_issues": 8,
+  "watchers": 519,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C#": 10550680,
+    "HTML": 2848567,
+    "JavaScript": 2340582,
+    "CSS": 1620550,
+    "SCSS": 557044,
+    "TSQL": 35822,
+    "Dockerfile": 2129,
+    "Batchfile": 92
+  },
+  "commit_activity": {
+    "total_commits_last_year": 663,
+    "avg_commits_per_week": 12.75,
+    "days_active_last_year": 197
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:42:35.331273"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "pyo3",
+  "owner": "PyO3",
+  "created_at": "2017-05-13T05:22:06Z",
+  "updated_at": "2025-01-14T17:14:59Z",
+  "pushed_at": "2025-01-11T21:33:58Z",
+  "size": 43089,
+  "stars": 12796,
+  "forks": 784,
+  "open_issues": 286,
+  "watchers": 12796,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Rust": 2905717,
+    "Python": 74258,
+    "Shell": 4591,
+    "Makefile": 2794,
+    "HTML": 1425,
+    "C": 93
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T18:42:08.128355"
+}

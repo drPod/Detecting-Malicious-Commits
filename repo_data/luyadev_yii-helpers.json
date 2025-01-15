@@ -1,0 +1,33 @@
+{
+  "name": "yii-helpers",
+  "owner": "luyadev",
+  "created_at": "2020-09-28T15:03:20Z",
+  "updated_at": "2024-02-21T21:41:05Z",
+  "pushed_at": "2024-02-14T14:20:54Z",
+  "size": 165,
+  "stars": 2,
+  "forks": 2,
+  "open_issues": 0,
+  "watchers": 2,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 173170
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:48:01.008357"
+}

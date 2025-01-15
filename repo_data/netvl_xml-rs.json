@@ -1,0 +1,33 @@
+{
+  "name": "xml-rs",
+  "owner": "netvl",
+  "created_at": "2014-06-07T21:37:51Z",
+  "updated_at": "2025-01-03T11:55:49Z",
+  "pushed_at": "2024-03-31T17:18:49Z",
+  "size": 3538,
+  "stars": 462,
+  "forks": 114,
+  "open_issues": 17,
+  "watchers": 462,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Rust": 304595
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:16:21.326351"
+}

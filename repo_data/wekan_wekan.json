@@ -1,0 +1,42 @@
+{
+  "name": "wekan",
+  "owner": "wekan",
+  "created_at": "2014-01-21T01:26:28Z",
+  "updated_at": "2025-01-14T01:05:06Z",
+  "pushed_at": "2025-01-13T20:55:33Z",
+  "size": 71100,
+  "stars": 19726,
+  "forks": 2843,
+  "open_issues": 647,
+  "watchers": 19726,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 2502301,
+    "HTML": 938287,
+    "CSS": 548881,
+    "Pug": 281872,
+    "Shell": 190550,
+    "Python": 69853,
+    "Batchfile": 30040,
+    "Dockerfile": 16324,
+    "Cap'n Proto": 9446,
+    "PHP": 6255
+  },
+  "commit_activity": {
+    "total_commits_last_year": 829,
+    "avg_commits_per_week": 15.942307692307692,
+    "days_active_last_year": 163
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:26:45.727369"
+}

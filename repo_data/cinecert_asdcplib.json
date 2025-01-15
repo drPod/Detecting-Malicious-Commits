@@ -1,0 +1,39 @@
+{
+  "name": "asdcplib",
+  "owner": "cinecert",
+  "created_at": "2019-02-21T06:29:40Z",
+  "updated_at": "2024-12-23T12:45:51Z",
+  "pushed_at": "2024-10-15T13:46:28Z",
+  "size": 2002,
+  "stars": 75,
+  "forks": 56,
+  "open_issues": 38,
+  "watchers": 75,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 2207371,
+    "Perl": 46162,
+    "M4": 35421,
+    "C": 24468,
+    "Shell": 20983,
+    "CMake": 12816,
+    "Makefile": 12498
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:54:20.210934"
+}

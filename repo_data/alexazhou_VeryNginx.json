@@ -1,0 +1,39 @@
+{
+  "name": "VeryNginx",
+  "owner": "alexazhou",
+  "created_at": "2015-12-31T09:11:43Z",
+  "updated_at": "2025-01-09T09:23:39Z",
+  "pushed_at": "2020-06-30T07:07:17Z",
+  "size": 642,
+  "stars": 5975,
+  "forks": 956,
+  "open_issues": 111,
+  "watchers": 5975,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Lua": 102483,
+    "JavaScript": 71490,
+    "Python": 29869,
+    "CSS": 8734,
+    "Dockerfile": 438
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:20:53.648867"
+}

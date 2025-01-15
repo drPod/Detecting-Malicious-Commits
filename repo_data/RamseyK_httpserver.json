@@ -1,0 +1,36 @@
+{
+  "name": "httpserver",
+  "owner": "RamseyK",
+  "created_at": "2012-05-13T23:45:51Z",
+  "updated_at": "2025-01-08T11:14:53Z",
+  "pushed_at": "2025-01-08T11:14:49Z",
+  "size": 518,
+  "stars": 81,
+  "forks": 35,
+  "open_issues": 0,
+  "watchers": 81,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C++": 89564,
+    "Python": 1256,
+    "Makefile": 1079,
+    "HTML": 183
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:53:44.134654"
+}

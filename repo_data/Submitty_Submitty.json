@@ -1,0 +1,52 @@
+{
+  "name": "Submitty",
+  "owner": "Submitty",
+  "created_at": "2014-01-25T17:43:57Z",
+  "updated_at": "2025-01-14T09:53:04Z",
+  "pushed_at": "2025-01-14T01:43:12Z",
+  "size": 87681,
+  "stars": 682,
+  "forks": 852,
+  "open_issues": 687,
+  "watchers": 682,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 3524910,
+    "Python": 1789870,
+    "Twig": 1402422,
+    "JavaScript": 1375239,
+    "HTML": 796624,
+    "C++": 511401,
+    "Shell": 238725,
+    "CSS": 230379,
+    "PLpgSQL": 168418,
+    "TypeScript": 22705,
+    "TeX": 21960,
+    "C": 8528,
+    "Java": 3828,
+    "Vue": 3411,
+    "CMake": 3004,
+    "Jupyter Notebook": 1019,
+    "Prolog": 336,
+    "Verilog": 152,
+    "Rust": 129,
+    "Haskell": 55
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T13:47:17.563863"
+}

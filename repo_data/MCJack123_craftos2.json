@@ -1,0 +1,45 @@
+{
+  "name": "craftos2",
+  "owner": "MCJack123",
+  "created_at": "2019-07-19T01:51:29Z",
+  "updated_at": "2025-01-06T16:21:21Z",
+  "pushed_at": "2024-11-26T00:10:43Z",
+  "size": 28183,
+  "stars": 243,
+  "forks": 29,
+  "open_issues": 36,
+  "watchers": 243,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "luajit",
+    "master"
+  ],
+  "languages": {
+    "C++": 940043,
+    "Java": 202706,
+    "Objective-C++": 74975,
+    "Lua": 36059,
+    "M4": 15658,
+    "Makefile": 8125,
+    "JavaScript": 1364,
+    "CMake": 635,
+    "Shell": 597,
+    "C": 482
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:57:30.285774"
+}

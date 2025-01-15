@@ -1,0 +1,36 @@
+{
+  "name": "session",
+  "owner": "fastify",
+  "created_at": "2021-07-29T09:29:49Z",
+  "updated_at": "2025-01-11T09:22:37Z",
+  "pushed_at": "2025-01-11T09:22:36Z",
+  "size": 471,
+  "stars": 110,
+  "forks": 50,
+  "open_issues": 11,
+  "watchers": 110,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 115065,
+    "TypeScript": 5386
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:57:59.568680"
+}

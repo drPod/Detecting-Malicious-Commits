@@ -1,0 +1,42 @@
+{
+  "name": "ovn",
+  "owner": "ovn-org",
+  "created_at": "2019-04-18T19:54:33Z",
+  "updated_at": "2025-01-13T05:42:46Z",
+  "pushed_at": "2025-01-09T15:27:09Z",
+  "size": 102621,
+  "stars": 537,
+  "forks": 258,
+  "open_issues": 90,
+  "watchers": 537,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "ddlog-dev"
+  ],
+  "languages": {
+    "C": 4143556,
+    "Shell": 163113,
+    "M4": 91297,
+    "Python": 78235,
+    "Makefile": 52178,
+    "Dockerfile": 7838,
+    "Roff": 2961,
+    "Ruby": 1567
+  },
+  "commit_activity": {
+    "total_commits_last_year": 470,
+    "avg_commits_per_week": 9.038461538461538,
+    "days_active_last_year": 157
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:59:15.490130"
+}

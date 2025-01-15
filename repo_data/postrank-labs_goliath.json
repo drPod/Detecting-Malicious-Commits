@@ -1,0 +1,33 @@
+{
+  "name": "goliath",
+  "owner": "postrank-labs",
+  "created_at": "2011-01-06T21:25:45Z",
+  "updated_at": "2025-01-01T14:18:23Z",
+  "pushed_at": "2023-10-08T16:57:35Z",
+  "size": 1010,
+  "stars": 2436,
+  "forks": 216,
+  "open_issues": 30,
+  "watchers": 2436,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Ruby": 251599
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:01:39.247021"
+}

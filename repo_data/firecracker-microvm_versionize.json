@@ -1,0 +1,35 @@
+{
+  "name": "versionize",
+  "owner": "firecracker-microvm",
+  "created_at": "2020-04-27T07:25:08Z",
+  "updated_at": "2024-11-04T23:51:09Z",
+  "pushed_at": "2024-01-02T15:14:27Z",
+  "size": 96,
+  "stars": 56,
+  "forks": 31,
+  "open_issues": 11,
+  "watchers": 56,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Rust": 100540
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T18:03:02.684961"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "meinheld",
+  "owner": "mopemope",
+  "created_at": "2010-07-30T01:38:27Z",
+  "updated_at": "2025-01-09T03:53:43Z",
+  "pushed_at": "2021-05-08T08:18:11Z",
+  "size": 4156,
+  "stars": 1462,
+  "forks": 103,
+  "open_issues": 32,
+  "watchers": 1462,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 282086,
+    "Python": 106917,
+    "JavaScript": 7769,
+    "C++": 4096,
+    "HTML": 3882,
+    "CSS": 2015
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:03:30.131912"
+}

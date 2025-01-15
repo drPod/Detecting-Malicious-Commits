@@ -1,0 +1,38 @@
+{
+  "name": "yfexam-exam",
+  "owner": "qiutiandefeng",
+  "created_at": "2022-07-27T06:53:32Z",
+  "updated_at": "2025-01-14T06:17:20Z",
+  "pushed_at": "2024-11-27T01:30:47Z",
+  "size": 106363,
+  "stars": 1064,
+  "forks": 189,
+  "open_issues": 6,
+  "watchers": 1064,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Java": 344442,
+    "Vue": 186888,
+    "JavaScript": 79281,
+    "SCSS": 14227,
+    "HTML": 1146,
+    "CSS": 825
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": true,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:24:15.168073"
+}

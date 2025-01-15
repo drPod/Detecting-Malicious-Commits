@@ -1,0 +1,35 @@
+{
+  "name": "pym.js",
+  "owner": "nprapps",
+  "created_at": "2014-01-09T19:10:33Z",
+  "updated_at": "2024-11-14T02:04:05Z",
+  "pushed_at": "2019-02-15T17:52:03Z",
+  "size": 1705,
+  "stars": 807,
+  "forks": 114,
+  "open_issues": 4,
+  "watchers": 807,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 104225,
+    "HTML": 13887,
+    "Python": 2043
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:27:45.327371"
+}

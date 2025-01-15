@@ -1,0 +1,35 @@
+{
+  "name": "ippusbxd",
+  "owner": "tillkamppeter",
+  "created_at": "2014-04-30T17:42:52Z",
+  "updated_at": "2024-09-14T16:38:08Z",
+  "pushed_at": "2017-12-05T01:05:12Z",
+  "size": 464,
+  "stars": 17,
+  "forks": 12,
+  "open_issues": 1,
+  "watchers": 17,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 98862,
+    "CMake": 4757,
+    "Makefile": 1147
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:01:19.006366"
+}

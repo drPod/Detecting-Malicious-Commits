@@ -1,0 +1,33 @@
+{
+  "name": "KlicUnLock",
+  "owner": "whitehatdefenses",
+  "created_at": "2019-05-18T03:44:26Z",
+  "updated_at": "2024-04-14T22:47:24Z",
+  "pushed_at": "2019-06-11T17:34:10Z",
+  "size": 112,
+  "stars": 10,
+  "forks": 2,
+  "open_issues": 0,
+  "watchers": 10,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 9469
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:54:23.970122"
+}

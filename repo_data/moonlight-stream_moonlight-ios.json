@@ -1,0 +1,36 @@
+{
+  "name": "moonlight-ios",
+  "owner": "moonlight-stream",
+  "created_at": "2014-01-18T03:11:26Z",
+  "updated_at": "2025-01-13T23:54:05Z",
+  "pushed_at": "2024-12-20T21:46:19Z",
+  "size": 241528,
+  "stars": 1222,
+  "forks": 302,
+  "open_issues": 136,
+  "watchers": 1222,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 3667099,
+    "Objective-C": 612959,
+    "C++": 35329,
+    "Shell": 5291
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T20:36:00.366246"
+}

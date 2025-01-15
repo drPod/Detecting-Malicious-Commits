@@ -1,0 +1,40 @@
+{
+  "name": "erpnext",
+  "owner": "frappe",
+  "created_at": "2011-06-08T08:20:56Z",
+  "updated_at": "2025-01-14T15:12:46Z",
+  "pushed_at": "2025-01-14T15:05:46Z",
+  "size": 1282531,
+  "stars": 22650,
+  "forks": 7567,
+  "open_issues": 2096,
+  "watchers": 22650,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop",
+    "master"
+  ],
+  "languages": {
+    "Python": 8077050,
+    "JavaScript": 1780668,
+    "HTML": 203283,
+    "SCSS": 37700,
+    "CSS": 2668
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3459,
+    "avg_commits_per_week": 66.51923076923077,
+    "days_active_last_year": 348
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T15:41:34.926955"
+}

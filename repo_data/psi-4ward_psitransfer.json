@@ -1,0 +1,37 @@
+{
+  "name": "psitransfer",
+  "owner": "psi-4ward",
+  "created_at": "2017-04-23T11:40:49Z",
+  "updated_at": "2025-01-14T17:32:16Z",
+  "pushed_at": "2024-12-08T05:45:36Z",
+  "size": 3085,
+  "stars": 1602,
+  "forks": 219,
+  "open_issues": 88,
+  "watchers": 1602,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 102480,
+    "Vue": 31709,
+    "Pug": 4571,
+    "Shell": 3881,
+    "Dockerfile": 648
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-2-clause"
+  },
+  "collected_at": "2025-01-14T22:02:18.611597"
+}

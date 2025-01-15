@@ -1,0 +1,35 @@
+{
+  "name": "hexo-theme-matery",
+  "owner": "blinkfox",
+  "created_at": "2018-08-27T16:38:12Z",
+  "updated_at": "2025-01-14T12:43:52Z",
+  "pushed_at": "2024-07-02T06:48:18Z",
+  "size": 20642,
+  "stars": 5270,
+  "forks": 1243,
+  "open_issues": 274,
+  "watchers": 5270,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 3921648,
+    "CSS": 257964,
+    "EJS": 203422
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T21:12:55.013880"
+}

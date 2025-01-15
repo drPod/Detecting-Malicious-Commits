@@ -1,0 +1,44 @@
+{
+  "name": "n8n",
+  "owner": "n8n-io",
+  "created_at": "2019-06-22T09:24:21Z",
+  "updated_at": "2025-01-14T19:36:41Z",
+  "pushed_at": "2025-01-14T17:16:44Z",
+  "size": 186976,
+  "stars": 54883,
+  "forks": 9959,
+  "open_issues": 564,
+  "watchers": 54883,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 26415642,
+    "Vue": 2479954,
+    "SCSS": 374032,
+    "JavaScript": 118544,
+    "Handlebars": 48304,
+    "HTML": 43974,
+    "Dockerfile": 8723,
+    "HCL": 6777,
+    "Shell": 2008,
+    "Rich Text Format": 267,
+    "Batchfile": 71,
+    "CSS": 59
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3171,
+    "avg_commits_per_week": 60.98076923076923,
+    "days_active_last_year": 266
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:58:48.292891"
+}

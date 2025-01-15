@@ -1,0 +1,47 @@
+{
+  "name": "online",
+  "owner": "CollaboraOnline",
+  "created_at": "2020-10-01T05:23:57Z",
+  "updated_at": "2025-01-14T14:28:34Z",
+  "pushed_at": "2025-01-14T14:28:32Z",
+  "size": 323901,
+  "stars": 1944,
+  "forks": 734,
+  "open_issues": 685,
+  "watchers": 1944,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 3902769,
+    "JavaScript": 3557882,
+    "TypeScript": 1609238,
+    "CSS": 357856,
+    "HTML": 208014,
+    "Makefile": 116960,
+    "Java": 102390,
+    "Objective-C": 82732,
+    "M4": 79411,
+    "Python": 70754,
+    "Shell": 61504,
+    "C": 39757,
+    "Perl": 30231,
+    "Dockerfile": 11301,
+    "Smarty": 2283
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4065,
+    "avg_commits_per_week": 78.17307692307692,
+    "days_active_last_year": 345
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:28:49.176171"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "katran",
+  "owner": "facebookincubator",
+  "created_at": "2018-04-27T21:49:35Z",
+  "updated_at": "2025-01-13T17:40:08Z",
+  "pushed_at": "2025-01-13T17:40:04Z",
+  "size": 8980,
+  "stars": 4813,
+  "forks": 508,
+  "open_issues": 2,
+  "watchers": 4813,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "C": 3220219,
+    "C++": 692650,
+    "Python": 358237,
+    "CMake": 124193,
+    "Go": 38160,
+    "Shell": 34497,
+    "Lua": 1445
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T13:50:24.367706"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "phpvms_v2",
+  "owner": "nshahzad",
+  "created_at": "2010-03-10T17:37:40Z",
+  "updated_at": "2023-04-28T01:57:22Z",
+  "pushed_at": "2019-12-06T08:58:23Z",
+  "size": 18082,
+  "stars": 41,
+  "forks": 46,
+  "open_issues": 28,
+  "watchers": 41,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 2109228,
+    "JavaScript": 530544,
+    "Smarty": 253008,
+    "CSS": 49547,
+    "HTML": 24455,
+    "Makefile": 468,
+    "Roff": 419
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T20:58:35.971202"
+}

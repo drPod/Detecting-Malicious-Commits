@@ -1,0 +1,43 @@
+{
+  "name": "duckdb",
+  "owner": "duckdb",
+  "created_at": "2018-06-26T15:04:45Z",
+  "updated_at": "2025-01-14T18:45:09Z",
+  "pushed_at": "2025-01-14T18:45:02Z",
+  "size": 323886,
+  "stars": 25805,
+  "forks": 2031,
+  "open_issues": 359,
+  "watchers": 25805,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "C++": 31719519,
+    "C": 3205177,
+    "Python": 2240381,
+    "Julia": 416016,
+    "Swift": 283463,
+    "CMake": 177051,
+    "Shell": 41951,
+    "Makefile": 19608,
+    "R": 1212
+  },
+  "commit_activity": {
+    "total_commits_last_year": 14217,
+    "avg_commits_per_week": 273.40384615384613,
+    "days_active_last_year": 354
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:04:58.129971"
+}

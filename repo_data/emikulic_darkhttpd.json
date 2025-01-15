@@ -1,0 +1,38 @@
+{
+  "name": "darkhttpd",
+  "owner": "emikulic",
+  "created_at": "2021-01-17T13:39:15Z",
+  "updated_at": "2025-01-12T00:40:38Z",
+  "pushed_at": "2024-11-04T11:32:25Z",
+  "size": 652,
+  "stars": 1067,
+  "forks": 88,
+  "open_issues": 11,
+  "watchers": 1067,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 103855,
+    "Python": 29574,
+    "Shell": 8971,
+    "C++": 1654,
+    "Dockerfile": 1249,
+    "Makefile": 593
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "isc"
+  },
+  "collected_at": "2025-01-14T13:50:08.686786"
+}

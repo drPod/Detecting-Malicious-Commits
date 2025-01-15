@@ -1,0 +1,42 @@
+{
+  "name": "wire-ios",
+  "owner": "wireapp",
+  "created_at": "2022-12-22T10:26:59Z",
+  "updated_at": "2025-01-14T11:54:19Z",
+  "pushed_at": "2025-01-14T11:55:23Z",
+  "size": 1664518,
+  "stars": 74,
+  "forks": 15,
+  "open_issues": 28,
+  "watchers": 74,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "chore/add-sz-app",
+    "develop",
+    "epic/prepare-for-universal-backups-WPB-14616"
+  ],
+  "languages": {
+    "Swift": 21138814,
+    "Objective-C": 3355652,
+    "Ruby": 40970,
+    "C": 25452,
+    "Shell": 19696,
+    "Python": 853
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1669,
+    "avg_commits_per_week": 32.09615384615385,
+    "days_active_last_year": 237
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:37:27.324669"
+}

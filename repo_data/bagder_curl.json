@@ -1,0 +1,45 @@
+{
+  "name": "curl",
+  "owner": "bagder",
+  "created_at": "2010-03-18T22:32:22Z",
+  "updated_at": "2025-01-14T16:47:01Z",
+  "pushed_at": "2025-01-14T16:46:56Z",
+  "size": 97196,
+  "stars": 36518,
+  "forks": 6522,
+  "open_issues": 26,
+  "watchers": 36518,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 7867907,
+    "Perl": 850648,
+    "M4": 515820,
+    "Python": 440097,
+    "CMake": 267646,
+    "DIGITAL Command Language": 237801,
+    "Shell": 142303,
+    "Makefile": 121830,
+    "Batchfile": 50260,
+    "Dockerfile": 1711,
+    "Emacs Lisp": 1348
+  },
+  "commit_activity": {
+    "total_commits_last_year": 2423,
+    "avg_commits_per_week": 46.59615384615385,
+    "days_active_last_year": 344
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:21:05.086355"
+}

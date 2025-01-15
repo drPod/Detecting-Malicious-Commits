@@ -1,0 +1,38 @@
+{
+  "name": "zkopru",
+  "owner": "zkopru-network",
+  "created_at": "2020-04-06T13:22:25Z",
+  "updated_at": "2025-01-07T19:00:43Z",
+  "pushed_at": "2023-01-24T15:11:10Z",
+  "size": 40123,
+  "stars": 218,
+  "forks": 28,
+  "open_issues": 105,
+  "watchers": 218,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 1241792,
+    "Solidity": 246118,
+    "JavaScript": 41331,
+    "Dockerfile": 9544,
+    "Shell": 4542,
+    "HTML": 80
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T21:06:40.776805"
+}

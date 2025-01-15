@@ -1,0 +1,36 @@
+{
+  "name": "modula-lite",
+  "owner": "MachoThemes",
+  "created_at": "2017-03-07T16:21:19Z",
+  "updated_at": "2025-01-13T14:40:29Z",
+  "pushed_at": "2025-01-13T14:40:25Z",
+  "size": 85796,
+  "stars": 18,
+  "forks": 9,
+  "open_issues": 172,
+  "watchers": 18,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 950219,
+    "PHP": 727523,
+    "CSS": 344567,
+    "SCSS": 14840
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T22:39:18.609379"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "ovs",
+  "owner": "cloudbase",
+  "created_at": "2015-08-13T15:11:31Z",
+  "updated_at": "2019-07-26T12:39:37Z",
+  "pushed_at": "2020-12-02T14:51:55Z",
+  "size": 90978,
+  "stars": 5,
+  "forks": 10,
+  "open_issues": 0,
+  "watchers": 5,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 15246768,
+    "Python": 956397,
+    "Roff": 324437,
+    "Shell": 286152,
+    "M4": 139539,
+    "Makefile": 126499,
+    "C++": 98831,
+    "JavaScript": 7350,
+    "PowerShell": 5683,
+    "Ruby": 3136,
+    "Objective-C": 2375,
+    "Batchfile": 85
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:30:56.765337"
+}

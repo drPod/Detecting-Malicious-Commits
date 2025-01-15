@@ -1,0 +1,49 @@
+{
+  "name": "djl",
+  "owner": "deepjavalibrary",
+  "created_at": "2019-10-29T22:38:54Z",
+  "updated_at": "2025-01-14T18:52:02Z",
+  "pushed_at": "2025-01-14T18:51:58Z",
+  "size": 48909,
+  "stars": 4257,
+  "forks": 673,
+  "open_issues": 163,
+  "watchers": 4257,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Java": 5991225,
+    "C++": 246598,
+    "Rust": 231932,
+    "C": 150347,
+    "Python": 139229,
+    "HTML": 59312,
+    "Scala": 58269,
+    "CMake": 28691,
+    "Shell": 27455,
+    "JavaScript": 21264,
+    "ANTLR": 17988,
+    "Dockerfile": 12377,
+    "CSS": 9953,
+    "Batchfile": 2738,
+    "Kotlin": 1207
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T21:16:18.605489"
+}

@@ -1,0 +1,37 @@
+{
+  "name": "go-ibax",
+  "owner": "IBAX-io",
+  "created_at": "2020-08-27T08:47:55Z",
+  "updated_at": "2025-01-14T04:47:03Z",
+  "pushed_at": "2024-11-08T03:38:17Z",
+  "size": 3262,
+  "stars": 7873,
+  "forks": 6442,
+  "open_issues": 96,
+  "watchers": 7873,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Go": 1784867,
+    "Makefile": 1346,
+    "Shell": 1025
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T17:33:25.727255"
+}

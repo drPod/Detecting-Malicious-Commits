@@ -1,0 +1,56 @@
+{
+  "name": "skywalking",
+  "owner": "apache",
+  "created_at": "2015-11-07T03:30:36Z",
+  "updated_at": "2025-01-14T16:03:31Z",
+  "pushed_at": "2025-01-14T16:03:20Z",
+  "size": 172238,
+  "stars": 24041,
+  "forks": 6546,
+  "open_issues": 73,
+  "watchers": 24041,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "5.x",
+    "6.x",
+    "8.8.x",
+    "master",
+    "website-docs/8.2.0",
+    "website-docs/8.3.0",
+    "website-docs/8.4.0",
+    "website-docs/8.5.0",
+    "website-docs/8.6.0",
+    "website-docs/9.7.0"
+  ],
+  "languages": {
+    "Java": 8027567,
+    "Shell": 40994,
+    "ANTLR": 23802,
+    "Lua": 18453,
+    "FreeMarker": 11051,
+    "Python": 8694,
+    "Dockerfile": 7335,
+    "Go": 7207,
+    "Batchfile": 6422,
+    "Makefile": 5882,
+    "PHP": 3108,
+    "TypeScript": 2515,
+    "JavaScript": 1367
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:11:09.894218"
+}

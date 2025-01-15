@@ -1,0 +1,36 @@
+{
+  "name": "fsevents",
+  "owner": "fsevents",
+  "created_at": "2011-02-23T16:41:56Z",
+  "updated_at": "2025-01-05T12:38:36Z",
+  "pushed_at": "2024-09-03T21:54:37Z",
+  "size": 227,
+  "stars": 569,
+  "forks": 118,
+  "open_issues": 11,
+  "watchers": 569,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 12888,
+    "JavaScript": 11408,
+    "Python": 716,
+    "Shell": 438
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:52:20.295265"
+}

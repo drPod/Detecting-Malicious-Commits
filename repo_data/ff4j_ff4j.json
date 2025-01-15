@@ -1,0 +1,41 @@
+{
+  "name": "ff4j",
+  "owner": "ff4j",
+  "created_at": "2013-06-22T14:36:32Z",
+  "updated_at": "2025-01-09T04:13:56Z",
+  "pushed_at": "2025-01-14T07:28:04Z",
+  "size": 11001,
+  "stars": 1397,
+  "forks": 279,
+  "open_issues": 31,
+  "watchers": 1397,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "v1"
+  ],
+  "languages": {
+    "Java": 2737404,
+    "CSS": 224698,
+    "HTML": 191359,
+    "JavaScript": 19189,
+    "Batchfile": 3140,
+    "FreeMarker": 196
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T17:17:05.243822"
+}

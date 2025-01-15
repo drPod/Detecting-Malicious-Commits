@@ -1,0 +1,39 @@
+{
+  "name": "litecart",
+  "owner": "litecart",
+  "created_at": "2016-06-16T10:46:17Z",
+  "updated_at": "2025-01-09T13:53:54Z",
+  "pushed_at": "2025-01-05T13:51:30Z",
+  "size": 18707,
+  "stars": 207,
+  "forks": 79,
+  "open_issues": 14,
+  "watchers": 207,
+  "has_security_policy": false,
+  "default_branch": "dev",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 2194838,
+    "Less": 121832,
+    "CSS": 81454,
+    "JavaScript": 80115,
+    "SCSS": 14761,
+    "Hack": 532,
+    "Shell": 425
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:31:14.206246"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "ibus-anthy",
+  "owner": "ibus",
+  "created_at": "2010-09-09T03:49:02Z",
+  "updated_at": "2024-12-24T01:42:42Z",
+  "pushed_at": "2024-08-17T06:46:23Z",
+  "size": 1436,
+  "stars": 24,
+  "forks": 8,
+  "open_issues": 5,
+  "watchers": 24,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Python": 588282,
+    "Terra": 117890,
+    "Makefile": 29140,
+    "M4": 18550,
+    "Shell": 17025,
+    "C": 14077,
+    "SWIG": 6410,
+    "Raku": 1403
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T22:19:31.488051"
+}

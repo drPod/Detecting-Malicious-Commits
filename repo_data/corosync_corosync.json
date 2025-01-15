@@ -1,0 +1,52 @@
+{
+  "name": "corosync",
+  "owner": "corosync",
+  "created_at": "2011-05-23T23:07:24Z",
+  "updated_at": "2025-01-10T21:42:34Z",
+  "pushed_at": "2024-11-25T16:10:01Z",
+  "size": 24055,
+  "stars": 1113,
+  "forks": 210,
+  "open_issues": 47,
+  "watchers": 1113,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "camelback",
+    "flatiron",
+    "flatiron-1.3",
+    "flatiron-1.4",
+    "gh-pages",
+    "main",
+    "needle",
+    "needle-2.0",
+    "needle-2.1",
+    "needle-2.2",
+    "needle-2.3",
+    "needle-2.4"
+  ],
+  "languages": {
+    "C": 1791378,
+    "Rust": 116429,
+    "Makefile": 43189,
+    "M4": 27214,
+    "Shell": 17275,
+    "Augeas": 8071,
+    "XSLT": 3546
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:20:44.527181"
+}

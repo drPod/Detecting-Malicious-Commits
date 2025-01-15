@@ -1,0 +1,55 @@
+{
+  "name": "dogecoin",
+  "owner": "dogecoin",
+  "created_at": "2013-12-06T11:38:05Z",
+  "updated_at": "2025-01-14T17:24:37Z",
+  "pushed_at": "2025-01-06T22:20:57Z",
+  "size": 195448,
+  "stars": 14844,
+  "forks": 2931,
+  "open_issues": 238,
+  "watchers": 14844,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "1.4-archive",
+    "1.6-archive",
+    "1.7-archive",
+    "1.8-archive",
+    "1.10-archive",
+    "1.14-maint",
+    "1.21-dev",
+    "master"
+  ],
+  "languages": {
+    "C++": 5335048,
+    "Python": 1280415,
+    "C": 1262006,
+    "M4": 219771,
+    "Makefile": 105748,
+    "Shell": 55865,
+    "Sage": 41479,
+    "Assembly": 28178,
+    "HTML": 20943,
+    "CMake": 14198,
+    "Objective-C++": 7103,
+    "Dockerfile": 1093,
+    "QMake": 825,
+    "Nix": 234
+  },
+  "commit_activity": {
+    "total_commits_last_year": 201,
+    "avg_commits_per_week": 3.8653846153846154,
+    "days_active_last_year": 92
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:35:51.885347"
+}

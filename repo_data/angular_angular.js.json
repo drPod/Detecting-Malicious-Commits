@@ -1,0 +1,55 @@
+{
+  "name": "angular.js",
+  "owner": "angular",
+  "created_at": "2010-01-06T00:34:37Z",
+  "updated_at": "2025-01-14T01:47:22Z",
+  "pushed_at": "2024-04-12T17:43:16Z",
+  "size": 101796,
+  "stars": 58771,
+  "forks": 27453,
+  "open_issues": 463,
+  "watchers": 58771,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "dependabot/npm_and_yarn/follow-redirects-1.14.7",
+    "dependabot/npm_and_yarn/marked-4.0.10",
+    "dependabot/npm_and_yarn/shelljs-0.8.5",
+    "dependabot/npm_and_yarn/tar-4.4.19",
+    "fix-aria-click",
+    "g3_v1_0",
+    "g3_v1_2",
+    "g3_v1_3",
+    "g3_v1_4",
+    "g3_v1_5",
+    "g3_v1_6",
+    "master",
+    "renovate/configure",
+    "v1.4.x",
+    "v1.5.x",
+    "v1.6.x",
+    "v1.7.x"
+  ],
+  "languages": {
+    "JavaScript": 6812691,
+    "HTML": 84393,
+    "Shell": 31578,
+    "BitBake": 7222,
+    "CSS": 3638
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1,
+    "avg_commits_per_week": 0.019230769230769232,
+    "days_active_last_year": 1
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T12:58:01.967697"
+}

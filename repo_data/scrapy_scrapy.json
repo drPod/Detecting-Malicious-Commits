@@ -1,0 +1,36 @@
+{
+  "name": "scrapy",
+  "owner": "scrapy",
+  "created_at": "2010-02-22T02:01:14Z",
+  "updated_at": "2025-01-14T12:03:42Z",
+  "pushed_at": "2025-01-10T18:08:27Z",
+  "size": 26971,
+  "stars": 53789,
+  "forks": 10611,
+  "open_issues": 611,
+  "watchers": 53789,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 2367474,
+    "HTML": 3290,
+    "Roff": 2010,
+    "Shell": 252
+  },
+  "commit_activity": {
+    "total_commits_last_year": 389,
+    "avg_commits_per_week": 7.480769230769231,
+    "days_active_last_year": 122
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T13:18:23.407520"
+}

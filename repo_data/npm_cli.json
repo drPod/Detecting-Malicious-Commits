@@ -1,0 +1,44 @@
+{
+  "name": "cli",
+  "owner": "npm",
+  "created_at": "2018-07-05T23:26:52Z",
+  "updated_at": "2025-01-14T13:53:49Z",
+  "pushed_at": "2025-01-06T21:33:28Z",
+  "size": 166341,
+  "stars": 8627,
+  "forks": 3264,
+  "open_issues": 672,
+  "watchers": 8627,
+  "has_security_policy": false,
+  "default_branch": "latest",
+  "protected_branches": [
+    "latest",
+    "release/v6",
+    "release/v7",
+    "release/v8",
+    "release/v9",
+    "release/v10"
+  ],
+  "languages": {
+    "JavaScript": 13393104,
+    "Handlebars": 23344,
+    "Shell": 11038,
+    "PowerShell": 1526,
+    "Batchfile": 1180
+  },
+  "commit_activity": {
+    "total_commits_last_year": 533,
+    "avg_commits_per_week": 10.25,
+    "days_active_last_year": 108
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:21:07.649621"
+}

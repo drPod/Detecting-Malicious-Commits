@@ -1,0 +1,40 @@
+{
+  "name": "avian",
+  "owner": "ReadyTalk",
+  "created_at": "2012-05-04T18:18:55Z",
+  "updated_at": "2024-12-30T09:48:27Z",
+  "pushed_at": "2021-02-19T02:20:09Z",
+  "size": 20491,
+  "stars": 1219,
+  "forks": 175,
+  "open_issues": 38,
+  "watchers": 1219,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 2235484,
+    "Java": 1220639,
+    "Makefile": 90423,
+    "Assembly": 55754,
+    "C": 7428,
+    "Dockerfile": 6587,
+    "Shell": 5393,
+    "CMake": 3100
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:57:01.412023"
+}

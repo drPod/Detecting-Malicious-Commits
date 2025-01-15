@@ -1,0 +1,38 @@
+{
+  "name": "vega",
+  "owner": "vega",
+  "created_at": "2013-02-03T18:36:30Z",
+  "updated_at": "2025-01-14T12:37:11Z",
+  "pushed_at": "2025-01-09T09:52:26Z",
+  "size": 99460,
+  "stars": 11317,
+  "forks": 1511,
+  "open_issues": 492,
+  "watchers": 11317,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "gh-pages"
+  ],
+  "languages": {
+    "JavaScript": 1463667,
+    "TypeScript": 478944,
+    "HTML": 21704,
+    "Shell": 3469
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T19:10:00.608328"
+}

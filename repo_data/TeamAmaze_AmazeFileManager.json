@@ -1,0 +1,37 @@
+{
+  "name": "AmazeFileManager",
+  "owner": "TeamAmaze",
+  "created_at": "2014-07-14T19:47:53Z",
+  "updated_at": "2025-01-14T03:59:48Z",
+  "pushed_at": "2025-01-13T06:27:31Z",
+  "size": 61739,
+  "stars": 5430,
+  "forks": 1591,
+  "open_issues": 588,
+  "watchers": 5430,
+  "has_security_policy": false,
+  "default_branch": "release/4.0",
+  "protected_branches": [],
+  "languages": {
+    "Java": 1920554,
+    "Kotlin": 1910498,
+    "HTML": 999,
+    "C": 749,
+    "CMake": 344
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:48:13.008877"
+}

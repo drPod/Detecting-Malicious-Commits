@@ -1,0 +1,36 @@
+{
+  "name": "taglib",
+  "owner": "taglib",
+  "created_at": "2011-03-10T19:36:24Z",
+  "updated_at": "2025-01-12T23:44:30Z",
+  "pushed_at": "2024-12-30T13:23:11Z",
+  "size": 7617,
+  "stars": 1211,
+  "forks": 350,
+  "open_issues": 66,
+  "watchers": 1211,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C++": 2173393,
+    "CMake": 49244,
+    "C": 24898,
+    "Shell": 1052
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T14:19:40.045896"
+}

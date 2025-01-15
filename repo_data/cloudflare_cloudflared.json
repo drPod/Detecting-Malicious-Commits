@@ -1,0 +1,40 @@
+{
+  "name": "cloudflared",
+  "owner": "cloudflare",
+  "created_at": "2017-10-13T19:54:47Z",
+  "updated_at": "2025-01-14T18:31:32Z",
+  "pushed_at": "2025-01-09T17:17:36Z",
+  "size": 39851,
+  "stars": 9655,
+  "forks": 855,
+  "open_issues": 422,
+  "watchers": 9655,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Go": 1543732,
+    "Python": 106394,
+    "Cap'n Proto": 8413,
+    "Makefile": 8109,
+    "Shell": 3722,
+    "Dockerfile": 1387
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T19:01:20.685258"
+}

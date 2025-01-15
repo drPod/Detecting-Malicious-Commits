@@ -1,0 +1,38 @@
+{
+  "name": "WesHack",
+  "owner": "DefinetlyNotAI",
+  "created_at": "2024-10-03T16:18:24Z",
+  "updated_at": "2024-12-28T17:23:53Z",
+  "pushed_at": "2024-12-28T17:24:44Z",
+  "size": 19660,
+  "stars": 2,
+  "forks": 1,
+  "open_issues": 0,
+  "watchers": 2,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "HTML": 92946,
+    "CSS": 14889,
+    "SCSS": 12157,
+    "JavaScript": 9096
+  },
+  "commit_activity": {
+    "total_commits_last_year": 194,
+    "avg_commits_per_week": 3.730769230769231,
+    "days_active_last_year": 35
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:13:47.966864"
+}

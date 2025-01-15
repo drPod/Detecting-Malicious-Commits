@@ -1,0 +1,35 @@
+{
+  "name": "go-restful",
+  "owner": "emicklei",
+  "created_at": "2012-11-15T07:31:43Z",
+  "updated_at": "2025-01-13T20:11:14Z",
+  "pushed_at": "2025-01-13T19:18:00Z",
+  "size": 6201,
+  "stars": 5053,
+  "forks": 690,
+  "open_issues": 5,
+  "watchers": 5053,
+  "has_security_policy": false,
+  "default_branch": "v3",
+  "protected_branches": [],
+  "languages": {
+    "Go": 219597,
+    "Shell": 420,
+    "Makefile": 131
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T20:51:25.647408"
+}

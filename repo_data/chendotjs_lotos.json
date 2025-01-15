@@ -1,0 +1,38 @@
+{
+  "name": "lotos",
+  "owner": "chendotjs",
+  "created_at": "2017-12-23T02:53:46Z",
+  "updated_at": "2024-11-26T14:28:38Z",
+  "pushed_at": "2018-02-18T05:50:08Z",
+  "size": 335,
+  "stars": 154,
+  "forks": 21,
+  "open_issues": 9,
+  "watchers": 154,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 104113,
+    "C++": 2149,
+    "Makefile": 1183,
+    "HTML": 1078,
+    "CMake": 818,
+    "Objective-C": 557
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T22:52:48.210903"
+}

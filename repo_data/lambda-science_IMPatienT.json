@@ -1,0 +1,43 @@
+{
+  "name": "IMPatienT",
+  "owner": "lambda-science",
+  "created_at": "2021-08-16T22:28:37Z",
+  "updated_at": "2024-08-16T15:32:53Z",
+  "pushed_at": "2024-04-24T07:29:31Z",
+  "size": 19650,
+  "stars": 7,
+  "forks": 0,
+  "open_issues": 9,
+  "watchers": 7,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Python": 177808,
+    "HTML": 48927,
+    "JavaScript": 26375,
+    "Jupyter Notebook": 19544,
+    "CSS": 2396,
+    "Shell": 2245,
+    "Dockerfile": 913,
+    "Mako": 494,
+    "Makefile": 487
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T21:37:02.689719"
+}

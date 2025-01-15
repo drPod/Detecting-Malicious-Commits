@@ -1,0 +1,43 @@
+{
+  "name": "puppet",
+  "owner": "puppetlabs",
+  "created_at": "2010-09-14T19:26:44Z",
+  "updated_at": "2025-01-13T14:35:03Z",
+  "pushed_at": "2024-12-11T04:01:36Z",
+  "size": 90565,
+  "stars": 7496,
+  "forks": 2192,
+  "open_issues": 73,
+  "watchers": 7496,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "6.x",
+    "7.x",
+    "main"
+  ],
+  "languages": {
+    "Ruby": 12928684,
+    "HTML": 48622,
+    "Puppet": 20259,
+    "Shell": 12321,
+    "C#": 5195,
+    "Pascal": 858,
+    "Batchfile": 594
+  },
+  "commit_activity": {
+    "total_commits_last_year": 506,
+    "avg_commits_per_week": 9.73076923076923,
+    "days_active_last_year": 146
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T14:10:48.445221"
+}

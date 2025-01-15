@@ -1,0 +1,39 @@
+{
+  "name": "Cecil",
+  "owner": "cecilapp",
+  "created_at": "2013-09-10T19:06:45Z",
+  "updated_at": "2025-01-14T11:28:04Z",
+  "pushed_at": "2025-01-14T11:28:02Z",
+  "size": 29561,
+  "stars": 260,
+  "forks": 28,
+  "open_issues": 9,
+  "watchers": 260,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "PHP": 443783,
+    "Twig": 60235,
+    "Shell": 9050,
+    "JavaScript": 462,
+    "Batchfile": 59
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:24:04.764850"
+}

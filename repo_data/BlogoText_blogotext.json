@@ -1,0 +1,36 @@
+{
+  "name": "blogotext",
+  "owner": "BlogoText",
+  "created_at": "2013-08-08T16:12:50Z",
+  "updated_at": "2024-11-23T19:06:16Z",
+  "pushed_at": "2021-03-28T15:45:22Z",
+  "size": 3421,
+  "stars": 136,
+  "forks": 30,
+  "open_issues": 75,
+  "watchers": 136,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 519248,
+    "CSS": 109502,
+    "JavaScript": 68381,
+    "HTML": 7533
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:33:25.246780"
+}

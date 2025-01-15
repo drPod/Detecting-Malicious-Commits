@@ -1,0 +1,35 @@
+{
+  "name": "getmecamtool",
+  "owner": "artemharutyunyan",
+  "created_at": "2013-04-07T02:01:18Z",
+  "updated_at": "2020-08-27T16:41:54Z",
+  "pushed_at": "2014-05-08T01:10:14Z",
+  "size": 428,
+  "stars": 50,
+  "forks": 17,
+  "open_issues": 1,
+  "watchers": 50,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 86106,
+    "Shell": 23763,
+    "Go": 3099
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T18:13:30.942333"
+}

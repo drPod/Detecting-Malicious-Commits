@@ -1,0 +1,37 @@
+{
+  "name": "swaylock",
+  "owner": "swaywm",
+  "created_at": "2019-01-14T02:25:09Z",
+  "updated_at": "2025-01-11T11:09:17Z",
+  "pushed_at": "2024-11-17T18:15:58Z",
+  "size": 320,
+  "stars": 864,
+  "forks": 202,
+  "open_issues": 86,
+  "watchers": 864,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 100273,
+    "Shell": 6325,
+    "Meson": 5445
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:16:37.409870"
+}

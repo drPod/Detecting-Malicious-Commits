@@ -1,0 +1,38 @@
+{
+  "name": "wal-g",
+  "owner": "wal-g",
+  "created_at": "2017-06-22T18:16:19Z",
+  "updated_at": "2025-01-14T05:29:03Z",
+  "pushed_at": "2025-01-13T18:26:53Z",
+  "size": 104252,
+  "stars": 3381,
+  "forks": 463,
+  "open_issues": 302,
+  "watchers": 3381,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Go": 2569488,
+    "Shell": 315684,
+    "Dockerfile": 27991,
+    "Gherkin": 17543,
+    "Makefile": 14081,
+    "PLpgSQL": 1010
+  },
+  "commit_activity": {
+    "total_commits_last_year": 186,
+    "avg_commits_per_week": 3.576923076923077,
+    "days_active_last_year": 122
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:29:47.727631"
+}

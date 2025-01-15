@@ -1,0 +1,39 @@
+{
+  "name": "opcua",
+  "owner": "locka99",
+  "created_at": "2017-01-07T09:48:09Z",
+  "updated_at": "2025-01-12T10:11:13Z",
+  "pushed_at": "2024-10-08T20:19:22Z",
+  "size": 14276,
+  "stars": 519,
+  "forks": 141,
+  "open_issues": 115,
+  "watchers": 519,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Rust": 9351158,
+    "JavaScript": 69858,
+    "HTML": 13332,
+    "Shell": 344,
+    "Batchfile": 48
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mpl-2.0"
+  },
+  "collected_at": "2025-01-14T16:55:08.287381"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "nikto",
+  "owner": "sullo",
+  "created_at": "2012-11-24T04:24:29Z",
+  "updated_at": "2025-01-14T17:20:14Z",
+  "pushed_at": "2025-01-07T15:05:22Z",
+  "size": 4711,
+  "stars": 8833,
+  "forks": 1268,
+  "open_issues": 26,
+  "watchers": 8833,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Perl": 218309,
+    "Roff": 9586,
+    "Dockerfile": 822
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:58:25.808976"
+}

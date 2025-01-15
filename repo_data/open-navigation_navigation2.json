@@ -1,0 +1,51 @@
+{
+  "name": "navigation2",
+  "owner": "open-navigation",
+  "created_at": "2018-05-29T23:35:08Z",
+  "updated_at": "2025-01-14T15:34:40Z",
+  "pushed_at": "2025-01-14T15:34:36Z",
+  "size": 110409,
+  "stars": 2727,
+  "forks": 1341,
+  "open_issues": 106,
+  "watchers": 2727,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "crystal-devel",
+    "dashing-devel",
+    "eloquent-devel",
+    "foxy-devel",
+    "galactic",
+    "humble",
+    "iron",
+    "jazzy",
+    "main"
+  ],
+  "languages": {
+    "C++": 4944508,
+    "Python": 663826,
+    "CMake": 179694,
+    "C": 58486,
+    "CSS": 27703,
+    "Dockerfile": 16439,
+    "Shell": 10325,
+    "Jupyter Notebook": 5219,
+    "HTML": 1090
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:13:58.283674"
+}

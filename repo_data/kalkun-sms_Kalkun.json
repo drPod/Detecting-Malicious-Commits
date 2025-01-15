@@ -1,0 +1,42 @@
+{
+  "name": "Kalkun",
+  "owner": "kalkun-sms",
+  "created_at": "2010-11-23T04:24:50Z",
+  "updated_at": "2025-01-03T17:34:42Z",
+  "pushed_at": "2025-01-03T17:34:37Z",
+  "size": 5923,
+  "stars": 215,
+  "forks": 131,
+  "open_issues": 38,
+  "watchers": 215,
+  "has_security_policy": false,
+  "default_branch": "devel",
+  "protected_branches": [
+    "devel",
+    "master"
+  ],
+  "languages": {
+    "PHP": 1914152,
+    "Shell": 34506,
+    "HTML": 33541,
+    "CSS": 20796,
+    "JavaScript": 6044,
+    "PLpgSQL": 872,
+    "Batchfile": 335
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T16:20:43.006005"
+}

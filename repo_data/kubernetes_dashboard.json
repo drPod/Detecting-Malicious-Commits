@@ -1,0 +1,59 @@
+{
+  "name": "dashboard",
+  "owner": "kubernetes",
+  "created_at": "2015-10-15T23:09:14Z",
+  "updated_at": "2025-01-14T12:29:09Z",
+  "pushed_at": "2025-01-13T08:47:50Z",
+  "size": 184241,
+  "stars": 14595,
+  "forks": 4176,
+  "open_issues": 133,
+  "watchers": 14595,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "bump/web",
+    "gh-pages",
+    "master",
+    "release/v7.9.0",
+    "release/7.0.0",
+    "release/7.0.1",
+    "release/7.1.0",
+    "release/7.1.1",
+    "release/7.1.2",
+    "release/7.2.0",
+    "release/7.3.0",
+    "release/7.3.1",
+    "release/7.3.2",
+    "release/7.5.0",
+    "release/7.8.0",
+    "release/7.10.0",
+    "release/7.10.1"
+  ],
+  "languages": {
+    "Go": 1161783,
+    "TypeScript": 823731,
+    "HTML": 456503,
+    "SCSS": 69500,
+    "Makefile": 34608,
+    "Dockerfile": 20660,
+    "Shell": 15130,
+    "Smarty": 4323,
+    "JavaScript": 2045
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T13:44:47.812974"
+}

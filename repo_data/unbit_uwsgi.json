@@ -1,0 +1,51 @@
+{
+  "name": "uwsgi",
+  "owner": "unbit",
+  "created_at": "2011-10-09T07:25:31Z",
+  "updated_at": "2025-01-13T08:12:32Z",
+  "pushed_at": "2024-10-26T10:05:23Z",
+  "size": 30728,
+  "stars": 3474,
+  "forks": 694,
+  "open_issues": 862,
+  "watchers": 3474,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 3382556,
+    "Python": 252815,
+    "C++": 48190,
+    "Perl": 34067,
+    "Ruby": 26275,
+    "Java": 20982,
+    "C#": 15636,
+    "Shell": 10796,
+    "Go": 7990,
+    "Lua": 5782,
+    "Clojure": 4006,
+    "Objective-C": 1395,
+    "HTML": 1273,
+    "Makefile": 1030,
+    "Erlang": 693,
+    "XSLT": 675,
+    "PHP": 355,
+    "ASP.NET": 130,
+    "Starlark": 29
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:02:59.005903"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "firmware",
+  "owner": "meshtastic",
+  "created_at": "2020-02-01T17:00:35Z",
+  "updated_at": "2025-01-14T10:10:14Z",
+  "pushed_at": "2025-01-14T13:09:43Z",
+  "size": 108686,
+  "stars": 3898,
+  "forks": 1000,
+  "open_issues": 123,
+  "watchers": 3898,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "1.2-legacy",
+    "master"
+  ],
+  "languages": {
+    "C++": 2689183,
+    "C": 1361167,
+    "Python": 44613,
+    "Shell": 14836,
+    "Batchfile": 4289,
+    "Dockerfile": 4234,
+    "JavaScript": 280
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1909,
+    "avg_commits_per_week": 36.71153846153846,
+    "days_active_last_year": 337
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:43:22.128964"
+}

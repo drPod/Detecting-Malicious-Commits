@@ -1,0 +1,36 @@
+{
+  "name": "nats.ws",
+  "owner": "nats-io",
+  "created_at": "2018-05-14T22:10:13Z",
+  "updated_at": "2025-01-13T08:24:05Z",
+  "pushed_at": "2025-01-10T19:22:05Z",
+  "size": 1130,
+  "stars": 337,
+  "forks": 30,
+  "open_issues": 2,
+  "watchers": 337,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "JavaScript": 81285,
+    "TypeScript": 24619
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T22:38:30.046087"
+}

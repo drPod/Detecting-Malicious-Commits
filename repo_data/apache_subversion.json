@@ -1,0 +1,52 @@
+{
+  "name": "subversion",
+  "owner": "apache",
+  "created_at": "2009-12-31T09:00:10Z",
+  "updated_at": "2025-01-08T08:55:50Z",
+  "pushed_at": "2025-01-08T08:55:46Z",
+  "size": 215492,
+  "stars": 582,
+  "forks": 177,
+  "open_issues": 0,
+  "watchers": 582,
+  "has_security_policy": false,
+  "default_branch": "trunk",
+  "protected_branches": [],
+  "languages": {
+    "C": 26007594,
+    "Python": 7270290,
+    "Java": 1742509,
+    "C++": 1239791,
+    "Perl": 547238,
+    "Ruby": 471741,
+    "Emacs Lisp": 427780,
+    "HTML": 362623,
+    "Shell": 285094,
+    "M4": 250137,
+    "Makefile": 156913,
+    "SWIG": 90975,
+    "Roff": 64542,
+    "Batchfile": 44554,
+    "CMake": 43947,
+    "XSLT": 28556,
+    "Yacc": 13900,
+    "Vim Script": 5801,
+    "HolyC": 3705,
+    "CSS": 3297
+  },
+  "commit_activity": {
+    "total_commits_last_year": 366,
+    "avg_commits_per_week": 7.038461538461538,
+    "days_active_last_year": 109
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T21:10:22.686351"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "speedtest",
+  "owner": "e7d",
+  "created_at": "2017-07-16T20:59:30Z",
+  "updated_at": "2024-11-20T21:22:50Z",
+  "pushed_at": "2023-03-04T02:32:37Z",
+  "size": 4288,
+  "stars": 213,
+  "forks": 57,
+  "open_issues": 48,
+  "watchers": 213,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 89503,
+    "SCSS": 15256,
+    "HTML": 10689,
+    "Dockerfile": 750
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T18:02:53.968857"
+}

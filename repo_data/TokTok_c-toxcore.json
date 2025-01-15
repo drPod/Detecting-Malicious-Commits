@@ -1,0 +1,45 @@
+{
+  "name": "c-toxcore",
+  "owner": "TokTok",
+  "created_at": "2016-07-06T08:15:22Z",
+  "updated_at": "2025-01-14T17:51:54Z",
+  "pushed_at": "2025-01-14T18:16:17Z",
+  "size": 24966,
+  "stars": 2322,
+  "forks": 292,
+  "open_issues": 211,
+  "watchers": 2322,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 3193434,
+    "C++": 223171,
+    "Shell": 61315,
+    "Starlark": 42635,
+    "CMake": 40266,
+    "M4": 36598,
+    "Makefile": 34751,
+    "Dockerfile": 29926,
+    "Python": 26652,
+    "Go": 4609,
+    "Perl": 1544
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:29:47.010367"
+}

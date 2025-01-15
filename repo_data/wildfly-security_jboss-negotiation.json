@@ -1,0 +1,38 @@
+{
+  "name": "jboss-negotiation",
+  "owner": "wildfly-security",
+  "created_at": "2013-10-22T17:26:47Z",
+  "updated_at": "2019-10-29T04:59:31Z",
+  "pushed_at": "2021-07-16T08:40:27Z",
+  "size": 1280,
+  "stars": 9,
+  "forks": 24,
+  "open_issues": 2,
+  "watchers": 9,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "2.2.x",
+    "2.3.x",
+    "master"
+  ],
+  "languages": {
+    "Java": 300945,
+    "HTML": 2779
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T17:17:34.607006"
+}

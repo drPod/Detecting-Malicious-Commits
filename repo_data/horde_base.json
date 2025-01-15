@@ -1,0 +1,39 @@
+{
+  "name": "base",
+  "owner": "horde",
+  "created_at": "2017-10-03T15:35:34Z",
+  "updated_at": "2024-08-07T14:11:00Z",
+  "pushed_at": "2024-07-12T10:44:08Z",
+  "size": 21284,
+  "stars": 50,
+  "forks": 24,
+  "open_issues": 4,
+  "watchers": 50,
+  "has_security_policy": false,
+  "default_branch": "FRAMEWORK_6_0",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 796806,
+    "JavaScript": 240108,
+    "CSS": 58970,
+    "HTML": 11358,
+    "XSLT": 2187,
+    "Shell": 1486,
+    "NASL": 846
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:21:51.409955"
+}

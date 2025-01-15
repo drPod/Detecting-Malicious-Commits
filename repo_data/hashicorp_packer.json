@@ -1,0 +1,42 @@
+{
+  "name": "packer",
+  "owner": "hashicorp",
+  "created_at": "2013-03-23T05:43:03Z",
+  "updated_at": "2025-01-13T20:11:15Z",
+  "pushed_at": "2025-01-13T19:37:14Z",
+  "size": 111744,
+  "stars": 15185,
+  "forks": 3329,
+  "open_issues": 421,
+  "watchers": 15185,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Go": 1475059,
+    "MDX": 450153,
+    "HCL": 72824,
+    "Shell": 20718,
+    "Makefile": 8559,
+    "JavaScript": 4837,
+    "Dockerfile": 3625,
+    "PowerShell": 3127,
+    "Python": 2217,
+    "Batchfile": 80
+  },
+  "commit_activity": {
+    "total_commits_last_year": 330,
+    "avg_commits_per_week": 6.346153846153846,
+    "days_active_last_year": 112
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:35:55.176074"
+}

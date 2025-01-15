@@ -1,0 +1,47 @@
+{
+  "name": "k-box",
+  "owner": "k-box",
+  "created_at": "2017-08-16T08:53:34Z",
+  "updated_at": "2024-06-17T22:55:35Z",
+  "pushed_at": "2023-07-11T00:35:05Z",
+  "size": 41136,
+  "stars": 32,
+  "forks": 22,
+  "open_issues": 16,
+  "watchers": 32,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "0.28",
+    "0.29",
+    "0.30",
+    "0.31",
+    "0.32",
+    "0.33",
+    "master"
+  ],
+  "languages": {
+    "PHP": 3305898,
+    "Blade": 331077,
+    "JavaScript": 231494,
+    "CSS": 46765,
+    "Shell": 10687,
+    "Dockerfile": 6084,
+    "HTML": 655
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:08:47.495488"
+}

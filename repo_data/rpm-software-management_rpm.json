@@ -1,0 +1,58 @@
+{
+  "name": "rpm",
+  "owner": "rpm-software-management",
+  "created_at": "2015-02-24T12:00:53Z",
+  "updated_at": "2025-01-14T12:49:04Z",
+  "pushed_at": "2025-01-14T12:48:59Z",
+  "size": 86059,
+  "stars": 519,
+  "forks": 375,
+  "open_issues": 272,
+  "watchers": 519,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "ffesti-templates",
+    "master",
+    "refs",
+    "rpm-4.4.x",
+    "rpm-4.6.x",
+    "rpm-4.7.x",
+    "rpm-4.8.x",
+    "rpm-4.9.x",
+    "rpm-4.10.x",
+    "rpm-4.11.x",
+    "rpm-4.12.x",
+    "rpm-4.13.x",
+    "rpm-4.14.x",
+    "rpm-4.15.x",
+    "rpm-4.16.x",
+    "rpm-4.17.x",
+    "rpm-4.18.x",
+    "rpm-4.19.x",
+    "rpm-4.20.x"
+  ],
+  "languages": {
+    "C++": 1716571,
+    "C": 619258,
+    "Shell": 62332,
+    "CMake": 34556,
+    "Python": 16186,
+    "Lua": 138
+  },
+  "commit_activity": {
+    "total_commits_last_year": 712,
+    "avg_commits_per_week": 13.692307692307692,
+    "days_active_last_year": 184
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:04:49.568059"
+}

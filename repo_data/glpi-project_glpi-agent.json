@@ -1,0 +1,43 @@
+{
+  "name": "glpi-agent",
+  "owner": "glpi-project",
+  "created_at": "2019-12-17T10:07:28Z",
+  "updated_at": "2025-01-11T23:49:52Z",
+  "pushed_at": "2025-01-10T14:17:20Z",
+  "size": 43114,
+  "stars": 261,
+  "forks": 64,
+  "open_issues": 19,
+  "watchers": 261,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [],
+  "languages": {
+    "Perl": 5733078,
+    "Roff": 823520,
+    "Smarty": 189031,
+    "Shell": 129907,
+    "Rich Text Format": 37144,
+    "VBScript": 23207,
+    "CSS": 18543,
+    "Go": 7533,
+    "C++": 3933,
+    "Makefile": 764,
+    "C": 737
+  },
+  "commit_activity": {
+    "total_commits_last_year": 338,
+    "avg_commits_per_week": 6.5,
+    "days_active_last_year": 119
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T19:57:43.329484"
+}

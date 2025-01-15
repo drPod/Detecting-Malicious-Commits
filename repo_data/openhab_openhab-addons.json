@@ -1,0 +1,56 @@
+{
+  "name": "openhab-addons",
+  "owner": "openhab",
+  "created_at": "2014-05-13T19:41:58Z",
+  "updated_at": "2025-01-14T17:41:06Z",
+  "pushed_at": "2025-01-14T07:56:23Z",
+  "size": 359973,
+  "stars": 1917,
+  "forks": 3613,
+  "open_issues": 640,
+  "watchers": 1917,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "2.5.x",
+    "3.0.x",
+    "3.1.x",
+    "3.2.x",
+    "3.4.x",
+    "4.0.x",
+    "4.1.x",
+    "4.2.x",
+    "4.3.x",
+    "l10n_crowdin",
+    "main"
+  ],
+  "languages": {
+    "Java": 62559432,
+    "JavaScript": 557917,
+    "CSS": 421234,
+    "HTML": 133419,
+    "Groovy": 45923,
+    "C++": 30357,
+    "C": 18836,
+    "Awk": 9404,
+    "XSLT": 6282,
+    "Python": 4218,
+    "Shell": 1702,
+    "Batchfile": 1466
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "epl-2.0"
+  },
+  "collected_at": "2025-01-14T19:48:58.855519"
+}

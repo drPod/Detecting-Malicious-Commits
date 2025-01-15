@@ -1,0 +1,38 @@
+{
+  "name": "xzs-mysql",
+  "owner": "mindskip",
+  "created_at": "2020-08-30T00:23:44Z",
+  "updated_at": "2025-01-14T09:07:56Z",
+  "pushed_at": "2025-01-14T00:41:42Z",
+  "size": 414067,
+  "stars": 3229,
+  "forks": 548,
+  "open_issues": 1,
+  "watchers": 3229,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 36399506,
+    "Java": 378855,
+    "Vue": 262467,
+    "HTML": 64992,
+    "SCSS": 19323,
+    "CSS": 561
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T20:36:44.851476"
+}

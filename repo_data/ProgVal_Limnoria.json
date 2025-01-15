@@ -1,0 +1,35 @@
+{
+  "name": "Limnoria",
+  "owner": "ProgVal",
+  "created_at": "2011-04-26T08:18:00Z",
+  "updated_at": "2025-01-10T21:40:31Z",
+  "pushed_at": "2024-12-22T15:29:41Z",
+  "size": 36539,
+  "stars": 626,
+  "forks": 175,
+  "open_issues": 249,
+  "watchers": 626,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 3251848,
+    "Makefile": 983,
+    "Shell": 331
+  },
+  "commit_activity": {
+    "total_commits_last_year": 60,
+    "avg_commits_per_week": 1.1538461538461537,
+    "days_active_last_year": 35
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:36:03.084418"
+}

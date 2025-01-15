@@ -1,0 +1,38 @@
+{
+  "name": "lemmy",
+  "owner": "LemmyNet",
+  "created_at": "2019-02-14T17:17:17Z",
+  "updated_at": "2025-01-14T19:08:10Z",
+  "pushed_at": "2025-01-14T15:48:56Z",
+  "size": 37358,
+  "stars": 13410,
+  "forks": 886,
+  "open_issues": 182,
+  "watchers": 13410,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Rust": 1960782,
+    "PLpgSQL": 406564,
+    "TypeScript": 144788,
+    "Shell": 30022,
+    "Dockerfile": 4038,
+    "JavaScript": 1457
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:44:00.928794"
+}

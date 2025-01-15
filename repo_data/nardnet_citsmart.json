@@ -1,0 +1,50 @@
+{
+  "name": "citsmart",
+  "owner": "nardnet",
+  "created_at": "2016-01-26T00:48:10Z",
+  "updated_at": "2016-01-26T00:53:32Z",
+  "pushed_at": "2016-01-26T00:55:44Z",
+  "size": 213782,
+  "stars": 0,
+  "forks": 2,
+  "open_issues": 0,
+  "watchers": 0,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Java": 23767674,
+    "HTML": 21531136,
+    "JavaScript": 10028842,
+    "CSS": 2175974,
+    "PLSQL": 2102118,
+    "PHP": 155008,
+    "ColdFusion": 127964,
+    "ASP": 44420,
+    "Perl": 41065,
+    "Python": 39475,
+    "Lasso": 20160,
+    "FreeMarker": 16259,
+    "ActionScript": 15982,
+    "SQLPL": 10306,
+    "Shell": 8907,
+    "CoffeeScript": 4704,
+    "Ruby": 1439,
+    "Makefile": 850
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:10:19.165137"
+}

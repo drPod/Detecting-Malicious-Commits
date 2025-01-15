@@ -1,0 +1,41 @@
+{
+  "name": "dash",
+  "owner": "plotly",
+  "created_at": "2015-04-10T01:53:08Z",
+  "updated_at": "2025-01-14T20:17:04Z",
+  "pushed_at": "2025-01-14T20:04:45Z",
+  "size": 171891,
+  "stars": 21792,
+  "forks": 2093,
+  "open_issues": 511,
+  "watchers": 21792,
+  "has_security_policy": false,
+  "default_branch": "dev",
+  "protected_branches": [
+    "dev"
+  ],
+  "languages": {
+    "Python": 1498570,
+    "TypeScript": 870825,
+    "HTML": 755370,
+    "JavaScript": 684288,
+    "Less": 22320,
+    "CSS": 17507,
+    "Shell": 402
+  },
+  "commit_activity": {
+    "total_commits_last_year": 440,
+    "avg_commits_per_week": 8.461538461538462,
+    "days_active_last_year": 134
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T20:43:59.572688"
+}

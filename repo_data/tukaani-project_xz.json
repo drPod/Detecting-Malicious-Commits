@@ -1,0 +1,41 @@
+{
+  "name": "xz",
+  "owner": "tukaani-project",
+  "created_at": "2022-10-18T15:11:36Z",
+  "updated_at": "2025-01-14T07:37:07Z",
+  "pushed_at": "2025-01-13T17:34:17Z",
+  "size": 6187,
+  "stars": 665,
+  "forks": 127,
+  "open_issues": 8,
+  "watchers": 665,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 1867740,
+    "CMake": 125078,
+    "M4": 93299,
+    "Roff": 85692,
+    "Shell": 60845,
+    "Makefile": 32666,
+    "Assembly": 14136,
+    "C++": 12013,
+    "Batchfile": 1180
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T22:17:50.606828"
+}

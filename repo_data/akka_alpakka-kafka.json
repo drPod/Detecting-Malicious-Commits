@@ -1,0 +1,38 @@
+{
+  "name": "alpakka-kafka",
+  "owner": "akka",
+  "created_at": "2014-12-30T15:30:02Z",
+  "updated_at": "2025-01-03T21:44:22Z",
+  "pushed_at": "2024-12-18T10:40:11Z",
+  "size": 4695,
+  "stars": 1416,
+  "forks": 387,
+  "open_issues": 118,
+  "watchers": 1416,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "release-2.0.x"
+  ],
+  "languages": {
+    "Scala": 1064515,
+    "Java": 166257,
+    "Shell": 461
+  },
+  "commit_activity": {
+    "total_commits_last_year": 69,
+    "avg_commits_per_week": 1.3269230769230769,
+    "days_active_last_year": 30
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:54:58.445990"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "SIOCtl",
+  "owner": "otavioarj",
+  "created_at": "2018-04-27T19:45:20Z",
+  "updated_at": "2024-06-03T07:07:39Z",
+  "pushed_at": "2018-05-09T22:05:29Z",
+  "size": 22,
+  "stars": 5,
+  "forks": 4,
+  "open_issues": 0,
+  "watchers": 5,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 3098
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:44:11.408062"
+}

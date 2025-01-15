@@ -1,0 +1,34 @@
+{
+  "name": "json2html",
+  "owner": "moappi",
+  "created_at": "2011-12-29T06:13:25Z",
+  "updated_at": "2024-12-18T12:59:20Z",
+  "pushed_at": "2024-12-11T06:31:18Z",
+  "size": 190,
+  "stars": 632,
+  "forks": 104,
+  "open_issues": 7,
+  "watchers": 632,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 86139,
+    "HTML": 1163
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T16:03:21.886821"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "osgi",
+  "owner": "vaadin",
+  "created_at": "2020-11-05T10:41:20Z",
+  "updated_at": "2022-01-10T20:18:06Z",
+  "pushed_at": "2024-03-12T12:27:26Z",
+  "size": 326,
+  "stars": 3,
+  "forks": 1,
+  "open_issues": 4,
+  "watchers": 3,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "6.0",
+    "7.0",
+    "8.0",
+    "main"
+  ],
+  "languages": {
+    "Java": 91421
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:22:37.004362"
+}

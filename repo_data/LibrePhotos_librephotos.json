@@ -1,0 +1,33 @@
+{
+  "name": "librephotos",
+  "owner": "LibrePhotos",
+  "created_at": "2020-11-11T23:08:19Z",
+  "updated_at": "2025-01-14T06:20:32Z",
+  "pushed_at": "2025-01-08T23:27:50Z",
+  "size": 82266,
+  "stars": 7088,
+  "forks": 314,
+  "open_issues": 287,
+  "watchers": 7088,
+  "has_security_policy": false,
+  "default_branch": "dev",
+  "protected_branches": [],
+  "languages": {
+    "Python": 717484
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T20:22:43.485408"
+}

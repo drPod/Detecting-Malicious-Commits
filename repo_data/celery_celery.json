@@ -1,0 +1,40 @@
+{
+  "name": "celery",
+  "owner": "celery",
+  "created_at": "2009-04-24T11:31:24Z",
+  "updated_at": "2025-01-14T17:07:34Z",
+  "pushed_at": "2025-01-14T11:20:05Z",
+  "size": 35495,
+  "stars": 25257,
+  "forks": 4701,
+  "open_issues": 707,
+  "watchers": 25257,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Python": 2995213,
+    "Shell": 28762,
+    "Dockerfile": 6862,
+    "Makefile": 6084,
+    "Batchfile": 2386,
+    "Smarty": 1722
+  },
+  "commit_activity": {
+    "total_commits_last_year": 355,
+    "avg_commits_per_week": 6.826923076923077,
+    "days_active_last_year": 172
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T17:13:30.125955"
+}

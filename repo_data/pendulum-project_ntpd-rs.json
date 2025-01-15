@@ -1,0 +1,36 @@
+{
+  "name": "ntpd-rs",
+  "owner": "pendulum-project",
+  "created_at": "2022-03-04T19:15:34Z",
+  "updated_at": "2025-01-14T14:11:24Z",
+  "pushed_at": "2025-01-10T14:16:11Z",
+  "size": 9622,
+  "stars": 807,
+  "forks": 44,
+  "open_issues": 65,
+  "watchers": 807,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Rust": 1035481,
+    "Shell": 11532
+  },
+  "commit_activity": {
+    "total_commits_last_year": 383,
+    "avg_commits_per_week": 7.365384615384615,
+    "days_active_last_year": 127
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:39:05.166322"
+}

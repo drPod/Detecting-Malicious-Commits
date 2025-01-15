@@ -1,0 +1,33 @@
+{
+  "name": "rpyc",
+  "owner": "tomerfiliba",
+  "created_at": "2009-03-08T11:23:29Z",
+  "updated_at": "2025-01-12T04:39:34Z",
+  "pushed_at": "2024-09-25T04:25:32Z",
+  "size": 3269,
+  "stars": 1595,
+  "forks": 246,
+  "open_issues": 86,
+  "watchers": 1595,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 321808
+  },
+  "commit_activity": {
+    "total_commits_last_year": 26,
+    "avg_commits_per_week": 0.5,
+    "days_active_last_year": 10
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T20:16:33.007126"
+}

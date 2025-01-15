@@ -1,0 +1,63 @@
+{
+  "name": "geotools",
+  "owner": "geotools",
+  "created_at": "2011-11-10T23:22:12Z",
+  "updated_at": "2025-01-14T08:31:40Z",
+  "pushed_at": "2025-01-14T10:56:05Z",
+  "size": 419761,
+  "stars": 1751,
+  "forks": 1157,
+  "open_issues": 3,
+  "watchers": 1751,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "10.x",
+    "11.x",
+    "12.x",
+    "13.x",
+    "14.x",
+    "15.x",
+    "16.x",
+    "17.x",
+    "18.x",
+    "19.x",
+    "20.x",
+    "21.x",
+    "22.x",
+    "23.x",
+    "24.x",
+    "25.x",
+    "26.x",
+    "27.x",
+    "28.x",
+    "29.x",
+    "30.x"
+  ],
+  "languages": {
+    "Java": 94586016,
+    "PLpgSQL": 3664254,
+    "Scheme": 919603,
+    "HTML": 178498,
+    "CSS": 37887,
+    "Shell": 19012,
+    "Python": 15428,
+    "Scala": 957,
+    "nesC": 83
+  },
+  "commit_activity": {
+    "total_commits_last_year": 222,
+    "avg_commits_per_week": 4.269230769230769,
+    "days_active_last_year": 137
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T13:20:27.489856"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "xen-orchestra",
+  "owner": "vatesfr",
+  "created_at": "2013-02-07T17:43:01Z",
+  "updated_at": "2025-01-13T15:30:29Z",
+  "pushed_at": "2025-01-14T14:45:22Z",
+  "size": 76101,
+  "stars": 810,
+  "forks": 270,
+  "open_issues": 359,
+  "watchers": 810,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 6503853,
+    "Vue": 606540,
+    "TypeScript": 275121,
+    "SCSS": 30530,
+    "CSS": 27084,
+    "Handlebars": 26183,
+    "Smarty": 17757,
+    "Pug": 8973,
+    "Shell": 6574,
+    "HTML": 1819
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1094,
+    "avg_commits_per_week": 21.03846153846154,
+    "days_active_last_year": 226
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:38:53.084982"
+}

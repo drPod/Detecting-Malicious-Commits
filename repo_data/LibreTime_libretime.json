@@ -1,0 +1,50 @@
+{
+  "name": "libretime",
+  "owner": "LibreTime",
+  "created_at": "2017-02-19T14:07:26Z",
+  "updated_at": "2025-01-10T16:56:44Z",
+  "pushed_at": "2025-01-12T12:59:39Z",
+  "size": 412034,
+  "stars": 824,
+  "forks": 229,
+  "open_issues": 159,
+  "watchers": 824,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "archive/airtime/saas-dev",
+    "archive/airtime/2.5.x",
+    "archive/airtime/2.6.x",
+    "main",
+    "stable",
+    "stable-3.x",
+    "stable-4.x"
+  ],
+  "languages": {
+    "PHP": 7421420,
+    "JavaScript": 1695366,
+    "Python": 430232,
+    "CSS": 306158,
+    "HTML": 238118,
+    "Shell": 33262,
+    "Dockerfile": 8922,
+    "Makefile": 7770,
+    "Jinja": 6769,
+    "Smarty": 858
+  },
+  "commit_activity": {
+    "total_commits_last_year": 217,
+    "avg_commits_per_week": 4.173076923076923,
+    "days_active_last_year": 97
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:54:14.524765"
+}

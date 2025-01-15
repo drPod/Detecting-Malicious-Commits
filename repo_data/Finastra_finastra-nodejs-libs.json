@@ -1,0 +1,37 @@
+{
+  "name": "finastra-nodejs-libs",
+  "owner": "Finastra",
+  "created_at": "2020-04-13T10:01:43Z",
+  "updated_at": "2024-12-15T02:45:39Z",
+  "pushed_at": "2024-12-11T09:18:40Z",
+  "size": 7152,
+  "stars": 37,
+  "forks": 14,
+  "open_issues": 20,
+  "watchers": 37,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop",
+    "master"
+  ],
+  "languages": {
+    "TypeScript": 214146,
+    "Handlebars": 1178
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:07:11.647628"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "kiwi-legacy",
+  "owner": "openSUSE",
+  "created_at": "2011-07-13T08:30:10Z",
+  "updated_at": "2024-10-06T17:02:10Z",
+  "pushed_at": "2022-10-04T17:29:53Z",
+  "size": 470218,
+  "stars": 148,
+  "forks": 75,
+  "open_issues": 0,
+  "watchers": 148,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Perl": 4235886,
+    "Shell": 1380775,
+    "XSLT": 81653,
+    "JavaScript": 55940,
+    "C": 17182,
+    "Makefile": 13364,
+    "Assembly": 5163,
+    "CSS": 4918,
+    "Emacs Lisp": 312
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T16:07:48.847200"
+}

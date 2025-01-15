@@ -1,0 +1,36 @@
+{
+  "name": "superagent",
+  "owner": "visionmedia",
+  "created_at": "2011-04-13T02:29:45Z",
+  "updated_at": "2025-01-09T22:00:06Z",
+  "pushed_at": "2024-10-18T23:46:39Z",
+  "size": 6419,
+  "stars": 16601,
+  "forks": 1328,
+  "open_issues": 178,
+  "watchers": 16601,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 338649,
+    "HTML": 42992,
+    "Makefile": 1811,
+    "Shell": 139
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:16:00.849404"
+}

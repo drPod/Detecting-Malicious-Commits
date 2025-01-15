@@ -1,0 +1,39 @@
+{
+  "name": "lucet",
+  "owner": "bytecodealliance",
+  "created_at": "2018-12-07T21:27:18Z",
+  "updated_at": "2025-01-05T15:09:36Z",
+  "pushed_at": "2022-03-23T22:18:15Z",
+  "size": 10652,
+  "stars": 4055,
+  "forks": 165,
+  "open_issues": 65,
+  "watchers": 4055,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Rust": 1174216,
+    "C": 49605,
+    "WebAssembly": 35228,
+    "Shell": 13284,
+    "Assembly": 8296,
+    "Makefile": 7949,
+    "Dockerfile": 2082
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T17:39:29.812597"
+}

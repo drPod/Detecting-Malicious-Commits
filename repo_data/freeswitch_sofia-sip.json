@@ -1,0 +1,43 @@
+{
+  "name": "sofia-sip",
+  "owner": "freeswitch",
+  "created_at": "2020-07-10T17:15:26Z",
+  "updated_at": "2025-01-06T08:32:53Z",
+  "pushed_at": "2024-09-27T21:04:52Z",
+  "size": 4284,
+  "stars": 280,
+  "forks": 188,
+  "open_issues": 96,
+  "watchers": 280,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 6801667,
+    "M4": 58588,
+    "Makefile": 58579,
+    "HTML": 37198,
+    "Shell": 34332,
+    "Awk": 23946,
+    "Batchfile": 17898,
+    "sed": 11551,
+    "C++": 4338,
+    "Perl": 2837,
+    "DIGITAL Command Language": 2203
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T15:53:31.403536"
+}

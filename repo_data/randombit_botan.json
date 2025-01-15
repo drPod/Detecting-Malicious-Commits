@@ -1,0 +1,47 @@
+{
+  "name": "botan",
+  "owner": "randombit",
+  "created_at": "2013-03-06T16:51:39Z",
+  "updated_at": "2025-01-14T12:22:38Z",
+  "pushed_at": "2025-01-14T13:10:17Z",
+  "size": 106654,
+  "stars": 2776,
+  "forks": 574,
+  "open_issues": 215,
+  "watchers": 2776,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "insito-bib",
+    "master",
+    "release-1_8",
+    "release-1_10",
+    "release-2",
+    "release-3"
+  ],
+  "languages": {
+    "C++": 9975206,
+    "Python": 672161,
+    "C": 204972,
+    "Shell": 25498,
+    "CMake": 8895,
+    "PowerShell": 1888,
+    "Emacs Lisp": 1313,
+    "HTML": 184
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1232,
+    "avg_commits_per_week": 23.692307692307693,
+    "days_active_last_year": 242
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-2-clause"
+  },
+  "collected_at": "2025-01-14T13:10:52.207996"
+}

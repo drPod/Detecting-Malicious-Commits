@@ -1,0 +1,35 @@
+{
+  "name": "date-and-time",
+  "owner": "knowledgecode",
+  "created_at": "2014-12-20T09:10:32Z",
+  "updated_at": "2024-12-23T06:42:20Z",
+  "pushed_at": "2024-09-28T08:21:29Z",
+  "size": 1597,
+  "stars": 186,
+  "forks": 42,
+  "open_issues": 0,
+  "watchers": 186,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 1181851,
+    "TypeScript": 10348,
+    "Shell": 2605
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:57:08.043364"
+}

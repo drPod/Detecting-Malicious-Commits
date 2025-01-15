@@ -1,0 +1,45 @@
+{
+  "name": "spark",
+  "owner": "FirelyTeam",
+  "created_at": "2014-02-27T15:03:09Z",
+  "updated_at": "2025-01-01T23:26:08Z",
+  "pushed_at": "2025-01-14T04:50:44Z",
+  "size": 294537,
+  "stars": 261,
+  "forks": 166,
+  "open_issues": 49,
+  "watchers": 261,
+  "has_security_policy": false,
+  "default_branch": "r4/master",
+  "protected_branches": [
+    "dstu1/master",
+    "master",
+    "r4b/master",
+    "r4/master",
+    "stu3/master"
+  ],
+  "languages": {
+    "C#": 850789,
+    "HTML": 10337,
+    "XSLT": 10017,
+    "JavaScript": 1837,
+    "Shell": 1636,
+    "Dockerfile": 868,
+    "Batchfile": 106
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T17:56:50.206018"
+}

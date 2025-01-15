@@ -1,0 +1,40 @@
+{
+  "name": "webmagic",
+  "owner": "code4craft",
+  "created_at": "2013-04-23T12:57:36Z",
+  "updated_at": "2025-01-14T05:57:55Z",
+  "pushed_at": "2024-12-31T18:10:32Z",
+  "size": 17416,
+  "stars": 11474,
+  "forks": 4177,
+  "open_issues": 363,
+  "watchers": 11474,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [],
+  "languages": {
+    "Java": 782948,
+    "HTML": 231706,
+    "JavaScript": 1777,
+    "Kotlin": 1371,
+    "Ruby": 832,
+    "Groovy": 545,
+    "Python": 393,
+    "Shell": 193
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:46:57.010577"
+}

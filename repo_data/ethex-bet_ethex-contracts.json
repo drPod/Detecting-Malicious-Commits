@@ -1,0 +1,33 @@
+{
+  "name": "ethex-contracts",
+  "owner": "ethex-bet",
+  "created_at": "2019-03-04T13:40:18Z",
+  "updated_at": "2021-11-04T08:18:17Z",
+  "pushed_at": "2022-02-11T01:02:40Z",
+  "size": 84,
+  "stars": 5,
+  "forks": 6,
+  "open_issues": 2,
+  "watchers": 5,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 32153
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T19:52:19.410043"
+}

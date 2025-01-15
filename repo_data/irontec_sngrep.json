@@ -1,0 +1,37 @@
+{
+  "name": "sngrep",
+  "owner": "irontec",
+  "created_at": "2013-06-20T17:06:31Z",
+  "updated_at": "2025-01-10T13:36:26Z",
+  "pushed_at": "2024-10-16T14:04:05Z",
+  "size": 6506,
+  "stars": 1036,
+  "forks": 188,
+  "open_issues": 69,
+  "watchers": 1036,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 744524,
+    "M4": 13874,
+    "CMake": 13859,
+    "Shell": 9276,
+    "Makefile": 2104
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:29:43.165609"
+}

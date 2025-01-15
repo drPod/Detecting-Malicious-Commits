@@ -1,0 +1,46 @@
+{
+  "name": "helpdezk",
+  "owner": "albandes",
+  "created_at": "2012-09-08T14:00:14Z",
+  "updated_at": "2024-08-12T19:21:26Z",
+  "pushed_at": "2024-12-11T17:51:31Z",
+  "size": 159812,
+  "stars": 11,
+  "forks": 16,
+  "open_issues": 9,
+  "watchers": 11,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "master"
+  ],
+  "languages": {
+    "PHP": 27982344,
+    "JavaScript": 3063517,
+    "CSS": 1622793,
+    "Smarty": 1003171,
+    "SCSS": 226605,
+    "Less": 206407,
+    "XSLT": 57772,
+    "HTML": 47181,
+    "Hack": 2812,
+    "Shell": 715,
+    "Makefile": 466
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:07:13.572451"
+}

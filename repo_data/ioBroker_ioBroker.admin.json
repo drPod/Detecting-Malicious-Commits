@@ -1,0 +1,39 @@
+{
+  "name": "ioBroker.admin",
+  "owner": "ioBroker",
+  "created_at": "2014-08-20T15:23:02Z",
+  "updated_at": "2025-01-11T17:43:08Z",
+  "pushed_at": "2025-01-14T15:06:13Z",
+  "size": 52270,
+  "stars": 272,
+  "forks": 78,
+  "open_issues": 169,
+  "watchers": 272,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "TypeScript": 4577198,
+    "JavaScript": 990483,
+    "Less": 64473,
+    "CSS": 42927,
+    "HTML": 23928
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T22:46:17.326018"
+}

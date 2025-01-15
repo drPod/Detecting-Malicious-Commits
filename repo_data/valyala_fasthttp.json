@@ -1,0 +1,33 @@
+{
+  "name": "fasthttp",
+  "owner": "valyala",
+  "created_at": "2015-10-18T22:19:57Z",
+  "updated_at": "2025-01-14T15:59:10Z",
+  "pushed_at": "2025-01-10T04:49:46Z",
+  "size": 3356,
+  "stars": 22096,
+  "forks": 1768,
+  "open_issues": 103,
+  "watchers": 22096,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Go": 1204606
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:39:05.007113"
+}

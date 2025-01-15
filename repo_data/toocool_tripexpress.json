@@ -1,0 +1,37 @@
+{
+  "name": "tripexpress",
+  "owner": "toocool",
+  "created_at": "2014-09-01T10:03:53Z",
+  "updated_at": "2025-01-13T03:46:22Z",
+  "pushed_at": "2016-01-18T19:54:25Z",
+  "size": 8899,
+  "stars": 81,
+  "forks": 69,
+  "open_issues": 14,
+  "watchers": 81,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 2583670,
+    "HTML": 949931,
+    "JavaScript": 239757,
+    "CSS": 33734,
+    "ApacheConf": 151
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:50:17.731822"
+}

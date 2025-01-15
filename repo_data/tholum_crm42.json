@@ -1,0 +1,40 @@
+{
+  "name": "crm42",
+  "owner": "tholum",
+  "created_at": "2012-12-13T22:08:22Z",
+  "updated_at": "2015-12-01T02:11:13Z",
+  "pushed_at": "2012-12-24T17:10:28Z",
+  "size": 9825,
+  "stars": 2,
+  "forks": 1,
+  "open_issues": 0,
+  "watchers": 2,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 11566480,
+    "JavaScript": 2268356,
+    "ActionScript": 321037,
+    "Apex": 59546,
+    "Perl": 13281,
+    "Shell": 4955,
+    "Rebol": 3977,
+    "Racket": 863
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T15:13:06.454213"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "mquery",
+  "owner": "aheckmann",
+  "created_at": "2012-12-14T22:55:16Z",
+  "updated_at": "2024-12-11T21:24:13Z",
+  "pushed_at": "2024-06-25T18:41:18Z",
+  "size": 642,
+  "stars": 479,
+  "forks": 73,
+  "open_issues": 15,
+  "watchers": 479,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "JavaScript": 164863
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:04:58.846653"
+}

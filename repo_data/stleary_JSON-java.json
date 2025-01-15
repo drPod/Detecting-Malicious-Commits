@@ -1,0 +1,35 @@
+{
+  "name": "JSON-java",
+  "owner": "stleary",
+  "created_at": "2010-12-21T17:46:09Z",
+  "updated_at": "2025-01-13T12:39:43Z",
+  "pushed_at": "2025-01-13T17:16:17Z",
+  "size": 3085,
+  "stars": 4561,
+  "forks": 2561,
+  "open_issues": 45,
+  "watchers": 4561,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Java": 967434
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T15:45:47.725466"
+}

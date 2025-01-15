@@ -1,0 +1,50 @@
+{
+  "name": "move",
+  "owner": "move-language",
+  "created_at": "2022-04-12T00:06:33Z",
+  "updated_at": "2025-01-14T14:01:41Z",
+  "pushed_at": "2024-05-04T21:17:51Z",
+  "size": 88960,
+  "stars": 2279,
+  "forks": 688,
+  "open_issues": 210,
+  "watchers": 2279,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "aptos-20221115",
+    "aptos-main",
+    "aptos-main-delete-me",
+    "aptos-until-1.2.0",
+    "aptos-v1.2.0",
+    "aptos-v1.3.0"
+  ],
+  "languages": {
+    "Rust": 7726712,
+    "Move": 2990155,
+    "SMT": 262895,
+    "TeX": 250116,
+    "JavaScript": 145994,
+    "Boogie": 71534,
+    "Shell": 49441,
+    "TypeScript": 42391,
+    "Solidity": 13152,
+    "Dockerfile": 3328,
+    "Jupyter Notebook": 2124
+  },
+  "commit_activity": {
+    "total_commits_last_year": 3,
+    "avg_commits_per_week": 0.057692307692307696,
+    "days_active_last_year": 2
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T22:09:06.527315"
+}

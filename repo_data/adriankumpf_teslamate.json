@@ -1,0 +1,44 @@
+{
+  "name": "teslamate",
+  "owner": "adriankumpf",
+  "created_at": "2019-03-31T20:27:26Z",
+  "updated_at": "2025-01-14T17:29:54Z",
+  "pushed_at": "2025-01-13T21:24:06Z",
+  "size": 54081,
+  "stars": 6214,
+  "forks": 766,
+  "open_issues": 44,
+  "watchers": 6214,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Elixir": 847132,
+    "HTML": 60328,
+    "Nix": 20291,
+    "JavaScript": 16747,
+    "MDX": 9149,
+    "SCSS": 5386,
+    "Dockerfile": 3598,
+    "Shell": 3113,
+    "CSS": 1703,
+    "Makefile": 652
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:32:30.285270"
+}

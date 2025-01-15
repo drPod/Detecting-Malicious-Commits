@@ -1,0 +1,40 @@
+{
+  "name": "capsule-proxy",
+  "owner": "clastix",
+  "created_at": "2020-09-16T13:52:50Z",
+  "updated_at": "2025-01-14T11:37:25Z",
+  "pushed_at": "2025-01-14T11:37:21Z",
+  "size": 1406,
+  "stars": 45,
+  "forks": 41,
+  "open_issues": 14,
+  "watchers": 45,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Go": 178919,
+    "Shell": 120731,
+    "Makefile": 13814,
+    "Smarty": 13806,
+    "Dockerfile": 793,
+    "JavaScript": 608
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:25:02.847269"
+}

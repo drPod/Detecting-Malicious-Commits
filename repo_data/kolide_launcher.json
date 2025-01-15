@@ -1,0 +1,45 @@
+{
+  "name": "launcher",
+  "owner": "kolide",
+  "created_at": "2017-05-02T19:53:30Z",
+  "updated_at": "2025-01-10T22:04:40Z",
+  "pushed_at": "2025-01-10T22:04:38Z",
+  "size": 14266,
+  "stars": 511,
+  "forks": 103,
+  "open_issues": 108,
+  "watchers": 511,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "Go": 2509867,
+    "Augeas": 116112,
+    "C#": 98150,
+    "Objective-C": 39310,
+    "Shell": 11866,
+    "Makefile": 9368,
+    "JavaScript": 4343,
+    "Dockerfile": 3676,
+    "C": 1410,
+    "PowerShell": 1219,
+    "HTML": 177
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T14:11:36.934679"
+}

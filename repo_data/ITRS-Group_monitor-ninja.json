@@ -1,0 +1,42 @@
+{
+  "name": "monitor-ninja",
+  "owner": "ITRS-Group",
+  "created_at": "2016-06-10T07:13:19Z",
+  "updated_at": "2024-10-08T08:42:25Z",
+  "pushed_at": "2025-01-14T07:16:23Z",
+  "size": 55501,
+  "stars": 32,
+  "forks": 16,
+  "open_issues": 11,
+  "watchers": 32,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 2753089,
+    "JavaScript": 1225509,
+    "CSS": 235352,
+    "Gherkin": 219487,
+    "Ruby": 66876,
+    "C": 16834,
+    "Shell": 6958,
+    "Makefile": 4284,
+    "HTML": 3318,
+    "Python": 3053
+  },
+  "commit_activity": {
+    "total_commits_last_year": 4,
+    "avg_commits_per_week": 0.07692307692307693,
+    "days_active_last_year": 4
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:43:48.288213"
+}

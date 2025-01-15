@@ -1,0 +1,39 @@
+{
+  "name": "simditor",
+  "owner": "mycolorway",
+  "created_at": "2014-01-10T03:54:08Z",
+  "updated_at": "2025-01-10T09:52:20Z",
+  "pushed_at": "2024-02-25T03:52:36Z",
+  "size": 6146,
+  "stars": 5024,
+  "forks": 799,
+  "open_issues": 32,
+  "watchers": 5024,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 404672,
+    "CoffeeScript": 154179,
+    "CSS": 75724,
+    "SCSS": 36766,
+    "HTML": 8998,
+    "Handlebars": 770,
+    "Ruby": 67
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1,
+    "avg_commits_per_week": 0.019230769230769232,
+    "days_active_last_year": 1
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T12:53:57.644038"
+}

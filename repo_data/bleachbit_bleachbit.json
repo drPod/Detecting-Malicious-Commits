@@ -1,0 +1,36 @@
+{
+  "name": "bleachbit",
+  "owner": "bleachbit",
+  "created_at": "2014-03-10T01:40:31Z",
+  "updated_at": "2025-01-14T20:00:48Z",
+  "pushed_at": "2025-01-14T20:00:45Z",
+  "size": 13306,
+  "stars": 3168,
+  "forks": 271,
+  "open_issues": 309,
+  "watchers": 3168,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Python": 802430,
+    "NSIS": 540645,
+    "Makefile": 7554,
+    "Batchfile": 3428
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T21:53:09.172329"
+}

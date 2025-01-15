@@ -1,0 +1,38 @@
+{
+  "name": "formwork",
+  "owner": "getformwork",
+  "created_at": "2018-06-16T14:39:18Z",
+  "updated_at": "2025-01-09T22:57:38Z",
+  "pushed_at": "2025-01-09T22:57:35Z",
+  "size": 10369,
+  "stars": 54,
+  "forks": 13,
+  "open_issues": 0,
+  "watchers": 54,
+  "has_security_policy": false,
+  "default_branch": "2.x",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 1013489,
+    "TypeScript": 186575,
+    "SCSS": 78045,
+    "CSS": 6658,
+    "JavaScript": 3858,
+    "Hack": 23
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T13:40:53.168960"
+}

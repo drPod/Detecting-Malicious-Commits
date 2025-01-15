@@ -1,0 +1,54 @@
+{
+  "name": "RediSearch",
+  "owner": "RediSearch",
+  "created_at": "2016-05-05T13:25:43Z",
+  "updated_at": "2025-01-14T14:55:22Z",
+  "pushed_at": "2025-01-14T16:19:45Z",
+  "size": 44581,
+  "stars": 5611,
+  "forks": 528,
+  "open_issues": 575,
+  "watchers": 5611,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "1.0",
+    "1.1",
+    "1.2",
+    "1.4",
+    "1.6",
+    "1.8",
+    "2.0",
+    "2.2",
+    "2.4",
+    "2.6",
+    "2.8",
+    "2.10",
+    "8.0"
+  ],
+  "languages": {
+    "C": 2983494,
+    "Python": 1710651,
+    "C++": 425486,
+    "Shell": 65639,
+    "Yacc": 53845,
+    "Ragel": 24069,
+    "Makefile": 22435,
+    "CMake": 13491
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T16:25:01.565696"
+}

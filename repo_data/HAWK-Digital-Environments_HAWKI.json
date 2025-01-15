@@ -1,0 +1,36 @@
+{
+  "name": "HAWKI",
+  "owner": "HAWK-Digital-Environments",
+  "created_at": "2023-06-28T10:33:11Z",
+  "updated_at": "2025-01-14T15:20:44Z",
+  "pushed_at": "2025-01-06T10:52:08Z",
+  "size": 19864,
+  "stars": 78,
+  "forks": 53,
+  "open_issues": 17,
+  "watchers": 78,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 1472658,
+    "PHP": 131686,
+    "CSS": 73353,
+    "Shell": 482
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T21:36:03.403240"
+}

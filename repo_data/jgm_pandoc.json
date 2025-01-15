@@ -1,0 +1,48 @@
+{
+  "name": "pandoc",
+  "owner": "jgm",
+  "created_at": "2010-03-20T20:34:23Z",
+  "updated_at": "2025-01-14T19:42:41Z",
+  "pushed_at": "2025-01-14T17:28:31Z",
+  "size": 64799,
+  "stars": 35412,
+  "forks": 3419,
+  "open_issues": 1116,
+  "watchers": 35412,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Haskell": 4233281,
+    "Roff": 329670,
+    "Rich Text Format": 259644,
+    "Lua": 102689,
+    "HTML": 56660,
+    "Jupyter Notebook": 33428,
+    "Typst": 17210,
+    "Makefile": 12998,
+    "Python": 12819,
+    "Shell": 11782,
+    "TeX": 5119,
+    "Nix": 4132,
+    "CSS": 3813,
+    "Perl": 3182,
+    "Smarty": 2753,
+    "Emacs Lisp": 2217
+  },
+  "commit_activity": {
+    "total_commits_last_year": 847,
+    "avg_commits_per_week": 16.28846153846154,
+    "days_active_last_year": 238
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:44:51.647460"
+}

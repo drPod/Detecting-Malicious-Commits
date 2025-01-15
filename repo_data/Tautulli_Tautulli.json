@@ -1,0 +1,46 @@
+{
+  "name": "Tautulli",
+  "owner": "Tautulli",
+  "created_at": "2015-02-22T16:36:06Z",
+  "updated_at": "2025-01-14T17:47:37Z",
+  "pushed_at": "2025-01-13T17:32:34Z",
+  "size": 104379,
+  "stars": 5732,
+  "forks": 596,
+  "open_issues": 119,
+  "watchers": 5732,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "beta",
+    "docs",
+    "master",
+    "nightly"
+  ],
+  "languages": {
+    "Python": 16270862,
+    "HTML": 1108208,
+    "JavaScript": 402175,
+    "CSS": 172482,
+    "NSIS": 7835,
+    "Shell": 5854,
+    "C": 4149,
+    "Dockerfile": 637,
+    "Batchfile": 440
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T22:47:56.044684"
+}

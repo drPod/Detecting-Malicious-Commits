@@ -1,0 +1,46 @@
+{
+  "name": "JUCE",
+  "owner": "juce-framework",
+  "created_at": "2012-03-31T11:19:43Z",
+  "updated_at": "2025-01-14T04:18:24Z",
+  "pushed_at": "2025-01-13T17:22:37Z",
+  "size": 270384,
+  "stars": 6815,
+  "forks": 1772,
+  "open_issues": 396,
+  "watchers": 6815,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "develop",
+    "master"
+  ],
+  "languages": {
+    "C++": 39806501,
+    "C": 8398001,
+    "CMake": 1349430,
+    "Objective-C++": 1110986,
+    "Java": 163264,
+    "Objective-C": 101508,
+    "Makefile": 79027,
+    "JavaScript": 22333,
+    "Python": 5460,
+    "Batchfile": 1771,
+    "HTML": 982
+  },
+  "commit_activity": {
+    "total_commits_last_year": 797,
+    "avg_commits_per_week": 15.326923076923077,
+    "days_active_last_year": 207
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:40:16.123308"
+}

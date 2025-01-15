@@ -1,0 +1,45 @@
+{
+  "name": "activemq",
+  "owner": "apache",
+  "created_at": "2009-05-21T01:33:45Z",
+  "updated_at": "2025-01-14T10:01:42Z",
+  "pushed_at": "2025-01-09T13:46:37Z",
+  "size": 65758,
+  "stars": 2330,
+  "forks": 1446,
+  "open_issues": 47,
+  "watchers": 2330,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "Java": 26365151,
+    "JavaScript": 438329,
+    "HTML": 161558,
+    "Shell": 80827,
+    "CSS": 34997,
+    "C#": 27536,
+    "C++": 17404,
+    "Python": 16801,
+    "Batchfile": 13237,
+    "Ruby": 6594,
+    "Perl": 4128,
+    "PHP": 3665,
+    "Dockerfile": 1988
+  },
+  "commit_activity": {
+    "total_commits_last_year": 328,
+    "avg_commits_per_week": 6.3076923076923075,
+    "days_active_last_year": 118
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T15:26:51.813044"
+}

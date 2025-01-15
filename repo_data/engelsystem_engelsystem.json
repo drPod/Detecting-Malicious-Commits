@@ -1,0 +1,41 @@
+{
+  "name": "engelsystem",
+  "owner": "engelsystem",
+  "created_at": "2012-04-11T17:36:00Z",
+  "updated_at": "2025-01-12T14:14:56Z",
+  "pushed_at": "2025-01-08T21:37:05Z",
+  "size": 20920,
+  "stars": 454,
+  "forks": 242,
+  "open_issues": 215,
+  "watchers": 454,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "PHP": 2098832,
+    "Twig": 204709,
+    "SCSS": 81104,
+    "JavaScript": 22404,
+    "HTML": 6510,
+    "Shell": 3629,
+    "Dockerfile": 3423
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T18:19:37.653608"
+}

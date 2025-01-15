@@ -1,0 +1,33 @@
+{
+  "name": "nmap4j",
+  "owner": "narkisr",
+  "created_at": "2013-04-22T01:22:47Z",
+  "updated_at": "2025-01-03T19:51:48Z",
+  "pushed_at": "2024-01-08T10:59:19Z",
+  "size": 3739,
+  "stars": 82,
+  "forks": 60,
+  "open_issues": 1,
+  "watchers": 82,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Java": 236944
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T19:22:31.968087"
+}

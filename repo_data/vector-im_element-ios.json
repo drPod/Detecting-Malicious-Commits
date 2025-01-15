@@ -1,0 +1,42 @@
+{
+  "name": "element-ios",
+  "owner": "vector-im",
+  "created_at": "2015-08-06T11:42:09Z",
+  "updated_at": "2025-01-14T04:05:17Z",
+  "pushed_at": "2025-01-10T14:37:22Z",
+  "size": 112889,
+  "stars": 1737,
+  "forks": 499,
+  "open_issues": 1739,
+  "watchers": 1737,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop"
+  ],
+  "languages": {
+    "Swift": 6832668,
+    "Objective-C": 5321077,
+    "HTML": 130340,
+    "Ruby": 23045,
+    "Shell": 14308,
+    "C": 12111,
+    "JavaScript": 2113,
+    "Jinja": 2090
+  },
+  "commit_activity": {
+    "total_commits_last_year": 273,
+    "avg_commits_per_week": 5.25,
+    "days_active_last_year": 78
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": true,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T14:43:18.693783"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "hustoj",
+  "owner": "zhblue",
+  "created_at": "2013-03-21T01:47:17Z",
+  "updated_at": "2025-01-14T13:05:28Z",
+  "pushed_at": "2025-01-14T13:05:23Z",
+  "size": 69161,
+  "stars": 3391,
+  "forks": 776,
+  "open_issues": 300,
+  "watchers": 3391,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 13945430,
+    "PHP": 3963485,
+    "CSS": 981579,
+    "Shell": 223827,
+    "C": 170791,
+    "C++": 156030,
+    "Less": 84359,
+    "SCSS": 82922,
+    "Lex": 37320,
+    "HTML": 25312,
+    "TeX": 19088,
+    "Roff": 18557,
+    "Hack": 16295,
+    "Dockerfile": 14575,
+    "Makefile": 14241,
+    "PLSQL": 3649
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1394,
+    "avg_commits_per_week": 26.807692307692307,
+    "days_active_last_year": 267
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T15:24:26.050427"
+}

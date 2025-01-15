@@ -1,0 +1,48 @@
+{
+  "name": "PX4-Autopilot",
+  "owner": "Drone-Lab",
+  "created_at": "2023-12-13T05:26:05Z",
+  "updated_at": "2024-01-15T09:41:01Z",
+  "pushed_at": "2024-03-18T10:25:26Z",
+  "size": 200809,
+  "stars": 0,
+  "forks": 0,
+  "open_issues": 0,
+  "watchers": 0,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C++": 17111428,
+    "C": 14337241,
+    "CMake": 1559240,
+    "Python": 1278962,
+    "Shell": 402167,
+    "Groovy": 61724,
+    "EmberScript": 40872,
+    "Makefile": 28285,
+    "HTML": 18185,
+    "Jupyter Notebook": 16723,
+    "Perl": 11401,
+    "MATLAB": 9938,
+    "Jinja": 4643,
+    "Nix": 1437,
+    "Dockerfile": 290,
+    "GDB": 41
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0.0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "bsd-3-clause"
+  },
+  "collected_at": "2025-01-14T16:00:25.168292"
+}

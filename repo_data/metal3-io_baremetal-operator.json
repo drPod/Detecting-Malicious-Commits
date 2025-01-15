@@ -1,0 +1,48 @@
+{
+  "name": "baremetal-operator",
+  "owner": "metal3-io",
+  "created_at": "2019-01-23T01:41:05Z",
+  "updated_at": "2025-01-14T07:30:27Z",
+  "pushed_at": "2025-01-14T08:44:23Z",
+  "size": 66035,
+  "stars": 604,
+  "forks": 258,
+  "open_issues": 55,
+  "watchers": 604,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main",
+    "release-0.1",
+    "release-0.3",
+    "release-0.4",
+    "release-0.5",
+    "release-0.6",
+    "release-0.7",
+    "release-0.8",
+    "release-0.9"
+  ],
+  "languages": {
+    "Go": 1150572,
+    "Shell": 69815,
+    "Smarty": 13359,
+    "Makefile": 13330,
+    "Python": 7474,
+    "Dockerfile": 1676
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T16:11:21.805744"
+}

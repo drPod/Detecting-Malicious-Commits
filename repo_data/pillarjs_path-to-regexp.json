@@ -1,0 +1,33 @@
+{
+  "name": "path-to-regexp",
+  "owner": "pillarjs",
+  "created_at": "2012-08-01T22:47:17Z",
+  "updated_at": "2025-01-14T06:21:22Z",
+  "pushed_at": "2025-01-13T02:04:39Z",
+  "size": 1046,
+  "stars": 8251,
+  "forks": 389,
+  "open_issues": 2,
+  "watchers": 8251,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "TypeScript": 52127
+  },
+  "commit_activity": {
+    "total_commits_last_year": 69,
+    "avg_commits_per_week": 1.3269230769230769,
+    "days_active_last_year": 25
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T12:59:16.284082"
+}

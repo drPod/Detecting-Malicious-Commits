@@ -1,0 +1,38 @@
+{
+  "name": "speedtest",
+  "owner": "librespeed",
+  "created_at": "2016-03-04T11:48:03Z",
+  "updated_at": "2025-01-14T14:42:48Z",
+  "pushed_at": "2024-12-29T19:30:05Z",
+  "size": 47588,
+  "stars": 12507,
+  "forks": 2226,
+  "open_issues": 118,
+  "watchers": 12507,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 58649,
+    "JavaScript": 45155,
+    "HTML": 15462,
+    "Shell": 4725,
+    "Dockerfile": 1140,
+    "TSQL": 841
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-3.0"
+  },
+  "collected_at": "2025-01-14T16:54:56.444259"
+}

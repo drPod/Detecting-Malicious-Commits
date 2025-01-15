@@ -1,0 +1,40 @@
+{
+  "name": "libproxy",
+  "owner": "libproxy",
+  "created_at": "2015-04-17T07:31:52Z",
+  "updated_at": "2025-01-09T14:53:20Z",
+  "pushed_at": "2024-10-02T14:23:13Z",
+  "size": 1430,
+  "stars": 195,
+  "forks": 61,
+  "open_issues": 1,
+  "watchers": 195,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "C": 155015,
+    "Meson": 14725,
+    "Python": 6896,
+    "Shell": 3725,
+    "JavaScript": 1037,
+    "Roff": 884
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "lgpl-2.1"
+  },
+  "collected_at": "2025-01-14T20:48:30.364448"
+}

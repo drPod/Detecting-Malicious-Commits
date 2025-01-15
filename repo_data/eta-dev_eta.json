@@ -1,0 +1,37 @@
+{
+  "name": "eta",
+  "owner": "eta-dev",
+  "created_at": "2020-03-26T02:30:08Z",
+  "updated_at": "2025-01-13T13:19:54Z",
+  "pushed_at": "2024-08-26T18:01:03Z",
+  "size": 2573,
+  "stars": 1446,
+  "forks": 66,
+  "open_issues": 19,
+  "watchers": 1446,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "v2"
+  ],
+  "languages": {
+    "TypeScript": 53178,
+    "JavaScript": 10776,
+    "HTML": 10542
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:55:01.971480"
+}

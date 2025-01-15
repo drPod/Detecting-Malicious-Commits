@@ -1,0 +1,38 @@
+{
+  "name": "DiscoTOC",
+  "owner": "discourse",
+  "created_at": "2019-03-09T02:00:14Z",
+  "updated_at": "2025-01-01T11:58:12Z",
+  "pushed_at": "2024-12-08T21:12:40Z",
+  "size": 498,
+  "stars": 22,
+  "forks": 33,
+  "open_issues": 2,
+  "watchers": 22,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "JavaScript": 21775,
+    "Ruby": 13827,
+    "SCSS": 6073,
+    "Handlebars": 227
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T19:42:00.529454"
+}

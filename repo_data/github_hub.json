@@ -1,0 +1,43 @@
+{
+  "name": "hub",
+  "owner": "github",
+  "created_at": "2009-12-05T22:15:25Z",
+  "updated_at": "2025-01-13T17:40:18Z",
+  "pushed_at": "2024-02-02T21:00:44Z",
+  "size": 7336,
+  "stars": 22860,
+  "forks": 2194,
+  "open_issues": 296,
+  "watchers": 22860,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "Go": 358746,
+    "Gherkin": 288983,
+    "Shell": 39220,
+    "Ruby": 28753,
+    "Makefile": 2397,
+    "Batchfile": 2112,
+    "Vim Script": 2060,
+    "HTML": 1666,
+    "Dockerfile": 551
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T17:20:05.248031"
+}

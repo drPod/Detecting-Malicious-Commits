@@ -1,0 +1,41 @@
+{
+  "name": "tolgee-platform",
+  "owner": "tolgee",
+  "created_at": "2020-10-13T16:36:39Z",
+  "updated_at": "2025-01-14T19:28:21Z",
+  "pushed_at": "2025-01-14T16:52:18Z",
+  "size": 144919,
+  "stars": 2310,
+  "forks": 220,
+  "open_issues": 138,
+  "watchers": 2310,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "feature/notifications"
+  ],
+  "languages": {
+    "TypeScript": 3188062,
+    "Kotlin": 2539002,
+    "JavaScript": 20192,
+    "Dockerfile": 1364,
+    "PLpgSQL": 663,
+    "Shell": 513,
+    "HTML": 483
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T21:06:18.446768"
+}

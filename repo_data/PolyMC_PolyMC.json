@@ -1,0 +1,46 @@
+{
+  "name": "PolyMC",
+  "owner": "PolyMC",
+  "created_at": "2021-12-17T20:08:34Z",
+  "updated_at": "2025-01-12T19:59:24Z",
+  "pushed_at": "2024-12-02T10:02:47Z",
+  "size": 23851,
+  "stars": 1828,
+  "forks": 261,
+  "open_issues": 274,
+  "watchers": 1828,
+  "has_security_policy": false,
+  "default_branch": "develop",
+  "protected_branches": [
+    "develop",
+    "release-1.3.x",
+    "release-1.4.x",
+    "release-5.x",
+    "release-6.x",
+    "release-legacy"
+  ],
+  "languages": {
+    "C++": 2933446,
+    "C": 184114,
+    "CMake": 82348,
+    "Java": 29961,
+    "Objective-C++": 6325,
+    "Shell": 5931,
+    "Nix": 5743
+  },
+  "commit_activity": {
+    "total_commits_last_year": 22,
+    "avg_commits_per_week": 0.4230769230769231,
+    "days_active_last_year": 16
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T13:26:09.776034"
+}

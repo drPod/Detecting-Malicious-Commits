@@ -1,0 +1,42 @@
+{
+  "name": "wolfMQTT",
+  "owner": "wolfSSL",
+  "created_at": "2015-10-26T16:58:13Z",
+  "updated_at": "2025-01-12T02:01:29Z",
+  "pushed_at": "2024-11-11T17:41:46Z",
+  "size": 1789,
+  "stars": 530,
+  "forks": 158,
+  "open_issues": 12,
+  "watchers": 530,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [
+    "master"
+  ],
+  "languages": {
+    "C": 515615,
+    "M4": 168915,
+    "CMake": 119943,
+    "Shell": 28250,
+    "Makefile": 20393,
+    "C++": 10555,
+    "FreeMarker": 3956,
+    "Batchfile": 1317
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T14:08:09.646015"
+}

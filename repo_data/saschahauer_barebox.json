@@ -1,0 +1,44 @@
+{
+  "name": "barebox",
+  "owner": "saschahauer",
+  "created_at": "2016-02-19T14:14:39Z",
+  "updated_at": "2025-01-11T19:35:10Z",
+  "pushed_at": "2025-01-14T09:02:04Z",
+  "size": 109551,
+  "stars": 167,
+  "forks": 65,
+  "open_issues": 1,
+  "watchers": 167,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 35272022,
+    "C++": 404187,
+    "Assembly": 301424,
+    "Perl": 264488,
+    "Makefile": 245914,
+    "Shell": 146390,
+    "Python": 129029,
+    "Roff": 28199,
+    "Yacc": 26989,
+    "Lex": 15481,
+    "Dockerfile": 3085,
+    "SmPL": 816
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1478,
+    "avg_commits_per_week": 28.423076923076923,
+    "days_active_last_year": 184
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T18:36:52.289805"
+}

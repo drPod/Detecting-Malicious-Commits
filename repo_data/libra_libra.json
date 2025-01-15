@@ -1,0 +1,57 @@
+{
+  "name": "diem",
+  "owner": "libra",
+  "created_at": "2019-04-02T21:51:45Z",
+  "updated_at": "2025-01-14T12:27:35Z",
+  "pushed_at": "2025-01-14T05:59:00Z",
+  "size": 124603,
+  "stars": 16697,
+  "forks": 2582,
+  "open_issues": 362,
+  "watchers": 16697,
+  "has_security_policy": false,
+  "default_branch": "latest",
+  "protected_branches": [
+    "auto",
+    "canary",
+    "gha-test-1",
+    "gha-test-2",
+    "gha-test-bmwill",
+    "latest",
+    "main"
+  ],
+  "languages": {
+    "Rust": 18411652,
+    "JavaScript": 434443,
+    "SMT": 262895,
+    "CSS": 109692,
+    "Shell": 102217,
+    "TeX": 87160,
+    "Boogie": 44693,
+    "Dockerfile": 20713,
+    "Python": 18840,
+    "Java": 3939,
+    "C#": 3791,
+    "Mustache": 3775,
+    "Go": 2314,
+    "Jupyter Notebook": 2124,
+    "C++": 1538,
+    "Smarty": 1049,
+    "HTML": 231
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "apache-2.0"
+  },
+  "collected_at": "2025-01-14T22:56:04.525072"
+}

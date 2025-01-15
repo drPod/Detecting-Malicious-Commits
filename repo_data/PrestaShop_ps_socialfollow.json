@@ -1,0 +1,40 @@
+{
+  "name": "ps_socialfollow",
+  "owner": "PrestaShop",
+  "created_at": "2016-03-07T09:33:03Z",
+  "updated_at": "2023-01-18T14:46:40Z",
+  "pushed_at": "2024-07-10T04:37:54Z",
+  "size": 142,
+  "stars": 7,
+  "forks": 21,
+  "open_issues": 3,
+  "watchers": 7,
+  "has_security_policy": false,
+  "default_branch": "dev",
+  "protected_branches": [
+    "1.7.0.x-prev",
+    "dev",
+    "master"
+  ],
+  "languages": {
+    "PHP": 22896,
+    "Smarty": 1148,
+    "Shell": 1066,
+    "CSS": 145
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "afl-3.0"
+  },
+  "collected_at": "2025-01-14T16:33:38.926034"
+}

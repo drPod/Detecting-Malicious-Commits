@@ -1,0 +1,38 @@
+{
+  "name": "loaded7",
+  "owner": "loadedcommerce",
+  "created_at": "2012-11-28T15:42:04Z",
+  "updated_at": "2019-08-09T09:49:51Z",
+  "pushed_at": "2018-08-21T21:53:29Z",
+  "size": 40851,
+  "stars": 19,
+  "forks": 26,
+  "open_issues": 115,
+  "watchers": 19,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "PHP": 6197340,
+    "JavaScript": 1299226,
+    "CSS": 1048992,
+    "HTML": 208540,
+    "Hack": 150705,
+    "ActionScript": 15982
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-2.0"
+  },
+  "collected_at": "2025-01-14T17:50:33.331239"
+}

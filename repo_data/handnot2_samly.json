@@ -1,0 +1,33 @@
+{
+  "name": "samly",
+  "owner": "handnot2",
+  "created_at": "2017-08-29T04:19:52Z",
+  "updated_at": "2024-12-24T02:01:02Z",
+  "pushed_at": "2024-02-26T19:12:30Z",
+  "size": 142,
+  "stars": 130,
+  "forks": 96,
+  "open_issues": 16,
+  "watchers": 130,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "Elixir": 72828
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T16:19:49.085797"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "ubuntu-advantage-desktop-daemon",
+  "owner": "canonical",
+  "created_at": "2021-09-17T05:07:03Z",
+  "updated_at": "2024-06-27T12:41:42Z",
+  "pushed_at": "2024-06-27T12:41:33Z",
+  "size": 96,
+  "stars": 3,
+  "forks": 5,
+  "open_issues": 4,
+  "watchers": 3,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [],
+  "languages": {
+    "C": 73587,
+    "Meson": 5663
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "gpl-3.0"
+  },
+  "collected_at": "2025-01-14T18:10:11.168122"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "libxml2",
+  "owner": "GNOME",
+  "created_at": "2012-06-03T12:37:38Z",
+  "updated_at": "2025-01-07T18:15:28Z",
+  "pushed_at": "2025-01-07T18:15:22Z",
+  "size": 33229,
+  "stars": 612,
+  "forks": 372,
+  "open_issues": 0,
+  "watchers": 612,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "C": 7666847,
+    "RPGLE": 880308,
+    "HTML": 590791,
+    "Python": 292950,
+    "C++": 172432,
+    "M4": 48743,
+    "Shell": 48293,
+    "CMake": 38875,
+    "JavaScript": 29341,
+    "Meson": 24533,
+    "Makefile": 22991,
+    "XSLT": 17980,
+    "Batchfile": 15298,
+    "Clean": 6801,
+    "PowerShell": 1722,
+    "Dockerfile": 1377,
+    "PHP": 1319,
+    "Max": 296
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": false,
+    "has_issues": false,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "other"
+  },
+  "collected_at": "2025-01-14T13:44:34.046242"
+}

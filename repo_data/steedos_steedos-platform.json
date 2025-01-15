@@ -1,0 +1,45 @@
+{
+  "name": "steedos-platform",
+  "owner": "steedos",
+  "created_at": "2019-03-04T09:31:44Z",
+  "updated_at": "2025-01-10T14:45:26Z",
+  "pushed_at": "2025-01-14T09:48:07Z",
+  "size": 1904807,
+  "stars": 1420,
+  "forks": 390,
+  "open_issues": 454,
+  "watchers": 1420,
+  "has_security_policy": false,
+  "default_branch": "master",
+  "protected_branches": [],
+  "languages": {
+    "JavaScript": 12279725,
+    "TypeScript": 3104544,
+    "CoffeeScript": 1712815,
+    "CSS": 1086640,
+    "HTML": 359237,
+    "Less": 181006,
+    "EJS": 129709,
+    "Shell": 52910,
+    "Dockerfile": 8599,
+    "PEG.js": 7780,
+    "SCSS": 5587,
+    "PLSQL": 2979,
+    "Batchfile": 30
+  },
+  "commit_activity": {
+    "total_commits_last_year": 1346,
+    "avg_commits_per_week": 25.884615384615383,
+    "days_active_last_year": 201
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": false,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "agpl-3.0"
+  },
+  "collected_at": "2025-01-14T22:08:08.535434"
+}

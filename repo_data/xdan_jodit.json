@@ -1,0 +1,42 @@
+{
+  "name": "jodit",
+  "owner": "xdan",
+  "created_at": "2017-07-24T15:06:37Z",
+  "updated_at": "2025-01-13T06:45:20Z",
+  "pushed_at": "2024-12-09T23:03:38Z",
+  "size": 74461,
+  "stars": 1736,
+  "forks": 356,
+  "open_issues": 298,
+  "watchers": 1736,
+  "has_security_policy": false,
+  "default_branch": "main",
+  "protected_branches": [
+    "main"
+  ],
+  "languages": {
+    "TypeScript": 1270745,
+    "JavaScript": 1186234,
+    "Less": 90193,
+    "HTML": 10188,
+    "Makefile": 9293,
+    "Dockerfile": 1221,
+    "CSS": 1130,
+    "Shell": 447
+  },
+  "commit_activity": {
+    "total_commits_last_year": 0,
+    "avg_commits_per_week": 0,
+    "days_active_last_year": 0
+  },
+  "security_features": {
+    "has_security_policy": false,
+    "has_protected_branches": true,
+    "has_wiki": true,
+    "has_issues": true,
+    "allow_forking": true,
+    "is_template": false,
+    "license": "mit"
+  },
+  "collected_at": "2025-01-14T14:25:41.485353"
+}
