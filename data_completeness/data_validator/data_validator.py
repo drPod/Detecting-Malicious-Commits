@@ -143,4 +143,4 @@ def audit_data_quality(data_dir: str):
 
 
 if __name__ == "__main__":
-    audit_data_quality("nvd_data")
+    audit_data_quality("../../nvd_data")
