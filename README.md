@@ -2,6 +2,9 @@
 
 `nvd-collector.py`: Outputs JSON files with vulnerability "metadata" from the NVD database
 `github-data-collector.py`: Collects additional data from GitHub API
+`data_validator.py`: Finding the percentage of fields missing from the dataset in each CVE
+`data_enhancer.py`: Looks for the missing fields and adds them to the dataset
+
 
 ## Project Plan
 

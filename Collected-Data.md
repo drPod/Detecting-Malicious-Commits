@@ -7,7 +7,50 @@ vulnerability_entry = {
         "repository": "owner/repo",
         "fix_commit": "hash",
         "related_commits": ["hash1", "hash2"],
-        "patch_url": "url"
+        "patch_url": "url",
+        "fix_commit_details": {
+            "sha": "commit_hash",
+            "commit_date": "ISO date",
+            "author": {
+                "login": "username",
+                "type": "User/Organization",
+                "stats": {
+                    "total_commits": int,
+                    "average_weekly_commits": float,
+                    "total_additions": int,
+                    "total_deletions": int,
+                    "weeks_active": int
+                }
+            },
+            "commit_message": {
+                "title": "commit title",
+                "length": int,
+                "has_description": bool,
+                "references_issue": bool
+            },
+            "stats": {
+                "additions": int,
+                "deletions": int,
+                "total": int
+            },
+            "file_patterns": {
+                "security_files": int,
+                "config_files": int,
+                "dependency_files": int,
+                "test_files": int,
+                "unique_directories": int,
+                "max_directory_depth": int
+            },
+            "context": {
+                "surrounding_commits": [
+                    {
+                        "sha": "hash",
+                        "date": "ISO date",
+                        "author_login": "username"
+                    }
+                ]
+            }
+        }
     },
     "vulnerability_details": {
         "cvss_score": float,
@@ -20,7 +63,7 @@ vulnerability_entry = {
     "temporal_data": {
         "published_date": "timestamp",
         "last_modified": "timestamp",
-        "fix_date": "timestamp"  # From GitHub commit
+        "fix_date": "timestamp"  # Populated from GitHub commit
     },
     "references": [
         {
@@ -28,7 +71,30 @@ vulnerability_entry = {
             "source": "string",
             "tags": ["patch", "exploit", "article"]
         }
-    ]
+    ],
+    "repository_context": {
+        "name": "repo-name",
+        "owner": "owner",
+        "security_features": {
+            "has_security_policy": bool,
+            "has_protected_branches": bool,
+            "has_wiki": bool,
+            "has_issues": bool,
+            "license": "string"
+        },
+        "commit_activity": {
+            "total_commits_last_year": int,
+            "avg_commits_per_week": float,
+            "days_active_last_year": int
+        },
+        "languages": {"Language": bytes},
+        "stars": int,
+        "forks": int
+    },
+    "collection_metadata": {
+        "collected_at": "ISO timestamp",
+        "processing_status": "raw|enhanced"
+    }
 }
 ```
 
