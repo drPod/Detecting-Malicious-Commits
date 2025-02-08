@@ -2,8 +2,9 @@ import subprocess
 import json
 import logging
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 import traceback
+import concurrent.futures
 
 # 1. Configuration
 NVD_DATA_DIR = Path("nvd_data")
@@ -26,7 +27,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def find_introducing_commit(
-    repo_path: Path, fix_commit_hash: str, file_path: str
+    repo_path: Path, fix_commit_hash: str, file_path: str, cve_id: str
 ) -> Optional[str]:
     """
     Finds the commit that introduced the vulnerability for a specific file.
@@ -35,6 +36,7 @@ def find_introducing_commit(
         repo_path (Path): Path to the cloned git repository.
         fix_commit_hash (str): Hash of the commit that fixed the vulnerability.
         file_path (str): Path to the vulnerable file within the repository.
+        cve_id (str): CVE ID being processed, for logging purposes.
 
     Returns:
         Optional[str]: Hash of the introducing commit if found, otherwise None.
@@ -62,13 +64,13 @@ def find_introducing_commit(
             error_message = stderr.decode()
             if "fatal: no such path" in error_message:
                 logger.warning(
-                    f"File path '{file_path}' not found in repository at commit {fix_commit_hash}. It may have been introduced in the fix commit or later."
+                    f"{cve_id}: File path '{file_path}' not found in repository at commit {fix_commit_hash}. It may have been introduced in the fix commit or later."
                 )
                 return (
                     None  # File not found, might be introduced in fix commit or later
                 )
             elif "fatal: no commits found in range" in error_message:
-                logger.warning(
+                logger.warning( # More specific warning message
                     f"No commits found before fix commit {fix_commit_hash} for file '{file_path}'. Vulnerability might be very old or the fix commit is the first commit."
                 )
                 return None  # No commits before fix commit, vulnerability might be very old
@@ -86,7 +88,7 @@ def find_introducing_commit(
             return introducing_commit_hash
         else:
             logger.warning(
-                f"No blame output for {file_path} in {repo_path} before {fix_commit_hash}. File might be introduced in fix commit."
+                f"{cve_id}: No blame output for {file_path} in {repo_path} before {fix_commit_hash}. File might be introduced in fix commit."
             )
             return None  # No blame output, file might be introduced in fix commit
 
@@ -102,7 +104,7 @@ def find_introducing_commit(
         return None
 
 
-def process_cve_file(cve_file_path: Path):
+def process_cve_file(cve_file_path: Path) -> None: # Explicit return type
     """
     Processes a single CVE JSON file to find introducing commits.
 
@@ -141,12 +143,12 @@ def process_cve_file(cve_file_path: Path):
                 )
             else:
                 logger.info(
-                    f"Processing {len(files_in_commit)} files from fix commit for {cve_id} in {repository}"
+                    f"{cve_id}: Processing {len(files_in_commit)} files from fix commit in {repository}"
                 )
                 for file_data in files_in_commit:
                     file_path = file_data["filename"]
                     introducing_commit_hash = find_introducing_commit(
-                        repo_path, fix_commit, file_path
+                        repo_path, fix_commit, file_path, cve_id
                     )
                     if introducing_commit_hash:
                         introducing_commits_for_cve[file_path] = introducing_commit_hash
@@ -173,11 +175,6 @@ def process_cve_file(cve_file_path: Path):
         logger.error(f"Error processing CVE file {cve_file_path.name}: {e}")
         logger.error(traceback.format_exc())
 
-    logger.info(
-        f"Successfully wrote all CVE introducing commits to {OUTPUT_DIR}"
-    )  # Summary log message updated
-    logger.info("Introducing commit finder script completed.")
-
 
 def main():
     """
@@ -186,9 +183,17 @@ def main():
     # cve_introducing_commits = {} # No longer needed to store all in memory
     logger.info("Starting introducing commit finder script.")
 
-    for cve_file_path in NVD_DATA_DIR.glob("*.json"):
-        process_cve_file(cve_file_path)
+    cve_files = list(NVD_DATA_DIR.glob("*.json")) # Get list of files
+    logger.info(f"Found {len(cve_files)} CVE files to process.") # Log number of files
 
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor: # Parallel processing
+        executor.map(process_cve_file, cve_files) # Use executor map for parallel processing
+
+    logger.info(
+        f"Successfully wrote all CVE introducing commits to {OUTPUT_DIR}"
+    )  # Summary log message updated
+
+    # Summary log message updated - moved here to be after all files are processed
     logger.info("Introducing commit finder script completed.")
 
 
