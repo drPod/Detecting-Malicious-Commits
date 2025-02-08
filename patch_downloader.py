@@ -1,6 +1,7 @@
 import os
 import json
 import logging
+from datetime import datetime
 import requests
 from pathlib import Path
 from tqdm import tqdm
@@ -18,7 +19,7 @@ NVD_DATA_DIR = Path("nvd_data")
 REPOS_DIR = Path("repos")
 PATCHES_DIR = Path("patches")
 STATE_FILE = Path("patch_state.json")  # Separate state file for this script
-CLONE_STATE_FILE = Path("clone_state.json") # Clone state file
+CLONE_STATE_FILE = Path("clone_state.json")  # Clone state file
 MAX_WORKERS = 10  # Conservative to avoid rate limits
 
 # Setup logging
@@ -85,7 +86,7 @@ class PatchDownloader:
             except Exception as e:
                 logger.error(f"Error saving state: {str(e)}")
 
-    def download_patch(self, vuln_ Dict) -> None:
+    def download_patch(self, vuln_data: Dict) -> None:
         """Downloads the patch file for a given vulnerability."""
         if not vuln_data or not vuln_data["github_data"]["patch_url"]:
             return
@@ -156,7 +157,10 @@ class PatchDownloader:
                     with open(cve_file, "r") as f:
                         vuln_data = json.load(f)
                     repo = vuln_data["github_data"]["repository"]
-                    if clone_state.get(repo, "") == "success" and vuln_data["github_data"]["patch_url"]:
+                    if (
+                        clone_state.get(repo, "") == "success"
+                        and vuln_data["github_data"]["patch_url"]
+                    ):
                         future = executor.submit(self.download_patch, vuln_data)
                         futures[vuln_data["cve_id"]] = future
                 except Exception as e:
