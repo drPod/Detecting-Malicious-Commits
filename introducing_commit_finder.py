@@ -5,6 +5,9 @@ from pathlib import Path
 from typing import Optional, Dict, List
 import traceback
 import concurrent.futures
+import requests
+from github_data_collector import TokenManager, load_github_tokens
+import time
 
 # 1. Configuration
 NVD_DATA_DIR = Path("nvd_data")
@@ -25,6 +28,64 @@ logger = logging.getLogger(__name__)
 # Create output directory if it doesn't exist
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+def _github_request(token_manager: TokenManager, url: str) -> Optional[dict]:
+    """
+    Make a rate-limited request to GitHub API using TokenManager.
+
+    Args:
+        token_manager: Instance of TokenManager for handling tokens.
+        url: The GitHub API URL to request.
+
+    Returns:
+        dict: JSON response from GitHub API, or None if error.
+    """
+    while True:
+        token = token_manager.get_available_token()
+        headers = {
+            "Authorization": f"token {token.key}",
+            "Accept": "application/vnd.github.v3+json",
+        }
+        try:
+            response = requests.get(url, headers=headers)
+            token_manager.update_token_limits(token, response.headers)
+
+            if response.status_code == 404:
+                return None # Handle 404 as None, not an error
+            response.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
+            return response.json()
+
+        except requests.exceptions.RequestException as e:
+            if response.status_code == 403 and "rate limit exceeded" in response.text.lower():
+                logger.warning(f"GitHub API rate limit exceeded. Retrying after waiting.")
+                # TokenManager handles waiting, just retry
+                continue
+            else:
+                logger.error(f"GitHub API request failed for {url}: {e}")
+                return None # Return None on error
+        except Exception as e:
+            logger.error(f"Unexpected error during GitHub API request for {url}: {e}")
+            return None # Return None on unexpected error
+
+def get_commit_files_from_api(
+    token_manager: TokenManager, owner: str, repo: str, commit_sha: str
+) -> Optional[List[str]]:
+    """
+    Fetches the list of files changed in a commit from GitHub API.
+
+    Args:
+        token_manager: TokenManager instance.
+        owner: Repository owner.
+        repo: Repository name.
+        commit_sha: Commit SHA.
+
+    Returns:
+        Optional[List[str]]: List of file paths changed in the commit, or None if API error.
+    """
+    url = f"https://api.github.com/repos/{owner}/{repo}/commits/{commit_sha}"
+    commit_data = _github_request(token_manager, url)
+    if commit_data and "files" in commit_
+        return [file_data["filename"] for file_data in commit_data["files"]]
+    return None
 
 def find_introducing_commit(
     repo_path: Path, fix_commit_hash: str, file_path: str, cve_id: str
@@ -104,12 +165,13 @@ def find_introducing_commit(
         return None
 
 
-def process_cve_file(cve_file_path: Path) -> None: # Explicit return type
+def process_cve_file(cve_file_path: Path, token_manager: TokenManager) -> None: # Explicit return type
     """
     Processes a single CVE JSON file to find introducing commits.
 
     Args:
         cve_file_path (Path): Path to the CVE JSON file.
+        token_manager: TokenManager instance for GitHub API requests.
     """
     try:
         with open(cve_file_path, "r") as f:
@@ -133,20 +195,21 @@ def process_cve_file(cve_file_path: Path) -> None: # Explicit return type
 
             introducing_commits_for_cve: Dict[str, Optional[str]] = {}
 
-            # Iterate over all files in the fix commit
-            commit_details = cve_data["github_data"].get("fix_commit_details", {})
-            files_in_commit = commit_details.get("files", [])
+            owner, repo = repository.split("/")
+            changed_files = get_commit_files_from_api(token_manager, owner, repo, fix_commit)
+            if changed_files is None:
+                logger.warning(f"{cve_id}: Could not fetch changed files from GitHub API for commit {fix_commit}.")
+                return # Skip to next CVE if we can't get file list
 
-            if not files_in_commit:
+            if not changed_files:
                 logger.warning(
-                    f"No files found in fix commit details for {cve_id}. Skipping file analysis."
+                    f"No files found in fix commit details for {cve_id} from GitHub API. Skipping file analysis."
                 )
             else:
-                logger.info(
-                    f"{cve_id}: Processing {len(files_in_commit)} files from fix commit in {repository}"
+                logger.debug( # Changed to debug as this can be verbose
+                    f"{cve_id}: Processing {len(changed_files)} files from fix commit in {repository}"
                 )
-                for file_data in files_in_commit:
-                    file_path = file_data["filename"]
+                for file_path in changed_files:
                     introducing_commit_hash = find_introducing_commit(
                         repo_path, fix_commit, file_path, cve_id
                     )
@@ -182,16 +245,34 @@ def main():
     """
     # cve_introducing_commits = {} # No longer needed to store all in memory
     logger.info("Starting introducing commit finder script.")
+    start_time = time.time() # Start timer
+
+    # Load GitHub tokens
+    try:
+        tokens = load_github_tokens()
+        logger.info(f"Loaded {len(tokens)} GitHub tokens for API requests.")
+        token_manager = TokenManager(tokens)
+    except ValueError as e:
+        logger.error(f"Failed to load GitHub tokens: {e}")
+        logger.error("Ensure you have set up GitHub tokens in .env file as GITHUB_TOKEN_1, GITHUB_TOKEN_2, etc.")
+        return # Exit if no tokens are loaded
 
     cve_files = list(NVD_DATA_DIR.glob("*.json")) # Get list of files
     logger.info(f"Found {len(cve_files)} CVE files to process.") # Log number of files
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor: # Parallel processing
-        executor.map(process_cve_file, cve_files) # Use executor map for parallel processing
+        executor.map(lambda file_path: process_cve_file(file_path, token_manager), cve_files) # Use executor map for parallel processing
+
+    end_time = time.time() # End timer
+    duration = end_time - start_time
+    minutes = int(duration // 60)
+    seconds = duration % 60
+    logger.info(f"Introducing commit finder script completed in {minutes} minutes and {seconds:.2f} seconds.")
 
     logger.info(
         f"Successfully wrote all CVE introducing commits to {OUTPUT_DIR}"
     )  # Summary log message updated
+
 
     # Summary log message updated - moved here to be after all files are processed
     logger.info("Introducing commit finder script completed.")
