@@ -156,34 +156,34 @@ class PatchDownloader:
                     with open(cve_file, "r") as f:
                         vuln_data = json.load(f)
                     repo = vuln_data["github_data"]["repository"]
-+                   if clone_state.get(repo, "") == "success" and vuln_data["github_data"]["patch_url"]:
-+                        future = executor.submit(self.download_patch, vuln_data)
-+                        futures[vuln_data["cve_id"]] = future
-+                except Exception as e:
-+                    logger.error(f"Error loading or processing {cve_file}: {e}")
-+
-+            with tqdm(total=len(futures), desc="Downloading Patches") as pbar:
-+                for cve_id, future in futures.items():
-+                    try:
-+                        future.result()
-+                    except Exception as e:
-+                        logger.error(f"Failed to download patch for {cve_id}: {e}")
-+                    finally:
-+                        pbar.update(1)
-+
-+        logger.info("Patch downloading process completed.")
-+        # Summary
-+        success = sum(1 for s in self.state.values() if s == "success")
-+        failed = len(self.state) - success
-+        logger.info(f"Summary - Success: {success}, Failed: {failed}")
-+        logger.info(f"Script completed at {datetime.now().isoformat()}")
-+
-+
-+def main():
-+    downloader = PatchDownloader()
-+    downloader.process_data()
-+    print("\nPatch downloading complete! Check logs for details.")
-+
-+
-+if __name__ == "__main__":
-+    main()
+                    if clone_state.get(repo, "") == "success" and vuln_data["github_data"]["patch_url"]:
+                        future = executor.submit(self.download_patch, vuln_data)
+                        futures[vuln_data["cve_id"]] = future
+                except Exception as e:
+                    logger.error(f"Error loading or processing {cve_file}: {e}")
+
+            with tqdm(total=len(futures), desc="Downloading Patches") as pbar:
+                for cve_id, future in futures.items():
+                    try:
+                        future.result()
+                    except Exception as e:
+                        logger.error(f"Failed to download patch for {cve_id}: {e}")
+                    finally:
+                        pbar.update(1)
+
+        logger.info("Patch downloading process completed.")
+        # Summary
+        success = sum(1 for s in self.state.values() if s == "success")
+        failed = len(self.state) - success
+        logger.info(f"Summary - Success: {success}, Failed: {failed}")
+        logger.info(f"Script completed at {datetime.now().isoformat()}")
+
+
+def main():
+    downloader = PatchDownloader()
+    downloader.process_data()
+    print("\nPatch downloading complete! Check logs for details.")
+
+
+if __name__ == "__main__":
+    main()
