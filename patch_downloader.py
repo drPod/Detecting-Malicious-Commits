@@ -9,9 +9,12 @@ from dotenv import load_dotenv
 import threading
 import signal
 import sys
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Optional
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
+from time import time, sleep
+from github_data_collector import TokenManager, load_github_tokens  # Import TokenManager
+
 
 # Configuration
 load_dotenv()  # Load environment variables
@@ -21,6 +24,8 @@ PATCHES_DIR = Path("patches")
 STATE_FILE = Path("patch_state.json")  # Separate state file for this script
 CLONE_STATE_FILE = Path("clone_state.json")  # Clone state file
 MAX_WORKERS = 10  # Conservative to avoid rate limits
+MAX_RETRIES = 3  # Maximum number of retries for API requests
+RETRY_DELAY = 10  # Delay in seconds before retrying API requests
 
 # Setup logging
 logging.basicConfig(
@@ -40,6 +45,7 @@ class PatchDownloader:
         self.lock = threading.RLock()
         self.interrupted = False
         self.active_downloads = {}
+        self.token_manager = self._setup_token_manager() # Initialize TokenManager
 
         # Setup directories
         PATCHES_DIR.mkdir(parents=True, exist_ok=True)
@@ -50,6 +56,42 @@ class PatchDownloader:
         # Register signal handlers
         signal.signal(signal.SIGINT, self.handle_interrupt)
         signal.signal(signal.SIGTERM, self.handle_interrupt)
+
+    def _setup_token_manager(self) -> TokenManager:
+        """Load tokens and initialize TokenManager."""
+        tokens = load_github_tokens()
+        logger.info(f"Loaded {len(tokens)} GitHub tokens for PatchDownloader")
+        return TokenManager(tokens)
+
+    def _github_request(self, url: str) -> requests.Response:
+        """Handles GitHub API requests with token management and retry logic."""
+        retry_count = 0
+        while retry_count <= MAX_RETRIES:
+            token = self.token_manager.get_available_token()
+            headers = {
+                "Authorization": f"token {token.key}",
+                "Accept": "application/vnd.github.v3.raw", # Expect raw patch content
+            }
+            try:
+                response = requests.get(url, headers=headers, stream=True)
+                if response.status_code == 429:  # Rate limit exceeded
+                    retry_after = int(response.headers.get('Retry-After', RETRY_DELAY))
+                    logger.warning(f"Rate limit hit. Retrying after {retry_after} seconds.")
+                    self.token_manager.update_token_limits(token, response.headers) # Update token limits
+                    time.sleep(retry_after)
+                    retry_count += 1
+                    continue # Retry with a different token after waiting
+                response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+                self.token_manager.update_token_limits(token, response.headers) # Update token limits
+                return response # Successful response
+            except requests.exceptions.RequestException as e:
+                logger.error(f"Request failed for {url}: {e}")
+                if response is not None and response.status_code == 404:
+                    return response # Return 404 response to be handled by caller
+                retry_count += 1
+                time.sleep(RETRY_DELAY) # Wait before retrying
+        raise Exception(f"Max retries exceeded for URL: {url}") # If max retries reached, raise exception
+
 
     def handle_interrupt(self, signum, frame):
         self.interrupted = True
@@ -86,7 +128,7 @@ class PatchDownloader:
             except Exception as e:
                 logger.error(f"Error saving state: {str(e)}")
 
-    def download_patch(self, vuln_data: Dict) -> None:
+    def download_patch(self, vuln_ Dict) -> None:
         """Downloads the patch file for a given vulnerability."""
         if not vuln_data or not vuln_data["github_data"]["patch_url"]:
             return
@@ -114,8 +156,8 @@ class PatchDownloader:
 
         try:
             logger.info(f"Downloading patch file: {patch_url}")
-            response = requests.get(patch_url, stream=True)
-            response.raise_for_status()
+            response = self._github_request(patch_url) # Use _github_request for API calls
+            response.raise_for_status() # Ensure successful response again after _github_request
 
             with open(patch_filepath, "wb") as f:
                 for chunk in response.iter_content(chunk_size=8192):
