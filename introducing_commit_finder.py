@@ -51,6 +51,9 @@ logger.info(f"NVD data directory: {NVD_DATA_DIR.absolute()}")
 STATE_FILE = Path("commit_finder_state.json")  # State file for resuming
 PROCESSED_PATCHES = set()  # Keep track of processed patches in memory
 MAX_WORKERS = 10  # Number of threads for parallel processing
+GIT_RESET_BRANCH = (
+    "main"  # Branch to reset to when finding commit before CVE publication
+)
 
 
 def load_state():
@@ -94,6 +97,84 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
     except json.JSONDecodeError:
         logger.error(f"Error decoding JSON from {cve_file}")
         return None
+
+
+def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
+    """Resets the git repository to the commit before the CVE publication date."""
+    cve_published_date_str = cve_data.get("cve", {}).get("published")
+    if not cve_published_date_str:
+        logger.warning(f"CVE published date not found in data.")
+        return False
+
+    try:
+        cve_published_date = datetime.strptime(
+            cve_published_date_str, "%Y-%m-%dT%H:%M:%S.%fZ"
+        )
+        date_str_for_git = cve_published_date.strftime("%Y-%m-%d %H:%M:%S")
+
+        # Find commit before CVE publication date
+        command_rev_list = [
+            "git",
+            "rev-list",
+            f"--before='{date_str_for_git}'",
+            "--max-count=1",
+            GIT_RESET_BRANCH,
+        ]
+        logger.debug(
+            f"Executing git rev-list command: {' '.join(command_rev_list)} in {repo_path}"
+        )
+        process_rev_list = subprocess.Popen(
+            command_rev_list,
+            cwd=repo_path,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        stdout_rev_list, stderr_rev_list = process_rev_list.communicate(timeout=30)
+
+        if stderr_rev_list:
+            error_message = stderr_rev_list.decode("utf-8", errors="replace")
+            logger.error(f"Git rev-list error: {error_message}")
+            return False
+
+        commit_hash = stdout_rev_list.decode("utf-8").strip()
+        if not commit_hash:
+            logger.warning(
+                f"No commit found before CVE publication date: {date_str_for_git}"
+            )
+            return False
+
+        # Reset repository to the found commit
+        command_reset = ["git", "reset", "--hard", commit_hash]
+        logger.debug(
+            f"Executing git reset command: {' '.join(command_reset)} in {repo_path}"
+        )
+        process_reset = subprocess.Popen(
+            command_reset, cwd=repo_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        stdout_reset, stderr_reset = process_reset.communicate(timeout=30)
+
+        if stderr_reset:
+            error_message = stderr_reset.decode("utf-8", errors="replace")
+            logger.error(f"Git reset error: {error_message}")
+            return False
+
+        logger.info(
+            f"Repository reset to commit {commit_hash} (before CVE publication date)."
+        )
+        return True
+
+    except subprocess.TimeoutExpired:
+        logger.error("Git command timed out during repository reset.")
+        return False
+    except FileNotFoundError:
+        logger.error("Git command not found. Is Git installed and in PATH?")
+        return False
+    except ValueError as e:
+        logger.error(f"Error parsing CVE published date: {e}")
+        return False
+    except Exception as e:
+        logger.error(f"Error resetting repository: {e}")
+        return False
 
 
 def analyze_patch_file(
@@ -144,6 +225,21 @@ def analyze_patch_file(
             "repo_name_from_patch": None,
             "file_path_in_repo": None,
         }
+
+    # Reset repository to commit before CVE publication date
+    if repo_path.exists() and repo_path.is_dir() and cve_data:
+        if not reset_repo_to_before_cve_date(repo_path, cve_data):
+            logger.warning(
+                f"Failed to reset repository {repo_name_from_patch} for CVE {cve_id}. Analysis might be inaccurate."
+            )
+        else:
+            logger.info(
+                f"Successfully reset repository {repo_name_from_patch} for CVE {cve_id}."
+            )
+    else:
+        logger.warning(
+            f"Repository path {repo_path} invalid or CVE data missing. Skipping repository reset."
+        )
 
     # Find all diff headers in the patch content
     diff_headers = re.finditer(r"(?m)^diff --git a/(.+?) b/(.+?)$", patch_content_str)
@@ -248,7 +344,9 @@ def execute_git_blame(
             f"{line_number},{line_number}",
             file_path_in_repo,
         ]
-        logger.debug(f"Executing git blame command: {' '.join(command)} in {repo_path}") # ADDED LOGGING HERE
+        logger.debug(
+            f"Executing git blame command: {' '.join(command)} in {repo_path}"
+        )  # ADDED LOGGING HERE
         process = subprocess.Popen(
             command, cwd=repo_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
