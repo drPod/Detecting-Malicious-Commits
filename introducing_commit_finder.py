@@ -101,14 +101,14 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
 
 def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
-    cve_published_date_str = cve_data.get("cve", {}).get("published")
+    cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
         logger.warning(f"CVE published date not found in data.")
         return False
 
     try:
         cve_published_date = datetime.strptime(
-            cve_published_date_str, "%Y-%m-%dT%H:%M:%S.%fZ"
+            cve_published_date_str, "%Y-%m-%dT%H:%M:%S.%f"
         )
         date_str_for_git = cve_published_date.strftime("%Y-%m-%d %H:%M:%S")
 
