@@ -28,7 +28,7 @@ LOG_FILE = Path("introducing_commit_finder.log")
 OUTPUT_FILE = Path("vulnerable_code_snippets.json")  # Output JSON file for results
 
 # Setup logging
-LOG_LEVEL = logging.INFO  # Set default log level
+LOG_LEVEL = logging.DEBUG  # Set default log level
 CONTEXT_LINES_BEFORE = 2  # Configurable context lines before vulnerable line
 CONTEXT_LINES_AFTER = 3  # Configurable context lines after vulnerable line
 MAX_WORKERS = 10  # Number of threads for parallel processing
@@ -137,7 +137,7 @@ def analyze_patch_file(
         (
             line
             for line in patch_content_lines
-            if "--- a/" in line.strip().lower() # Relaxed and case-insensitive check
+            if "--- a/" in line.strip().lower()  # Relaxed and case-insensitive check
         ),
         None,  # Use lines to find filepath
     )
@@ -163,13 +163,17 @@ def analyze_patch_file(
             }
         repo_path = REPOS_DIR / repo_name_from_patch  # Correctly use REPOS_DIR
     else:
-        logger.debug( # Changed to debug level
+        logger.debug(  # Changed to debug level
             f"No diff header found in {patch_file_path.name}. Skipping file path extraction."
         )
-        logger.debug(f"First 10 lines of patch file {patch_file_path.name}:") # Debug log for first lines
-        for i, line in enumerate(patch_content_lines[:10]): # Log first 10 lines
-            logger.debug(f"Line {i+1}: {line.strip()}") # Log with line number and stripped content
-        logger.warning( # Keep warning log for important cases
+        logger.debug(
+            f"First 10 lines of patch file {patch_file_path.name}:"
+        )  # Debug log for first lines
+        for i, line in enumerate(patch_content_lines[:10]):  # Log first 10 lines
+            logger.debug(
+                f"Line {i+1}: {line.strip()}"
+            )  # Log with line number and stripped content
+        logger.warning(  # Keep warning log for important cases
             f"No '--- a/' diff header found in {patch_file_path.name}. File path extraction may be incomplete."
         )
         return {
@@ -179,7 +183,6 @@ def analyze_patch_file(
             "repo_name_from_patch": None,  # Return None if no diff header
             "file_path_in_repo": None,  # Return None if no diff header
         }
-
 
     try:
         diff = Diff(
