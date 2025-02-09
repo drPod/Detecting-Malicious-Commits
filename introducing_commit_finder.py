@@ -95,7 +95,7 @@ def analyze_patch_file(patch_file_path: Path):
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
     vulnerable_snippets = []
-    git_blame_commands = []
+    git_blame_commands = [] # No longer used for commands, but kept for potential future use or debugging
     repo_path = None
     repo_name_from_patch = None  # Store repo name
     file_path_in_repo = None
@@ -226,34 +226,40 @@ def analyze_patch_file(patch_file_path: Path):
                             context_lines
                         )  # Add context lines to the current snippet's context
 
-                        vulnerable_snippets.append(
-                            {
-                                "snippet": "\n".join(
-                                    context_lines_for_snippet + vulnerable_code_block
-                                ),  # Vulnerable code + context
-                                # Include CWE ID
-                                "cwe_id": cwe_id,  # Include CWE ID
-                                "cve_description": (
-                                    cve_data.get("vulnerability_details", {}).get(
-                                        "description"
-                                    )
-                                    if cve_data
-                                    else None
-                                ),
-                                # Access line number from line_obj, corrected to be original line number
-                                "line_number": (
-                                    hunk.start_line + line_obj.number - 1
-                                    if line_obj.number
-                                    else hunk.start_line
-                                ),
-                            }
-                        )
-                    if (
-                        file_path_in_repo and repo_path
-                    ):  # Ensure repo_path and file_path_in_repo are valid
-                        git_blame_commands.append(
-                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {hunk.start_line + line_obj.number -1},{hunk.start_line + line_obj.number -1}"  # git blame command using line number from diff parser
-                        )  # Replace <commit_hash> with a commit hash to run the command
+                        vuln_info = {
+                            "snippet": "\n".join(
+                                context_lines_for_snippet + vulnerable_code_block
+                            ),  # Vulnerable code + context
+                            # Include CWE ID
+                            "cwe_id": cwe_id,  # Include CWE ID
+                            "cve_description": (
+                                cve_data.get("vulnerability_details", {}).get(
+                                    "description"
+                                )
+                                if cve_data
+                                else None
+                            ),
+                            # Access line number from line_obj, corrected to be original line number
+                            "line_number": (
+                                hunk.start_line + line_obj.number - 1
+                                if line_obj.number
+                                else hunk.start_line
+                            ),
+                            "introducing_commit": None # Initialize introducing_commit to None
+                        }
+
+                        if (
+                            repo_path and file_path_in_repo
+                        ):  # Ensure repo_path and file_path_in_repo are valid
+                            commit_hash = execute_git_blame(
+                                repo_path,
+                                file_path_in_repo,
+                                vuln_info["line_number"],
+                            )
+                            vuln_info["introducing_commit"] = commit_hash # Store the commit hash
+
+                        vulnerable_snippets.append(vuln_info)
+
 
     except Exception as e:
         logger.error(f"Error parsing patch hunk in {patch_file_path.name}: {e}")
@@ -268,7 +274,7 @@ def analyze_patch_file(patch_file_path: Path):
     return {
         "cve_id": cve_id,
         "vulnerable_snippets": vulnerable_snippets,
-        "git_blame_commands": git_blame_commands,
+        "git_blame_commands": git_blame_commands, # Still return, might be useful for debugging or future features
         "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name
         "file_path_in_repo": file_path_in_repo,  # Return extracted file path
     }
@@ -375,25 +381,13 @@ def main():
                             f"Line: {vuln_info['line_number']}, CWE: {vuln_info['cwe_id']}"
                         )  # Print line number and CWE
                         logger.info(vuln_info["snippet"])  # Print code snippet
-
-                        repo_path_for_blame = (
-                            REPOS_DIR / repo_name_from_patch
-                            if repo_name_from_patch
-                            else None
-                        )  # Construct repo path for git blame
-                        commit_hash = None
-                        if (
-                            repo_path_for_blame and file_path_in_repo
-                        ):  # Execute git blame if repo path and file path are available
-                            commit_hash = execute_git_blame(
-                                repo_path_for_blame,
-                                file_path_in_repo,
-                                vuln_info["line_number"],
+                        if vuln_info["introducing_commit"]:
+                            logger.info(
+                                f"  Introducing commit (git blame): {vuln_info['introducing_commit']}"
                             )
-                            if commit_hash:
-                                logger.info(
-                                    f"  Introducing commit (estimated): {commit_hash}"
-                                )
+                        else:
+                            logger.info("  Introducing commit: Not automatically determined.")
+
 
                         logger.info("---")
 
@@ -407,24 +401,10 @@ def main():
                                 "cwe_id": vuln_info["cwe_id"],
                                 "cve_description": vuln_info["cve_description"],
                                 "code_snippet": vuln_info["snippet"],
+                                "introducing_commit": vuln_info["introducing_commit"] # Add introducing commit to output
                             }
                         )
 
-                    logger.info(
-                        "\nRecommended git blame commands (replace <commit_hash> and run in repo directory):"
-                    )
-                    for command in analysis_result["git_blame_commands"]:
-                        logger.info(command)
-                    logger.info("\nTo determine the introducing commit:")
-                    logger.info(
-                        "1. Run each git blame command in the corresponding repository."
-                    )
-                    logger.info(
-                        "2. Examine the output of git blame to identify the commit hash."
-                    )
-                    logger.info(
-                        "3. The earliest commit hash is likely the vulnerability-introducing commit."
-                    )
                 else:
                     logger.info(f"No vulnerable snippets found in {patch_file.name}")
             except Exception as e:
