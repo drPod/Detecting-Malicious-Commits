@@ -102,29 +102,32 @@ def analyze_patch_file(patch_file_path: Path):
                 vulnerable_code_block = [] # Store vulnerable code lines for current hunk
                 context_lines_for_snippet = [] # Store context lines for the current vulnerable snippet
 
-                for line in hunk.lines: # Iterate over lines within the hunk
-                    if line.removed: # Identify removed lines (potential vulnerability)
-                        vulnerable_code_block.append(line.content) # Add removed line content
+                # Iterate through lines in hunk.lines which are Line instances, not just strings
+                for line_obj in hunk.lines:
+                    if line_obj.removed: # Identify removed lines (potential vulnerability)
+                        vulnerable_code_block.append(line_obj.content) # Add removed line content
                         context_lines = [] # Context for each vulnerable line
 
                         # Collect context lines (before and after the vulnerable line within the hunk)
-                        line_index_in_hunk = hunk.lines.index(line)
+                        line_index_in_hunk = hunk.lines.index(line_obj)
                         for context_idx in range(max(0, line_index_in_hunk - 2), min(line_index_in_hunk + 3, len(hunk.lines))):
-                            if not hunk.lines[context_idx].removed and not hunk.lines[context_idx].added: # Get context lines (not added or removed)
-                                context_lines.append(hunk.lines[context_idx].content)
+                            context_line_obj = hunk.lines[context_idx]
+                            if not context_line_obj.removed and not context_line_obj.added: # Get context lines (not added or removed)
+                                context_lines.append(context_line_obj.content)
                         context_lines_for_snippet.extend(context_lines) # Add context lines to the current snippet's context
 
                         vulnerable_snippets.append(
                             {
                                 "snippet": "\n".join(context_lines_for_snippet + vulnerable_code_block), # Vulnerable code + context
                                 "cwe_id": cwe_id, # Include CWE ID
-                                "cve_description": cve_data.get("vulnerability_details", {}).get("description") if cve_data else None, # CVE description
-                                "line_number": hunk.start_line + line.number -1, # Original line number from diff parser
+                                "cve_description": cve_data.get("vulnerability_details", {}).get("description") if cve_data else None,
+                                # Access line number from line_obj, corrected to be original line number
+                                "line_number": hunk.start_line + line_obj.number - 1 if line_obj.number else hunk.start_line
                             }
                         )
                     if file_path_in_repo and repo_path:
                         git_blame_commands.append(
-                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {hunk.start_line + line.number -1},{hunk.start_line + line.number -1}" # git blame command using line number from diff parser
+                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {hunk.start_line + line_obj.number -1},{hunk.start_line + line_obj.number -1}" # git blame command using line number from diff parser
                         )  # Replace <commit_hash> with a commit hash to run the command
 
     except Exception as e:
