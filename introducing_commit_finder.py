@@ -11,7 +11,7 @@ from diff_parser import Diff  # Changed import from DiffParser to Diff
 from unidiff import PatchSet  # Import PatchSet from unidiff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
-import shutil # For deleting directories
+import shutil  # For deleting directories
 
 from github_data_collector import (
     TokenManager,
@@ -26,7 +26,7 @@ import subprocess  # For running git blame
 # Directories and files
 PATCHES_DIR = Path("patches")  # Directory containing patch files
 REPOS_DIR = Path("repos")
-MIRROR_REPOS_DIR = Path("repos_mirror") # Add mirror repo directory
+MIRROR_REPOS_DIR = Path("repos_mirror")  # Add mirror repo directory
 NVD_DATA_DIR = Path("nvd_data")  # Add NVD data directory
 LOG_FILE = Path("introducing_commit_finder.log")
 OUTPUT_FILE = Path("vulnerable_code_snippets.json")  # Output JSON file for results
@@ -49,14 +49,16 @@ logger = logging.getLogger(__name__)
 logger.info(f"Script starting at {datetime.now().isoformat()}")
 logger.info(f"Log file: {LOG_FILE.absolute()}")
 logger.info(f"NVD data directory: {NVD_DATA_DIR.absolute()}")
-logger.info(f"Mirror repository directory: {MIRROR_REPOS_DIR.absolute()}") # Log mirror repo dir
+logger.info(
+    f"Mirror repository directory: {MIRROR_REPOS_DIR.absolute()}"
+)  # Log mirror repo dir
 
 
 STATE_FILE = Path("commit_finder_state.json")  # State file for resuming
 PROCESSED_PATCHES = set()  # Keep track of processed patches in memory
 MAX_WORKERS = 10  # Number of threads for parallel processing
 GIT_RESET_BRANCH = "main"  # Fallback branch to reset to if detection fails
-GIT_TIMEOUT = 600 # Timeout for git commands in seconds
+GIT_TIMEOUT = 600  # Timeout for git commands in seconds
 
 
 def load_state():
@@ -102,7 +104,7 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -220,25 +222,37 @@ def clone_working_repo_from_mirror(repo: str) -> bool:
     mirror_repo_path = MIRROR_REPOS_DIR / repo.replace("/", "_")
 
     if repo_dir.exists():
-        logger.warning(f"Working repository directory already exists: {repo_dir}. Skipping clone.")
-        return True # Assume success if directory exists
+        logger.warning(
+            f"Working repository directory already exists: {repo_dir}. Skipping clone."
+        )
+        return True  # Assume success if directory exists
 
     if not mirror_repo_path.exists() or not (mirror_repo_path / ".git").exists():
-        logger.error(f"Mirror repository not found at: {mirror_repo_path}. Cannot clone working repository.")
+        logger.error(
+            f"Mirror repository not found at: {mirror_repo_path}. Cannot clone working repository."
+        )
         return False
 
     try:
-        logger.info(f"Cloning working repository from local mirror: {mirror_repo_path} to {repo_dir}")
+        logger.info(
+            f"Cloning working repository from local mirror: {mirror_repo_path} to {repo_dir}"
+        )
         command = ["git", "clone", str(mirror_repo_path), str(repo_dir)]
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(
+            command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         stdout, stderr = process.communicate(timeout=GIT_TIMEOUT)
 
         if process.returncode == 0:
-            logger.info(f"Successfully cloned working repository for {repo} from mirror.")
+            logger.info(
+                f"Successfully cloned working repository for {repo} from mirror."
+            )
             return True
         else:
-            error_message = stderr.decode('utf-8', errors='replace').strip()
-            logger.error(f"Failed to clone working repository for {repo} from mirror: {error_message}")
+            error_message = stderr.decode("utf-8", errors="replace").strip()
+            logger.error(
+                f"Failed to clone working repository for {repo} from mirror: {error_message}"
+            )
             logger.debug(f"Git clone output: {stdout.decode()}")
             return False
 
@@ -263,7 +277,9 @@ def delete_working_repo(repo: str):
         except Exception as e:
             logger.error(f"Error deleting working repository directory {repo_dir}: {e}")
     else:
-        logger.warning(f"Working repository directory not found at {repo_dir}, cannot delete.")
+        logger.warning(
+            f"Working repository directory not found at {repo_dir}, cannot delete."
+        )
 
 
 def analyze_patch_file(
@@ -305,7 +321,7 @@ def analyze_patch_file(
         )
         if not repo_name_from_patch:
             raise ValueError("Empty repo name")
-        repo = repo_name_from_patch # Use extracted repo name
+        repo = repo_name_from_patch  # Use extracted repo name
         repo_path = REPOS_DIR / repo_name_from_patch
     except Exception as e:
         logger.error(f"Failed to extract repo name: {e}")
@@ -318,15 +334,23 @@ def analyze_patch_file(
 
     # --- On-demand cloning ---
     if not repo_path.exists() or not (repo_path / ".git").exists():
-        if not clone_working_repo_from_mirror(repo): # Use repo name here
-            logger.warning(f"Failed to clone working repository for {repo_name_from_patch} (CVE: {cve_id}). Analysis might be inaccurate.")
+        if not clone_working_repo_from_mirror(repo):  # Use repo name here
+            logger.warning(
+                f"Failed to clone working repository for {repo_name_from_patch} (CVE: {cve_id}). Analysis might be inaccurate."
+            )
         else:
-            logger.info(f"Working repository cloned successfully for {repo_name_from_patch} (CVE: {cve_id}).")
+            logger.info(
+                f"Working repository cloned successfully for {repo_name_from_patch} (CVE: {cve_id})."
+            )
     # --- End on-demand cloning ---
 
-
     # Reset repository to commit before CVE publication date
-    if repo_path.exists() and repo_path.is_dir() and cve_data and (repo_path / ".git").exists(): # Check for .git directory
+    if (
+        repo_path.exists()
+        and repo_path.is_dir()
+        and cve_data
+        and (repo_path / ".git").exists()
+    ):  # Check for .git directory
         if not reset_repo_to_before_cve_date(repo_path, cve_data):
             logger.warning(
                 f"Failed to reset repository {repo_name_from_patch} for CVE {cve_id}. Analysis might be inaccurate."
@@ -421,10 +445,9 @@ def analyze_patch_file(
         logger.warning(f"No valid diff content found in {patch_file_path.name}")
 
     # --- Delete working repo after processing all patches for it ---
-    if repo_name_from_patch: # Only delete if repo name was successfully extracted
+    if repo_name_from_patch:  # Only delete if repo name was successfully extracted
         delete_working_repo(repo_name_from_patch)
     # --- End delete working repo ---
-
 
     return {
         "cve_id": cve_id,
@@ -458,12 +481,18 @@ def execute_git_blame(
         stdout, stderr = process.communicate(timeout=15)  # Timeout to prevent hanging
 
         if stderr:
-            error_message = stderr.decode('utf-8', errors='replace')
-            if "fatal: file " in error_message and "has only" in error_message and "lines" in error_message:
-                logger.warning(f"Git blame line number error for {file_path_in_repo} line {line_number}: {error_message.strip()}") # Log as warning if line number issue
-            else: # Log as error for other git blame issues
+            error_message = stderr.decode("utf-8", errors="replace")
+            if (
+                "fatal: file " in error_message
+                and "has only" in error_message
+                and "lines" in error_message
+            ):
+                logger.warning(
+                    f"Git blame line number error for {file_path_in_repo} line {line_number}: {error_message.strip()}"
+                )  # Log as warning if line number issue
+            else:  # Log as error for other git blame issues
                 logger.error(
-                f"Git blame error for {file_path_in_repo} line {line_number}: {stderr.decode('utf-8', errors='replace')}"
+                    f"Git blame error for {file_path_in_repo} line {line_number}: {stderr.decode('utf-8', errors='replace')}"
                 )
             return None
 
