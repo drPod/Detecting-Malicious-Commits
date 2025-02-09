@@ -4,3 +4,5 @@ __pycache__
 analysis/
 nvd_data/
 data_completeness/
+patches/
+.aider*
