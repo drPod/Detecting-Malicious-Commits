@@ -134,9 +134,14 @@ def analyze_patch_file(
         }
 
     diff_header_line = next(
-        (line for line in patch_content_lines if line.startswith("--- a/")),
+        (
+            line
+            for line in patch_content_lines
+            if "--- a/" in line.strip().lower() # Relaxed and case-insensitive check
+        ),
         None,  # Use lines to find filepath
     )
+
     if diff_header_line:  # Extract filepath from diff header
         file_path_in_patch = diff_header_line.split("--- a/")[1].strip()
         file_path_in_repo = file_path_in_patch  # Use path from patch header
@@ -158,8 +163,14 @@ def analyze_patch_file(
             }
         repo_path = REPOS_DIR / repo_name_from_patch  # Correctly use REPOS_DIR
     else:
-        logger.warning(
+        logger.debug( # Changed to debug level
             f"No diff header found in {patch_file_path.name}. Skipping file path extraction."
+        )
+        logger.debug(f"First 10 lines of patch file {patch_file_path.name}:") # Debug log for first lines
+        for i, line in enumerate(patch_content_lines[:10]): # Log first 10 lines
+            logger.debug(f"Line {i+1}: {line.strip()}") # Log with line number and stripped content
+        logger.warning( # Keep warning log for important cases
+            f"No '--- a/' diff header found in {patch_file_path.name}. File path extraction may be incomplete."
         )
         return {
             "cve_id": cve_id,
@@ -168,6 +179,7 @@ def analyze_patch_file(
             "repo_name_from_patch": None,  # Return None if no diff header
             "file_path_in_repo": None,  # Return None if no diff header
         }
+
 
     try:
         diff = Diff(
