@@ -6,7 +6,9 @@ import logging
 import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional, TYPE_CHECKING
+from io import StringIO
 from diff_parser import Diff  # Changed import from DiffParser to Diff
+from unidiff import PatchSet  # Import PatchSet from unidiff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -97,229 +99,137 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
 def analyze_patch_file(
     patch_file_path: Path, token_manager: Optional["TokenManager"] = None
 ):
-    """# token_manager: Optional['TokenManager'] = None - FINAL VERSION - TOKEN_MANAGER PASSED BUT NOT USED
+    """
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
     vulnerable_snippets: List[Dict[str, Any]] = []
-    git_blame_commands: List[str] = (
-        []
-    )  # No longer used for commands, but kept for potential future use or debugging - REMOVE GIT_BLAME_COMMANDS COMPLETELY
     repo_path = None
-    repo_name_from_patch = None  # Store repo name
+    repo_name_from_patch = None
     file_path_in_repo = None
     patch_content_str = ""
     cve_id = patch_file_path.name.split("_")[0]
-    cve_data = load_cve_data(cve_id)  # Load CVE data
+    cve_data = load_cve_data(cve_id)
     cwe_id = (
         cve_data.get("vulnerability_details", {}).get("cwe_id") if cve_data else None
-    )  # Extract CWE ID
+    )
 
     logger.info(f"Analyzing patch file: {patch_file_path.name}")
+
+    # Read patch file content
     try:
         with open(patch_file_path, "r") as f:
-            patch_content_str = (
-                f.read()
-            )  # Read entire patch content as string for diff_parser
-            patch_content_lines = (
-                f.readlines()
-            )  # Keep lines for manual parsing of filepath (if needed)
+            patch_content_str = f.read()
     except FileNotFoundError:
         logger.error(f"Patch file not found: {patch_file_path}")
         return {
             "cve_id": cve_id,
             "vulnerable_snippets": [],
-            "git_blame_commands": [],
-            "repo_name_from_patch": None,  # Return None if error
-            "file_path_in_repo": None,  # Return None if error
+            "repo_name_from_patch": None,
+            "file_path_in_repo": None,
         }
 
-    diff_header_line = next(
-        (
-            line
-            for line in patch_content_lines
-            if "--- a/" in line.strip().lower()  # Relaxed and case-insensitive check
-        ),
-        None,  # Use lines to find filepath
-    )
-
-    if diff_header_line:  # Extract filepath from diff header
-        file_path_in_patch = diff_header_line.split("--- a/")[1].strip()
-        file_path_in_repo = file_path_in_patch  # Use path from patch header
-        repo_name_from_patch = patch_file_path.name.replace(
-            cve_id + "_", ""
-        ).replace(  # Extract repo name
+    # Extract repo name from patch file name
+    try:
+        repo_name_from_patch = patch_file_path.name.replace(f"{cve_id}_", "").replace(
             ".patch", ""
         )
-        if not repo_name_from_patch:  # Handle cases where repo name extraction fails
-            logger.error(
-                f"Could not extract repo name from patch file name: {patch_file_path.name}"
-            )
-            return {
-                "cve_id": cve_id,
-                "vulnerable_snippets": [],
-                "git_blame_commands": [],
-                "repo_name_from_patch": None,  # Return None if extraction fails
-                "file_path_in_repo": None,  # Return None if extraction fails
-            }
-        repo_path = REPOS_DIR / repo_name_from_patch  # Correctly use REPOS_DIR
-    else:
-        logger.debug(  # Changed to debug level
-            f"No diff header found in {patch_file_path.name}. Skipping file path extraction."
-        )
-        logger.debug(
-            f"First 10 lines of patch file {patch_file_path.name}:"
-        )  # Debug log for first lines
-        for i, line in enumerate(patch_content_lines[:10]):  # Log first 10 lines
-            logger.debug(f"Line {i+1} - content: '{line.strip()}' - '--- a/' in line: {'--- a/' in line.strip().lower()}") # DEBUGGING: Log line content and check
-            logger.debug(
-                f"Line {i+1}: {line.strip()}"
-            )  # Log with line number and stripped content
-        logger.warning(  # Keep warning log for important cases
-            f"No '--- a/' diff header found in {patch_file_path.name}. File path extraction may be incomplete."
-        )
-        return {
-            "cve_id": cve_id,
-            "vulnerable_snippets": [],
-            "git_blame_commands": [],
-            "repo_name_from_patch": None,  # Return None if no diff header
-            "file_path_in_repo": None,  # Return None if no diff header
-        }
-
-    try:
-        diff = Diff(
-            patch_content_str
-        )  # Parse the patch content using diff_parser - Use Diff instead of DiffParser
-
-        # if not diff.files:  # diff object from Diff does not have 'files' attribute. Remove this check.
-        #     logger.warning(
-        #         f"No files found in diff content for {patch_file_path.name}. Diff Parser might have failed."
-        #     )
-        #     return {
-        #         "cve_id": cve_id,
-        #         "vulnerable_snippets": [],
-        #         "git_blame_commands": [],
-        #         "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name
-        #         "file_path_in_repo": file_path_in_repo,  # Return extracted file path
-        #     }
-
-        for (
-            block
-        ) in (
-            diff
-        ):  # Iterate over each block in the diff - Use 'block' as per documentation
-            diff_file_path = block.new_filepath  # Use block.new_filepath as file path
-            if not diff_file_path:  # Robust check for file path
-                logger.warning(
-                    f"No file path found in diff for {patch_file_path.name} in block"
-                )
-                continue
-            file_path_in_repo = diff_file_path  # Use block.new_filepath as file path
-            # for hunk in file_diff.hunks:  # No hunks in Diff output, iterate changes directly
-            for change in block.changes:  # Iterate over changes in block
-                vulnerable_code_block = (
-                    []
-                )  # Store vulnerable code lines for current change
-                context_lines_for_snippet = (
-                    []
-                )  # Store context lines for the current vulnerable snippet
-
-                # Iterate through lines in hunk.lines which are Line instances, not just strings
-                # for line_obj in hunk.lines: # No line_obj in change, content is directly string
-                change_content_lines = (
-                    change.content.splitlines()
-                )  # Split change content to lines for processing
-                original_line_start = change.original_line_start
-                modified_line_start = change.modified_line_start
-
-                for i, line_content in enumerate(
-                    change_content_lines
-                ):  # Iterate over lines in change.content
-                    if line_content.startswith(
-                        "-"
-                    ):  # Identify removed lines (potential vulnerability)
-                        vulnerable_code_block.append(
-                            line_content[1:]  # Remove '-' prefix
-                        )  # Add removed line content
-                        context_lines = []  # Context for each vulnerable line
-
-                        # Collect context lines (before and after the vulnerable line within the change)
-                        line_index_in_change = i
-                        context_start_index = max(
-                            0, line_index_in_change - CONTEXT_LINES_BEFORE
-                        )
-                        context_end_index = min(
-                            len(change_content_lines),
-                            line_index_in_change + CONTEXT_LINES_AFTER + 1,
-                        )
-
-                        for context_idx in range(
-                            context_start_index, context_end_index
-                        ):
-                            context_line_content = change_content_lines[context_idx]
-                            if context_line_content.startswith(
-                                " "
-                            ):  # Context lines start with space
-                                context_lines.append(
-                                    context_line_content[1:]
-                                )  # Remove ' ' prefix
-
-                        context_lines_for_snippet.extend(
-                            context_lines
-                        )  # Add context lines to the current snippet's context
-
-                        vuln_info = {
-                            "snippet": "\n".join(
-                                context_lines_for_snippet + vulnerable_code_block
-                            ),  # Vulnerable code + context
-                            # Include CWE ID
-                            "cwe_id": cwe_id,  # Include CWE ID
-                            "cve_description": (
-                                cve_data.get("vulnerability_details", {}).get(
-                                    "description"
-                                )
-                                if cve_data
-                                else None
-                            ),
-                            # Access line number from change, using original_line_start and line index. Approximation!
-                            "line_number": (
-                                original_line_start + i
-                                if original_line_start
-                                else modified_line_start + i
-                            ),  # Approximation of line number
-                            "introducing_commit": None,  # Initialize introducing_commit to None
-                        }
-
-                        if (
-                            repo_path and file_path_in_repo
-                        ):  # Ensure repo_path and file_path_in_repo are valid
-                            commit_hash = execute_git_blame(
-                                repo_path,
-                                file_path_in_repo,
-                                vuln_info["line_number"],
-                                # token_manager # TokenManager passed to analyze_patch_file, but not used in execute_git_blame - FINAL VERSION, TOKEN_MANAGER NOT USED
-                            )
-                            vuln_info["introducing_commit"] = (
-                                commit_hash  # Store the commit hash
-                            )
-
-                        vulnerable_snippets.append(vuln_info)
-
+        if not repo_name_from_patch:
+            raise ValueError("Empty repo name")
+        repo_path = REPOS_DIR / repo_name_from_patch
     except Exception as e:
-        logger.error(f"Error parsing patch hunk in {patch_file_path.name}: {e}")
+        logger.error(f"Failed to extract repo name: {e}")
         return {
             "cve_id": cve_id,
             "vulnerable_snippets": [],
-            "git_blame_commands": [],
-            "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name even if error
-            "file_path_in_repo": file_path_in_repo,  # Return extracted file path even if error
+            "repo_name_from_patch": None,
+            "file_path_in_repo": None,
         }
+
+    # Find all diff headers in the patch content
+    diff_headers = re.finditer(r"(?m)^diff --git a/(.+?) b/(.+?)$", patch_content_str)
+    if not diff_headers:
+        logger.debug(f"No git diff headers found in {patch_file_path.name}")
+        # Try unified diff format
+        diff_headers = re.finditer(
+            r"(?m)^--- a/(.+?)\n\+\+\+ b/(.+?)$", patch_content_str
+        )
+
+    files_processed = False
+    for diff_header in diff_headers:
+        files_processed = True
+        try:
+            # Extract file path from diff header
+            if len(diff_header.groups()) >= 2:
+                file_path_in_repo = diff_header.group(2)  # Use the 'b' path
+            else:
+                file_path_in_repo = diff_header.group(1)  # Fallback to first group
+
+            # Parse the diff using unidiff
+            patch_set = PatchSet(StringIO(patch_content_str))
+
+            for patched_file in patch_set:
+                for hunk in patched_file:
+                    vulnerable_code_block = []
+                    context_lines = []
+
+                    # Track line numbers
+                    current_line = hunk.source_start
+
+                    for line in hunk:
+                        if line.is_removed:
+                            # Store vulnerable line
+                            vulnerable_code_block.append(
+                                line.value[1:]
+                            )  # Remove the '-' prefix
+
+                            # Collect context (before and after)
+                            context_start = max(0, current_line - CONTEXT_LINES_BEFORE)
+                            context_end = current_line + CONTEXT_LINES_AFTER
+
+                            # Add context lines
+                            for ctx_line in hunk.source[context_start:context_end]:
+                                if not ctx_line.startswith(("-", "+")):
+                                    context_lines.append(
+                                        ctx_line[1:]
+                                    )  # Remove space prefix
+
+                            if repo_path and file_path_in_repo:
+                                commit_hash = execute_git_blame(
+                                    repo_path, file_path_in_repo, current_line
+                                )
+
+                                vuln_info = {
+                                    "snippet": "\n".join(
+                                        context_lines + vulnerable_code_block
+                                    ),
+                                    "cwe_id": cwe_id,
+                                    "cve_description": (
+                                        cve_data.get("vulnerability_details", {}).get(
+                                            "description"
+                                        )
+                                        if cve_data
+                                        else None
+                                    ),
+                                    "line_number": current_line,
+                                    "introducing_commit": commit_hash,
+                                }
+                                vulnerable_snippets.append(vuln_info)
+
+                        if not line.is_added:  # Count original lines
+                            current_line += 1
+
+        except Exception as e:
+            logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
+            continue
+
+    if not files_processed:
+        logger.warning(f"No valid diff content found in {patch_file_path.name}")
 
     return {
         "cve_id": cve_id,
         "vulnerable_snippets": vulnerable_snippets,
-        "git_blame_commands": git_blame_commands,  # Still return, might be useful for debugging or future features
-        "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name
-        "file_path_in_repo": file_path_in_repo,  # Return extracted file path
+        "repo_name_from_patch": repo_name_from_patch,
+        "file_path_in_repo": file_path_in_repo,
     }
 
 
