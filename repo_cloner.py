@@ -10,15 +10,14 @@ from typing import Dict, List, Set
 import signal
 import sys
 import threading
+import shutil # Import shutil for deleting directories
 from dotenv import load_dotenv
 
 # Configuration
 load_dotenv()  # Load environment variables
 NVD_DATA_DIR = Path("nvd_data")
 REPOS_DIR = Path("repos")
-MIRROR_REPOS_DIR = Path(
-    "repos_mirror"
-)  # New directory for mirror repos (assuming your current repos are in 'repos_mirror')
+MIRROR_REPOS_DIR = Path("repos_mirror") # Directory containing mirror repos
 STATE_FILE = Path("clone_state.json")
 MAX_WORKERS = 5  # Conservative to avoid rate limits
 GIT_TIMEOUT = 600  # Seconds for git operation timeout
@@ -35,9 +34,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logger.info(f"Script starting at {datetime.now().isoformat()}")
 logger.info(f"Repository directory: {REPOS_DIR.absolute()}")
-logger.info(
-    f"Mirror repository directory: {MIRROR_REPOS_DIR.absolute()}"
-)  # Log mirror repo dir
+logger.info(f"Mirror repository directory: {MIRROR_REPOS_DIR.absolute()}") # Log mirror repo dir
 logger.info(f"Log file: {Path('repo_cloner.log').absolute()}")
 logger.info(f"Loaded {len(GITHUB_TOKENS)} GitHub tokens")
 
@@ -148,9 +145,7 @@ class CloneManager:
             return
 
         repo_dir = REPOS_DIR / repo.replace("/", "_")
-        mirror_repo_path = MIRROR_REPOS_DIR / repo.replace(
-            "/", "_"
-        )  # Path to the local mirror repo
+        mirror_repo_path = MIRROR_REPOS_DIR / repo.replace("/", "_") # Path to the local mirror repo
 
         with self.lock:
             if repo in self.state and self.state[repo] in ["success", "failed"]:
@@ -160,43 +155,32 @@ class CloneManager:
             self.save_state()
 
         try:
-            # Check existing directory
+            # Check existing directory - now for the *working* repo directory
             if repo_dir.exists():
                 git_dir = repo_dir / ".git"
                 if git_dir.exists():
-                    logger.info(f"{repo} already exists and appears valid")
+                    logger.info(f"Working repository {repo} already exists and appears valid. Skipping.")
                     with self.lock:
                         self.state[repo] = "success"
                     return
                 else:
                     logger.warning(
-                        f"{repo} directory exists but isn't a git repo. Removing..."
+                        f"Working repository directory {repo} exists but isn't a git repo. Removing..."
                     )
-                    subprocess.run(f"rm -rf {repo_dir}", shell=True, check=True)
-                    logger.info(f"Removed invalid directory for {repo}")
+                    shutil.rmtree(repo_dir) # Use shutil.rmtree for directory removal
+                    logger.info(f"Removed invalid working repository directory for {repo}")
 
-            if (
-                not mirror_repo_path.exists()
-                or not (mirror_repo_path / ".git").exists()
-            ):  # Check if mirror repo exists
-                logger.error(
-                    f"Mirror repository not found at: {mirror_repo_path}. Please ensure mirror repositories are in {MIRROR_REPOS_DIR}"
-                )
+            if not mirror_repo_path.exists() or not (mirror_repo_path / ".git").exists(): # Check if mirror repo exists
+                logger.error(f"Mirror repository not found at: {mirror_repo_path}. Please ensure mirror repositories are in {MIRROR_REPOS_DIR}")
                 with self.lock:
                     self.state[repo] = f"failed: mirror repo missing"
                 return
 
-            logger.info(
-                f"Cloning from local mirror: {mirror_repo_path} to {repo_dir}"
-            )  # Log local clone
+
+            logger.info(f"Cloning working repository to: {repo_dir} from local mirror: {mirror_repo_path}") # Log working repo clone
 
             process = subprocess.Popen(
-                [
-                    "git",
-                    "clone",
-                    str(mirror_repo_path),
-                    str(repo_dir),
-                ],  # Clone from local mirror, removed auth_url and --mirror
+                ["git", "clone", str(mirror_repo_path), str(repo_dir)], # Clone from local mirror (no --mirror)
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
@@ -218,16 +202,23 @@ class CloneManager:
                 raise subprocess.TimeoutExpired(process.args, GIT_TIMEOUT)
 
             if result.returncode == 0:
-                logger.info(
-                    f"Successfully cloned {repo} from local mirror"
-                )  # Log success from local mirror
+                logger.info(f"Successfully cloned working repository {repo} from mirror.") # Log working repo clone success
                 with self.lock:
                     self.state[repo] = "success"
+
+                # --- Delete the mirror repository after successful working clone ---
+                try:
+                    logger.info(f"Deleting mirror repository: {mirror_repo_path}")
+                    shutil.rmtree(mirror_repo_path) # Use shutil.rmtree to delete the mirror repo directory
+                    logger.info(f"Mirror repository {repo} deleted successfully.")
+                except Exception as e:
+                    logger.error(f"Error deleting mirror repository {repo}: {e}")
+                # --- End mirror repository deletion ---
+
+
             else:
                 error = result.stderr.decode().strip()
-                logger.error(
-                    f"Failed to clone {repo} from local mirror: {error}"
-                )  # Log failure from local mirror
+                logger.error(f"Failed to clone working repository {repo} from mirror: {error}") # Log working repo clone failure
                 logger.debug(f"Git output: {result.stdout.decode()}")
                 with self.lock:
                     self.state[repo] = f"failed: {error}"
@@ -237,7 +228,7 @@ class CloneManager:
             with self.lock:
                 self.state[repo] = "failed: timeout"
         except Exception as e:
-            logger.error(f"Error cloning from mirror {repo}: {str(e)}", exc_info=True)
+            logger.error(f"Error cloning working repo from mirror {repo}: {str(e)}", exc_info=True)
             with self.lock:
                 self.state[repo] = f"failed: {str(e)}"
         finally:
