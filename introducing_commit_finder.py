@@ -7,10 +7,13 @@ import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from diff_parser import DiffParser
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
+from github_data_collector import TokenManager, load_github_tokens  # Import TokenManager
 
 # Install diff-parser library: pip install diff-parser
 
-PATCHES_DIR = Path("patches")
+PATCHES_DIR = Path("patches") # Directory containing patch files
 REPOS_DIR = Path("repos")
 NVD_DATA_DIR = Path("nvd_data") # Add NVD data directory
 LOG_FILE = Path("introducing_commit_finder.log")
@@ -20,7 +23,7 @@ OUTPUT_FILE = Path("vulnerable_code_snippets.json") # Output JSON file for resul
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()],
+    handlers=[logging.FileHandler(LOG_FILE, mode='w'), logging.StreamHandler()], # mode='w' to clear log on start
 )
 logger = logging.getLogger(__name__)
 logger.info(f"Script starting at {datetime.now().isoformat()}")
@@ -28,6 +31,30 @@ logger.info(f"Patch directory: {PATCHES_DIR.absolute()}")
 logger.info(f"Repository directory: {REPOS_DIR.absolute()}")
 logger.info(f"Log file: {LOG_FILE.absolute()}")
 logger.info(f"NVD data directory: {NVD_DATA_DIR.absolute()}")
+
+STATE_FILE = Path("commit_finder_state.json") # State file for resuming
+PROCESSED_PATCHES = set() # Keep track of processed patches in memory
+MAX_WORKERS = 10 # Number of threads for parallel processing
+
+def load_state():
+    """Load processed patches state from JSON file."""
+    global PROCESSED_PATCHES
+    if STATE_FILE.exists():
+        try:
+            with open(STATE_FILE, 'r') as f:
+                PROCESSED_PATCHES = set(json.load(f))
+            logger.info(f"Loaded state for {len(PROCESSED_PATCHES)} patches from {STATE_FILE}")
+        except (FileNotFoundError, json.JSONDecodeError):
+            logger.warning(f"No valid state file found at {STATE_FILE}, starting from scratch.")
+
+def save_state():
+    """Save processed patches state to JSON file."""
+    try:
+        with open(STATE_FILE, 'w') as f:
+            json.dump(list(PROCESSED_PATCHES), f)
+        logger.info(f"Saved state for {len(PROCESSED_PATCHES)} patches to {STATE_FILE}")
+    except Exception as e:
+        logger.error(f"Error saving state to {STATE_FILE}: {e}")
 logger.info(f"Output file: {OUTPUT_FILE.absolute()}")
 
 def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
@@ -146,45 +173,69 @@ def analyze_patch_file(patch_file_path: Path):
 
 
 def main():
+    load_state() # Load state at start
+
+    tokens = load_github_tokens() # Load tokens for TokenManager - even if not directly used now, for future use.
+    token_manager = TokenManager(tokens) # Initialize TokenManager
+
     patch_files = list(PATCHES_DIR.glob("*.patch"))
     if not patch_files:
         logger.warning(
             f"No patch files found in {PATCHES_DIR}. Please run patch_downloader.py first."
         )
+        save_state() # Save state before exit, even if no patches
         return
 
-    logger.info(f"Analyzing {len(patch_files)} patch files from {PATCHES_DIR}...")
+    patch_files_to_process = [
+        f for f in patch_files if f.name not in PROCESSED_PATCHES
+    ] # Filter out already processed patches
+
+    if not patch_files_to_process:
+        logger.info("No new patch files to process.")
+        save_state() # Save state before exit, if no new patches
+        return
+
+    logger.info(f"Analyzing {len(patch_files_to_process)} new patch files from {PATCHES_DIR}...")
 
     output_data = [] # List to store structured output
 
-    for patch_file in patch_files:
-        analysis_result = analyze_patch_file(patch_file)
-        if analysis_result["vulnerable_snippets"]:
-            logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
-            logger.info("\nVulnerable Code Snippets:")
-            for vuln_info in analysis_result["vulnerable_snippets"]:
-                logger.info(f"Line: {vuln_info['line_number']}, CWE: {vuln_info['cwe_id']}")  # Print line number and CWE
-                logger.info(vuln_info["snippet"])  # Print code snippet
-                logger.info("---")
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = {executor.submit(analyze_patch_file, patch_file): patch_file for patch_file in patch_files_to_process}
+        for future in tqdm(as_completed(futures), total=len(futures), desc="Analyzing Patches"):
+            patch_file = futures[future]
+            try:
+                analysis_result = future.result()
+                if analysis_result["vulnerable_snippets"]:
+                    logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
+                    logger.info("\nVulnerable Code Snippets:")
+                    for vuln_info in analysis_result["vulnerable_snippets"]:
+                        logger.info(f"Line: {vuln_info['line_number']}, CWE: {vuln_info['cwe_id']}")  # Print line number and CWE
+                        logger.info(vuln_info["snippet"])  # Print code snippet
+                        logger.info("---")
 
-                output_data.append({ # Add to output data for each snippet
-                    "cve_id": analysis_result['cve_id'],
-                    "file_path": analysis_result['git_blame_commands'][0].split()[3] if analysis_result['git_blame_commands'] else None, # Extract file path from git blame command
-                    "line_number": vuln_info['line_number'],
-                    "cwe_id": vuln_info['cwe_id'],
-                    "cve_description": vuln_info['cve_description'],
-                    "code_snippet": vuln_info['snippet'],
-                })
+                        output_data.append({ # Add to output data for each snippet
+                            "cve_id": analysis_result['cve_id'],
+                            "file_path": analysis_result['git_blame_commands'][0].split()[3] if analysis_result['git_blame_commands'] else None, # Extract file path
+                            "line_number": vuln_info['line_number'],
+                            "cwe_id": vuln_info['cwe_id'],
+                            "cve_description": vuln_info['cve_description'],
+                            "code_snippet": vuln_info['snippet'],
+                        })
 
-            logger.info("\nRecommended git blame commands (replace <commit_hash> and run in repo directory):")
-            for command in analysis_result["git_blame_commands"]:
-                logger.info(command)
-            logger.info("\nTo determine the introducing commit:")
-            logger.info("1. Run each git blame command in the corresponding repository.")
-            logger.info("2. Examine the output of git blame to identify the commit hash that introduced the vulnerable lines.")
-            logger.info("3. The earliest commit hash among all snippets is likely the vulnerability-introducing commit.")
-        else:
-            logger.info(f"No vulnerable snippets found in {patch_file.name}")
+                    logger.info("\nRecommended git blame commands (replace <commit_hash> and run in repo directory):")
+                    for command in analysis_result["git_blame_commands"]:
+                        logger.info(command)
+                    logger.info("\nTo determine the introducing commit:")
+                    logger.info("1. Run each git blame command in the corresponding repository.")
+                    logger.info("2. Examine the output of git blame to identify the commit hash.")
+                    logger.info("3. The earliest commit hash is likely the vulnerability-introducing commit.")
+                else:
+                    logger.info(f"No vulnerable snippets found in {patch_file.name}")
+            except Exception as e:
+                logger.error(f"Error analyzing {patch_file.name}: {e}")
+            finally:
+                PROCESSED_PATCHES.add(patch_file.name) # Mark as processed after each file
+                save_state() # Save state after each file
 
     with open(OUTPUT_FILE, 'w') as outfile: # Write output data to JSON file
         json.dump(output_data, outfile, indent=2)
@@ -193,6 +244,6 @@ def main():
     logger.info("\nAnalysis completed.")
     logger.info(f"Script finished at {datetime.now().isoformat()}")
 
-
 if __name__ == "__main__":
     main()
+    save_state() # Final state save on normal exit
