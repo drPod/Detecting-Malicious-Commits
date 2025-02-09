@@ -6,6 +6,9 @@ import logging
 import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional
+from diff_parser import DiffParser
+
+# Install diff-parser library: pip install diff-parser
 
 PATCHES_DIR = Path("patches")
 REPOS_DIR = Path("repos")
@@ -49,7 +52,7 @@ def analyze_patch_file(patch_file_path: Path):
     git_blame_commands = []
     repo_path = None
     file_path_in_repo = None
-
+    patch_content_str = ""
     cve_id = patch_file_path.name.split("_")[0]
     cve_data = load_cve_data(cve_id) # Load CVE data
     cwe_id = cve_data.get("vulnerability_details", {}).get("cwe_id") if cve_data else None # Extract CWE ID
@@ -57,7 +60,8 @@ def analyze_patch_file(patch_file_path: Path):
     logger.info(f"Analyzing patch file: {patch_file_path.name}")
     try:
         with open(patch_file_path, "r") as f:
-            patch_content = f.readlines()
+            patch_content_str = f.read() # Read entire patch content as string for diff_parser
+            patch_content_lines = f.readlines() # Keep lines for manual parsing of filepath (if needed)
     except FileNotFoundError:
         logger.error(f"Patch file not found: {patch_file_path}")
         return {
@@ -67,9 +71,9 @@ def analyze_patch_file(patch_file_path: Path):
         }
 
     diff_header_line = next(
-        (line for line in patch_content if line.startswith("--- a/")), None
+        (line for line in patch_content_lines if line.startswith("--- a/")), None # Use lines to find filepath
     )
-    if diff_header_line:
+    if diff_header_line: # Extract filepath from diff header
         file_path_in_patch = diff_header_line.split("--- a/")[1].strip()
         file_path_in_repo = file_path_in_patch
         repo_name_from_patch = patch_file_path.name.replace(cve_id + "_", "").replace(
@@ -86,84 +90,43 @@ def analyze_patch_file(patch_file_path: Path):
             "git_blame_commands": [],
         }
 
-    hunks = []
-    current_hunk = None
-
     try:
-        for line in patch_content:
-            if line.startswith("@@"):
-                if current_hunk:
-                    hunks.append(current_hunk)
-                current_hunk = {"lines": [], "header": line.strip()}
-            elif current_hunk is not None:
-                current_hunk["lines"].append(line)
-        if current_hunk:
-            hunks.append(current_hunk)
+        diff = DiffParser().parse(patch_content_str) # Parse the patch content using diff-parser
 
-        for hunk in hunks:
-            vulnerable_code_block = []
-            start_line_number = int(
-                hunk["header"]
-                .split("@@")[1]
-                .strip()
-                .split(" ")[0]
-                .split(",")[0]
-                .replace("-", "")
-            )
-            original_line_offset = 0  # Track line numbers in the original file
-            added_line_offset = 0  # Track line numbers in the new file
-            for line in hunk["lines"]:
-                if line.startswith("-"):
-                    vulnerable_code_block.append(line.strip())
-                    context_lines = []
-                    context_lines.append(line.strip())
-                    # Add a few lines of context from the hunk
-                    line_index = hunk["lines"].index(line)
-                    for context_idx in range(
-                        max(0, line_index - 2), min(line_index + 3, len(hunk["lines"]))
-                    ):
-                        if not hunk["lines"][context_idx].startswith("-") and not hunk[ # Context lines are not additions or removals
-                            "lines"
-                        ][context_idx].startswith("+"):
-                            context_lines.append(hunk["lines"][context_idx].strip())
+        for file_diff in diff.files: # Iterate over each file changed in the patch
+            if not file_diff.path: # Skip if no file path (shouldn't happen, but for robustness)
+                logger.warning(f"No file path found in diff for {patch_file_path.name}")
+                continue
 
-                    is_modified = (
-                        False  # Check if it's a modification (has corresponding + line)
-                    )
-                    for next_line in hunk["lines"][
-                        line_index + 1 :
-                    ]:  # Check lines after the '-' line in the hunk
-                        if (
-                            next_line.startswith("+")
-                            and line[1:].strip() == next_line[1:].strip()
-                        ):  # Basic check if content is similar, could be improved
-                            is_modified = True
-                            break
+            for hunk in file_diff.hunks: # Iterate over each hunk in the file
+                vulnerable_code_block = [] # Store vulnerable code lines for current hunk
+                context_lines_for_snippet = [] # Store context lines for the current vulnerable snippet
 
-                    if (
-                        is_modified or True
-                    ):  # Consider it vulnerable if modified or always (for now, to not miss pure removals)
+                for line in hunk.lines: # Iterate over lines within the hunk
+                    if line.removed: # Identify removed lines (potential vulnerability)
+                        vulnerable_code_block.append(line.content) # Add removed line content
+                        context_lines = [] # Context for each vulnerable line
+
+                        # Collect context lines (before and after the vulnerable line within the hunk)
+                        line_index_in_hunk = hunk.lines.index(line)
+                        for context_idx in range(max(0, line_index_in_hunk - 2), min(line_index_in_hunk + 3, len(hunk.lines))):
+                            if not hunk.lines[context_idx].removed and not hunk.lines[context_idx].added: # Get context lines (not added or removed)
+                                context_lines.append(hunk.lines[context_idx].content)
+                        context_lines_for_snippet.extend(context_lines) # Add context lines to the current snippet's context
+
                         vulnerable_snippets.append(
                             {
-                                "snippet": "\n".join(context_lines),
+                                "snippet": "\n".join(context_lines_for_snippet + vulnerable_code_block), # Vulnerable code + context
                                 "cwe_id": cwe_id, # Include CWE ID
-                                "cve_description": cve_data.get("vulnerability_details", {}).get("description") if cve_data else None, # Include CVE description
-                                "line_number": start_line_number
-                                + original_line_offset,  # Line number in original file
+                                "cve_description": cve_data.get("vulnerability_details", {}).get("description") if cve_data else None, # CVE description
+                                "line_number": hunk.start_line + line.number -1, # Original line number from diff parser
                             }
                         )
                     if file_path_in_repo and repo_path:
                         git_blame_commands.append(
-                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {start_line_number + original_line_offset},{start_line_number + original_line_offset}"
+                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {hunk.start_line + line.number -1},{hunk.start_line + line.number -1}" # git blame command using line number from diff parser
                         )  # Replace <commit_hash> with a commit hash to run the command
-                if not line.startswith(
-                    "+"
-                ):  # Count original lines (lines starting with '-' or ' ')
-                    original_line_offset += 1
-                if not line.startswith(
-                    "-"
-                ):  # Count lines in the patched file (lines starting with '+' or ' ')
-                    added_line_offset += 1
+
     except Exception as e:
         logger.error(f"Error parsing patch hunk in {patch_file_path.name}: {e}")
         return {
