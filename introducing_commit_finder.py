@@ -5,14 +5,18 @@ from pathlib import Path
 import logging
 import json
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, TYPE_CHECKING
 from diff_parser import DiffParser
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
+
 from github_data_collector import (
     TokenManager,
     load_github_tokens,
 )  # Import TokenManager
+
+if TYPE_CHECKING:
+    from github_data_collector import TokenManager
 import subprocess  # For running git blame
 
 # --- Configuration ---
@@ -90,12 +94,12 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def analyze_patch_file(patch_file_path: Path):
-    """
+def analyze_patch_file(patch_file_path: Path, token_manager: Optional['TokenManager'] = None):
+    """ # token_manager: Optional['TokenManager'] = None - FINAL VERSION - TOKEN_MANAGER PASSED BUT NOT USED
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
-    vulnerable_snippets = []
-    git_blame_commands = [] # No longer used for commands, but kept for potential future use or debugging
+    vulnerable_snippets: List[Dict[str, Any]] = []
+    git_blame_commands: List[str] = [] # No longer used for commands, but kept for potential future use or debugging - REMOVE GIT_BLAME_COMMANDS COMPLETELY
     repo_path = None
     repo_name_from_patch = None  # Store repo name
     file_path_in_repo = None
@@ -255,6 +259,7 @@ def analyze_patch_file(patch_file_path: Path):
                                 repo_path,
                                 file_path_in_repo,
                                 vuln_info["line_number"],
+                                # token_manager # TokenManager passed to analyze_patch_file, but not used in execute_git_blame - FINAL VERSION, TOKEN_MANAGER NOT USED
                             )
                             vuln_info["introducing_commit"] = commit_hash # Store the commit hash
 
@@ -302,7 +307,7 @@ def execute_git_blame(
 
         if stderr:
             logger.error(
-                f"Git blame error for {file_path_in_repo} line {line_number}: {stderr.decode()}"
+                f"Git blame error for {file_path_in_repo} line {line_number}: {stderr.decode('utf-8', errors='replace')}"
             )
             return None
 
@@ -358,7 +363,9 @@ def main():
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = {
-            executor.submit(analyze_patch_file, patch_file): patch_file
+            executor.submit(
+                analyze_patch_file, patch_file, token_manager # Pass token_manager to analyze_patch_file - FINAL VERSION, TOKEN_MANAGER NOT USED
+            ): patch_file # token_manager passed to analyze_patch_file
             for patch_file in patch_files_to_process
         }
         for future in tqdm(
