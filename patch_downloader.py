@@ -16,27 +16,33 @@ from time import time, sleep
 from github_data_collector import TokenManager, load_github_tokens  # Import TokenManager
 
 
-# Configuration
+# --- Configuration ---
 load_dotenv()  # Load environment variables
-NVD_DATA_DIR = Path("nvd_data")
-REPOS_DIR = Path("repos")
-PATCHES_DIR = Path("patches")
-STATE_FILE = Path("patch_state.json")  # Separate state file for this script
-CLONE_STATE_FILE = Path("clone_state.json")  # Clone state file
-MAX_WORKERS = 10  # Conservative to avoid rate limits
-MAX_RETRIES = 3  # Maximum number of retries for API requests
-RETRY_DELAY = 10  # Delay in seconds before retrying API requests
+NVD_DATA_DIR = Path("nvd_data")  # Directory for NVD data - configurable
+REPOS_DIR = Path("repos")  # Directory for repositories - configurable
+PATCHES_DIR = Path("patches")  # Directory for patches - configurable
+STATE_FILE = Path("patch_state.json")  # State file for this script - configurable
+CLONE_STATE_FILE = Path("clone_state.json")  # Clone state file - configurable
+LOG_FILE = Path("patch_downloader.log")  # Log file - configurable
+MAX_WORKERS = 10  # Conservative to avoid rate limits - configurable
+MAX_RETRIES = 3  # Maximum number of retries for API requests - configurable
+RETRY_DELAY = 10  # Delay in seconds before retrying API requests - configurable
 
+
+# --- Logging Setup ---
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("patch_downloader.log"), logging.StreamHandler()],
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler()
+    ],
 )
 logger = logging.getLogger(__name__)
 logger.info(f"Script starting at {datetime.now().isoformat()}")
 logger.info(f"Patch directory: {PATCHES_DIR.absolute()}")
-logger.info(f"Log file: {Path('patch_downloader.log').absolute()}")
+logger.info(f"Log file: {Path(LOG_FILE).absolute()}")
 
 
 class PatchDownloader:
