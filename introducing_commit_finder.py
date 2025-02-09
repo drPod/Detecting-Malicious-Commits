@@ -10,9 +10,10 @@ from diff_parser import DiffParser
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 from github_data_collector import TokenManager, load_github_tokens  # Import TokenManager
+import subprocess  # For running git blame
 
-# Install diff-parser library: pip install diff-parser
-
+# --- Configuration ---
+# Directories and files
 PATCHES_DIR = Path("patches")  # Directory containing patch files
 REPOS_DIR = Path("repos")
 NVD_DATA_DIR = Path("nvd_data")  # Add NVD data directory
@@ -20,18 +21,21 @@ LOG_FILE = Path("introducing_commit_finder.log")
 OUTPUT_FILE = Path("vulnerable_code_snippets.json")  # Output JSON file for results
 
 # Setup logging
+LOG_LEVEL = logging.INFO  # Set default log level
+CONTEXT_LINES_BEFORE = 2  # Configurable context lines before vulnerable line
+CONTEXT_LINES_AFTER = 3   # Configurable context lines after vulnerable line
+MAX_WORKERS = 10  # Number of threads for parallel processing
 logging.basicConfig(
-    level=logging.INFO,
+    level=LOG_LEVEL,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(LOG_FILE, mode="w"),  # mode='w' to clear log on start
         logging.StreamHandler(),
     ],
 )
+
 logger = logging.getLogger(__name__)
 logger.info(f"Script starting at {datetime.now().isoformat()}")
-logger.info(f"Patch directory: {PATCHES_DIR.absolute()}")
-logger.info(f"Repository directory: {REPOS_DIR.absolute()}")
 logger.info(f"Log file: {LOG_FILE.absolute()}")
 logger.info(f"NVD data directory: {NVD_DATA_DIR.absolute()}")
 
@@ -85,6 +89,7 @@ def analyze_patch_file(patch_file_path: Path):
     vulnerable_snippets = []
     git_blame_commands = []
     repo_path = None
+    repo_name_from_patch = None # Store repo name
     file_path_in_repo = None
     patch_content_str = ""
     cve_id = patch_file_path.name.split("_")[0]
@@ -109,10 +114,13 @@ def analyze_patch_file(patch_file_path: Path):
     )
     if diff_header_line:  # Extract filepath from diff header
         file_path_in_patch = diff_header_line.split("--- a/")[1].strip()
-        file_path_in_repo = file_path_in_patch
-        repo_name_from_patch = patch_file_path.name.replace(cve_id + "_", "").replace(
+        file_path_in_repo = file_path_in_patch # Use path from patch header
+        repo_name_from_patch = patch_file_path.name.replace(cve_id + "_", "").replace( # Extract repo name
             ".patch", ""
         )
+        if not repo_name_from_patch: # Handle cases where repo name extraction fails
+            logger.error(f"Could not extract repo name from patch file name: {patch_file_path.name}")
+            return {"cve_id": cve_id, "vulnerable_snippets": [], "git_blame_commands": []}
         repo_path = REPOS_DIR / repo_name_from_patch  # Correctly use REPOS_DIR
     else:
         logger.warning(
@@ -127,11 +135,16 @@ def analyze_patch_file(patch_file_path: Path):
     try:
         diff = DiffParser().parse(patch_content_str)  # Parse the patch content using diff-parser
 
-        for file_diff in diff.files:  # Iterate over each file changed in the patch
-            if not file_diff.path:  # Skip if no file path (shouldn't happen, but for robustness)
-                logger.warning(f"No file path found in diff for {patch_file_path.name}")
-                continue
+        if not diff.files: # Check if files are parsed in diff
+            logger.warning(f"No files found in diff content for {patch_file_path.name}. Diff Parser might have failed.")
+            return {"cve_id": cve_id, "vulnerable_snippets": [], "git_blame_commands": []}
 
+        for file_diff in diff.files: # Iterate over each file changed in the patch
+            diff_file_path = file_diff.path # Use file_diff.path directly
+            if not diff_file_path: # Robust check for file path
+                logger.warning(f"No file path found in diff for {patch_file_path.name} in file_diff")
+                continue
+            file_path_in_repo = diff_file_path # Use file_diff.path directly
             for hunk in file_diff.hunks:  # Iterate over each hunk in the file
                 vulnerable_code_block = []  # Store vulnerable code lines for current hunk
                 context_lines_for_snippet = []  # Store context lines for the current vulnerable snippet
@@ -143,9 +156,10 @@ def analyze_patch_file(patch_file_path: Path):
                         context_lines = []  # Context for each vulnerable line
 
                         # Collect context lines (before and after the vulnerable line within the hunk)
-                        line_index_in_hunk = hunk.lines.index(line_obj)
-                        for context_idx in range(max(0, line_index_in_hunk - 2), min(line_index_in_hunk + 3, len(hunk.lines))):
+                        line_index_in_hunk = hunk.lines.index(line_obj) # Get index of the vulnerable line
+                        for context_idx in range(max(0, line_index_in_hunk - CONTEXT_LINES_BEFORE), min(line_index_in_hunk + CONTEXT_LINES_AFTER + 1, len(hunk.lines))): # Configurable context lines
                             context_line_obj = hunk.lines[context_idx]
+                            # Get context lines (not added or removed)
                             if not context_line_obj.removed and not context_line_obj.added:  # Get context lines (not added or removed)
                                 context_lines.append(context_line_obj.content)
                         context_lines_for_snippet.extend(context_lines)  # Add context lines to the current snippet's context
@@ -153,16 +167,17 @@ def analyze_patch_file(patch_file_path: Path):
                         vulnerable_snippets.append(
                             {
                                 "snippet": "\n".join(context_lines_for_snippet + vulnerable_code_block),  # Vulnerable code + context
+                                # Include CWE ID
                                 "cwe_id": cwe_id,  # Include CWE ID
                                 "cve_description": cve_data.get("vulnerability_details", {}).get("description") if cve_data else None,
                                 # Access line number from line_obj, corrected to be original line number
                                 "line_number": hunk.start_line + line_obj.number - 1 if line_obj.number else hunk.start_line
                             }
                         )
-                    if file_path_in_repo and repo_path:
+                    if file_path_in_repo and repo_path: # Ensure repo_path and file_path_in_repo are valid
                         git_blame_commands.append(
-                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {hunk.start_line + line_obj.number -1},{hunk.start_line + line_obj.number -1}"  # git blame command using line number from diff parser
-                        )  # Replace <commit_hash> with a commit hash to run the command
+                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {hunk.start_line + line_obj.number -1},{hunk.start_line + line_obj.number -1}" # git blame command using line number from diff parser
+                        ) # Replace <commit_hash> with a commit hash to run the command
 
     except Exception as e:
         logger.error(f"Error parsing patch hunk in {patch_file_path.name}: {e}")
@@ -170,13 +185,49 @@ def analyze_patch_file(patch_file_path: Path):
             "cve_id": cve_id,
             "vulnerable_snippets": [],
             "git_blame_commands": [],
-        }  # Return empty lists in case of error
+        }
 
     return {
         "cve_id": cve_id,
         "vulnerable_snippets": vulnerable_snippets,
         "git_blame_commands": git_blame_commands,
     }
+
+def execute_git_blame(repo_path: Path, file_path_in_repo: str, line_number: int) -> Optional[str]:
+    """
+    Executes git blame command and returns the commit hash.
+    """
+    try:
+        command = [
+            "git",
+            "blame",
+            "--porcelain", # Use porcelain format for easier parsing
+            "-L",
+            f"{line_number},{line_number}",
+            file_path_in_repo,
+        ]
+        process = subprocess.Popen(command, cwd=repo_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = process.communicate(timeout=15) # Timeout to prevent hanging
+
+        if stderr:
+            logger.error(f"Git blame error for {file_path_in_repo} line {line_number}: {stderr.decode()}")
+            return None
+
+        blame_output = stdout.decode()
+        # Parse porcelain output to get commit hash (first line is commit hash)
+        commit_hash_line = blame_output.splitlines()[0]
+        commit_hash = commit_hash_line.split(" ")[0] # Extract commit hash
+        return commit_hash
+
+    except subprocess.TimeoutExpired:
+        logger.error(f"Git blame timed out for {file_path_in_repo} line {line_number}")
+        return None
+    except FileNotFoundError:
+        logger.error("Git command not found. Is Git installed and in PATH?")
+        return None
+    except Exception as e:
+        logger.error(f"Error executing git blame for {file_path_in_repo} line {line_number}: {e}")
+        return None
 
 
 def main():
@@ -218,11 +269,19 @@ def main():
                     for vuln_info in analysis_result["vulnerable_snippets"]:
                         logger.info(f"Line: {vuln_info['line_number']}, CWE: {vuln_info['cwe_id']}")  # Print line number and CWE
                         logger.info(vuln_info["snippet"])  # Print code snippet
+
+                        repo_path_for_blame = REPOS_DIR / repo_name_from_patch if repo_name_from_patch else None # Construct repo path for git blame
+                        commit_hash = None
+                        if repo_path_for_blame and file_path_in_repo: # Execute git blame if repo path and file path are available
+                            commit_hash = execute_git_blame(repo_path_for_blame, file_path_in_repo, vuln_info['line_number'])
+                            if commit_hash:
+                                logger.info(f"  Introducing commit (estimated): {commit_hash}")
+
                         logger.info("---")
 
                         output_data.append({  # Add to output data for each snippet
-                            "cve_id": analysis_result['cve_id'],
-                            "file_path": analysis_result['git_blame_commands'][0].split()[3] if analysis_result['git_blame_commands'] else None,  # Extract file path
+                            "cve_id": analysis_result['cve_id'], # Include CVE ID
+                            "file_path": file_path_in_repo if file_path_in_repo else None, # Use file_path_in_repo directly
                             "line_number": vuln_info['line_number'],
                             "cwe_id": vuln_info['cwe_id'],
                             "cve_description": vuln_info['cve_description'],
