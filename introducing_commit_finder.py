@@ -75,26 +75,41 @@ def analyze_patch_file(patch_file_path: Path):
         for hunk in hunks:
             vulnerable_code_block = []
             start_line_number = int(hunk["header"].split("@@")[1].strip().split(" ")[0].split(',')[0].replace('-', ''))
-            line_offset = 0
+            original_line_offset = 0 # Track line numbers in the original file
+            added_line_offset = 0 # Track line numbers in the new file
             for line in hunk["lines"]:
                 if line.startswith("-"):
                     vulnerable_code_block.append(line.strip())
                     context_lines = []
                     context_lines.append(line.strip())
                     # Add a few lines of context from the hunk
-                    context_index = hunk["lines"].index(line)
-                    for i in range(max(0, context_index - 2), min(context_index + 3, len(hunk["lines"]))):
-                        if not hunk["lines"][i].startswith("-") and not hunk["lines"][i].startswith("+"):
-                            context_lines.append(hunk["lines"][i].strip())
-                    vulnerable_snippets.append("\n".join(context_lines))
+                    line_index = hunk["lines"].index(line)
+                    for context_idx in range(max(0, line_index - 2), min(line_index + 3, len(hunk["lines"]))):
+                        if not hunk["lines"][context_idx].startswith("-") and not hunk["lines"][context_idx].startswith("+"):
+                            context_lines.append(hunk["lines"][context_idx].strip())
+
+                    is_modified = False # Check if it's a modification (has corresponding + line)
+                    for next_line in hunk["lines"][line_index+1:]: # Check lines after the '-' line in the hunk
+                        if next_line.startswith("+") and line[1:].strip() == next_line[1:].strip(): # Basic check if content is similar, could be improved
+                            is_modified = True
+                            break
+
+                    if is_modified or True: # Consider it vulnerable if modified or always (for now, to not miss pure removals)
+                        vulnerable_snippets.append({
+                            "snippet": "\n".join(context_lines),
+                            "line_number": start_line_number + original_line_offset # Line number in original file
+                        })
                     if file_path_in_repo and repo_path:
                          git_blame_commands.append(
-                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {start_line_number + line_offset},{start_line_number + line_offset}"
-                        ) # Replace <commit_hash> with a commit hash to run the command
-                if not line.startswith("+") and not line.startswith(" "): # only count lines in original file for line numbers (lines starting with '-' or ' ' in diff)
-                    line_offset += 1
+                            f"cd {repo_path} && git blame <commit_hash> {file_path_in_repo} -L {start_line_number + original_line_offset},{start_line_number + original_line_offset}"
+                         ) # Replace <commit_hash> with a commit hash to run the command
+                 if not line.startswith("+"): # Count original lines (lines starting with '-' or ' ')
+                    original_line_offset += 1
+                 if not line.startswith("-"): # Count lines in the patched file (lines starting with '+' or ' ')
+                    added_line_offset += 1
     except Exception as e:
         logger.error(f"Error parsing patch hunk in {patch_file_path.name}: {e}")
+        return { "cve_id": cve_id, "vulnerable_snippets": [], "git_blame_commands": [] } # Return empty lists in case of error
 
     return {
         "cve_id": cve_id,
@@ -114,9 +129,12 @@ def main():
         if analysis_result["vulnerable_snippets"]:
             logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
             logger.info("\nVulnerable Code Snippets:")
-            for snippet in analysis_result["vulnerable_snippets"]:
-                logger.info(snippet)
-            logger.info("\nRecommended git blame commands (replace <commit_hash>):")
+            for vuln_info in analysis_result["vulnerable_snippets"]:
+                logger.info(f"Line: {vuln_info['line_number']}") # Print line number
+                logger.info(vuln_info['snippet']) # Print code snippet
+                logger.info("---")
+
+            logger.info("\nRecommended git blame commands (replace <commit_hash> and run in repo directory):")
             for command in analysis_result["git_blame_commands"]:
                 logger.info(command)
             logger.info("\nTo determine the introducing commit:")
