@@ -248,6 +248,7 @@ def execute_git_blame(
             f"{line_number},{line_number}",
             file_path_in_repo,
         ]
+        logger.debug(f"Executing git blame command: {' '.join(command)} in {repo_path}") # ADDED LOGGING HERE
         process = subprocess.Popen(
             command, cwd=repo_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
