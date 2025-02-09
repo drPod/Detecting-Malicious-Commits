@@ -170,6 +170,7 @@ def analyze_patch_file(
             f"First 10 lines of patch file {patch_file_path.name}:"
         )  # Debug log for first lines
         for i, line in enumerate(patch_content_lines[:10]):  # Log first 10 lines
+            logger.debug(f"Line {i+1} - content: '{line.strip()}' - '--- a/' in line: {'--- a/' in line.strip().lower()}") # DEBUGGING: Log line content and check
             logger.debug(
                 f"Line {i+1}: {line.strip()}"
             )  # Log with line number and stripped content
