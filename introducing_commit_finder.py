@@ -3,11 +3,15 @@ import os
 import re
 from pathlib import Path
 import logging
+import json
 from datetime import datetime
+from typing import List, Dict, Any, Optional
 
 PATCHES_DIR = Path("patches")
 REPOS_DIR = Path("repos")
+NVD_DATA_DIR = Path("nvd_data") # Add NVD data directory
 LOG_FILE = Path("introducing_commit_finder.log")
+OUTPUT_FILE = Path("vulnerable_code_snippets.json") # Output JSON file for results
 
 # Setup logging
 logging.basicConfig(
@@ -20,6 +24,21 @@ logger.info(f"Script starting at {datetime.now().isoformat()}")
 logger.info(f"Patch directory: {PATCHES_DIR.absolute()}")
 logger.info(f"Repository directory: {REPOS_DIR.absolute()}")
 logger.info(f"Log file: {LOG_FILE.absolute()}")
+logger.info(f"NVD data directory: {NVD_DATA_DIR.absolute()}")
+logger.info(f"Output file: {OUTPUT_FILE.absolute()}")
+
+def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
+    """Load CVE data from JSON file."""
+    cve_file = NVD_DATA_DIR / f"{cve_id}.json"
+    if not cve_file.exists():
+        logger.warning(f"CVE data file not found: {cve_file}")
+        return None
+    try:
+        with open(cve_file, 'r') as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        logger.error(f"Error decoding JSON from {cve_file}")
+        return None
 
 
 def analyze_patch_file(patch_file_path: Path):
@@ -32,6 +51,8 @@ def analyze_patch_file(patch_file_path: Path):
     file_path_in_repo = None
 
     cve_id = patch_file_path.name.split("_")[0]
+    cve_data = load_cve_data(cve_id) # Load CVE data
+    cwe_id = cve_data.get("vulnerability_details", {}).get("cwe_id") if cve_data else None # Extract CWE ID
 
     logger.info(f"Analyzing patch file: {patch_file_path.name}")
     try:
@@ -101,7 +122,7 @@ def analyze_patch_file(patch_file_path: Path):
                     for context_idx in range(
                         max(0, line_index - 2), min(line_index + 3, len(hunk["lines"]))
                     ):
-                        if not hunk["lines"][context_idx].startswith("-") and not hunk[
+                        if not hunk["lines"][context_idx].startswith("-") and not hunk[ # Context lines are not additions or removals
                             "lines"
                         ][context_idx].startswith("+"):
                             context_lines.append(hunk["lines"][context_idx].strip())
@@ -125,6 +146,8 @@ def analyze_patch_file(patch_file_path: Path):
                         vulnerable_snippets.append(
                             {
                                 "snippet": "\n".join(context_lines),
+                                "cwe_id": cwe_id, # Include CWE ID
+                                "cve_description": cve_data.get("vulnerability_details", {}).get("description") if cve_data else None, # Include CVE description
                                 "line_number": start_line_number
                                 + original_line_offset,  # Line number in original file
                             }
@@ -166,33 +189,40 @@ def main():
 
     logger.info(f"Analyzing {len(patch_files)} patch files from {PATCHES_DIR}...")
 
+    output_data = [] # List to store structured output
+
     for patch_file in patch_files:
         analysis_result = analyze_patch_file(patch_file)
         if analysis_result["vulnerable_snippets"]:
             logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
             logger.info("\nVulnerable Code Snippets:")
             for vuln_info in analysis_result["vulnerable_snippets"]:
-                logger.info(f"Line: {vuln_info['line_number']}")  # Print line number
+                logger.info(f"Line: {vuln_info['line_number']}, CWE: {vuln_info['cwe_id']}")  # Print line number and CWE
                 logger.info(vuln_info["snippet"])  # Print code snippet
                 logger.info("---")
 
-            logger.info(
-                "\nRecommended git blame commands (replace <commit_hash> and run in repo directory):"
-            )
+                output_data.append({ # Add to output data for each snippet
+                    "cve_id": analysis_result['cve_id'],
+                    "file_path": analysis_result['git_blame_commands'][0].split()[3] if analysis_result['git_blame_commands'] else None, # Extract file path from git blame command
+                    "line_number": vuln_info['line_number'],
+                    "cwe_id": vuln_info['cwe_id'],
+                    "cve_description": vuln_info['cve_description'],
+                    "code_snippet": vuln_info['snippet'],
+                })
+
+            logger.info("\nRecommended git blame commands (replace <commit_hash> and run in repo directory):")
             for command in analysis_result["git_blame_commands"]:
                 logger.info(command)
             logger.info("\nTo determine the introducing commit:")
-            logger.info(
-                "1. Run each git blame command in the corresponding repository."
-            )
-            logger.info(
-                "2. Examine the output of git blame to identify the commit hash that introduced the vulnerable lines."
-            )
-            logger.info(
-                "3. The earliest commit hash among all snippets is likely the vulnerability-introducing commit."
-            )
+            logger.info("1. Run each git blame command in the corresponding repository.")
+            logger.info("2. Examine the output of git blame to identify the commit hash that introduced the vulnerable lines.")
+            logger.info("3. The earliest commit hash among all snippets is likely the vulnerability-introducing commit.")
         else:
             logger.info(f"No vulnerable snippets found in {patch_file.name}")
+
+    with open(OUTPUT_FILE, 'w') as outfile: # Write output data to JSON file
+        json.dump(output_data, outfile, indent=2)
+    logger.info(f"Vulnerable code snippets saved to {OUTPUT_FILE}")
 
     logger.info("\nAnalysis completed.")
     logger.info(f"Script finished at {datetime.now().isoformat()}")
