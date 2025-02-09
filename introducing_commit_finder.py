@@ -6,7 +6,7 @@ import logging
 import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional, TYPE_CHECKING
-from diff_parser import DiffParser
+from diff_parser import Diff  # Changed import from DiffParser to Diff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -94,12 +94,16 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def analyze_patch_file(patch_file_path: Path, token_manager: Optional['TokenManager'] = None):
-    """ # token_manager: Optional['TokenManager'] = None - FINAL VERSION - TOKEN_MANAGER PASSED BUT NOT USED
+def analyze_patch_file(
+    patch_file_path: Path, token_manager: Optional["TokenManager"] = None
+):
+    """# token_manager: Optional['TokenManager'] = None - FINAL VERSION - TOKEN_MANAGER PASSED BUT NOT USED
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
     vulnerable_snippets: List[Dict[str, Any]] = []
-    git_blame_commands: List[str] = [] # No longer used for commands, but kept for potential future use or debugging - REMOVE GIT_BLAME_COMMANDS COMPLETELY
+    git_blame_commands: List[str] = (
+        []
+    )  # No longer used for commands, but kept for potential future use or debugging - REMOVE GIT_BLAME_COMMANDS COMPLETELY
     repo_path = None
     repo_name_from_patch = None  # Store repo name
     file_path_in_repo = None
@@ -166,66 +170,83 @@ def analyze_patch_file(patch_file_path: Path, token_manager: Optional['TokenMana
         }
 
     try:
-        diff = DiffParser().parse(
+        diff = Diff(
             patch_content_str
-        )  # Parse the patch content using diff-parser
+        )  # Parse the patch content using diff_parser - Use Diff instead of DiffParser
 
-        if not diff.files:  # Check if files are parsed in diff
-            logger.warning(
-                f"No files found in diff content for {patch_file_path.name}. Diff Parser might have failed."
-            )
-            return {
-                "cve_id": cve_id,
-                "vulnerable_snippets": [],
-                "git_blame_commands": [],
-                "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name
-                "file_path_in_repo": file_path_in_repo,  # Return extracted file path
-            }
+        # if not diff.files:  # diff object from Diff does not have 'files' attribute. Remove this check.
+        #     logger.warning(
+        #         f"No files found in diff content for {patch_file_path.name}. Diff Parser might have failed."
+        #     )
+        #     return {
+        #         "cve_id": cve_id,
+        #         "vulnerable_snippets": [],
+        #         "git_blame_commands": [],
+        #         "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name
+        #         "file_path_in_repo": file_path_in_repo,  # Return extracted file path
+        #     }
 
-        for file_diff in diff.files:  # Iterate over each file changed in the patch
-            diff_file_path = file_diff.path  # Use file_diff.path directly
+        for (
+            block
+        ) in (
+            diff
+        ):  # Iterate over each block in the diff - Use 'block' as per documentation
+            diff_file_path = block.new_filepath  # Use block.new_filepath as file path
             if not diff_file_path:  # Robust check for file path
                 logger.warning(
-                    f"No file path found in diff for {patch_file_path.name} in file_diff"
+                    f"No file path found in diff for {patch_file_path.name} in block"
                 )
                 continue
-            file_path_in_repo = diff_file_path  # Use file_diff.path directly
-            for hunk in file_diff.hunks:  # Iterate over each hunk in the file
+            file_path_in_repo = diff_file_path  # Use block.new_filepath as file path
+            # for hunk in file_diff.hunks:  # No hunks in Diff output, iterate changes directly
+            for change in block.changes:  # Iterate over changes in block
                 vulnerable_code_block = (
                     []
-                )  # Store vulnerable code lines for current hunk
+                )  # Store vulnerable code lines for current change
                 context_lines_for_snippet = (
                     []
                 )  # Store context lines for the current vulnerable snippet
 
                 # Iterate through lines in hunk.lines which are Line instances, not just strings
-                for line_obj in hunk.lines:
-                    if (
-                        line_obj.removed
+                # for line_obj in hunk.lines: # No line_obj in change, content is directly string
+                change_content_lines = (
+                    change.content.splitlines()
+                )  # Split change content to lines for processing
+                original_line_start = change.original_line_start
+                modified_line_start = change.modified_line_start
+
+                for i, line_content in enumerate(
+                    change_content_lines
+                ):  # Iterate over lines in change.content
+                    if line_content.startswith(
+                        "-"
                     ):  # Identify removed lines (potential vulnerability)
                         vulnerable_code_block.append(
-                            line_obj.content
+                            line_content[1:]  # Remove '-' prefix
                         )  # Add removed line content
                         context_lines = []  # Context for each vulnerable line
 
-                        # Collect context lines (before and after the vulnerable line within the hunk)
-                        line_index_in_hunk = hunk.lines.index(
-                            line_obj
-                        )  # Get index of the vulnerable line
+                        # Collect context lines (before and after the vulnerable line within the change)
+                        line_index_in_change = i
+                        context_start_index = max(
+                            0, line_index_in_change - CONTEXT_LINES_BEFORE
+                        )
+                        context_end_index = min(
+                            len(change_content_lines),
+                            line_index_in_change + CONTEXT_LINES_AFTER + 1,
+                        )
+
                         for context_idx in range(
-                            max(0, line_index_in_hunk - CONTEXT_LINES_BEFORE),
-                            min(
-                                line_index_in_hunk + CONTEXT_LINES_AFTER + 1,
-                                len(hunk.lines),
-                            ),
-                        ):  # Configurable context lines
-                            context_line_obj = hunk.lines[context_idx]
-                            # Get context lines (not added or removed)
-                            if (
-                                not context_line_obj.removed
-                                and not context_line_obj.added
-                            ):  # Get context lines (not added or removed)
-                                context_lines.append(context_line_obj.content)
+                            context_start_index, context_end_index
+                        ):
+                            context_line_content = change_content_lines[context_idx]
+                            if context_line_content.startswith(
+                                " "
+                            ):  # Context lines start with space
+                                context_lines.append(
+                                    context_line_content[1:]
+                                )  # Remove ' ' prefix
+
                         context_lines_for_snippet.extend(
                             context_lines
                         )  # Add context lines to the current snippet's context
@@ -243,13 +264,13 @@ def analyze_patch_file(patch_file_path: Path, token_manager: Optional['TokenMana
                                 if cve_data
                                 else None
                             ),
-                            # Access line number from line_obj, corrected to be original line number
+                            # Access line number from change, using original_line_start and line index. Approximation!
                             "line_number": (
-                                hunk.start_line + line_obj.number - 1
-                                if line_obj.number
-                                else hunk.start_line
-                            ),
-                            "introducing_commit": None # Initialize introducing_commit to None
+                                original_line_start + i
+                                if original_line_start
+                                else modified_line_start + i
+                            ),  # Approximation of line number
+                            "introducing_commit": None,  # Initialize introducing_commit to None
                         }
 
                         if (
@@ -261,10 +282,11 @@ def analyze_patch_file(patch_file_path: Path, token_manager: Optional['TokenMana
                                 vuln_info["line_number"],
                                 # token_manager # TokenManager passed to analyze_patch_file, but not used in execute_git_blame - FINAL VERSION, TOKEN_MANAGER NOT USED
                             )
-                            vuln_info["introducing_commit"] = commit_hash # Store the commit hash
+                            vuln_info["introducing_commit"] = (
+                                commit_hash  # Store the commit hash
+                            )
 
                         vulnerable_snippets.append(vuln_info)
-
 
     except Exception as e:
         logger.error(f"Error parsing patch hunk in {patch_file_path.name}: {e}")
@@ -279,7 +301,7 @@ def analyze_patch_file(patch_file_path: Path, token_manager: Optional['TokenMana
     return {
         "cve_id": cve_id,
         "vulnerable_snippets": vulnerable_snippets,
-        "git_blame_commands": git_blame_commands, # Still return, might be useful for debugging or future features
+        "git_blame_commands": git_blame_commands,  # Still return, might be useful for debugging or future features
         "repo_name_from_patch": repo_name_from_patch,  # Return extracted repo name
         "file_path_in_repo": file_path_in_repo,  # Return extracted file path
     }
@@ -364,8 +386,10 @@ def main():
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = {
             executor.submit(
-                analyze_patch_file, patch_file, token_manager # Pass token_manager to analyze_patch_file - FINAL VERSION, TOKEN_MANAGER NOT USED
-            ): patch_file # token_manager passed to analyze_patch_file
+                analyze_patch_file,
+                patch_file,
+                token_manager,  # Pass token_manager to analyze_patch_file - FINAL VERSION, TOKEN_MANAGER NOT USED
+            ): patch_file  # token_manager passed to analyze_patch_file
             for patch_file in patch_files_to_process
         }
         for future in tqdm(
@@ -393,8 +417,9 @@ def main():
                                 f"  Introducing commit (git blame): {vuln_info['introducing_commit']}"
                             )
                         else:
-                            logger.info("  Introducing commit: Not automatically determined.")
-
+                            logger.info(
+                                "  Introducing commit: Not automatically determined."
+                            )
 
                         logger.info("---")
 
@@ -408,7 +433,9 @@ def main():
                                 "cwe_id": vuln_info["cwe_id"],
                                 "cve_description": vuln_info["cve_description"],
                                 "code_snippet": vuln_info["snippet"],
-                                "introducing_commit": vuln_info["introducing_commit"] # Add introducing commit to output
+                                "introducing_commit": vuln_info[
+                                    "introducing_commit"
+                                ],  # Add introducing commit to output
                             }
                         )
 
