@@ -52,7 +52,7 @@ STATE_FILE = Path("commit_finder_state.json")  # State file for resuming
 PROCESSED_PATCHES = set()  # Keep track of processed patches in memory
 MAX_WORKERS = 10  # Number of threads for parallel processing
 GIT_RESET_BRANCH = (
-    "main"  # Branch to reset to when finding commit before CVE publication
+    "main"  # Fallback branch to reset to if detection fails
 )
 
 
@@ -99,7 +99,7 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -112,16 +112,43 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         )
         date_str_for_git = cve_published_date.strftime("%Y-%m-%d %H:%M:%S")
 
+        # --- Branch detection logic ---
+        default_branch = GIT_RESET_BRANCH  # Fallback to default if detection fails
+        try:
+            command_remote_show = ["git", "remote", "show", "origin"]
+            process_remote_show = subprocess.Popen(
+                command_remote_show,
+                cwd=repo_path,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            stdout_remote_show, stderr_remote_show = process_remote_show.communicate(timeout=30)
+            if not stderr_remote_show:
+                remote_show_output = stdout_remote_show.decode("utf-8")
+                match = re.search(r"HEAD branch: (.+)", remote_show_output)
+                if match:
+                    default_branch = match.group(1).strip()
+                    logger.debug(f"Detected default branch: {default_branch}")
+                else:
+                    logger.warning("Could not parse default branch from git remote show output, using fallback.")
+            else:
+                logger.warning(f"Error getting remote info: {stderr_remote_show.decode('utf-8', errors='replace')}, using fallback branch.")
+
+        except Exception as e:
+            logger.warning(f"Error detecting default branch: {e}, using fallback branch.")
+        # --- End branch detection logic ---
+
+
         # Find commit before CVE publication date
         command_rev_list = [
             "git",
             "rev-list",
             f"--before='{date_str_for_git}'",
             "--max-count=1",
-            GIT_RESET_BRANCH,
+            default_branch, # Use detected default branch here
         ]
         logger.debug(
-            f"Executing git rev-list command: {' '.join(command_rev_list)} in {repo_path}"
+            f"Executing git rev-list command: {' '.join(command_rev_list)} in {repo_path} using branch '{default_branch}'"
         )
         process_rev_list = subprocess.Popen(
             command_rev_list,
@@ -139,7 +166,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         commit_hash = stdout_rev_list.decode("utf-8").strip()
         if not commit_hash:
             logger.warning(
-                f"No commit found before CVE publication date: {date_str_for_git}"
+                f"No commit found before CVE publication date: {date_str_for_git} on branch '{default_branch}'"
             )
             return False
 
@@ -159,7 +186,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
             return False
 
         logger.info(
-            f"Repository reset to commit {commit_hash} (before CVE publication date)."
+            f"Repository reset to commit {commit_hash} (before CVE publication date) on branch '{default_branch}'."
         )
         return True
 
@@ -227,7 +254,7 @@ def analyze_patch_file(
         }
 
     # Reset repository to commit before CVE publication date
-    if repo_path.exists() and repo_path.is_dir() and cve_data:
+    if repo_path.exists() and repo_path.is_dir() and cve_
         if not reset_repo_to_before_cve_date(repo_path, cve_data):
             logger.warning(
                 f"Failed to reset repository {repo_name_from_patch} for CVE {cve_id}. Analysis might be inaccurate."
