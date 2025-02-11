@@ -5,14 +5,12 @@ from pathlib import Path
 import logging
 import json
 from datetime import datetime
-from typing import List, Dict, Any, Optional, TYPE_CHECKING
+from typing import List, Dict, Any, Optional
 from io import StringIO
 from unidiff import PatchSet  # Import PatchSet from unidiff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
-if TYPE_CHECKING:
-    from github_data_collector import TokenManager  # TYPE_CHECKING import removed
 import subprocess  # For running git blame
 
 # --- Configuration ---
@@ -21,9 +19,6 @@ PATCHES_DIR = Path(
     os.environ.get("PATCHES_DIR", "patches")
 )  # Directory containing patch files
 REPOS_DIR = Path(os.environ.get("REPOS_DIR", "repos"))
-MIRROR_REPOS_DIR = Path(
-    os.environ.get("MIRROR_REPOS_DIR", "repos_mirror")
-)  # Add mirror repo directory
 NVD_DATA_DIR = Path(
     os.environ.get("NVD_DATA_DIR", "nvd_data")
 )  # Add NVD data directory
@@ -59,9 +54,6 @@ logger.info(f"Log file: {LOG_FILE.absolute()}")
 logger.info(f"NVD data directory: {NVD_DATA_DIR.absolute()}")
 logger.info(f"Patches directory: {PATCHES_DIR.absolute()}")
 logger.info(f"Repository directory: {REPOS_DIR.absolute()}")
-logger.info(
-    f"Mirror repository directory: {MIRROR_REPOS_DIR.absolute()}"
-)  # Log mirror repo dir
 logger.info(f"Output file: {OUTPUT_FILE.absolute()}")
 
 
@@ -351,6 +343,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
         try:
             file_path_in_repo = patched_file.new_path
             for hunk in patched_file:
+                current_hunk_commit_hash = None  # Initialize commit_hash per hunk
                 vulnerable_code_block = []
                 context_lines = []
 
@@ -382,34 +375,24 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                             context_lines.append(ctx_line[1:])  # Remove space prefix
 
                     if repo_path and file_path_in_repo:
-                        # Execute git blame for the *first* vulnerable line in the block to get the introducing commit
+                        # Execute git blame for the *first* vulnerable line in the hunk to get the introducing commit, only if not already done for this hunk
                         if (
                             vulnerable_lines_in_hunk
                             and line == vulnerable_lines_in_hunk[0]
+                            and current_hunk_commit_hash is None  # Check if commit_hash is already obtained for this hunk
                         ):
-                            commit_hash = execute_git_blame(
+                            current_hunk_commit_hash = execute_git_blame(
                                 repo_path, file_path_in_repo, current_line
                             )
-                        else:  # For subsequent vulnerable lines in same hunk, reuse commit hash (optimization)
-                            commit_hash = None  # Initialize with None for subsequent lines
-                            
-                            vuln_info = {
-                                "snippet": "\n".join(
-                                    context_lines + vulnerable_code_block
-                                ),
-                                "introducing_commit": commit_hash,
-                                "cwe_id": cwe_id,
-                                "cve_description": (
-                                    cve_data.get("vulnerability_details", {}).get(
-                                        "description"
-                                    )
-                                    if cve_data
-                                    else None
-                                ),
-                                "line_number": current_line,
-                                "introducing_commit": commit_hash,
-                            }
-                            vulnerable_snippets.append(vuln_info)
+
+                        vuln_info = {
+                            "snippet": "\n".join(context_lines + vulnerable_code_block),
+                            "introducing_commit": current_hunk_commit_hash,  # Use commit_hash obtained for the hunk
+                            "cwe_id": cwe_id,
+                            "cve_description": (cve_data.get("vulnerability_details", {}).get("description") if cve_data else None),
+                            "line_number": current_line,
+                        }
+                        vulnerable_snippets.append(vuln_info)
 
         except AttributeError as e:
             logger.error(
