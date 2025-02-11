@@ -120,7 +120,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         date_str_for_git = cve_published_date.strftime("%Y-%m-%d %H:%M:%S")
 
         # --- Branch detection logic ---
-        default_branch = GIT_RESET_BRANCH  # Fallback to default if detection fails
+        default_branch = "main"  # Default branch
         try:
             command_symbolic_ref = [
                 "/usr/bin/git",
