@@ -336,29 +336,15 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset."  # Log absolute path
         )
 
-    # Find all diff headers in the patch content
-    diff_headers = re.finditer(r"(?m)^diff --git a/(.+?) b/(.+?)$", patch_content_str)
-    if not diff_headers:
-        logger.debug(f"No git diff headers found in {patch_file_path.name}")
-        # Try unified diff format
-        diff_headers = re.finditer(
-            r"(?m)^--- a/(.+?)\n\+\+\+ b/(.+?)$", patch_content_str
-        )
+    try:
+        patch_set = PatchSet(StringIO(patch_content_str))
+    except Exception as e:
+        logger.error(f"Error parsing patch file {patch_file_path.name} with unidiff: {e}")
+        return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None}
 
-    files_processed = False
-    for diff_header in diff_headers:
-        files_processed = True
+    for patched_file in patch_set:
         try:
-            # Extract file path from diff header
-            if len(diff_header.groups()) >= 2:
-                file_path_in_repo = diff_header.group(2)  # Use the 'b' path
-            else:
-                file_path_in_repo = diff_header.group(1)  # Fallback to first group
-
-            # Parse the diff using unidiff
-            patch_set = PatchSet(StringIO(patch_content_str))
-
-            for patched_file in patch_set:
+            file_path_in_repo = patched_file.new_path
                 for hunk in patched_file:
                     vulnerable_code_block = []
                     context_lines = []
@@ -431,17 +417,8 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
             continue
 
-    if not files_processed:
-        logger.warning(f"No valid diff content found in {patch_file_path.name}")
-    else:
-        logger.info(
-            f"Processed diff content in {patch_file_path.name}"
-        )  # Added info log when diff content is processed
-
     if not vulnerable_snippets:
-        logger.info(
-            f"No vulnerable snippets found in {patch_file_path.name}"
-        )  # Log when no snippets found
+        logger.info(f"No vulnerable snippets found in {patch_file_path.name}")
 
     return {
         "cve_id": cve_id,
