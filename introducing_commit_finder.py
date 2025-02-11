@@ -11,11 +11,6 @@ from diff_parser import Diff  # Changed import from DiffParser to Diff
 from unidiff import PatchSet  # Import PatchSet from unidiff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
-import shutil  # For deleting directories
-
-from github_data_collector import (
-    load_github_tokens,
-)  # Import TokenManager, but TokenManager is removed
 
 if TYPE_CHECKING:
     from github_data_collector import TokenManager  # TYPE_CHECKING import removed
@@ -23,19 +18,29 @@ import subprocess  # For running git blame
 
 # --- Configuration ---
 # Directories and files - now configurable via environment variables with defaults
-PATCHES_DIR = Path(os.environ.get("PATCHES_DIR", "patches"))  # Directory containing patch files
+PATCHES_DIR = Path(
+    os.environ.get("PATCHES_DIR", "patches")
+)  # Directory containing patch files
 REPOS_DIR = Path(os.environ.get("REPOS_DIR", "repos"))
-MIRROR_REPOS_DIR = Path(os.environ.get("MIRROR_REPOS_DIR", "repos_mirror"))  # Add mirror repo directory
-NVD_DATA_DIR = Path(os.environ.get("NVD_DATA_DIR", "nvd_data"))  # Add NVD data directory
+MIRROR_REPOS_DIR = Path(
+    os.environ.get("MIRROR_REPOS_DIR", "repos_mirror")
+)  # Add mirror repo directory
+NVD_DATA_DIR = Path(
+    os.environ.get("NVD_DATA_DIR", "nvd_data")
+)  # Add NVD data directory
 LOG_FILE = Path(os.environ.get("LOG_FILE", "introducing_commit_finder.log"))
-OUTPUT_FILE = Path(os.environ.get("OUTPUT_FILE", "vulnerable_code_snippets.json"))  # Output JSON file for results
+OUTPUT_FILE = Path(
+    os.environ.get("OUTPUT_FILE", "vulnerable_code_snippets.json")
+)  # Output JSON file for results
 
 # Script settings
 LOG_LEVEL = logging.DEBUG  # Set default log level
 CONTEXT_LINES_BEFORE = 2  # Configurable context lines before vulnerable line
 CONTEXT_LINES_AFTER = 3  # Configurable context lines after vulnerable line
 MAX_WORKERS = 10  # Number of threads for parallel processing
-GIT_RESET_BRANCH = os.environ.get("GIT_RESET_BRANCH", "main")  # Fallback branch to reset to if detection fails, configurable
+GIT_RESET_BRANCH = os.environ.get(
+    "GIT_RESET_BRANCH", "main"
+)  # Fallback branch to reset to if detection fails, configurable
 GIT_TIMEOUT = 600  # Timeout for git commands in seconds
 
 
@@ -96,17 +101,21 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
     """Load CVE data from JSON file."""
     cve_file = NVD_DATA_DIR / f"{cve_id}.json"
     if not cve_file.exists():
-        logger.warning(f"CVE data file not found: {cve_file.absolute()}")  # Log absolute path
+        logger.warning(
+            f"CVE data file not found: {cve_file.absolute()}"
+        )  # Log absolute path
         return None
     try:
         with open(cve_file, "r") as f:
             return json.load(f)
     except json.JSONDecodeError as e:
-        logger.error(f"Error decoding JSON from {cve_file.absolute()}: {e}")  # Log absolute path and error
+        logger.error(
+            f"Error decoding JSON from {cve_file.absolute()}: {e}"
+        )  # Log absolute path and error
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -123,7 +132,9 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
         default_branch = GIT_RESET_BRANCH  # Fallback to default if detection fails
         try:
             command_remote_show = ["/usr/bin/git", "remote", "show", "origin"]
-            logger.debug(f"Executing git remote show command: {' '.join(command_remote_show)} in {repo_path}") # Debug log
+            logger.debug(
+                f"Executing git remote show command: {' '.join(command_remote_show)} in {repo_path}"
+            )  # Debug log
             process_remote_show = subprocess.Popen(
                 command_remote_show,
                 cwd=repo_path,
@@ -238,7 +249,9 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
             raise ValueError("Extracted repository name is empty.")
         return repo_name_from_patch
     except Exception as e:
-        logger.error(f"Error extracting repo name from patch file path {patch_file_path}: {e}")
+        logger.error(
+            f"Error extracting repo name from patch file path {patch_file_path}: {e}"
+        )
         return None
 
 
@@ -273,7 +286,9 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
         with open(patch_file_path, "r") as f:
             patch_content_str = f.read()
     except FileNotFoundError as e:
-        logger.error(f"Patch file not found: {patch_file_path.absolute()}: {e}") # Log absolute path
+        logger.error(
+            f"Patch file not found: {patch_file_path.absolute()}: {e}"
+        )  # Log absolute path
         return {
             "cve_id": cve_id,
             "vulnerable_snippets": [],
@@ -294,11 +309,10 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             "file_path_in_repo": None,
         }
 
-
     # --- On-demand cloning ---
     if not repo_path.exists() or not (repo_path / ".git").exists():
         logger.warning(
-            f"Working repository directory does not exist: {repo_path.absolute()}. Expecting it to be cloned externally." # Log absolute path
+            f"Working repository directory does not exist: {repo_path.absolute()}. Expecting it to be cloned externally."  # Log absolute path
         )
     # --- End on-demand cloning ---
 
@@ -319,7 +333,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             )
     else:
         logger.warning(
-            f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset." # Log absolute path
+            f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset."  # Log absolute path
         )
 
     # Find all diff headers in the patch content
@@ -420,10 +434,14 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
     if not files_processed:
         logger.warning(f"No valid diff content found in {patch_file_path.name}")
     else:
-        logger.info(f"Processed diff content in {patch_file_path.name}") # Added info log when diff content is processed
+        logger.info(
+            f"Processed diff content in {patch_file_path.name}"
+        )  # Added info log when diff content is processed
 
     if not vulnerable_snippets:
-        logger.info(f"No vulnerable snippets found in {patch_file_path.name}") # Log when no snippets found
+        logger.info(
+            f"No vulnerable snippets found in {patch_file_path.name}"
+        )  # Log when no snippets found
 
     return {
         "cve_id": cve_id,
@@ -459,7 +477,7 @@ def execute_git_blame(
         if process.returncode != 0:  # Check return code
             error_message = stderr.decode("utf-8", errors="replace")
             logger.error(
-                f"Git blame failed with return code {process.returncode}: {error_message} for file {file_path_in_repo}, line {line_number}" # More context in error log
+                f"Git blame failed with return code {process.returncode}: {error_message} for file {file_path_in_repo}, line {line_number}"  # More context in error log
             )
             return None
 
@@ -509,7 +527,7 @@ def main():
     patch_files = list(PATCHES_DIR.glob("*.patch"))
     if not patch_files:
         logger.warning(
-            f"No patch files found in {PATCHES_DIR.absolute()}. Please run patch_downloader.py first." # Log absolute path
+            f"No patch files found in {PATCHES_DIR.absolute()}. Please run patch_downloader.py first."  # Log absolute path
         )
         save_state()  # Save state before exit, even if no patches
         return
@@ -524,7 +542,7 @@ def main():
         return
 
     logger.info(
-        f"Analyzing {len(patch_files_to_process)} new patch files from {PATCHES_DIR.absolute()}..." # Log absolute path
+        f"Analyzing {len(patch_files_to_process)} new patch files from {PATCHES_DIR.absolute()}..."  # Log absolute path
     )
 
     output_data = []  # List to store structured output
@@ -596,7 +614,9 @@ def main():
 
     with open(OUTPUT_FILE, "w") as outfile:  # Write output data to JSON file
         json.dump(output_data, outfile, indent=2)
-    logger.info(f"Vulnerable code snippets saved to {OUTPUT_FILE.absolute()}") # Log absolute path
+    logger.info(
+        f"Vulnerable code snippets saved to {OUTPUT_FILE.absolute()}"
+    )  # Log absolute path
 
     logger.info("\nAnalysis completed.")
     logger.info(f"Script finished at {datetime.now().isoformat()}")
