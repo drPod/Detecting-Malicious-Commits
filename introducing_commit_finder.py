@@ -14,12 +14,11 @@ from tqdm import tqdm
 import shutil  # For deleting directories
 
 from github_data_collector import (
-    TokenManager,
     load_github_tokens,
-)  # Import TokenManager
+)  # Import TokenManager, but TokenManager is removed
 
 if TYPE_CHECKING:
-    from github_data_collector import TokenManager
+    from github_data_collector import TokenManager # TYPE_CHECKING import removed
 import subprocess  # For running git blame
 
 # --- Configuration ---
@@ -104,7 +103,7 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -225,9 +224,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         return False
 
 
-def analyze_patch_file(
-    patch_file_path: Path, token_manager: Optional["TokenManager"] = None
-):
+def analyze_patch_file(patch_file_path: Path): # Removed token_manager parameter
     """
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
@@ -463,10 +460,10 @@ def main():
     logger.info(f"Current PATH environment variable: {os.environ['PATH']}")  # Log PATH
     load_state()  # Load state at start
 
-    tokens = (
-        load_github_tokens()
-    )  # Load tokens for TokenManager - even if not directly used now, for future use.
-    token_manager = TokenManager(tokens)  # Initialize TokenManager
+    # tokens = ( # Removed token loading
+    #     load_github_tokens()
+    # )
+    # token_manager = TokenManager(tokens) # Removed TokenManager initialization
 
     patch_files = list(PATCHES_DIR.glob("*.patch"))
     if not patch_files:
@@ -496,8 +493,7 @@ def main():
             executor.submit(
                 analyze_patch_file,
                 patch_file,
-                token_manager,  # Pass token_manager to analyze_patch_file - FINAL VERSION, TOKEN_MANAGER NOT USED
-            ): patch_file  # token_manager passed to analyze_patch_file
+            ): patch_file # Removed token_manager from function call
             for patch_file in patch_files_to_process
         }
         for future in tqdm(
