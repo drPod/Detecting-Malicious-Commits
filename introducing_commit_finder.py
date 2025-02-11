@@ -391,13 +391,9 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                                 repo_path, file_path_in_repo, current_line
                             )
                         else:  # For subsequent vulnerable lines in same hunk, reuse commit hash (optimization)
-                            vuln_info = {}  # Initialize vuln_info here
-                            commit_hash = (
-                                vuln_info.get("introducing_commit")
-                                if vuln_info
-                                else None
-                            )
-
+                            commit_hash = None  # Initialize with None for subsequent lines
+                            
+                            vuln_info = {
                                 "snippet": "\n".join(
                                     context_lines + vulnerable_code_block
                                 ),
