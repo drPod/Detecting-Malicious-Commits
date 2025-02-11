@@ -103,7 +103,7 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -326,31 +326,31 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                     vulnerable_code_block = []
                     context_lines = []
 
-                    # Track line numbers
-                    current_line = hunk.source_start
+                    vulnerable_lines_in_hunk = [
+                        line for line in hunk.lines if line.is_removed
+                    ]
 
-                    for line in hunk:
-                        if line.is_removed:
-                            # Store vulnerable line
-                            vulnerable_code_block.append(
-                                line.value[1:]
-                            )  # Remove the '-' prefix
+                    for line in vulnerable_lines_in_hunk:
+                        vulnerable_code_block.append(line.value[1:]) # Remove '-' prefix
+                        current_line = hunk.source_start + line.source_line_no -1 # Calculate line number
 
-                            # Collect context (before and after)
-                            context_start = max(0, current_line - CONTEXT_LINES_BEFORE)
-                            context_end = current_line + CONTEXT_LINES_AFTER
+                        # Extract context lines from hunk
+                        start_context_line = max(1, line.source_line_no - CONTEXT_LINES_BEFORE)
+                        end_context_line = min(len(hunk.source_lines), line.source_line_no + CONTEXT_LINES_AFTER)
+                        for context_line_index in range(start_context_line -1 , end_context_line -1 ): # Adjust index to be 0-based
+                            ctx_line = hunk.source_lines[context_line_index]
+                            if not ctx_line.startswith(('-', '+')): # Ensure it's a context line
+                                context_lines.append(ctx_line[1:]) # Remove space prefix
 
-                            # Add context lines
-                            for ctx_line in hunk.source[context_start:context_end]:
-                                if not ctx_line.startswith(("-", "+")):
-                                    context_lines.append(
-                                        ctx_line[1:]
-                                    )  # Remove space prefix
-
-                            if repo_path and file_path_in_repo:
+                        if repo_path and file_path_in_repo:
+                            # Execute git blame for the *first* vulnerable line in the block to get the introducing commit
+                            if vulnerable_lines_in_hunk and line == vulnerable_lines_in_hunk[0]:
                                 commit_hash = execute_git_blame(
                                     repo_path, file_path_in_repo, current_line
                                 )
+                            else: # For subsequent vulnerable lines in same hunk, reuse commit hash (optimization)
+                                commit_hash = vuln_info.get("introducing_commit") if 'vuln_info' in locals() else None
+
 
                                 vuln_info = {
                                     "snippet": "\n".join(
@@ -369,8 +369,6 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                                 }
                                 vulnerable_snippets.append(vuln_info)
 
-                        if not line.is_added:  # Count original lines
-                            current_line += 1
 
         except Exception as e:
             logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
