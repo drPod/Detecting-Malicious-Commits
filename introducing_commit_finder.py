@@ -398,10 +398,10 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                                 else None
                             )
 
-                            vuln_info = {
                                 "snippet": "\n".join(
                                     context_lines + vulnerable_code_block
                                 ),
+                                "introducing_commit": commit_hash,
                                 "cwe_id": cwe_id,
                                 "cve_description": (
                                     cve_data.get("vulnerability_details", {}).get(
