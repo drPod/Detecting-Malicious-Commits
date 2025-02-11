@@ -132,7 +132,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         date_str_for_git = cve_published_date.strftime("%Y-%m-%d %H:%M:%S")
 
         # --- Branch detection logic ---
-        default_branch = GIT_RESET_BRANCH # Fallback to default if detection fails
+        default_branch = GIT_RESET_BRANCH  # Fallback to default if detection fails
         try:
             command_symbolic_ref = [
                 "/usr/bin/git",
@@ -148,7 +148,9 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
-            stdout_symbolic_ref, stderr_symbolic_ref = process_symbolic_ref.communicate(timeout=30)
+            stdout_symbolic_ref, stderr_symbolic_ref = process_symbolic_ref.communicate(
+                timeout=30
+            )
             if process_symbolic_ref.returncode != 0:
                 error_message = stderr_symbolic_ref.decode("utf-8", errors="replace")
                 logger.warning(
@@ -156,8 +158,10 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
                 )
             else:
                 remote_ref = stdout_symbolic_ref.decode("utf-8").strip()
-                default_branch = remote_ref.split('/')[-1] # Extract branch name
-                logger.debug(f"Detected default branch: {default_branch} from symbolic-ref")
+                default_branch = remote_ref.split("/")[-1]  # Extract branch name
+                logger.debug(
+                    f"Detected default branch: {default_branch} from symbolic-ref"
+                )
         except Exception as e:
             logger.warning(
                 f"Error detecting default branch using symbolic-ref: {e}, using fallback branch '{GIT_RESET_BRANCH}'."
@@ -387,9 +391,10 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                                 repo_path, file_path_in_repo, current_line
                             )
                         else:  # For subsequent vulnerable lines in same hunk, reuse commit hash (optimization)
+                            vuln_info = {}  # Initialize vuln_info here
                             commit_hash = (
                                 vuln_info.get("introducing_commit")
-                                if "vuln_info" in locals()
+                                if vuln_info
                                 else None
                             )
 
@@ -411,7 +416,9 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                             vulnerable_snippets.append(vuln_info)
 
         except AttributeError as e:
-            logger.error(f"AttributeError processing diff in {patch_file_path.name}: {str(e)}")
+            logger.error(
+                f"AttributeError processing diff in {patch_file_path.name}: {str(e)}"
+            )
         except Exception as e:
             logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
             continue
