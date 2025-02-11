@@ -104,7 +104,7 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -225,72 +225,6 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         return False
 
 
-def clone_working_repo_from_mirror(repo: str) -> bool:
-    """Clones a working repository from a local mirror repository."""
-    repo_dir = REPOS_DIR / repo.replace("/", "_")
-    mirror_repo_path = MIRROR_REPOS_DIR / repo.replace("/", "_")
-
-    if repo_dir.exists():
-        logger.warning(
-            f"Working repository directory already exists: {repo_dir}. Skipping clone."
-        )
-        return True  # Assume success if directory exists
-
-    if not mirror_repo_path.exists() or not (mirror_repo_path / ".git").exists():
-        logger.error(
-            f"Mirror repository not found at: {mirror_repo_path}. Cannot clone working repository."
-        )
-        return False
-
-    try:
-        logger.info(
-            f"Cloning working repository from local mirror: {mirror_repo_path} to {repo_dir}"
-        )
-        command = ["/usr/bin/git", "clone", str(mirror_repo_path), str(repo_dir)]
-        process = subprocess.Popen(
-            command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
-        stdout, stderr = process.communicate(timeout=GIT_TIMEOUT)
-
-        if process.returncode == 0:
-            logger.info(
-                f"Successfully cloned working repository for {repo} from mirror."
-            )
-            return True
-        else:
-            error_message = stderr.decode("utf-8", errors="replace").strip()
-            logger.error(
-                f"Failed to clone working repository for {repo} from mirror with return code {process.returncode}: {error_message}"
-            )
-            logger.debug(f"Git clone output: {stdout.decode()}")
-            return False
-
-    except subprocess.TimeoutExpired:
-        logger.error(f"Timeout cloning working repository for {repo} from mirror.")
-        return False
-    except FileNotFoundError:
-        logger.error("Git command not found. Is Git installed and in PATH?")
-        return None
-    except Exception as e:
-        logger.error(f"Error cloning working repository for {repo} from mirror: {e}")
-        return False
-
-
-def delete_working_repo(repo: str):
-    """Deletes the working repository directory to save space."""
-    repo_dir = REPOS_DIR / repo.replace("/", "_")
-    if repo_dir.exists() and repo_dir.is_dir():
-        try:
-            shutil.rmtree(repo_dir)
-            logger.info(f"Deleted working repository directory: {repo_dir}")
-        except Exception as e:
-            logger.error(f"Error deleting working repository directory {repo_dir}: {e}")
-    else:
-        logger.warning(
-            f"Working repository directory not found at {repo_dir}, cannot delete."
-        )
-
-
 def analyze_patch_file(
     patch_file_path: Path, token_manager: Optional["TokenManager"] = None
 ):
@@ -343,14 +277,9 @@ def analyze_patch_file(
 
     # --- On-demand cloning ---
     if not repo_path.exists() or not (repo_path / ".git").exists():
-        if not clone_working_repo_from_mirror(repo):  # Use repo name here
-            logger.warning(
-                f"Failed to clone working repository for {repo_name_from_patch} (CVE: {cve_id}). Analysis might be inaccurate."
-            )
-        else:
-            logger.info(
-                f"Working repository cloned successfully for {repo_name_from_patch} (CVE: {cve_id})."
-            )
+        logger.warning(
+            f"Working repository directory does not exist: {repo_path}. Expecting it to be cloned externally."
+        )
     # --- End on-demand cloning ---
 
     # Reset repository to commit before CVE publication date
@@ -452,11 +381,6 @@ def analyze_patch_file(
 
     if not files_processed:
         logger.warning(f"No valid diff content found in {patch_file_path.name}")
-
-    # --- Delete working repo after processing all patches for it ---
-    if repo_name_from_patch:  # Only delete if repo name was successfully extracted
-        delete_working_repo(repo_name_from_patch)
-    # --- End delete working repo ---
 
     return {
         "cve_id": cve_id,
