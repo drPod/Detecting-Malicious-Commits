@@ -19,10 +19,10 @@ NVD_DATA_DIR = Path("nvd_data")  # Directory for NVD data - configurable
 REPOS_DIR = Path("repos")  # Directory for repositories - configurable
 CLONE_STATE_FILE = Path("clone_state.json")  # State file - configurable
 LOG_FILE = Path("repo_cloner.log")  # Log file - configurable
-MAX_WORKERS = 10  # Number of threads for parallel cloning - configurable
+MAX_WORKERS = 14  # Number of threads for parallel cloning - configurable
 GIT_TIMEOUT = 600  # Timeout for git commands in seconds - configurable
-MAX_RETRIES = 3  # Maximum number of retries for git clone - configurable
-RETRY_DELAY = 10  # Delay in seconds before retrying git clone - configurable
+MAX_RETRIES = 1  # Maximum number of retries for git clone - configurable
+RETRY_DELAY = 5  # Delay in seconds before retrying git clone - configurable
 
 
 # --- Logging Setup ---
@@ -83,6 +83,33 @@ class CloneManager:
         except Exception as e:
             logger.error(f"Error loading state: {str(e)}")
 
+    def get_already_cloned_repos(self) -> Set[str]:
+        """
+        Identify already cloned repositories by checking for existing directories
+        in the REPOS_DIR.
+        """
+        cloned_repo_dirs = set()
+        try:
+            for item in REPOS_DIR.iterdir():
+                if item.is_dir():
+                    cloned_repo_dirs.add(item.name)
+            # Update state for already cloned repos
+            with self.lock:
+                for repo_dirname in cloned_repo_dirs:
+                    # Reconstruct repo_url from dirname (reverse of repo_url.replace("/", "_"))
+                    repo_url = repo_dirname.replace(
+                        "_", "/"
+                    )  # This is a simplification and might not be perfect
+                    if repo_url not in self.state:  # Only add if not already in state
+                        self.state[repo_url] = "success"
+                self.save_state()  # Save state immediately after updating with existing repos
+            logger.info(
+                f"Found {len(cloned_repo_dirs)} existing repository directories in {REPOS_DIR}"
+            )
+        except Exception as e:
+            logger.error(f"Error listing repository directories: {e}")
+        return cloned_repo_dirs
+
     def save_state(self):
         with self.lock:
             try:
@@ -139,6 +166,8 @@ class CloneManager:
                     f"https://github.com/{repo_url}",
                     str(repo_path),
                 ]
+                env = os.environ.copy()  # Copy the current environment
+                env["GIT_TERMINAL_PROMPT"] = "0"  # Disable git prompt
                 process = subprocess.Popen(
                     command,
                     stdout=subprocess.PIPE,
@@ -146,6 +175,7 @@ class CloneManager:
                     stdin=subprocess.DEVNULL,
                     # timeout=GIT_TIMEOUT,
                 )
+                process.env = env  # Apply modified env to subprocess
                 self.active_processes[repo_url] = process  # Track active process
                 stdout, stderr = process.communicate()
                 del self.active_processes[repo_url]  # Remove after completion
@@ -197,9 +227,17 @@ class CloneManager:
     def process_repos(self):
         """Main function to process and clone repositories."""
         self.repos_to_process = self.get_repos_from_nvd()
+        already_cloned_dirs = self.get_already_cloned_repos()
         repos_to_clone = [
-            repo for repo in self.repos_to_process if repo not in self.state
+            repo
+            for repo in self.repos_to_process
+            if repo.replace("/", "_") not in already_cloned_dirs
+            and repo not in self.state
         ]
+
+        logger.info(
+            f"Identified {len(repos_to_clone)} repositories to clone after checking existing directories."
+        )
 
         if not repos_to_clone:
             logger.info("No new repositories to clone.")
