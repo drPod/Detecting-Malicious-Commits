@@ -7,7 +7,6 @@ import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional, TYPE_CHECKING
 from io import StringIO
-from diff_parser import Diff  # Changed import from DiffParser to Diff
 from unidiff import PatchSet  # Import PatchSet from unidiff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
@@ -339,79 +338,82 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
     try:
         patch_set = PatchSet(StringIO(patch_content_str))
     except Exception as e:
-        logger.error(f"Error parsing patch file {patch_file_path.name} with unidiff: {e}")
-        return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None}
+        logger.error(
+            f"Error parsing patch file {patch_file_path.name} with unidiff: {e}"
+        )
+        return {
+            "cve_id": cve_id,
+            "vulnerable_snippets": [],
+            "repo_name_from_patch": repo_name_from_patch,
+            "file_path_in_repo": None,
+        }
 
     for patched_file in patch_set:
         try:
             file_path_in_repo = patched_file.new_path
-                for hunk in patched_file:
-                    vulnerable_code_block = []
-                    context_lines = []
+            for hunk in patched_file:
+                vulnerable_code_block = []
+                context_lines = []
 
-                    vulnerable_lines_in_hunk = [
-                        line for line in hunk.lines if line.is_removed
-                    ]
+                vulnerable_lines_in_hunk = [
+                    line for line in hunk.lines if line.is_removed
+                ]
 
-                    for line in vulnerable_lines_in_hunk:
-                        vulnerable_code_block.append(
-                            line.value[1:]
-                        )  # Remove '-' prefix
-                        current_line = (
-                            hunk.source_start + line.source_line_no - 1
-                        )  # Calculate line number
+                for line in vulnerable_lines_in_hunk:
+                    vulnerable_code_block.append(line.value[1:])  # Remove '-' prefix
+                    current_line = (
+                        hunk.source_start + line.source_line_no - 1
+                    )  # Calculate line number
 
-                        # Extract context lines from hunk
-                        context_start_index = max(
-                            1, line.source_line_no - CONTEXT_LINES_BEFORE
-                        )
-                        context_end_index = min(
-                            len(hunk.source_lines),
-                            line.source_line_no + CONTEXT_LINES_AFTER,
-                        )
-                        for context_line_index in range(
-                            context_start_index - 1, context_end_index - 1
-                        ):  # Adjust index to be 0-based
-                            ctx_line = hunk.source_lines[context_line_index]
-                            if not ctx_line.startswith(
-                                ("-", "+")
-                            ):  # Ensure it's a context line
-                                context_lines.append(
-                                    ctx_line[1:]
-                                )  # Remove space prefix
+                    # Extract context lines from hunk
+                    context_start_index = max(
+                        1, line.source_line_no - CONTEXT_LINES_BEFORE
+                    )
+                    context_end_index = min(
+                        len(hunk.source_lines),
+                        line.source_line_no + CONTEXT_LINES_AFTER,
+                    )
+                    for context_line_index in range(
+                        context_start_index - 1, context_end_index - 1
+                    ):  # Adjust index to be 0-based
+                        ctx_line = hunk.source_lines[context_line_index]
+                        if not ctx_line.startswith(
+                            ("-", "+")
+                        ):  # Ensure it's a context line
+                            context_lines.append(ctx_line[1:])  # Remove space prefix
 
-                        if repo_path and file_path_in_repo:
-                            # Execute git blame for the *first* vulnerable line in the block to get the introducing commit
-                            if (
-                                vulnerable_lines_in_hunk
-                                and line == vulnerable_lines_in_hunk[0]
-                            ):
-                                commit_hash = execute_git_blame(
-                                    repo_path, file_path_in_repo, current_line
-                                )
-                            else:  # For subsequent vulnerable lines in same hunk, reuse commit hash (optimization)
-                                commit_hash = (
-                                    vuln_info.get("introducing_commit")
-                                    if "vuln_info" in locals()
+                    if repo_path and file_path_in_repo:
+                        # Execute git blame for the *first* vulnerable line in the block to get the introducing commit
+                        if (
+                            vulnerable_lines_in_hunk
+                            and line == vulnerable_lines_in_hunk[0]
+                        ):
+                            commit_hash = execute_git_blame(
+                                repo_path, file_path_in_repo, current_line
+                            )
+                        else:  # For subsequent vulnerable lines in same hunk, reuse commit hash (optimization)
+                            commit_hash = (
+                                vuln_info.get("introducing_commit")
+                                if "vuln_info" in locals()
+                                else None
+                            )
+
+                            vuln_info = {
+                                "snippet": "\n".join(
+                                    context_lines + vulnerable_code_block
+                                ),
+                                "cwe_id": cwe_id,
+                                "cve_description": (
+                                    cve_data.get("vulnerability_details", {}).get(
+                                        "description"
+                                    )
+                                    if cve_data
                                     else None
-                                )
-
-                                vuln_info = {
-                                    "snippet": "\n".join(
-                                        context_lines + vulnerable_code_block
-                                    ),
-                                    "cwe_id": cwe_id,
-                                    "cve_description": (
-                                        cve_data.get("vulnerability_details", {}).get(
-                                            "description"
-                                        )
-                                        if cve_data
-                                        else None
-                                    ),
-                                    "line_number": current_line,
-                                    "introducing_commit": commit_hash,
-                                }
-                                vulnerable_snippets.append(vuln_info)
+                                ),
+                                "line_number": current_line,
+                                "introducing_commit": commit_hash,
+                            }
+                            vulnerable_snippets.append(vuln_info)
 
         except Exception as e:
             logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
