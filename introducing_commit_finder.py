@@ -29,13 +29,9 @@ OUTPUT_FILE = Path(
 
 # Script settings
 LOG_LEVEL = logging.DEBUG  # Set default log level
-CONTEXT_LINES_BEFORE = 2  # Configurable context lines before vulnerable line
-CONTEXT_LINES_AFTER = 3  # Configurable context lines after vulnerable line
+CONTEXT_LINES_BEFORE = 2  # Number of context lines before vulnerable line
+CONTEXT_LINES_AFTER = 3  # Number of context lines after vulnerable line
 MAX_WORKERS = 10  # Number of threads for parallel processing
-GIT_RESET_BRANCH = os.environ.get(
-    "GIT_RESET_BRANCH", "main"
-)  # Fallback branch to reset to if detection fails, configurable
-GIT_TIMEOUT = 600  # Timeout for git commands in seconds
 
 
 # Setup logging
@@ -146,8 +142,9 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
             if process_symbolic_ref.returncode != 0:
                 error_message = stderr_symbolic_ref.decode("utf-8", errors="replace")
                 logger.warning(
-                    f"Git symbolic-ref failed with return code {process_symbolic_ref.returncode}: {error_message}, using fallback branch '{GIT_RESET_BRANCH}'."
+                    f"Git symbolic-ref failed with return code {process_symbolic_ref.returncode}: {error_message}, using fallback branch 'main'."
                 )
+                default_branch = "main"  # Hardcoded fallback branch
             else:
                 remote_ref = stdout_symbolic_ref.decode("utf-8").strip()
                 default_branch = remote_ref.split("/")[-1]  # Extract branch name
@@ -156,7 +153,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
                 )
         except Exception as e:
             logger.warning(
-                f"Error detecting default branch using symbolic-ref: {e}, using fallback branch '{GIT_RESET_BRANCH}'."
+                f"Error detecting default branch using symbolic-ref: {e}, using fallback branch 'main'."
             )
         # --- End branch detection logic ---
 
@@ -495,9 +492,8 @@ def main():
     patch_files = list(PATCHES_DIR.glob("*.patch"))
     if not patch_files:
         logger.warning(
-            f"No patch files found in {PATCHES_DIR.absolute()}. Please run patch_downloader.py first."  # Log absolute path
+            f"No patch files found in {PATCHES_DIR.absolute()}."  # Log absolute path
         )
-        save_state()  # Save state before exit, even if no patches
         return
 
     patch_files_to_process = [
@@ -506,7 +502,6 @@ def main():
 
     if not patch_files_to_process:
         logger.info("No new patch files to process.")
-        save_state()  # Save state before exit, if no new patches
         return
 
     logger.info(
@@ -594,4 +589,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    save_state()  # Final state save on normal exit
