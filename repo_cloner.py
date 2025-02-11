@@ -1,42 +1,40 @@
 import os
 import json
 import logging
-import subprocess
-import concurrent.futures
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
-from datetime import datetime
-from typing import Dict, List, Set
+import threading
 import signal
 import sys
-import threading
-import shutil # Import shutil for deleting directories
+from pathlib import Path
+import datetime
+from typing import Dict, Set
+import subprocess
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
+from time import time, sleep
 from dotenv import load_dotenv
 
-# Configuration
+# --- Configuration ---
 load_dotenv()  # Load environment variables
-NVD_DATA_DIR = Path("nvd_data")
-REPOS_DIR = Path("repos")
-MIRROR_REPOS_DIR = Path("repos_mirror") # Directory containing mirror repos
-STATE_FILE = Path("clone_state.json")
-MAX_WORKERS = 5  # Conservative to avoid rate limits
-GIT_TIMEOUT = 600  # Seconds for git operation timeout
-GITHUB_TOKENS = [
-    v for k, v in os.environ.items() if k.startswith("GITHUB_TOKEN_")
-]  # Load all tokens
+NVD_DATA_DIR = Path("nvd_data")  # Directory for NVD data - configurable
+REPOS_DIR = Path("repos")  # Directory for repositories - configurable
+CLONE_STATE_FILE = Path("clone_state.json")  # State file - configurable
+LOG_FILE = Path("repo_cloner.log")  # Log file - configurable
+MAX_WORKERS = 10  # Number of threads for parallel cloning - configurable
+GIT_TIMEOUT = 600  # Timeout for git commands in seconds - configurable
+MAX_RETRIES = 3  # Maximum number of retries for git clone - configurable
+RETRY_DELAY = 10  # Delay in seconds before retrying git clone - configurable
 
-# Setup logging
+
+# --- Logging Setup ---
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("repo_cloner.log"), logging.StreamHandler()],
+    handlers=[logging.FileHandler(LOG_FILE), logging.StreamHandler()],
 )
 logger = logging.getLogger(__name__)
-logger.info(f"Script starting at {datetime.now().isoformat()}")
+logger.info(f"Script starting at {datetime.datetime.now().isoformat()}")
 logger.info(f"Repository directory: {REPOS_DIR.absolute()}")
-logger.info(f"Mirror repository directory: {MIRROR_REPOS_DIR.absolute()}") # Log mirror repo dir
-logger.info(f"Log file: {Path('repo_cloner.log').absolute()}")
-logger.info(f"Loaded {len(GITHUB_TOKENS)} GitHub tokens")
+logger.info(f"Log file: {Path(LOG_FILE).absolute()}")
 
 
 class CloneManager:
@@ -51,7 +49,6 @@ class CloneManager:
 
         # Setup directories
         REPOS_DIR.mkdir(parents=True, exist_ok=True)
-        logger.info(f"Created repository directory at {REPOS_DIR.absolute()}")
 
         # Load existing state
         self.load_state()
@@ -60,41 +57,27 @@ class CloneManager:
         signal.signal(signal.SIGINT, self.handle_interrupt)
         signal.signal(signal.SIGTERM, self.handle_interrupt)
 
-    def get_next_token(self):
-        """Cycle through available GitHub tokens"""
-        with self.lock:
-            if not GITHUB_TOKENS:
-                return ""
-            token = GITHUB_TOKENS[self.current_token_idx]
-            self.current_token_idx = (self.current_token_idx + 1) % len(GITHUB_TOKENS)
-            return token
-
     def handle_interrupt(self, signum, frame):
         self.interrupted = True
         logger.warning("Interrupt received. Cleaning up and exiting...")
 
-        # Terminate active processes
-        for repo, process in self.active_processes.items():
+        # Terminate active clones
+        for repo, future in self.active_processes.items():
             try:
-                process.terminate()
-                logger.info(f"Terminated process for {repo}")
+                future.cancel()
+                logger.info(f"Cancelled clone for {repo}")
             except Exception as e:
-                logger.error(f"Error terminating {repo}: {str(e)}")
-
-        # Shutdown executor
-        if self.executor:
-            self.executor.shutdown(wait=False, cancel_futures=True)
+                logger.error(f"Error cancelling {repo}: {str(e)}")
 
         self.save_state()
         sys.exit(1)
 
     def load_state(self):
         try:
-            if STATE_FILE.exists():
-                with open(STATE_FILE) as f:
+            if CLONE_STATE_FILE.exists():
+                with open(CLONE_STATE_FILE, "r") as f:
                     self.state = json.load(f)
                 logger.info(f"Loaded state with {len(self.state)} entries")
-                logger.debug(f"State contents: {json.dumps(self.state, indent=2)}")
             else:
                 logger.info("No existing state file found")
         except Exception as e:
@@ -103,184 +86,156 @@ class CloneManager:
     def save_state(self):
         with self.lock:
             try:
-                with open(STATE_FILE, "w") as f:
+                with open(CLONE_STATE_FILE, "w") as f:
                     json.dump(self.state, f, indent=2)
                 logger.debug("State file saved successfully")
             except Exception as e:
                 logger.error(f"Error saving state: {str(e)}")
 
     def get_repos_from_nvd(self) -> Set[str]:
+        """Extract unique repository names from NVD data files."""
         repos = set()
-        logger.info(f"Scanning NVD data directory: {NVD_DATA_DIR.absolute()}")
-
-        if not NVD_DATA_DIR.exists():
-            logger.error(f"NVD data directory not found: {NVD_DATA_DIR}")
-            return repos
-
-        for json_file in NVD_DATA_DIR.glob("*.json"):
-            logger.info(f"Processing NVD file: {json_file.name}")
+        nvd_files = list(NVD_DATA_DIR.glob("*.json"))
+        logger.info(f"Scanning {len(nvd_files)} NVD files for repositories.")
+        for nvd_file in nvd_files:
             try:
-                with open(json_file) as f:
-                    data = json.load(f)
-                    repo = data.get("github_data", {}).get("repository")
-                    if repo:
-                        if repo not in self.state:
-                            repos.add(repo)
-                            logger.debug(f"Found new repository: {repo}")
-                        else:
-                            logger.debug(
-                                f"Skipping already processed repository: {repo}"
-                            )
-                    else:
-                        logger.warning(f"No repository found in {json_file.name}")
-            except json.JSONDecodeError:
-                logger.error(f"Invalid JSON in file: {json_file}")
+                with open(nvd_file, "r") as f:
+                    vuln_data = json.load(f)
+                    repo_name = vuln_data["github_data"]["repository"]
+                    if repo_name:
+                        repos.add(repo_name)
             except Exception as e:
-                logger.error(f"Error processing {json_file}: {str(e)}")
-        logger.info(f"Total new repositories found: {len(repos)}")
+                logger.error(f"Error reading NVD file {nvd_file}: {e}")
+        logger.info(f"Found {len(repos)} unique repositories in NVD data.")
         return repos
 
-    def clone_repo(self, repo: str) -> None:
-        if self.interrupted:
-            return
-
-        repo_dir = REPOS_DIR / repo.replace("/", "_")
-        mirror_repo_path = MIRROR_REPOS_DIR / repo.replace("/", "_") # Path to the local mirror repo
+    def clone_repo(self, repo_url: str) -> None:
+        """Clones a single repository."""
+        repo_name = repo_url.replace("/", "_")
+        repo_path = REPOS_DIR / repo_name
 
         with self.lock:
-            if repo in self.state and self.state[repo] in ["success", "failed"]:
-                logger.info(f"Skipping already processed repository: {repo}")
+            if repo_url in self.state and self.state[repo_url] in ["success", "failed"]:
+                logger.info(f"Skipping already processed repository: {repo_url}")
                 return
-            self.state[repo] = "started"
+            self.state[repo_url] = "started"
             self.save_state()
 
-        try:
-            # Check existing directory - now for the *working* repo directory
-            if repo_dir.exists():
-                git_dir = repo_dir / ".git"
-                if git_dir.exists():
-                    logger.info(f"Working repository {repo} already exists and appears valid. Skipping.")
+        if repo_path.exists() and repo_path.is_dir():
+            logger.info(f"Repository directory already exists: {repo_url}")
+            with self.lock:
+                self.state[repo_url] = "success"
+                self.save_state()
+            return
+
+        retry_count = 0
+        while retry_count <= MAX_RETRIES and not self.interrupted:
+            start_time = time()
+            try:
+                logger.info(f"Cloning repository: {repo_url} to {repo_path}")
+                command = [
+                    "/usr/bin/git",
+                    "clone",
+                    f"https://github.com/{repo_url}",
+                    str(repo_path),
+                ]
+                process = subprocess.Popen(
+                    command,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    stdin=subprocess.DEVNULL,
+                    # timeout=GIT_TIMEOUT,
+                )
+                self.active_processes[repo_url] = process  # Track active process
+                stdout, stderr = process.communicate()
+                del self.active_processes[repo_url]  # Remove after completion
+
+                if process.returncode == 0:
+                    logger.info(f"Successfully cloned repository: {repo_url}")
                     with self.lock:
-                        self.state[repo] = "success"
+                        self.state[repo_url] = "success"
+                        self.save_state()
                     return
                 else:
-                    logger.warning(
-                        f"Working repository directory {repo} exists but isn't a git repo. Removing..."
+                    error_message = stderr.decode("utf-8", errors="replace").strip()
+                    logger.error(
+                        f"Failed to clone repository {repo_url} with return code {process.returncode}: {error_message}"
                     )
-                    shutil.rmtree(repo_dir) # Use shutil.rmtree for directory removal
-                    logger.info(f"Removed invalid working repository directory for {repo}")
+                    logger.debug(f"Git clone output: {stdout.decode()}")
+                    retry_count += 1
+                    sleep(RETRY_DELAY)
 
-            if not mirror_repo_path.exists() or not (mirror_repo_path / ".git").exists(): # Check if mirror repo exists
-                logger.error(f"Mirror repository not found at: {mirror_repo_path}. Please ensure mirror repositories are in {MIRROR_REPOS_DIR}")
-                with self.lock:
-                    self.state[repo] = f"failed: mirror repo missing"
-                return
-
-
-            logger.info(f"Cloning working repository to: {repo_dir} from local mirror: {mirror_repo_path}") # Log working repo clone
-
-            process = subprocess.Popen(
-                ["git", "clone", str(mirror_repo_path), str(repo_dir)], # Clone from local mirror (no --mirror)
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-            )
-
-            with self.lock:
-                self.active_processes[repo] = process
-
-            try:
-                stdout, stderr = process.communicate(timeout=GIT_TIMEOUT)
-                result = subprocess.CompletedProcess(
-                    args=process.args,
-                    returncode=process.returncode,
-                    stdout=stdout,
-                    stderr=stderr,
-                )
             except subprocess.TimeoutExpired:
-                process.kill()
-                stdout, stderr = process.communicate()
-                raise subprocess.TimeoutExpired(process.args, GIT_TIMEOUT)
-
-            if result.returncode == 0:
-                logger.info(f"Successfully cloned working repository {repo} from mirror.") # Log working repo clone success
+                logger.error(f"Timeout cloning repository: {repo_url}")
+                retry_count += 1
+                sleep(RETRY_DELAY)
+            except FileNotFoundError:
+                logger.error("Git command not found. Is Git installed and in PATH?")
                 with self.lock:
-                    self.state[repo] = "success"
+                    self.state[repo_url] = "failed: Git not found"
+                    self.save_state()
+                return
+            except Exception as e:
+                logger.error(f"Error cloning repository {repo_url}: {e}")
+                retry_count += 1
+                sleep(RETRY_DELAY)
+            finally:
+                clone_duration = time() - start_time
+                logger.info(
+                    f"Clone attempt for {repo_url} took {clone_duration:.2f} seconds."
+                )
+                if self.interrupted:
+                    logger.warning(
+                        f"Clone process interrupted for {repo_url} after {retry_count} retries."
+                    )
+                    break  # Exit retry loop if interrupted
 
-                # --- Delete the mirror repository after successful working clone ---
-                try:
-                    logger.info(f"Deleting mirror repository: {mirror_repo_path}")
-                    shutil.rmtree(mirror_repo_path) # Use shutil.rmtree to delete the mirror repo directory
-                    logger.info(f"Mirror repository {repo} deleted successfully.")
-                except Exception as e:
-                    logger.error(f"Error deleting mirror repository {repo}: {e}")
-                # --- End mirror repository deletion ---
-
-
-            else:
-                error = result.stderr.decode().strip()
-                logger.error(f"Failed to clone working repository {repo} from mirror: {error}") # Log working repo clone failure
-                logger.debug(f"Git output: {result.stdout.decode()}")
-                with self.lock:
-                    self.state[repo] = f"failed: {error}"
-
-        except subprocess.TimeoutExpired:
-            logger.error(f"Clone from mirror timed out for {repo}")
-            with self.lock:
-                self.state[repo] = "failed: timeout"
-        except Exception as e:
-            logger.error(f"Error cloning working repo from mirror {repo}: {str(e)}", exc_info=True)
-            with self.lock:
-                self.state[repo] = f"failed: {str(e)}"
-        finally:
-            with self.lock:
-                if repo in self.active_processes:
-                    del self.active_processes[repo]
-
-        self.save_state()
+        with self.lock:
+            self.state[repo_url] = f"failed after {MAX_RETRIES} retries"
+            self.save_state()
 
     def process_repos(self):
-        new_repos = self.get_repos_from_nvd()
-        logger.info(f"Total repositories to process: {len(new_repos)}")
+        """Main function to process and clone repositories."""
+        self.repos_to_process = self.get_repos_from_nvd()
+        repos_to_clone = [
+            repo for repo in self.repos_to_process if repo not in self.state
+        ]
 
-        with ThreadPoolExecutor(
-            max_workers=MAX_WORKERS, thread_name_prefix="CloneWorker"
-        ) as executor:
-            self.executor = executor
+        if not repos_to_clone:
+            logger.info("No new repositories to clone.")
+            return
+
+        logger.info(f"Found {len(repos_to_clone)} new repositories to clone.")
+
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            self.executor = executor  # Assign executor to self for interrupt handling
             futures = {
-                executor.submit(self.clone_repo, repo): repo for repo in new_repos
+                executor.submit(self.clone_repo, repo): repo for repo in repos_to_clone
             }
+            with tqdm(total=len(futures), desc="Cloning Repositories") as pbar:
+                for future in as_completed(futures):
+                    repo = futures[future]
+                    try:
+                        future.result()  # Get result to raise any exceptions
+                    except Exception as e:
+                        logger.error(f"Task for {repo} raised an exception: {e}")
+                    finally:
+                        pbar.update(1)
+        self.executor = None  # Reset executor after use
 
-            try:
-                while futures and not self.interrupted:
-                    done, _ = concurrent.futures.wait(
-                        futures.keys(),
-                        timeout=1,
-                        return_when=concurrent.futures.FIRST_COMPLETED,
-                    )
-
-                    for future in done:
-                        repo = futures.pop(future)
-                        try:
-                            future.result()
-                        except Exception as e:
-                            logger.error(
-                                f"Error processing {repo}: {str(e)}", exc_info=True
-                            )
-            except KeyboardInterrupt:
-                self.handle_interrupt(None, None)
-            finally:
-                self.executor = None
-
-        self.save_state()
-        logger.info("Cloning process completed")
-
+        logger.info("Repository cloning process completed.")
         # Summary
-        success = sum(1 for s in self.state.values() if s.startswith("success"))
+        success = sum(1 for s in self.state.values() if s == "success")
         failed = len(self.state) - success
         logger.info(f"Summary - Success: {success}, Failed: {failed}")
-        logger.info(f"Script completed at {datetime.now().isoformat()}")
+        logger.info(f"Script completed at {datetime.datetime.now().isoformat()}")
+
+
+def main():
+    cloner = CloneManager()
+    cloner.process_repos()
+    print("\nRepository cloning complete! Check logs for details.")
 
 
 if __name__ == "__main__":
-    manager = CloneManager()
-    manager.process_repos()
+    main()

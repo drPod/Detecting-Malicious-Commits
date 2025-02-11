@@ -120,7 +120,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         # --- Branch detection logic ---
         default_branch = GIT_RESET_BRANCH  # Fallback to default if detection fails
         try:
-            command_remote_show = ["git", "remote", "show", "origin"]
+            command_remote_show = ["/usr/bin/git", "remote", "show", "origin"]
             process_remote_show = subprocess.Popen(
                 command_remote_show,
                 cwd=repo_path,
@@ -130,7 +130,12 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
             stdout_remote_show, stderr_remote_show = process_remote_show.communicate(
                 timeout=30
             )
-            if not stderr_remote_show:
+            if process_remote_show.returncode != 0:
+                error_message = stderr_remote_show.decode("utf-8", errors="replace")
+                logger.warning(
+                    f"Git remote show failed with return code {process_remote_show.returncode}: {error_message}, using fallback branch."
+                )
+            elif not stderr_remote_show:
                 remote_show_output = stdout_remote_show.decode("utf-8")
                 match = re.search(r"HEAD branch: (.+)", remote_show_output)
                 if match:
@@ -153,7 +158,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
 
         # Find commit before CVE publication date
         command_rev_list = [
-            "git",
+            "/usr/bin/git",
             "rev-list",
             f"--before='{date_str_for_git}'",
             "--max-count=1",
@@ -170,9 +175,11 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         )
         stdout_rev_list, stderr_rev_list = process_rev_list.communicate(timeout=30)
 
-        if stderr_rev_list:
+        if process_rev_list.returncode != 0:
             error_message = stderr_rev_list.decode("utf-8", errors="replace")
-            logger.error(f"Git rev-list error: {error_message}")
+            logger.error(
+                f"Git rev-list error with return code {process_rev_list.returncode}: {error_message}"
+            )
             return False
 
         commit_hash = stdout_rev_list.decode("utf-8").strip()
@@ -183,7 +190,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
             return False
 
         # Reset repository to the found commit
-        command_reset = ["git", "reset", "--hard", commit_hash]
+        command_reset = ["/usr/bin/git", "reset", "--hard", commit_hash]
         logger.debug(
             f"Executing git reset command: {' '.join(command_reset)} in {repo_path}"
         )
@@ -192,9 +199,11 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         )
         stdout_reset, stderr_reset = process_reset.communicate(timeout=30)
 
-        if stderr_reset:
+        if process_reset.returncode != 0:
             error_message = stderr_reset.decode("utf-8", errors="replace")
-            logger.error(f"Git reset error: {error_message}")
+            logger.error(
+                f"Git reset error with return code {process_reset.returncode}: {error_message}"
+            )
             return False
 
         logger.info(
@@ -237,7 +246,7 @@ def clone_working_repo_from_mirror(repo: str) -> bool:
         logger.info(
             f"Cloning working repository from local mirror: {mirror_repo_path} to {repo_dir}"
         )
-        command = ["git", "clone", str(mirror_repo_path), str(repo_dir)]
+        command = ["/usr/bin/git", "clone", str(mirror_repo_path), str(repo_dir)]
         process = subprocess.Popen(
             command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
@@ -251,7 +260,7 @@ def clone_working_repo_from_mirror(repo: str) -> bool:
         else:
             error_message = stderr.decode("utf-8", errors="replace").strip()
             logger.error(
-                f"Failed to clone working repository for {repo} from mirror: {error_message}"
+                f"Failed to clone working repository for {repo} from mirror with return code {process.returncode}: {error_message}"
             )
             logger.debug(f"Git clone output: {stdout.decode()}")
             return False
@@ -465,7 +474,7 @@ def execute_git_blame(
     """
     try:
         command = [
-            "git",
+            "/usr/bin/git",
             "blame",
             "--porcelain",  # Use porcelain format for easier parsing
             "-L",
@@ -480,7 +489,16 @@ def execute_git_blame(
         )
         stdout, stderr = process.communicate(timeout=15)  # Timeout to prevent hanging
 
-        if stderr:
+        if process.returncode != 0:  # Check return code
+            error_message = stderr.decode("utf-8", errors="replace")
+            logger.error(
+                f"Git blame failed with return code {process.returncode}: {error_message}"
+            )
+            return None
+
+        if (
+            stderr
+        ):  # This part might be redundant now with return code check, but keep it for now.
             error_message = stderr.decode("utf-8", errors="replace")
             if (
                 "fatal: file " in error_message
@@ -506,7 +524,9 @@ def execute_git_blame(
         logger.error(f"Git blame timed out for {file_path_in_repo} line {line_number}")
         return None
     except FileNotFoundError:
-        logger.error("Git command not found. Is Git installed and in PATH?")
+        logger.error(
+            "FileNotFoundError: Git command not found. Is Git installed and in PATH?"
+        )  # Changed error message to include FileNotFoundError
         return None
     except Exception as e:
         logger.error(
@@ -516,6 +536,7 @@ def execute_git_blame(
 
 
 def main():
+    logger.info(f"Current PATH environment variable: {os.environ['PATH']}")  # Log PATH
     load_state()  # Load state at start
 
     tokens = (
