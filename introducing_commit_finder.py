@@ -128,44 +128,35 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
         date_str_for_git = cve_published_date.strftime("%Y-%m-%d %H:%M:%S")
 
         # --- Branch detection logic ---
-        default_branch = GIT_RESET_BRANCH  # Fallback to default if detection fails
+        default_branch = GIT_RESET_BRANCH # Fallback to default if detection fails
         try:
-            command_remote_show = ["/usr/bin/git", "remote", "show", "origin"]
+            command_symbolic_ref = [
+                "/usr/bin/git",
+                "symbolic-ref",
+                "refs/remotes/origin/HEAD",
+            ]
             logger.debug(
-                f"Executing git remote show command: {' '.join(command_remote_show)} in {repo_path}"
+                f"Executing git symbolic-ref command: {' '.join(command_symbolic_ref)} in {repo_path}"
             )  # Debug log
-            process_remote_show = subprocess.Popen(
-                command_remote_show,
+            process_symbolic_ref = subprocess.Popen(
+                command_symbolic_ref,
                 cwd=repo_path,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
-            stdout_remote_show, stderr_remote_show = process_remote_show.communicate(
-                timeout=30
-            )
-            if process_remote_show.returncode != 0:
-                error_message = stderr_remote_show.decode("utf-8", errors="replace")
+            stdout_symbolic_ref, stderr_symbolic_ref = process_symbolic_ref.communicate(timeout=30)
+            if process_symbolic_ref.returncode != 0:
+                error_message = stderr_symbolic_ref.decode("utf-8", errors="replace")
                 logger.warning(
-                    f"Git remote show failed with return code {process_remote_show.returncode}: {error_message}, using fallback branch."
+                    f"Git symbolic-ref failed with return code {process_symbolic_ref.returncode}: {error_message}, using fallback branch '{GIT_RESET_BRANCH}'."
                 )
-            elif not stderr_remote_show:
-                remote_show_output = stdout_remote_show.decode("utf-8")
-                match = re.search(r"HEAD branch: (.+)", remote_show_output)
-                if match:
-                    default_branch = match.group(1).strip()
-                    logger.debug(f"Detected default branch: {default_branch}")
-                else:
-                    logger.warning(
-                        "Could not parse default branch from git remote show output, using fallback."
-                    )
             else:
-                logger.warning(
-                    f"Error getting remote info: {stderr_remote_show.decode('utf-8', errors='replace')}, using fallback branch."
-                )
-
+                remote_ref = stdout_symbolic_ref.decode("utf-8").strip()
+                default_branch = remote_ref.split('/')[-1] # Extract branch name
+                logger.debug(f"Detected default branch: {default_branch} from symbolic-ref")
         except Exception as e:
             logger.warning(
-                f"Error detecting default branch: {e}, using fallback branch."
+                f"Error detecting default branch using symbolic-ref: {e}, using fallback branch '{GIT_RESET_BRANCH}'."
             )
         # --- End branch detection logic ---
 
