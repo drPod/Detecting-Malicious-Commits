@@ -80,9 +80,13 @@ def load_state():
             logger.info(
                 f"Loaded state for {len(PROCESSED_PATCHES)} patches from {STATE_FILE}"
             )
-        except (FileNotFoundError, json.JSONDecodeError) as e:
+        except FileNotFoundError:
             logger.warning(
-                f"No valid state file found at {STATE_FILE}, starting from scratch. Error: {e}"
+                f"State file not found at {STATE_FILE}, starting from scratch."
+            )
+        except json.JSONDecodeError as e:
+            logger.error(
+                f"Error decoding JSON from state file {STATE_FILE}: {e}. Starting from scratch."
             )
 
 
@@ -406,6 +410,8 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                             }
                             vulnerable_snippets.append(vuln_info)
 
+        except AttributeError as e:
+            logger.error(f"AttributeError processing diff in {patch_file_path.name}: {str(e)}")
         except Exception as e:
             logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
             continue
@@ -482,6 +488,12 @@ def execute_git_blame(
         logger.error(
             "FileNotFoundError: Git command not found. Is Git installed and in PATH?"
         )  # Changed error message to include FileNotFoundError
+        return None
+    except UnicodeDecodeError as e:
+        logger.error(f"UnicodeDecodeError decoding git blame output: {e}")
+        return None
+    except IndexError as e:
+        logger.error(f"IndexError parsing git blame output: {e}")
         return None
     except Exception as e:
         logger.error(
@@ -574,6 +586,8 @@ def main():
 
                 else:
                     logger.info(f"No vulnerable snippets found in {patch_file.name}")
+            except KeyError as e:
+                logger.error(f"KeyError accessing analysis result: {e}")
             except Exception as e:
                 logger.error(f"Error analyzing {patch_file.name}: {e}")
             finally:
