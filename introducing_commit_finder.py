@@ -5,6 +5,7 @@ from pathlib import Path
 import logging
 import json
 from datetime import datetime
+import dotenv
 from typing import List, Dict, Any, Optional
 from io import StringIO
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -383,6 +384,9 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
 
 def main():
     logger.info(f"Current PATH environment variable: {os.environ['PATH']}")  # Log PATH
+    
+    dotenv.load_dotenv()  # Load environment variables from .env file
+    
     load_state()  # Load state at start
 
     patch_files = list(PATCHES_DIR.glob("*.patch"))
