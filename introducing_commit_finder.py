@@ -31,7 +31,7 @@ OUTPUT_FILE = Path(
 LOG_LEVEL = logging.DEBUG  # Set default log level
 CONTEXT_LINES_BEFORE = 2  # Number of context lines before vulnerable line
 CONTEXT_LINES_AFTER = 3  # Number of context lines after vulnerable line
-MAX_WORKERS = 10  # Number of threads for parallel processing
+MAX_WORKERS = 12  # Number of threads for parallel processing
 
 
 # Setup logging
@@ -338,7 +338,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
 
     for patched_file in patch_set:
         try:
-            file_path_in_repo = patched_file.new_path
+            file_path_in_repo = patched_file.target_file
             for hunk in patched_file:
                 current_hunk_commit_hash = None  # Initialize commit_hash per hunk
                 vulnerable_code_block = []
@@ -376,7 +376,8 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                         if (
                             vulnerable_lines_in_hunk
                             and line == vulnerable_lines_in_hunk[0]
-                            and current_hunk_commit_hash is None  # Check if commit_hash is already obtained for this hunk
+                            and current_hunk_commit_hash
+                            is None  # Check if commit_hash is already obtained for this hunk
                         ):
                             current_hunk_commit_hash = execute_git_blame(
                                 repo_path, file_path_in_repo, current_line
@@ -386,7 +387,13 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                             "snippet": "\n".join(context_lines + vulnerable_code_block),
                             "introducing_commit": current_hunk_commit_hash,  # Use commit_hash obtained for the hunk
                             "cwe_id": cwe_id,
-                            "cve_description": (cve_data.get("vulnerability_details", {}).get("description") if cve_data else None),
+                            "cve_description": (
+                                cve_data.get("vulnerability_details", {}).get(
+                                    "description"
+                                )
+                                if cve_data
+                                else None
+                            ),
                             "line_number": current_line,
                         }
                         vulnerable_snippets.append(vuln_info)
