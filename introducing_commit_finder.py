@@ -106,7 +106,7 @@ def load_cve_data(cve_id: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def reset_repo_to_before_cve_date(repo_path: Path, cve_ Dict[str, Any]) -> bool:
+def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> bool:
     """Resets the git repository to the commit before the CVE publication date."""
     cve_published_date_str = cve_data.get("temporal_data", {}).get("published_date")
     if not cve_published_date_str:
@@ -339,21 +339,27 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
     for patched_file in patch_set:
         try:
             file_path_in_repo = patched_file.target_file
-            print(f"Processing patched_file: {patched_file.target_file}") # DEBUG: Patched file processing start
+            print(
+                f"Processing patched_file: {patched_file.target_file}"
+            )  # DEBUG: Patched file processing start
             for hunk in patched_file:
-                print(f"  Processing hunk: {hunk}") # DEBUG: Hunk processing start
+                print(f"  Processing hunk: {hunk}")  # DEBUG: Hunk processing start
                 current_hunk_commit_hash = None  # Initialize commit_hash per hunk
                 vulnerable_code_block = []
                 context_lines = []
 
                 source_lines_generator = hunk.source_lines()  # Get the generator
                 # Debug: Check generator object itself
-                print(f"  Type of source_lines_generator: {type(source_lines_generator)}")
+                print(
+                    f"  Type of source_lines_generator: {type(source_lines_generator)}"
+                )
                 # Debug: Try to peek at first element of generator (if possible, for debugging only)
                 # try: print(f"  First element of source_lines_generator: {next(iter(source_lines_generator))}")
                 # except StopIteration: print("  source_lines_generator is empty")
-                source_lines = list(source_lines_generator) # Convert generator to a list
-                if ( # Now source_lines is a list, so it's safe to check length and index
+                source_lines = list(
+                    source_lines_generator
+                )  # Convert generator to a list
+                if (  # Now source_lines is a list, so it's safe to check length and index
                     source_lines
                 ):  # Check if source_lines is not empty before accessing elements
                     print(
@@ -363,15 +369,24 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                 vulnerable_lines_in_hunk = [
                     line_content
                     for line_content in source_lines
-                    if hasattr(line_content, 'startswith') and line_content.startswith("-") # Check for hasattr before calling startswith
+                    if hasattr(line_content, "startswith")
+                    and line_content.startswith(
+                        "-"
+                    )  # Check for hasattr before calling startswith
                 ]
-                print(f"  Number of vulnerable_lines_in_hunk: {len(vulnerable_lines_in_hunk)}") # DEBUG: Count vulnerable lines
+                print(
+                    f"  Number of vulnerable_lines_in_hunk: {len(vulnerable_lines_in_hunk)}"
+                )  # DEBUG: Count vulnerable lines
 
                 for line_content in vulnerable_lines_in_hunk:
-                    print(f"    Processing vulnerable line: {line_content}") # DEBUG: Vulnerable line processing start
+                    print(
+                        f"    Processing vulnerable line: {line_content}"
+                    )  # DEBUG: Vulnerable line processing start
                     vulnerable_code_block.append(line_content[1:])  # Remove '-' prefix
-                    print(f"    vulnerable_code_block so far: {vulnerable_code_block}") # DEBUG: vulnerable_code_block content
-                     current_line = hunk.source_start + hunk.source_lines.index(
+                    print(
+                        f"    vulnerable_code_block so far: {vulnerable_code_block}"
+                    )  # DEBUG: vulnerable_code_block content
+                    current_line = hunk.source_start + hunk.source_lines.index(
                         line_content
                     )
 
@@ -405,10 +420,16 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                     ):  # Adjust index to be 0-based
                         # This print statement was not giving output before
                         # print(f"Debugging type of ctx_line.value: {type(ctx_line.value)}")
-                        print(f"      Context line index: {context_line_index}") # DEBUG: Context line index
+                        print(
+                            f"      Context line index: {context_line_index}"
+                        )  # DEBUG: Context line index
                         ctx_line = hunk.source_lines[context_line_index]
-                        print(f"      Type of ctx_line: {type(ctx_line)}") # DEBUG: Type of ctx_line
-                        print(f"      Value of ctx_line: {ctx_line}") # DEBUG: Value of ctx_line (object representation)
+                        print(
+                            f"      Type of ctx_line: {type(ctx_line)}"
+                        )  # DEBUG: Type of ctx_line
+                        print(
+                            f"      Value of ctx_line: {ctx_line}"
+                        )  # DEBUG: Value of ctx_line (object representation)
                         if not ctx_line.value.startswith(
                             (
                                 " ",
