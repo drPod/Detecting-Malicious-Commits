@@ -9,7 +9,7 @@ from typing import List, Dict, Any, Optional
 from io import StringIO
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
-
+import google.generativeai as genai  # For Gemini model integration
 import subprocess  # For running git blame
 
 # --- Configuration ---
@@ -324,32 +324,49 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
 
     vulnerable_snippets: List[Dict[str, Any]] = []  # Initialize vulnerable_snippets here
 
-    # --- Gemini Model Integration Point ---
-    # 1. Call Gemini 2.0 Flash model here to analyze the repository at repo_path
-    #    and identify vulnerable code snippets related to CVE cve_id.
-    # 2. Model should return a list of dictionaries, where each dictionary
-    #    contains details about a vulnerable snippet, including:
-    #    - file_path (str): Path to the file in the repository.
-    #    - line_number (int): Line number of the vulnerability.
-    #    - code_snippet (str): The vulnerable code snippet with context.
-    #    - introducing_commit (str, optional): Commit hash introducing the vulnerability.
-    #    - cwe_id (str, optional): CWE ID if available.
-    #    - cve_description (str, optional): CVE description.
-    #
-    # Example placeholder output (replace with actual model output):
-    # vulnerable_snippets = [
-    #     {
-    #         "file_path": "path/to/vulnerable_file.py",
-    #         "line_number": 123,
-    #         "code_snippet": "vulnerable code line and context...",
-    #         "introducing_commit": "abcdef123456...",
-    #         "cwe_id": "CWE-XXX",
-    #         "cve_description": "Description of the CVE..."
-    #     },
-    #     ...
-    # ]
-    # For now, we are just setting it to empty list.
-    vulnerable_snippets = []
+    # Initialize Gemini model
+    try:
+        genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+        model = genai.GenerativeModel("gemini-2-flash")
+        logger.info("Gemini model initialized successfully.")
+    except Exception as e:
+        logger.error(f"Error initializing Gemini model: {e}")
+        return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": file_path_in_repo}
+
+    # Call Gemini model to analyze repository
+    try:
+        if repo_path and repo_path.exists() and repo_path.is_dir():
+            prompt_text = f"""
+            Analyze the code repository located at {repo_path.absolute()} for vulnerabilities related to CVE ID {cve_id}.
+            Identify vulnerable code snippets, their file paths, line numbers, and provide a short code snippet with context.
+            If possible, determine the commit that introduced each vulnerability and the CWE ID.
+            Return the results in a JSON-like format as a list of dictionaries.
+            Each dictionary should have the following keys: 'file_path', 'line_number', 'code_snippet', 'introducing_commit', 'cwe_id', 'cve_description'.
+            If 'introducing_commit' or 'cwe_id' cannot be determined, leave them as null or empty strings.
+            """
+            response = model.generate_content(prompt_text)
+            gemini_output = response.text
+            logger.debug(f"Gemini Model Output for {cve_id}: {gemini_output}")
+
+            try:
+                vulnerable_snippets_raw = json.loads(gemini_output)
+                if isinstance(vulnerable_snippets_raw, list):
+                    vulnerable_snippets = vulnerable_snippets_raw
+                else:
+                    logger.warning(f"Gemini output for {cve_id} was not parsed as a list, but as: {type(vulnerable_snippets_raw)}. Attempting to use as is.")
+                    vulnerable_snippets = vulnerable_snippets_raw
+
+            except json.JSONDecodeError as e:
+                logger.error(f"Error parsing Gemini JSON output for {cve_id}: {e}. Raw output was: {gemini_output}")
+                vulnerable_snippets = []
+
+        else:
+            logger.warning(f"Repository path {repo_path.absolute()} is invalid, skipping Gemini analysis.")
+            vulnerable_snippets = []
+
+    except Exception as e:
+        logger.error(f"Error calling Gemini model for {cve_id}: {e}")
+        vulnerable_snippets = []
 
     if not vulnerable_snippets:
         logger.info(f"No vulnerable snippets found in {patch_file_path.name}")
