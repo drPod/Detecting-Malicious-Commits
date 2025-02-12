@@ -344,7 +344,16 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                 vulnerable_code_block = []
                 context_lines = []
 
-                source_lines = hunk.source_lines()  # Call the method to get lines
+                source_lines_generator = hunk.source_lines()  # Get the generator
+                source_lines = list(
+                    source_lines_generator
+                )  # Convert generator to a list
+                # if (  # Now source_lines is a list, so it's safe to check length and index
+                #     source_lines
+                # ):  # Check if source_lines is not empty before accessing elements
+                #     print(
+                #         f"Debugging type of source_lines[0] in hunk: {type(source_lines[0])}"
+                #     )
 
                 vulnerable_lines_in_hunk = [
                     line_content
@@ -386,15 +395,20 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                     for context_line_index in range(
                         context_start_index - 1, context_end_index - 1
                     ):  # Adjust index to be 0-based
+                        print(
+                            f"Debugging type of ctx_line.value: {type(ctx_line.value)}"
+                        )
                         ctx_line = hunk.source_lines[context_line_index]
                         if not ctx_line.value.startswith(
                             (
                                 " ",
-                                "+", 
+                                "+",
                                 "-",  # include '-' and '+' to be safe, although context lines should start with " "
                             )
                         ):  # Ensure it's a context line
-                            context_lines.append(ctx_line.value[1:])  # Remove space prefix
+                            context_lines.append(
+                                ctx_line.value[1:]
+                            )  # Remove space prefix
 
                     if repo_path and file_path_in_repo:
                         # Execute git blame for the *first* vulnerable line in the hunk to get the introducing commit, only if not already done for this hunk
