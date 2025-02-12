@@ -345,10 +345,10 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                 context_lines = []
 
                 vulnerable_lines_in_hunk = [
-                    line for line in hunk.lines if line.is_removed
+                    line_content for line_content in hunk.source_lines if line_content.startswith('-')
                 ]
 
-                for line in vulnerable_lines_in_hunk:
+                for line_content in vulnerable_lines_in_hunk:
                     vulnerable_code_block.append(line.value[1:])  # Remove '-' prefix
                     current_line = (
                         hunk.source_start + line.source_line_no - 1
@@ -357,17 +357,17 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                     # Extract context lines from hunk
                     context_start_index = max(
                         1, line.source_line_no - CONTEXT_LINES_BEFORE
-                    )
+                    ) if vulnerable_lines_in_hunk else 1 # avoid error if vulnerable_lines_in_hunk is empty
                     context_end_index = min(
                         len(hunk.source_lines),
-                        line.source_line_no + CONTEXT_LINES_AFTER,
-                    )
+                        (line.source_line_no + CONTEXT_LINES_AFTER) if vulnerable_lines_in_hunk else len(hunk.source_lines), # avoid error if vulnerable_lines_in_hunk is empty
+                    ) if vulnerable_lines_in_hunk else len(hunk.source_lines) # avoid error if vulnerable_lines_in_hunk is empty
                     for context_line_index in range(
                         context_start_index - 1, context_end_index - 1
                     ):  # Adjust index to be 0-based
                         ctx_line = hunk.source_lines[context_line_index]
                         if not ctx_line.startswith(
-                            ("-", "+")
+                            (" ", "+", "-") # include '-' and '+' to be safe, although context lines should start with " "
                         ):  # Ensure it's a context line
                             context_lines.append(ctx_line[1:])  # Remove space prefix
 
