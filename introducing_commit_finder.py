@@ -387,14 +387,14 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                         context_start_index - 1, context_end_index - 1
                     ):  # Adjust index to be 0-based
                         ctx_line = hunk.source_lines[context_line_index]
-                        if not ctx_line.startswith(
+                        if not ctx_line.value.startswith(
                             (
                                 " ",
-                                "+",
+                                "+", 
                                 "-",  # include '-' and '+' to be safe, although context lines should start with " "
                             )
                         ):  # Ensure it's a context line
-                            context_lines.append(ctx_line[1:])  # Remove space prefix
+                            context_lines.append(ctx_line.value[1:])  # Remove space prefix
 
                     if repo_path and file_path_in_repo:
                         # Execute git blame for the *first* vulnerable line in the hunk to get the introducing commit, only if not already done for this hunk
