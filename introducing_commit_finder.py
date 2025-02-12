@@ -340,17 +340,17 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
         try:
             file_path_in_repo = patched_file.target_file
             for hunk in patched_file:
-                print(f"Hunk object: {hunk}")  # Print the hunk object itself
-                print(
-                    f"Type of hunk.source_lines: {type(hunk.source_lines)}"
-                )  # Print the type of hunk.source_lines
+                print(f"Hunk object: {hunk}")
+                print(f"Type of hunk.source_lines: {type(hunk.source_lines)}")
                 current_hunk_commit_hash = None  # Initialize commit_hash per hunk
                 vulnerable_code_block = []
                 context_lines = []
 
+                source_lines = hunk.source_lines() # Call the method to get lines
+
                 vulnerable_lines_in_hunk = [
                     line_content
-                    for line_content in hunk.source_lines
+                    for line_content in source_lines
                     if line_content.startswith("-")
                 ]
 
@@ -358,7 +358,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                     vulnerable_code_block.append(line_content[1:])  # Remove '-' prefix
                     current_line = hunk.source_start + hunk.source_lines.index(
                         line_content
-                    )  # Calculate line number
+                    )
 
                     # Extract context lines from hunk
                     context_start_index = (
@@ -389,13 +389,9 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                         context_start_index - 1, context_end_index - 1
                     ):  # Adjust index to be 0-based
                         ctx_line = hunk.source_lines[context_line_index]
-                        if not ctx_line.startswith(
-                            (
-                                " ",
-                                "+",
-                                "-",
-                            )  # include '-' and '+' to be safe, although context lines should start with " "
-                        ):  # Ensure it's a context line
+                        if not ctx_line.startswith((
+                            " ", "+", "-"  # include '-' and '+' to be safe, although context lines should start with " "
+                        )):  # Ensure it's a context line
                             context_lines.append(ctx_line[1:])  # Remove space prefix
 
                     if repo_path and file_path_in_repo:
