@@ -24,8 +24,8 @@ NVD_DATA_DIR = Path(
 )  # Add NVD data directory
 LOG_FILE = Path(os.environ.get("LOG_FILE", "introducing_commit_finder.log"))
 OUTPUT_FILE = Path(
-    os.environ.get("OUTPUT_FILE", "vulnerable_code_snippets.json")
-)  # Output JSON file for results
+    os.environ.get("OUTPUT_FILE_DIR", "vulnerable_code_snippets")
+)  # Output directory for results
 
 # Script settings
 LOG_LEVEL = logging.DEBUG  # Set default log level
@@ -344,27 +344,48 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
     # Call Gemini model to analyze repository
     try:
         if repo_path and repo_path.exists() and repo_path.is_dir():
+            repo_name_for_prompt = repo_name_from_patch if repo_name_from_patch else "unknown repository"
             prompt_text = f"""
-            Analyze the code repository located at {repo_path.absolute()} for vulnerabilities related to CVE ID {cve_id}.
-            Identify vulnerable code snippets, their file paths, line numbers, and provide a short code snippet with context.
-            If possible, determine the commit that introduced each vulnerability and the CWE ID.
-            Return the results in a JSON-like format as a list of dictionaries.
-            Each dictionary should have the following keys: 'file_path', 'line_number', 'code_snippet', 'introducing_commit', 'cwe_id', 'cve_description'.
-            If 'introducing_commit' or 'cwe_id' cannot be determined, leave them as null or empty strings.
+            Analyze the patch for CVE ID {cve_id} applied to the repository named '{repo_name_for_prompt}'.
+            Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
+            Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
+            Each dictionary should contain 'file_path' and 'line_numbers' keys.
+            'file_path' is the path to the file in the repository.
+            'line_numbers' is a list of integers representing the vulnerable line numbers in that file.
+            Example:
+            ```json
+            [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
+            ```
             """
             response = model.generate_content(prompt_text)
             gemini_output = response.text
             logger.debug(f"Gemini Model Output for {cve_id}: {gemini_output}")
 
             try:
-                vulnerable_snippets_raw = json.loads(gemini_output)
-                if isinstance(vulnerable_snippets_raw, list):
-                    vulnerable_snippets = vulnerable_snippets_raw
+                start_marker = "```json"
+                end_marker = "```"
+                start_index = gemini_output.find(start_marker)
+                end_index = gemini_output.find(end_marker, start_index + len(start_marker))
+
+                if start_index != -1 and end_index != -1:
+                    json_string = gemini_output[start_index + len(start_marker):end_index].strip()
+                    vulnerable_snippets_raw = json.loads(json_string)
+
+                    if isinstance(vulnerable_snippets_raw, list):
+                        vulnerable_snippets = []
+                        for item in vulnerable_snippets_raw:
+                            if isinstance(item, dict) and 'file_path' in item and 'line_numbers' in item:
+                                vulnerable_snippets.append(item)
+                            else:
+                                logger.warning(f"Unexpected item format in Gemini output for {cve_id}: {item}")
+                    else:
+                        logger.warning(
+                            f"Gemini output for {cve_id} was not parsed as a list, but as: {type(vulnerable_snippets_raw)}. Attempting to use as is."
+                        )
+                        vulnerable_snippets = vulnerable_snippets_raw
                 else:
-                    logger.warning(
-                        f"Gemini output for {cve_id} was not parsed as a list, but as: {type(vulnerable_snippets_raw)}. Attempting to use as is."
-                    )
-                    vulnerable_snippets = vulnerable_snippets_raw
+                    logger.warning(f"JSON markers not found in Gemini output for {cve_id}. Raw output was: {gemini_output}")
+                    vulnerable_snippets = []
 
             except json.JSONDecodeError as e:
                 logger.error(
@@ -419,7 +440,7 @@ def main():
         f"Analyzing {len(patch_files_to_process)} new patch files from {PATCHES_DIR.absolute()}..."  # Log absolute path
     )
 
-    output_data = []  # List to store structured output
+    OUTPUT_FILE.mkdir(parents=True, exist_ok=True)  # Create output directory if it doesn't exist
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = {
@@ -437,44 +458,19 @@ def main():
                 analysis_result = future.result()
                 if analysis_result["vulnerable_snippets"]:
                     logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
-                    logger.info("\nVulnerable Code Snippets:")
-                    repo_name_from_patch = analysis_result.get(
-                        "repo_name_from_patch"
-                    )  # Get repo name from result
-                    file_path_in_repo = analysis_result.get(
-                        "file_path_in_repo"
-                    )  # Get file path from result
-                    for vuln_info in analysis_result["vulnerable_snippets"]:
-                        logger.info(
-                            f"Line: {vuln_info['line_number']}, CWE: {vuln_info['cwe_id']}"
-                        )  # Print line number and CWE
-                        logger.info(vuln_info["snippet"])  # Print code snippet
-                        if vuln_info["introducing_commit"]:
-                            logger.info(
-                                f"  Introducing commit (git blame): {vuln_info['introducing_commit']}"
-                            )
-                        else:
-                            logger.info(
-                                "  Introducing commit: Not automatically determined."
-                            )
+                    output_file_path_cve = OUTPUT_FILE / f"{analysis_result['cve_id']}.json"
+                    try:
+                        with open(output_file_path_cve, 'w') as outfile:
+                            json.dump(analysis_result["vulnerable_snippets"], outfile, indent=2)
+                        logger.info(f"Vulnerable lines saved to {output_file_path_cve.absolute()}")
+                    except Exception as e:
+                        logger.error(f"Error saving vulnerable lines to {output_file_path_cve.absolute()}: {e}")
 
-                        logger.info("---")
-
-                        output_data.append(
-                            {  # Add to output data for each snippet
-                                "cve_id": analysis_result["cve_id"],  # Include CVE ID
-                                "file_path": (
-                                    file_path_in_repo if file_path_in_repo else None
-                                ),  # Use file_path_in_repo directly
-                                "line_number": vuln_info["line_number"],
-                                "cwe_id": vuln_info["cwe_id"],
-                                "cve_description": vuln_info["cve_description"],
-                                "code_snippet": vuln_info["snippet"],
-                                "introducing_commit": vuln_info[
-                                    "introducing_commit"
-                                ],  # Add introducing commit to output
-                            }
-                        )
+                    # Log the structured data
+                    for vuln_file_info in analysis_result["vulnerable_snippets"]:
+                        logger.info(f"  File: {vuln_file_info['file_path']}")
+                        logger.info(f"  Vulnerable Lines: {vuln_file_info['line_numbers']}")
+                        logger.info("---")  # Separator for different file info blocks
 
                 else:
                     logger.info(f"No vulnerable snippets found in {patch_file.name}")
@@ -488,11 +484,6 @@ def main():
                 )  # Mark as processed after each file
                 save_state()  # Save state after each file
 
-    with open(OUTPUT_FILE, "w") as outfile:  # Write output data to JSON file
-        json.dump(output_data, outfile, indent=2)
-    logger.info(
-        f"Vulnerable code snippets saved to {OUTPUT_FILE.absolute()}"
-    )  # Log absolute path
 
     logger.info("\nAnalysis completed.")
     logger.info(f"Script finished at {datetime.now().isoformat()}")
