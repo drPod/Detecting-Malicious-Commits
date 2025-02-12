@@ -7,7 +7,6 @@ import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from io import StringIO
-from unidiff import PatchSet  # Import PatchSet from unidiff
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -323,159 +322,34 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset."  # Log absolute path
         )
 
-    try:
-        patch_set = PatchSet(StringIO(patch_content_str))
-    except Exception as e:
-        logger.error(
-            f"Error parsing patch file {patch_file_path.name} with unidiff: {e}"
-        )
-        return {
-            "cve_id": cve_id,
-            "vulnerable_snippets": [],
-            "repo_name_from_patch": repo_name_from_patch,
-            "file_path_in_repo": None,
-        }
+    vulnerable_snippets: List[Dict[str, Any]] = []  # Initialize vulnerable_snippets here
 
-    for patched_file in patch_set:
-        try:
-            file_path_in_repo = patched_file.target_file
-            print(
-                f"Processing patched_file: {patched_file.target_file}"
-            )  # DEBUG: Patched file processing start
-            for hunk in patched_file:
-                print(f"  Processing hunk: {hunk}")  # DEBUG: Hunk processing start
-                current_hunk_commit_hash = None  # Initialize commit_hash per hunk
-                vulnerable_code_block = []
-                context_lines = []
-
-                source_lines_generator = hunk.source_lines()  # Get the generator
-                # Debug: Check generator object itself
-                print(
-                    f"  Type of source_lines_generator: {type(source_lines_generator)}"
-                )
-                # Debug: Try to peek at first element of generator (if possible, for debugging only)
-                # try: print(f"  First element of source_lines_generator: {next(iter(source_lines_generator))}")
-                # except StopIteration: print("  source_lines_generator is empty")
-                source_lines = list(
-                    source_lines_generator
-                )  # Convert generator to a list
-                if (  # Now source_lines is a list, so it's safe to check length and index
-                    source_lines
-                ):  # Check if source_lines is not empty before accessing elements
-                    print(
-                        f"Debugging type of source_lines[0] in hunk: {type(source_lines[0])}"
-                    )
-
-                vulnerable_lines_in_hunk = [
-                    line_content
-                    for line_content in source_lines
-                    if hasattr(line_content, "startswith")
-                    and line_content.startswith(
-                        "-"
-                    )  # Check for hasattr before calling startswith
-                ]
-                print(
-                    f"  Number of vulnerable_lines_in_hunk: {len(vulnerable_lines_in_hunk)}"
-                )  # DEBUG: Count vulnerable lines
-
-                for line_content in vulnerable_lines_in_hunk:
-                    print(
-                        f"    Processing vulnerable line: {line_content}"
-                    )  # DEBUG: Vulnerable line processing start
-                    vulnerable_code_block.append(line_content[1:])  # Remove '-' prefix
-                    print(
-                        f"    vulnerable_code_block so far: {vulnerable_code_block}"
-                    )  # DEBUG: vulnerable_code_block content
-                    current_line = hunk.source_start + hunk.source_lines.index(
-                        line_content
-                    )
-
-                    # Extract context lines from hunk
-                    context_start_index = (
-                        max(
-                            1,
-                            hunk.source_lines.index(line_content)
-                            - CONTEXT_LINES_BEFORE,
-                        )
-                        if vulnerable_lines_in_hunk
-                        else 1
-                    )  # avoid error if vulnerable_lines_in_hunk is empty
-                    context_end_index = (
-                        min(
-                            len(hunk.source_lines),
-                            (
-                                (
-                                    hunk.source_lines.index(line_content)
-                                    + CONTEXT_LINES_AFTER
-                                )
-                                if vulnerable_lines_in_hunk
-                                else len(hunk.source_lines)
-                            ),  # avoid error if vulnerable_lines_in_hunk is empty
-                        )
-                        if vulnerable_lines_in_hunk
-                        else len(hunk.source_lines)
-                    )  # avoid error if vulnerable_lines_in_hunk is empty
-                    for context_line_index in range(
-                        context_start_index - 1, context_end_index - 1
-                    ):  # Adjust index to be 0-based
-                        # This print statement was not giving output before
-                        # print(f"Debugging type of ctx_line.value: {type(ctx_line.value)}")
-                        print(
-                            f"      Context line index: {context_line_index}"
-                        )  # DEBUG: Context line index
-                        ctx_line = hunk.source_lines[context_line_index]
-                        print(
-                            f"      Type of ctx_line: {type(ctx_line)}"
-                        )  # DEBUG: Type of ctx_line
-                        print(
-                            f"      Value of ctx_line: {ctx_line}"
-                        )  # DEBUG: Value of ctx_line (object representation)
-                        if not ctx_line.value.startswith(
-                            (
-                                " ",
-                                "+",
-                                "-",  # include '-' and '+' to be safe, although context lines should start with " "
-                            )
-                        ):  # Ensure it's a context line
-                            context_lines.append(
-                                # ctx_line.value # Original line - might cause error if .value is not string
-                                ctx_line.value[1:]
-                            )  # Remove space prefix
-
-                    if repo_path and file_path_in_repo:
-                        # Execute git blame for the *first* vulnerable line in the hunk to get the introducing commit, only if not already done for this hunk
-                        if (
-                            vulnerable_lines_in_hunk
-                            and line_content == vulnerable_lines_in_hunk[0]
-                            and current_hunk_commit_hash
-                            is None  # Check if commit_hash is already obtained for this hunk
-                        ):
-                            current_hunk_commit_hash = execute_git_blame(
-                                repo_path, file_path_in_repo, current_line
-                            )
-
-                        vuln_info = {
-                            "snippet": "\n".join(context_lines + vulnerable_code_block),
-                            "introducing_commit": current_hunk_commit_hash,  # Use commit_hash obtained for the hunk
-                            "cwe_id": cwe_id,
-                            "cve_description": (
-                                cve_data.get("vulnerability_details", {}).get(
-                                    "description"
-                                )
-                                if cve_data
-                                else None
-                            ),
-                            "line_number": current_line,
-                        }
-                        vulnerable_snippets.append(vuln_info)
-
-        except AttributeError as e:
-            logger.error(
-                f"AttributeError processing diff in {patch_file_path.name}: {str(e)}"
-            )
-        except Exception as e:
-            logger.error(f"Error processing diff in {patch_file_path.name}: {str(e)}")
-            continue
+    # --- Gemini Model Integration Point ---
+    # 1. Call Gemini 2.0 Flash model here to analyze the repository at repo_path
+    #    and identify vulnerable code snippets related to CVE cve_id.
+    # 2. Model should return a list of dictionaries, where each dictionary
+    #    contains details about a vulnerable snippet, including:
+    #    - file_path (str): Path to the file in the repository.
+    #    - line_number (int): Line number of the vulnerability.
+    #    - code_snippet (str): The vulnerable code snippet with context.
+    #    - introducing_commit (str, optional): Commit hash introducing the vulnerability.
+    #    - cwe_id (str, optional): CWE ID if available.
+    #    - cve_description (str, optional): CVE description.
+    #
+    # Example placeholder output (replace with actual model output):
+    # vulnerable_snippets = [
+    #     {
+    #         "file_path": "path/to/vulnerable_file.py",
+    #         "line_number": 123,
+    #         "code_snippet": "vulnerable code line and context...",
+    #         "introducing_commit": "abcdef123456...",
+    #         "cwe_id": "CWE-XXX",
+    #         "cve_description": "Description of the CVE..."
+    #     },
+    #     ...
+    # ]
+    # For now, we are just setting it to empty list.
+    vulnerable_snippets = []
 
     if not vulnerable_snippets:
         logger.info(f"No vulnerable snippets found in {patch_file_path.name}")
@@ -488,79 +362,6 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
     }
 
 
-def execute_git_blame(
-    repo_path: Path, file_path_in_repo: str, line_number: int
-) -> Optional[str]:
-    """
-    Executes git blame command and returns the commit hash.
-    """
-    try:
-        command = [
-            "/usr/bin/git",
-            "blame",
-            "--porcelain",  # Use porcelain format for easier parsing
-            "-L",
-            f"{line_number},{line_number}",
-            file_path_in_repo,
-        ]
-        logger.debug(
-            f"Executing git blame command: {' '.join(command)} in {repo_path}"
-        )  # ADDED LOGGING HERE
-        process = subprocess.Popen(
-            command, cwd=repo_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
-        stdout, stderr = process.communicate(timeout=15)  # Timeout to prevent hanging
-
-        if process.returncode != 0:  # Check return code
-            error_message = stderr.decode("utf-8", errors="replace")
-            logger.error(
-                f"Git blame failed with return code {process.returncode}: {error_message} for file {file_path_in_repo}, line {line_number}"  # More context in error log
-            )
-            return None
-
-        if (
-            stderr
-        ):  # This part might be redundant now with return code check, but keep it for now.
-            error_message = stderr.decode("utf-8", errors="replace")
-            if (
-                "fatal: file " in error_message
-                and "has only" in error_message
-                and "lines" in error_message
-            ):
-                logger.warning(
-                    f"Git blame line number error for {file_path_in_repo} line {line_number}: {error_message.strip()}"
-                )  # Log as warning if line number issue
-            else:  # Log as error for other git blame issues
-                logger.error(
-                    f"Git blame error for {file_path_in_repo} line {line_number}: {stderr.decode('utf-8', errors='replace')}"
-                )
-            return None
-
-        blame_output = stdout.decode()
-        # Parse porcelain output to get commit hash (first line is commit hash)
-        commit_hash_line = blame_output.splitlines()[0]
-        commit_hash = commit_hash_line.split(" ")[0]  # Extract commit hash
-        return commit_hash
-
-    except subprocess.TimeoutExpired:
-        logger.error(f"Git blame timed out for {file_path_in_repo} line {line_number}")
-        return None
-    except FileNotFoundError:
-        logger.error(
-            "FileNotFoundError: Git command not found. Is Git installed and in PATH?"
-        )  # Changed error message to include FileNotFoundError
-        return None
-    except UnicodeDecodeError as e:
-        logger.error(f"UnicodeDecodeError decoding git blame output: {e}")
-        return None
-    except IndexError as e:
-        logger.error(f"IndexError parsing git blame output: {e}")
-        return None
-    except Exception as e:
-        logger.error(
-            f"Error executing git blame for {file_path_in_repo} line {line_number}: {e}"
-        )
-        return None
 
 
 def main():
