@@ -349,18 +349,18 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                 ]
 
                 for line_content in vulnerable_lines_in_hunk:
-                    vulnerable_code_block.append(line.value[1:])  # Remove '-' prefix
+                    vulnerable_code_block.append(line_content[1:])  # Remove '-' prefix
                     current_line = (
-                        hunk.source_start + line.source_line_no - 1
+                        hunk.source_start + hunk.source_lines.index(line_content)
                     )  # Calculate line number
 
                     # Extract context lines from hunk
                     context_start_index = max(
-                        1, line.source_line_no - CONTEXT_LINES_BEFORE
+                        1, hunk.source_lines.index(line_content) - CONTEXT_LINES_BEFORE
                     ) if vulnerable_lines_in_hunk else 1 # avoid error if vulnerable_lines_in_hunk is empty
                     context_end_index = min(
                         len(hunk.source_lines),
-                        (line.source_line_no + CONTEXT_LINES_AFTER) if vulnerable_lines_in_hunk else len(hunk.source_lines), # avoid error if vulnerable_lines_in_hunk is empty
+                        (hunk.source_lines.index(line_content) + CONTEXT_LINES_AFTER) if vulnerable_lines_in_hunk else len(hunk.source_lines), # avoid error if vulnerable_lines_in_hunk is empty
                     ) if vulnerable_lines_in_hunk else len(hunk.source_lines) # avoid error if vulnerable_lines_in_hunk is empty
                     for context_line_index in range(
                         context_start_index - 1, context_end_index - 1
@@ -375,7 +375,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                         # Execute git blame for the *first* vulnerable line in the hunk to get the introducing commit, only if not already done for this hunk
                         if (
                             vulnerable_lines_in_hunk
-                            and line == vulnerable_lines_in_hunk[0]
+                            and line_content == vulnerable_lines_in_hunk[0]
                             and current_hunk_commit_hash
                             is None  # Check if commit_hash is already obtained for this hunk
                         ):
