@@ -323,16 +323,23 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset."  # Log absolute path
         )
 
-    vulnerable_snippets: List[Dict[str, Any]] = []  # Initialize vulnerable_snippets here
+    vulnerable_snippets: List[Dict[str, Any]] = (
+        []
+    )  # Initialize vulnerable_snippets here
 
     # Initialize Gemini model
     try:
         genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-        model = genai.GenerativeModel("gemini-2-flash")
+        model = genai.GenerativeModel("gemini-2.0-flash")
         logger.info("Gemini model initialized successfully.")
     except Exception as e:
         logger.error(f"Error initializing Gemini model: {e}")
-        return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": file_path_in_repo}
+        return {
+            "cve_id": cve_id,
+            "vulnerable_snippets": [],
+            "repo_name_from_patch": repo_name_from_patch,
+            "file_path_in_repo": file_path_in_repo,
+        }
 
     # Call Gemini model to analyze repository
     try:
@@ -354,15 +361,21 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
                 if isinstance(vulnerable_snippets_raw, list):
                     vulnerable_snippets = vulnerable_snippets_raw
                 else:
-                    logger.warning(f"Gemini output for {cve_id} was not parsed as a list, but as: {type(vulnerable_snippets_raw)}. Attempting to use as is.")
+                    logger.warning(
+                        f"Gemini output for {cve_id} was not parsed as a list, but as: {type(vulnerable_snippets_raw)}. Attempting to use as is."
+                    )
                     vulnerable_snippets = vulnerable_snippets_raw
 
             except json.JSONDecodeError as e:
-                logger.error(f"Error parsing Gemini JSON output for {cve_id}: {e}. Raw output was: {gemini_output}")
+                logger.error(
+                    f"Error parsing Gemini JSON output for {cve_id}: {e}. Raw output was: {gemini_output}"
+                )
                 vulnerable_snippets = []
 
         else:
-            logger.warning(f"Repository path {repo_path.absolute()} is invalid, skipping Gemini analysis.")
+            logger.warning(
+                f"Repository path {repo_path.absolute()} is invalid, skipping Gemini analysis."
+            )
             vulnerable_snippets = []
 
     except Exception as e:
@@ -380,13 +393,11 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
     }
 
 
-
-
 def main():
     logger.info(f"Current PATH environment variable: {os.environ['PATH']}")  # Log PATH
-    
+
     dotenv.load_dotenv()  # Load environment variables from .env file
-    
+
     load_state()  # Load state at start
 
     patch_files = list(PATCHES_DIR.glob("*.patch"))
