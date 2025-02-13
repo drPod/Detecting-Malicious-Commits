@@ -1,6 +1,7 @@
 # This script uses the patches/ directory to find vulnerability introducing commits for each CVE.
 import os
 import re
+import time
 from pathlib import Path
 import logging
 import json
@@ -278,7 +279,7 @@ def analyze_with_gemini(
     repo_name_from_patch: str,
     cve_id: str,
     patch_file_path: Path,
-    model,
+    models,
 ):  # Removed logger parameter as it's globally available
     """
     Analyzes a patch using the Gemini model to identify vulnerable code snippets.
@@ -341,24 +342,50 @@ def analyze_with_gemini(
             f"Prompt sent to Gemini API for {cve_id}: {prompt_text}"
         )  # Log full prompt
 
-        try:  # Inner try for Gemini API interaction
-            response = model.generate_content(prompt_text)
-            logger.debug(
-                f"Gemini API Response object for {cve_id}: {response}"
-            )  # Log response object
-            gemini_output = response.text
-            logger.debug(
-                f"Gemini Model Output for {cve_id}:\n{gemini_output}"
-            )  # Log with newline for readability
+        gemini_output = None
+        for model_name in models:
+            retry_count = 0
+            max_retries = 15
+            base_delay = 1  # seconds
 
-        except Exception as e:  # Catch Gemini specific errors
-            logger.error(f"Error communicating with Gemini API for {cve_id}: {e}")
-            return {
-                "cve_id": cve_id,
-                "vulnerable_snippets": [],
-                "repo_name_from_patch": repo_name_from_patch,
-                "file_path_in_repo": None,
-            }
+            while retry_count <= max_retries:
+                current_model = genai.GenerativeModel(model_name)
+                try:  # Inner try for Gemini API interaction
+                    logger.info(
+                        f"Using Gemini model '{model_name}' for CVE: {cve_id}, attempt {retry_count + 1}"
+                    )
+                    response = current_model.generate_content(prompt_text)
+                    logger.debug(
+                        f"Gemini API Response object for {cve_id} with model '{model_name}': {response}"
+                    )  # Log response object
+                    gemini_output = response.text
+                    logger.debug(
+                        f"Gemini Model Output for {cve_id} with model '{model_name}':\n{gemini_output}"
+                    )  # Log with newline for readability
+                    break  # Successful API call, exit retry loop
+
+                except Exception as e:  # Catch Gemini specific errors, specifically rate limit errors
+                    if "exceeded quota" in str(e) or "RateLimitError" in str(e):  # Adjust error checking as needed
+                        retry_count += 1
+                        if retry_count <= max_retries:
+                            delay = base_delay * (2**retry_count)  # Exponential backoff
+                            logger.warning(
+                                f"Rate limit encountered for model '{model_name}' on CVE: {cve_id}, retry {retry_count}/{max_retries}. Waiting {delay} seconds before retrying."
+                            )
+                            time.sleep(delay)
+                        else:
+                            logger.error(
+                                f"Max retries reached for model '{model_name}' on CVE: {cve_id} due to rate limits. Switching to next model if available."
+                            )
+                            break  # Move to the next model
+                    else:
+                        logger.error(f"Error communicating with Gemini API for {cve_id} using model '{model_name}' (non-rate-limit error): {e}")
+                        return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None} # Non-rate-limit error, no retry or model switch for now
+            if gemini_output: # if gemini_output is not None, it means we got a valid response from one of the models
+                break # exit model loop as well
+        if not gemini_output: # if after trying all models, we still don't have output, then return error
+            logger.error(f"Failed to get Gemini output for CVE: {cve_id} after trying all models and retries.")
+            return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None}
 
         try:  # JSON parsing
             logger.debug(
@@ -520,7 +547,7 @@ def analyze_with_gemini(
     }
 
 
-def analyze_patch_file(patch_file_path: Path, model):  # Added model parameter
+def analyze_patch_file(patch_file_path: Path, models):  # Added models parameter
     """
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
@@ -606,7 +633,7 @@ def analyze_patch_file(patch_file_path: Path, model):  # Added model parameter
     )  # Initialize vulnerable_snippets here
 
     return analyze_with_gemini(
-        repo_path, repo_name_from_patch, cve_id, patch_file_path, model
+        repo_path, repo_name_from_patch, cve_id, patch_file_path, models
     )  # Pass model parameter
 
 
@@ -636,14 +663,18 @@ def main():
         f"Analyzing {len(patch_files_to_process)} new patch files from {PATCHES_DIR.absolute()}..."  # Log absolute path
     )
 
-    # Initialize Gemini model in main function
+    # Initialize Gemini models in main function
+    gemini_models_to_try = [
+        "gemini-2.0-flash",
+        "gemini-2.0-flash-exp",
+        "gemini-2.0-flash-lite",
+        "gemini-1.5-flash-exp",
+    ]
     try:
         genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-        gemini_model = genai.GenerativeModel("gemini-2.0-flash")
-        logger.info("Gemini model initialized successfully in main.")
+        logger.info("Gemini API configured successfully in main.")
     except Exception as e:
         logger.error(f"Error initializing Gemini model in main: {e}")
-        gemini_model = None  # Handle case where model initialization fails
 
     OUTPUT_FILE.mkdir(
         parents=True, exist_ok=True
@@ -658,7 +689,7 @@ def main():
                 executor.submit(
                     analyze_patch_file,
                     patch_file,
-                    gemini_model,  # Pass initialized Gemini model
+                    gemini_models_to_try,  # Pass list of Gemini models
                 ): patch_file  # Removed token_manager from function call
                 for patch_file in patch_files_to_process
             }
