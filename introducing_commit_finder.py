@@ -184,14 +184,18 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
             return False
 
         commit_hash = stdout_rev_list.decode("utf-8").strip()
-        if not commit_hash and default_branch == 'main': # If no commit found on 'main', try 'master'
-            logger.debug(f"No commit found on 'main' branch, trying 'master' as fallback.")
+        if (
+            not commit_hash and default_branch == "main"
+        ):  # If no commit found on 'main', try 'master'
+            logger.debug(
+                f"No commit found on 'main' branch, trying 'master' as fallback."
+            )
             command_rev_list_master = [
                 "/usr/bin/git",
                 "rev-list",
                 f"--before='{date_str_for_git}'",
                 "--max-count=1",
-                "master", # Trying 'master' branch
+                "master",  # Trying 'master' branch
             ]
             process_rev_list_master = subprocess.Popen(
                 command_rev_list_master,
@@ -199,11 +203,15 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
-            stdout_rev_list_master, stderr_rev_list_master = process_rev_list_master.communicate(timeout=30)
+            stdout_rev_list_master, stderr_rev_list_master = (
+                process_rev_list_master.communicate(timeout=30)
+            )
             if process_rev_list_master.returncode == 0:
                 commit_hash = stdout_rev_list_master.decode("utf-8").strip()
                 if commit_hash:
-                    default_branch = 'master' # Update default_branch to 'master' if commit found
+                    default_branch = (
+                        "master"  # Update default_branch to 'master' if commit found
+                    )
                     logger.info(f"Found commit on 'master' branch as fallback.")
                 else:
                     logger.warning(f"No commit found on 'master' branch either.")
@@ -265,7 +273,9 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
         return None
 
 
-def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model): # Removed logger parameter as it's globally available
+def analyze_with_gemini(
+    repo_path, repo_name_from_patch, cve_id, patch_file_path, model
+):  # Removed logger parameter as it's globally available
     """
     Analyzes a patch using the Gemini model to identify vulnerable code snippets.
     """
@@ -276,10 +286,13 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
         if not repo_path or not repo_path.exists() or not repo_path.is_dir():
             raise ValueError(f"Invalid repository path: {repo_path}")
 
-        repo_name_for_prompt = (
-            "".join(c if c.isalnum() or c in [".", "_", "-"] else "_" for c in repo_name_from_patch or "unknown_repository")
+        repo_name_for_prompt = "".join(
+            c if c.isalnum() or c in [".", "_", "-"] else "_"
+            for c in repo_name_from_patch or "unknown_repository"
         )
-        cve_id_for_prompt = "".join(c if c.isalnum() or c in [".", "_", "-"] else "_" for c in cve_id)
+        cve_id_for_prompt = "".join(
+            c if c.isalnum() or c in [".", "_", "-"] else "_" for c in cve_id
+        )
 
         prompt_text = f"""
         Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
@@ -299,9 +312,11 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
         try:  # Inner try for Gemini API interaction
             response = model.generate_content(prompt_text)
             gemini_output = response.text
-            logger.debug(f"Gemini Model Output for {cve_id}:\n{gemini_output}") # Log with newline for readability
+            logger.debug(
+                f"Gemini Model Output for {cve_id}:\n{gemini_output}"
+            )  # Log with newline for readability
 
-        except Exception as e: # Catch Gemini specific errors
+        except Exception as e:  # Catch Gemini specific errors
             logger.error(f"Error communicating with Gemini API for {cve_id}: {e}")
             return {
                 "cve_id": cve_id,
@@ -310,31 +325,43 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
                 "file_path_in_repo": None,
             }
 
-        try: # JSON parsing
+        try:  # JSON parsing
             start_marker = "```json"
             end_marker = "```"
             start_index = gemini_output.find(start_marker)
             end_index = gemini_output.find(end_marker, start_index + len(start_marker))
 
             if start_index != -1 and end_index != -1:
-                json_string = gemini_output[start_index + len(start_marker):end_index].strip()
+                json_string = gemini_output[
+                    start_index + len(start_marker) : end_index
+                ].strip()
                 vulnerable_snippets_raw = json.loads(json_string)
 
                 if not isinstance(vulnerable_snippets_raw, list):
-                    raise TypeError(f"Gemini output not a list: {type(vulnerable_snippets_raw)}")
+                    raise TypeError(
+                        f"Gemini output not a list: {type(vulnerable_snippets_raw)}"
+                    )
 
                 for item in vulnerable_snippets_raw:
-                    if not isinstance(item, dict) or "file_path" not in item or "line_numbers" not in item:
-                        raise ValueError(f"Invalid item format in Gemini output: {item}")
+                    if (
+                        not isinstance(item, dict)
+                        or "file_path" not in item
+                        or "line_numbers" not in item
+                    ):
+                        raise ValueError(
+                            f"Invalid item format in Gemini output: {item}"
+                        )
                     vulnerable_snippets.append(item)
             else:
                 raise ValueError("JSON markers not found in Gemini output.")
 
         except (json.JSONDecodeError, TypeError, ValueError) as e:
-            logger.error(f"Error processing Gemini output for {cve_id}: {e}. Raw output:\n{gemini_output}") # Include raw output in error log
+            logger.error(
+                f"Error processing Gemini output for {cve_id}: {e}. Raw output:\n{gemini_output}"
+            )  # Include raw output in error log
             # vulnerable_snippets remains empty
 
-    except ValueError as e: # For repo path issues
+    except ValueError as e:  # For repo path issues
         logger.warning(str(e))  # Log the specific error message
         # vulnerable_snippets remains empty
 
@@ -343,7 +370,11 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
         # vulnerable_snippets remains empty
 
     if not vulnerable_snippets:
-        logger.info(f"No vulnerable snippets found in {patch_file_path.name if patch_file_path else 'unknown patch file'}")
+        logger.info(
+            f"No vulnerable snippets found in {patch_file_path.name if patch_file_path else 'unknown patch file'}"
+        )
+        # If there's no vulnerable snippets, log the gemini output
+        logger.debug(f"Gemini output for {cve_id}: {gemini_output}")
 
     return {
         "cve_id": cve_id,
@@ -351,6 +382,7 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
         "repo_name_from_patch": repo_name_from_patch,
         "file_path_in_repo": None,
     }
+
 
 def analyze_patch_file(patch_file_path: Path, model):  # Added model parameter
     """
@@ -437,7 +469,9 @@ def analyze_patch_file(patch_file_path: Path, model):  # Added model parameter
         []
     )  # Initialize vulnerable_snippets here
 
-    return analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model) # Pass model parameter
+    return analyze_with_gemini(
+        repo_path, repo_name_from_patch, cve_id, patch_file_path, model
+    )  # Pass model parameter
 
 
 def main():
@@ -473,7 +507,7 @@ def main():
         logger.info("Gemini model initialized successfully in main.")
     except Exception as e:
         logger.error(f"Error initializing Gemini model in main: {e}")
-        gemini_model = None # Handle case where model initialization fails
+        gemini_model = None  # Handle case where model initialization fails
 
     OUTPUT_FILE.mkdir(
         parents=True, exist_ok=True
@@ -488,7 +522,7 @@ def main():
                 executor.submit(
                     analyze_patch_file,
                     patch_file,
-                    gemini_model # Pass initialized Gemini model
+                    gemini_model,  # Pass initialized Gemini model
                 ): patch_file  # Removed token_manager from function call
                 for patch_file in patch_files_to_process
             }
