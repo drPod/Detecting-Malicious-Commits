@@ -301,6 +301,7 @@ def analyze_with_gemini(
         )
 
         prompt_text = f"""
+        [DEBUG PROMPT START]
         Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
         Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
         Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
@@ -311,12 +312,14 @@ def analyze_with_gemini(
         ```json
         [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
         ```
+        [DEBUG PROMPT END]
         """
 
         logger.debug(f"Prompt sent to Gemini API for {cve_id}: {prompt_text}")
 
         try:  # Inner try for Gemini API interaction
             response = model.generate_content(prompt_text)
+            logger.debug(f"Gemini API Response object for {cve_id}: {response}") # Log response object
             gemini_output = response.text
             logger.debug(
                 f"Gemini Model Output for {cve_id}:\n{gemini_output}"
@@ -332,6 +335,7 @@ def analyze_with_gemini(
             }
 
         try:  # JSON parsing
+            logger.debug(f"Attempting to parse JSON from Gemini output for {cve_id}") # Debug log before parsing
             start_marker = "```json"
             end_marker = "```"
             start_index = gemini_output.find(start_marker)
@@ -360,6 +364,7 @@ def analyze_with_gemini(
                     vulnerable_snippets.append(item)
             else:
                 raise ValueError("JSON markers not found in Gemini output.")
+            logger.debug(f"Successfully parsed JSON and found vulnerable snippets for {cve_id}: {vulnerable_snippets}") # Debug log after parsing success
 
         except (json.JSONDecodeError, TypeError, ValueError) as e:
             logger.error(
@@ -374,6 +379,8 @@ def analyze_with_gemini(
     except Exception as e:  # Catch any other unexpected exceptions
         logger.error(f"Unexpected error during Gemini analysis for {cve_id}: {e}")
         # vulnerable_snippets remains empty
+
+    logger.debug(f"Vulnerable snippets after Gemini analysis for {cve_id}: {vulnerable_snippets}") # Log vulnerable_snippets before return
 
     # Git blame analysis to find introducing commits
     if vulnerable_snippets and repo_path and (repo_path / ".git").exists():
