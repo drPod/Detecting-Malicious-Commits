@@ -391,7 +391,7 @@ def analyze_with_gemini(
                     )  # Log response object
                     gemini_output = response.text
                     logger.debug(
-                        f"Gemini Model Output for {cve_id} with model '{model_name}':\n{gemini_output}"
+                        f"Gemini Model Output (Initial) for {cve_id} with model '{model_name}':\n{gemini_output}"
                     )  # Log with newline for readability
                     break  # Successful API call, exit retry loop
 
@@ -410,7 +410,19 @@ def analyze_with_gemini(
                             )
                             break  # Move to the next model
                     else:
-                        logger.error(f"Error communicating with Gemini API for {cve_id} using model '{model_name}' (non-rate-limit error): {e}")
+                        error_type = type(e).__name__
+                        error_message = str(e)
+                        if "BlockedPromptError" in error_type:
+                            log_level = logger.warning
+                        else:
+                            log_level = logger.error # Default to error for other unexpected issues
+                        log_level(f"Error communicating with Gemini API for CVE {cve_id} using model '{model_name}' ({error_type}): {error_message}")
+                        if isinstance(e, google.api_core.exceptions.ServiceUnavailable): # Explicitly check for ServiceUnavailable
+                            logger.warning(f"ServiceUnavailable error (HTTP 503) encountered for model '{model_name}' on CVE: {cve_id}. Consider retrying or switching models.")
+                        elif isinstance(e, google.api_core.exceptions.InternalServerError): # Explicitly check for InternalServerError
+                            logger.error(f"InternalServerError (HTTP 500) from Gemini API for CVE {cve_id} using model '{model_name}'. This indicates a server-side issue.")
+                        elif isinstance(e, google.generativeai.types.generation_types.BlockedPromptError):
+                            logger.warning(f"Gemini API blocked the prompt for CVE {cve_id} using model '{model_name}'. Review prompt or model.")
                         return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None} # Non-rate-limit error, no retry or model switch for now
             if gemini_output: # if gemini_output is not None, it means we got a valid response from one of the models
                 break # exit model loop as well
@@ -470,6 +482,10 @@ def analyze_with_gemini(
                         response = current_model.generate_content(follow_up_prompt_text)
                         gemini_output = response.text
                         logger.debug(f"Gemini Follow-up Response for CVE {cve_id}, attempt {follow_up_attempt}:\n{gemini_output}")
+                        if json_parsed_successfully: # Log successful follow-up output
+                            logger.debug(
+                                f"Gemini Follow-up Output (Successfully Parsed JSON) for CVE {cve_id}, attempt {follow_up_attempt}:\n{gemini_output}"
+                            )
                     except Exception as follow_up_e:
                         logger.error(f"Error during Gemini follow-up attempt {follow_up_attempt} for CVE {cve_id}: {follow_up_e}")
                         break # If follow-up request fails, break the loop
