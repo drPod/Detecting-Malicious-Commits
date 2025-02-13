@@ -366,7 +366,7 @@ def analyze_with_gemini(
                     break  # Successful API call, exit retry loop
 
                 except Exception as e:  # Catch Gemini specific errors, specifically rate limit errors
-                    if "exceeded quota" in str(e) or "RateLimitError" in str(e):  # Adjust error checking as needed
+                    if "exceeded quota" in str(e) or "RateLimitError" in str(e) or "429" in str(e):  # Adjust error checking as needed, include HTTP 429
                         retry_count += 1
                         if retry_count <= max_retries:
                             delay = min(base_delay * (2**retry_count), max_delay)  # Exponential backoff with max cap
@@ -388,7 +388,7 @@ def analyze_with_gemini(
             logger.error(f"Failed to get Gemini output for CVE: {cve_id} after trying all models and retries.")
             return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None}
 
-        max_follow_up_attempts = 1
+        max_follow_up_attempts = 2  # Increased to 2 attempts
         follow_up_attempt = 0
         json_parsed_successfully = False # Flag to track successful parsing
 
@@ -447,11 +447,11 @@ def analyze_with_gemini(
                 if follow_up_attempt < max_follow_up_attempts: # Check if follow-up is allowed
                     follow_up_attempt += 1
                     follow_up_prompt_text = (
-                        f"The JSON output you provided for CVE {cve_id} was invalid or not in the expected format. "
-                        f"Specifically, parsing failed because: {e}. " # Include the parsing error in the follow-up prompt
-                        "Please provide a corrected JSON response enclosed in ```json and ``` markers. "
+                        f"Your JSON response for CVE {cve_id} was invalid and could not be parsed. "  # More direct and less accusatory tone
+                        f"Specifically, parsing failed because: {e}. "  # Include the parsing error in the follow-up prompt
+                        "Please provide a **corrected**, **valid** JSON response, **strictly** enclosed in ```json and ``` markers. "  # Stronger emphasis on correction and markers
                         "Ensure it is valid JSON and conforms to the format: "
-                        '[{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]. '
+                        '[{{"file_path": "path/to/file.c", "line_numbers": [123, 125]}}, {{"file_path": "another/file.java", "line_numbers": [50]}}]. '  # Added escaped quotes for clarity in prompt, and curly braces for example
                         "Only return the JSON, without any extra text or comments outside the JSON block."
                     )
                     logger.info(f"Sending follow-up prompt to Gemini for CVE {cve_id}, attempt {follow_up_attempt}: {follow_up_prompt_text}")
@@ -468,7 +468,7 @@ def analyze_with_gemini(
                         break # If follow-up request fails, break the loop
 
                     if not gemini_output: # If no output from follow-up, break
-                        logger.error(f"No Gemini output received for follow-up attempt {follow_up_attempt} for CVE {cve_id}.")
+                        logger.warning(f"No Gemini output received for follow-up attempt {follow_up_attempt} for CVE {cve_id}.")  # Changed to warning as it's not necessarily an error, just no response
                         break # No output from follow-up, break the loop to avoid infinite loop
 
                 else: # Max follow-up attempts reached
