@@ -150,7 +150,7 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
                 default_branch = remote_ref.split("/")[-1]  # Extract branch name
                 logger.debug(
                     f"Detected default branch: {default_branch} from symbolic-ref"
-                )
+                )  # Debug log
         except Exception as e:
             logger.warning(
                 f"Error detecting default branch using symbolic-ref: {e}, using fallback branch 'main'."
@@ -184,6 +184,29 @@ def reset_repo_to_before_cve_date(repo_path: Path, cve_data: Dict[str, Any]) -> 
             return False
 
         commit_hash = stdout_rev_list.decode("utf-8").strip()
+        if not commit_hash and default_branch == 'main': # If no commit found on 'main', try 'master'
+            logger.debug(f"No commit found on 'main' branch, trying 'master' as fallback.")
+            command_rev_list_master = [
+                "/usr/bin/git",
+                "rev-list",
+                f"--before='{date_str_for_git}'",
+                "--max-count=1",
+                "master", # Trying 'master' branch
+            ]
+            process_rev_list_master = subprocess.Popen(
+                command_rev_list_master,
+                cwd=repo_path,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            stdout_rev_list_master, stderr_rev_list_master = process_rev_list_master.communicate(timeout=30)
+            if process_rev_list_master.returncode == 0:
+                commit_hash = stdout_rev_list_master.decode("utf-8").strip()
+                if commit_hash:
+                    default_branch = 'master' # Update default_branch to 'master' if commit found
+                    logger.info(f"Found commit on 'master' branch as fallback.")
+                else:
+                    logger.warning(f"No commit found on 'master' branch either.")
         if not commit_hash:
             logger.warning(
                 f"No commit found before CVE publication date: {date_str_for_git} on branch '{default_branch}'"
@@ -242,7 +265,7 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
         return None
 
 
-def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model, logger):
+def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model): # Removed logger parameter as it's globally available
     """
     Analyzes a patch using the Gemini model to identify vulnerable code snippets.
     """
@@ -276,7 +299,7 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
         try:  # Inner try for Gemini API interaction
             response = model.generate_content(prompt_text)
             gemini_output = response.text
-            logger.debug(f"Gemini Model Output for {cve_id}: {gemini_output}")
+            logger.debug(f"Gemini Model Output for {cve_id}:\n{gemini_output}") # Log with newline for readability
 
         except Exception as e: # Catch Gemini specific errors
             logger.error(f"Error communicating with Gemini API for {cve_id}: {e}")
@@ -308,7 +331,7 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
                 raise ValueError("JSON markers not found in Gemini output.")
 
         except (json.JSONDecodeError, TypeError, ValueError) as e:
-            logger.error(f"Error processing Gemini output for {cve_id}: {e}. Raw output: {gemini_output}")
+            logger.error(f"Error processing Gemini output for {cve_id}: {e}. Raw output:\n{gemini_output}") # Include raw output in error log
             # vulnerable_snippets remains empty
 
     except ValueError as e: # For repo path issues
@@ -414,21 +437,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
         []
     )  # Initialize vulnerable_snippets here
 
-    # Initialize Gemini model
-    try:
-        genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-        model = genai.GenerativeModel("gemini-2.0-flash")
-        logger.info("Gemini model initialized successfully.")
-    except Exception as e:
-        logger.error(f"Error initializing Gemini model: {e}")
-        return {
-            "cve_id": cve_id,
-            "vulnerable_snippets": [],
-            "repo_name_from_patch": repo_name_from_patch,
-            "file_path_in_repo": file_path_in_repo,
-        }
-
-    return analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model, logger)
+    return analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, gemini_model) # Pass initialized model
 
 
 def main():
@@ -457,6 +466,15 @@ def main():
         f"Analyzing {len(patch_files_to_process)} new patch files from {PATCHES_DIR.absolute()}..."  # Log absolute path
     )
 
+    # Initialize Gemini model in main function
+    try:
+        genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+        gemini_model = genai.GenerativeModel("gemini-2.0-flash")
+        logger.info("Gemini model initialized successfully in main.")
+    except Exception as e:
+        logger.error(f"Error initializing Gemini model in main: {e}")
+        gemini_model = None # Handle case where model initialization fails
+
     OUTPUT_FILE.mkdir(
         parents=True, exist_ok=True
     )  # Create output directory if it doesn't exist
@@ -470,6 +488,7 @@ def main():
                 executor.submit(
                     analyze_patch_file,
                     patch_file,
+                    gemini_model # Pass initialized Gemini model
                 ): patch_file  # Removed token_manager from function call
                 for patch_file in patch_files_to_process
             }
