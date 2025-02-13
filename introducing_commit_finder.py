@@ -274,7 +274,11 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
 
 
 def analyze_with_gemini(
-    repo_path: Path, repo_name_from_patch: str, cve_id: str, patch_file_path: Path, model
+    repo_path: Path,
+    repo_name_from_patch: str,
+    cve_id: str,
+    patch_file_path: Path,
+    model,
 ):  # Removed logger parameter as it's globally available
     """
     Analyzes a patch using the Gemini model to identify vulnerable code snippets.
@@ -344,7 +348,7 @@ def analyze_with_gemini(
                         f"Gemini output not a list: {type(vulnerable_snippets_raw)}"
                     )
 
-                for item in vulnerable_snippets_raw: # type: ignore
+                for item in vulnerable_snippets_raw:  # type: ignore
                     if (
                         not isinstance(item, dict)
                         or "file_path" not in item
@@ -385,7 +389,9 @@ def analyze_with_gemini(
                 )  # Keep snippet info, but no blame
                 continue
 
-            introducing_commits_for_file: Dict[int, str] = {} # line_number: commit_hash
+            introducing_commits_for_file: Dict[int, str] = (
+                {}
+            )  # line_number: commit_hash
             for line_number in snippet["line_numbers"]:
                 try:
                     command_blame = [
@@ -393,7 +399,7 @@ def analyze_with_gemini(
                         "blame",
                         "-L",
                         f"{line_number},{line_number}",
-                        "--porcelain", # for easier parsing
+                        "--porcelain",  # for easier parsing
                         str(snippet["file_path"]),
                     ]
                     logger.debug(
@@ -412,11 +418,15 @@ def analyze_with_gemini(
                         logger.error(
                             f"Git blame error for {cve_id}, file {snippet['file_path']}, line {line_number} with return code {process_blame.returncode}: {error_message}"
                         )
-                        introducing_commits_for_file[line_number] = "blame_error" # Indicate blame error
+                        introducing_commits_for_file[line_number] = (
+                            "blame_error"  # Indicate blame error
+                        )
                     else:
                         blame_output = stdout_blame.decode("utf-8", errors="replace")
                         # Parse git blame porcelain output to get commit hash
-                        commit_hash_match = re.search(r"^([0-9a-f]{40}) ", blame_output, re.MULTILINE)
+                        commit_hash_match = re.search(
+                            r"^([0-9a-f]{40}) ", blame_output, re.MULTILINE
+                        )
                         if commit_hash_match:
                             commit_hash = commit_hash_match.group(1)
                             introducing_commits_for_file[line_number] = commit_hash
@@ -427,27 +437,41 @@ def analyze_with_gemini(
                             logger.warning(
                                 f"Could not parse commit hash from git blame output for {cve_id}, file {snippet['file_path']}, line {line_number}. Output: {blame_output}"
                             )
-                            introducing_commits_for_file[line_number] = "parse_error" # Indicate parse error
+                            introducing_commits_for_file[line_number] = (
+                                "parse_error"  # Indicate parse error
+                            )
 
                 except subprocess.TimeoutExpired:
-                    logger.error(f"Git blame timed out for {cve_id}, file {snippet['file_path']}, line {line_number}")
-                    introducing_commits_for_file[line_number] = "timeout_error" # Indicate timeout
+                    logger.error(
+                        f"Git blame timed out for {cve_id}, file {snippet['file_path']}, line {line_number}"
+                    )
+                    introducing_commits_for_file[line_number] = (
+                        "timeout_error"  # Indicate timeout
+                    )
                 except FileNotFoundError:
-                    logger.error("Git blame command not found. Is Git installed and in PATH?")
-                    introducing_commits_for_file[line_number] = "git_not_found" # Indicate git not found
+                    logger.error(
+                        "Git blame command not found. Is Git installed and in PATH?"
+                    )
+                    introducing_commits_for_file[line_number] = (
+                        "git_not_found"  # Indicate git not found
+                    )
                 except Exception as e:
-                    logger.error(f"Unexpected error during git blame for {cve_id}, file {snippet['file_path']}, line {line_number}: {e}")
-                    introducing_commits_for_file[line_number] = "exception_error" # Indicate exception
+                    logger.error(
+                        f"Unexpected error during git blame for {cve_id}, file {snippet['file_path']}, line {line_number}: {e}"
+                    )
+                    introducing_commits_for_file[line_number] = (
+                        "exception_error"  # Indicate exception
+                    )
 
-            vulnerable_snippets_with_commits.append({**snippet, "introducing_commits": introducing_commits_for_file}) # Add blame results
-        vulnerable_snippets = vulnerable_snippets_with_commits # Replace original snippets with enriched ones
+            vulnerable_snippets_with_commits.append(
+                {**snippet, "introducing_commits": introducing_commits_for_file}
+            )  # Add blame results
+        vulnerable_snippets = vulnerable_snippets_with_commits  # Replace original snippets with enriched ones
 
     if not vulnerable_snippets:
         logger.info(
             f"No vulnerable snippets found in {patch_file_path.name if patch_file_path else 'unknown patch file'}"
         )
-        if gemini_output: # Only log if there was gemini output to begin with
-            logger.debug(f"Gemini output for {cve_id}: {gemini_output}") # Log Gemini output if no vulnerable snippets found
 
     return {
         "cve_id": cve_id,
@@ -634,7 +658,9 @@ def main():
                                 f"  Vulnerable Lines: {vuln_file_info['line_numbers']}"
                             )
                             if "introducing_commits" in vuln_file_info:
-                                for line_num, commit_hash in vuln_file_info["introducing_commits"].items():
+                                for line_num, commit_hash in vuln_file_info[
+                                    "introducing_commits"
+                                ].items():
                                     logger.info(
                                         f"    Line {line_num} introducing commit: {commit_hash}"
                                     )
