@@ -388,47 +388,96 @@ def analyze_with_gemini(
             logger.error(f"Failed to get Gemini output for CVE: {cve_id} after trying all models and retries.")
             return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None}
 
-        try:  # JSON parsing
-            logger.debug(
-                f"Attempting to parse JSON from Gemini output for {cve_id}"
-            )  # Debug log before parsing
-            start_marker = "```json"
-            end_marker = "```"
-            start_index = gemini_output.find(start_marker)
-            end_index = gemini_output.find(end_marker, start_index + len(start_marker))
+        max_follow_up_attempts = 1
+        follow_up_attempt = 0
+        json_parsed_successfully = False # Flag to track successful parsing
 
-            if start_index != -1 and end_index != -1:
-                json_string = gemini_output[
-                    start_index + len(start_marker) : end_index
-                ].strip()
-                vulnerable_snippets_raw = json.loads(json_string)
+        while follow_up_attempt <= max_follow_up_attempts and not json_parsed_successfully:
+            json_string = None # Initialize json_string here, will be used in follow-up prompt
+            try:  # JSON parsing attempt
+                logger.debug(
+                    f"Attempting to parse JSON from Gemini output for {cve_id}, attempt {follow_up_attempt + 1}"
+                )  # Debug log before parsing
+                start_marker = "```json"
+                end_marker = "```"
+                start_index = gemini_output.find(start_marker)
+                end_index = gemini_output.find(end_marker, start_index + len(start_marker))
 
-                if not isinstance(vulnerable_snippets_raw, list):
-                    raise TypeError(
-                        f"Gemini output not a list: {type(vulnerable_snippets_raw)}"
-                    )
-
-                for item in vulnerable_snippets_raw:  # type: ignore
-                    if (
-                        not isinstance(item, dict)
-                        or "file_path" not in item
-                        or "line_numbers" not in item
-                    ):
-                        raise ValueError(
-                            f"Invalid item format in Gemini output: {item}"
+                if start_index != -1 and end_index != -1:
+                    json_string = gemini_output[
+                        start_index + len(start_marker) : end_index
+                    ].strip()
+                    try:
+                        vulnerable_snippets_raw = json.loads(json_string)
+                    except json.JSONDecodeError as e:
+                        logger.error(
+                            f"JSONDecodeError on Gemini output for CVE {cve_id}, attempt {follow_up_attempt + 1}: {e}. Raw output:\n{json_string}"
                         )
-                    vulnerable_snippets.append(item)
-            else:
-                raise ValueError("JSON markers not found in Gemini output.")
-            logger.debug(
-                f"Successfully parsed JSON and found vulnerable snippets for {cve_id}: {vulnerable_snippets}"
-            )  # Debug log after parsing success
+                        raise # Re-raise to be caught in the outer except block for follow-up prompt
 
-        except (json.JSONDecodeError, TypeError, ValueError) as e:
-            logger.error(
-                f"Error processing Gemini output for {cve_id}: {e}. Raw output:\n{gemini_output}"
-            )  # Include raw output in error log
-            # vulnerable_snippets remains empty
+                    if not isinstance(vulnerable_snippets_raw, list):
+                        raise TypeError(
+                            f"Gemini output is not a list, but {type(vulnerable_snippets_raw)} for CVE {cve_id}, attempt {follow_up_attempt + 1}."
+                        )
+
+                    vulnerable_snippets = [] # Clear vulnerable_snippets for each attempt
+                    for item in vulnerable_snippets_raw:  # type: ignore
+                        if not isinstance(item, dict):
+                            raise ValueError(f"Item in Gemini output list is not a dict: {item}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
+                        if "file_path" not in item:
+                            raise ValueError(f"'file_path' key missing in item: {item}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
+                        if "line_numbers" not in item:
+                            raise ValueError(f"'line_numbers' key missing in item: {item}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
+                        if not isinstance(item["line_numbers"], list):
+                            raise ValueError(f"'line_numbers' is not a list: {item['line_numbers']}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
+                        vulnerable_snippets.append(item)
+                    json_parsed_successfully = True # Parsing successful, set flag to exit loop
+                    logger.debug(
+                        f"Successfully parsed JSON for CVE {cve_id} after attempt {follow_up_attempt + 1} and found vulnerable snippets: {vulnerable_snippets}"
+                    )  # Debug log after parsing success
+                    break # Exit the loop if parsing is successful
+
+                else: # JSON markers not found
+                    raise ValueError("JSON markers '```json' and '```' not found in Gemini output.")
+
+            except (json.JSONDecodeError, TypeError, ValueError) as e: # Catch parsing errors
+                logger.error(
+                    f"Error processing Gemini output for CVE {cve_id}, attempt {follow_up_attempt + 1}: {e}."
+                )  # Include specific error in log
+                if follow_up_attempt < max_follow_up_attempts: # Check if follow-up is allowed
+                    follow_up_attempt += 1
+                    follow_up_prompt_text = (
+                        f"The JSON output you provided for CVE {cve_id} was invalid or not in the expected format. "
+                        f"Specifically, parsing failed because: {e}. " # Include the parsing error in the follow-up prompt
+                        "Please provide a corrected JSON response enclosed in ```json and ``` markers. "
+                        "Ensure it is valid JSON and conforms to the format: "
+                        '[{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]. '
+                        "Only return the JSON, without any extra text or comments outside the JSON block."
+                    )
+                    logger.info(f"Sending follow-up prompt to Gemini for CVE {cve_id}, attempt {follow_up_attempt}: {follow_up_prompt_text}")
+
+                    # Send follow-up prompt to Gemini (using the same model as before)
+                    gemini_output = None # Reset gemini_output for follow-up attempt
+                    current_model = genai.GenerativeModel(model_name) # Re-instantiate model for follow-up
+                    try:
+                        response = current_model.generate_content(follow_up_prompt_text)
+                        gemini_output = response.text
+                        logger.debug(f"Gemini Follow-up Response for CVE {cve_id}, attempt {follow_up_attempt}:\n{gemini_output}")
+                    except Exception as follow_up_e:
+                        logger.error(f"Error during Gemini follow-up attempt {follow_up_attempt} for CVE {cve_id}: {follow_up_e}")
+                        break # If follow-up request fails, break the loop
+
+                    if not gemini_output: # If no output from follow-up, break
+                        logger.error(f"No Gemini output received for follow-up attempt {follow_up_attempt} for CVE {cve_id}.")
+                        break # No output from follow-up, break the loop to avoid infinite loop
+
+                else: # Max follow-up attempts reached
+                    logger.error(f"Max follow-up attempts reached for CVE {cve_id}. Parsing failed. Raw output:\n{gemini_output}")
+                    break # Exit loop after max follow-ups
+
+            if not json_parsed_successfully: # If parsing failed even after follow-ups (or no follow-up attempted)
+                logger.warning(f"Failed to parse JSON from Gemini output for CVE {cve_id} after {follow_up_attempt} attempt(s). Raw output:\n{gemini_output}")
+                vulnerable_snippets = [] # Ensure vulnerable_snippets is empty in case of parsing failure
 
     except ValueError as e:  # For repo path issues
         logger.warning(str(e))  # Log the specific error message
