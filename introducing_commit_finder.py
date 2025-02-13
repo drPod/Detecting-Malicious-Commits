@@ -762,16 +762,16 @@ def main():
     executor = ThreadPoolExecutor(
         max_workers=MAX_WORKERS
     )  # Create executor outside try block
+    futures = {}  # Initialize futures as an empty dictionary
     try:
         with executor:  # Use context manager for proper shutdown
-            futures = {
-                executor.submit(
+            for patch_file in patch_files_to_process:  # Iterate through patch files
+                future = executor.submit(  # Submit task and get future object
                     analyze_patch_file,
                     patch_file,
                     gemini_models_to_try,  # Pass list of Gemini models
-                ): patch_file  # Removed token_manager from function call
-                for patch_file in patch_files_to_process
-            }
+                )
+                futures[future] = patch_file  # Store patch_file with its future
             for future in tqdm(
                 as_completed(futures), total=len(futures), desc="Analyzing Patches"
             ):
