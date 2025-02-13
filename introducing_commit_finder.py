@@ -274,6 +274,36 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
         return None
 
 
+def parse_gemini_json_output(gemini_output: str, cve_id: str, attempt_number: int) -> List[Dict[str, Any]]:
+    """Parses JSON from Gemini output with improved robustness and error handling."""
+    start_marker = "```json"
+    end_marker = "```"
+    start_index = gemini_output.find(start_marker)
+    end_index = gemini_output.find(end_marker, start_index + len(start_marker))
+
+    if start_index != -1 and end_index != -1:
+        json_string = gemini_output[start_index + len(start_marker) : end_index].strip()
+        if not json_string:  # Check if anything is actually between markers
+            raise ValueError("No JSON content found between markers.")
+        try:
+            vulnerable_snippets_raw = json.loads(json_string)
+            if not isinstance(vulnerable_snippets_raw, list):
+                raise TypeError(
+                    f"Gemini output is not a list, but {type(vulnerable_snippets_raw)}."
+                )
+            return vulnerable_snippets_raw
+        except json.JSONDecodeError as e:
+            error_snippet = (
+                json_string[:100] + "..." if len(json_string) > 100 else json_string
+            )  # Snippet for logging
+            logger.error(
+                f"JSONDecodeError on Gemini output for CVE {cve_id}, attempt {attempt_number}: {e}. Snippet: {error_snippet}"
+            )
+            raise  # Re-raise for follow-up handling
+    else:
+        raise ValueError("JSON markers '```json' and '```' not found in Gemini output.")
+
+
 def analyze_with_gemini(
     repo_path: Path,
     repo_name_from_patch: str,
@@ -395,50 +425,16 @@ def analyze_with_gemini(
         while follow_up_attempt <= max_follow_up_attempts and not json_parsed_successfully:
             json_string = None # Initialize json_string here, will be used in follow-up prompt
             try:  # JSON parsing attempt
-                logger.debug(
-                    f"Attempting to parse JSON from Gemini output for {cve_id}, attempt {follow_up_attempt + 1}"
-                )  # Debug log before parsing
-                start_marker = "```json"
-                end_marker = "```"
-                start_index = gemini_output.find(start_marker)
-                end_index = gemini_output.find(end_marker, start_index + len(start_marker))
-
-                if start_index != -1 and end_index != -1:
-                    json_string = gemini_output[
-                        start_index + len(start_marker) : end_index
-                    ].strip()
-                    try:
-                        vulnerable_snippets_raw = json.loads(json_string)
-                    except json.JSONDecodeError as e:
-                        logger.error(
-                            f"JSONDecodeError on Gemini output for CVE {cve_id}, attempt {follow_up_attempt + 1}: {e}. Raw output:\n{json_string}"
-                        )
-                        raise # Re-raise to be caught in the outer except block for follow-up prompt
-
-                    if not isinstance(vulnerable_snippets_raw, list):
-                        raise TypeError(
-                            f"Gemini output is not a list, but {type(vulnerable_snippets_raw)} for CVE {cve_id}, attempt {follow_up_attempt + 1}."
-                        )
-
-                    vulnerable_snippets = [] # Clear vulnerable_snippets for each attempt
-                    for item in vulnerable_snippets_raw:  # type: ignore
-                        if not isinstance(item, dict):
-                            raise ValueError(f"Item in Gemini output list is not a dict: {item}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
-                        if "file_path" not in item:
-                            raise ValueError(f"'file_path' key missing in item: {item}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
-                        if "line_numbers" not in item:
-                            raise ValueError(f"'line_numbers' key missing in item: {item}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
-                        if not isinstance(item["line_numbers"], list):
-                            raise ValueError(f"'line_numbers' is not a list: {item['line_numbers']}, for CVE {cve_id}, attempt {follow_up_attempt + 1}.")
-                        vulnerable_snippets.append(item)
-                    json_parsed_successfully = True # Parsing successful, set flag to exit loop
-                    logger.debug(
-                        f"Successfully parsed JSON for CVE {cve_id} after attempt {follow_up_attempt + 1} and found vulnerable snippets: {vulnerable_snippets}"
-                    )  # Debug log after parsing success
-                    break # Exit the loop if parsing is successful
-
-                else: # JSON markers not found
-                    raise ValueError("JSON markers '```json' and '```' not found in Gemini output.")
+                vulnerable_snippets_raw = parse_gemini_json_output(
+                    gemini_output, cve_id, follow_up_attempt + 1
+                )
+                vulnerable_snippets = []  # Clear vulnerable_snippets for each attempt
+                for item in vulnerable_snippets_raw:  # type: ignore
+                    if not isinstance(item, dict):
+                        raise ValueError(f"'vulnerable_snippets_raw' item is not a dict: {item}")
+                    vulnerable_snippets.append(item)
+                json_parsed_successfully = True  # Parsing successful, set flag to exit loop
+                break  # Exit the loop if parsing is successful
 
             except (json.JSONDecodeError, TypeError, ValueError) as e: # Catch parsing errors
                 logger.error(
