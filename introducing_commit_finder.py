@@ -453,8 +453,9 @@ def analyze_with_gemini(
                     logger.info(f"Sending follow-up prompt to Gemini for CVE {cve_id}, attempt {follow_up_attempt}: {follow_up_prompt_text}")
 
                     # Send follow-up prompt to Gemini (using the same model as before)
+                    current_model = genai.GenerativeModel(model_name) # Initialize model here, before the follow-up loop
                     gemini_output = None # Reset gemini_output for follow-up attempt
-                    current_model = genai.GenerativeModel(model_name) # Re-instantiate model for follow-up
+
                     try:
                         response = current_model.generate_content(follow_up_prompt_text)
                         gemini_output = response.text
