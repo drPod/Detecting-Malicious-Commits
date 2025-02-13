@@ -286,6 +286,7 @@ def analyze_with_gemini(
         if not repo_path or not repo_path.exists() or not repo_path.is_dir():
             raise ValueError(f"Invalid repository path: {repo_path}")
         if not (repo_path / ".git").exists():
+            raise ValueError(f"Not a git repository: {repo_path}")
 
         repo_name_for_prompt = "".join(
             c if c.isalnum() or c in [".", "_", "-"] else "_"
