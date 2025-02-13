@@ -324,7 +324,7 @@ def analyze_with_gemini(
             + prompt_part3
             + prompt_part4
             + prompt_part5
-            + prompt_part6
+            + "Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers. **Ensure the JSON is valid and contains no comments or any text outside the JSON block.**\n"
             + prompt_part7
             + prompt_part8
             + prompt_part9
