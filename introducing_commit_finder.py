@@ -469,7 +469,9 @@ def main():
         parents=True, exist_ok=True
     )  # Create output directory if it doesn't exist
 
-    executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)  # Create executor outside try block
+    executor = ThreadPoolExecutor(
+        max_workers=MAX_WORKERS
+    )  # Create executor outside try block
     try:
         with executor:  # Use context manager for proper shutdown
             futures = {
@@ -486,7 +488,9 @@ def main():
                 try:
                     analysis_result = future.result()
                     if analysis_result["vulnerable_snippets"]:
-                        logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
+                        logger.info(
+                            f"\n--- Analysis for {analysis_result['cve_id']} ---"
+                        )
                         output_file_path_cve = (
                             OUTPUT_FILE / f"{analysis_result['cve_id']}.json"
                         )
@@ -511,17 +515,25 @@ def main():
                             logger.info(
                                 f"  Vulnerable Lines: {vuln_file_info['line_numbers']}"
                             )
-                            logger.info("---")  # Separator for different file info blocks
+                            logger.info(
+                                "---"
+                            )  # Separator for different file info blocks
 
                     else:
-                        logger.info(f"No vulnerable snippets found in {patch_file.name}")
+                        logger.info(
+                            f"No vulnerable snippets found in {patch_file.name}"
+                        )
                 except Exception as e:
                     logger.error(f"Error analyzing {patch_file.name}: {e}")
                 finally:
-                    PROCESSED_PATCHES.add(patch_file.name)  # Mark as processed after each file
+                    PROCESSED_PATCHES.add(
+                        patch_file.name
+                    )  # Mark as processed after each file
     except KeyboardInterrupt:
         logger.info("Script interrupted by user. Shutting down executor...")
-        executor.shutdown(wait=False)  # Cancel pending tasks, but don't wait for current ones to finish immediately
+        executor.shutdown(
+            wait=False
+        )  # Cancel pending tasks, but don't wait for current ones to finish immediately
         logger.info("Executor shutdown initiated.")
     finally:  # Ensure state is saved even on normal completion or interruption
         save_state()  # Save state at the end
