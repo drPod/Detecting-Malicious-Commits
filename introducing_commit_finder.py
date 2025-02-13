@@ -443,11 +443,21 @@ def analyze_with_gemini(
                 if follow_up_attempt < max_follow_up_attempts: # Check if follow-up is allowed
                     follow_up_attempt += 1
                     follow_up_prompt_text = (
-                        f"Your JSON response for CVE {cve_id} was invalid and could not be parsed. "  # More direct and less accusatory tone
-                        f"Specifically, parsing failed because: {e}. "  # Include the parsing error in the follow-up prompt
+                        f"Your JSON response for CVE {cve_id} was invalid and could not be parsed. "
+                    )
+                    if isinstance(e, json.JSONDecodeError):
+                        follow_up_prompt_text += (
+                            "The error indicates a problem with the JSON syntax. "
+                            "Please ensure the JSON is correctly formatted and valid. "
+                        )
+                    elif isinstance(e, (TypeError, ValueError)):
+                        follow_up_prompt_text += (
+                            "The error suggests the JSON structure is incorrect. "
+                            "Ensure the JSON is a list of dictionaries, where each dictionary has 'file_path' and 'line_numbers' keys as described. "
+                        )
+                    follow_up_prompt_text += (
+                        f"Specifically, the parsing error was: {e}. " # Include the parsing error in the follow-up prompt
                         "Please provide a **corrected**, **valid** JSON response, **strictly** enclosed in ```json and ``` markers. "  # Stronger emphasis on correction and markers
-                        "Ensure it is valid JSON and conforms to the format: "
-                        '[{{"file_path": "path/to/file.c", "line_numbers": [123, 125]}}, {{"file_path": "another/file.java", "line_numbers": [50]}}]. '  # Added escaped quotes for clarity in prompt, and curly braces for example
                         "Only return the JSON, without any extra text or comments outside the JSON block."
                     )
                     logger.info(f"Sending follow-up prompt to Gemini for CVE {cve_id}, attempt {follow_up_attempt}: {follow_up_prompt_text}")
