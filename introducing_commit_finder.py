@@ -436,7 +436,7 @@ def analyze_with_gemini(
         follow_up_attempt = 0
         json_parsed_successfully = False # Flag to track successful parsing
 
-        while follow_up_attempt <= max_follow_up_attempts and not json_parsed_successfully:
+        while follow_up_attempt <= max_follow_up_attempts and not json_parsed_successfully: # Loop for follow-up attempts
             json_string = None # Initialize json_string here, will be used in follow-up prompt
             try:  # JSON parsing attempt
                 vulnerable_snippets_raw = parse_gemini_json_output(
@@ -497,6 +497,7 @@ def analyze_with_gemini(
 
                     if not gemini_output: # If no output from follow-up, break
                         logger.warning(f"No Gemini output received for follow-up attempt {follow_up_attempt} for CVE {cve_id}.")  # Changed to warning as it's not necessarily an error, just no response
+                        logger.warning(f"Breaking follow-up loop for CVE {cve_id} due to empty Gemini output in follow-up attempt {follow_up_attempt}.") # Explicit log for loop break
                         break # No output from follow-up, break the loop to avoid infinite loop
 
                 else: # Max follow-up attempts reached
