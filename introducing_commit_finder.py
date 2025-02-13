@@ -242,6 +242,93 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
         return None
 
 
+def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model, logger):
+    """
+    Analyzes a patch using the Gemini model to identify vulnerable code snippets.
+    """
+
+    vulnerable_snippets = []  # Initialize outside the try block for consistent return
+
+    try:
+        if not repo_path or not repo_path.exists() or not repo_path.is_dir():
+            raise ValueError(f"Invalid repository path: {repo_path}")
+
+        repo_name_for_prompt = (
+            "".join(c if c.isalnum() or c in [".", "_", "-"] else "_" for c in repo_name_from_patch or "unknown_repository")
+        )
+        cve_id_for_prompt = "".join(c if c.isalnum() or c in [".", "_", "-"] else "_" for c in cve_id)
+
+        prompt_text = f"""
+        Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
+        Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
+        Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
+        Each dictionary should contain 'file_path' and 'line_numbers' keys.
+        'file_path' is the path to the file in the repository.
+        'line_numbers' is a list of integers representing the vulnerable line numbers in that file.
+        Example:
+        ```json
+        [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
+        ```
+        """
+
+        logger.debug(f"Prompt sent to Gemini API for {cve_id}: {prompt_text}")
+
+        try:  # Inner try for Gemini API interaction
+            response = model.generate_content(prompt_text)
+            gemini_output = response.text
+            logger.debug(f"Gemini Model Output for {cve_id}: {gemini_output}")
+
+        except Exception as e: # Catch Gemini specific errors
+            logger.error(f"Error communicating with Gemini API for {cve_id}: {e}")
+            return {
+                "cve_id": cve_id,
+                "vulnerable_snippets": [],
+                "repo_name_from_patch": repo_name_from_patch,
+                "file_path_in_repo": None,
+            }
+
+        try: # JSON parsing
+            start_marker = "```json"
+            end_marker = "```"
+            start_index = gemini_output.find(start_marker)
+            end_index = gemini_output.find(end_marker, start_index + len(start_marker))
+
+            if start_index != -1 and end_index != -1:
+                json_string = gemini_output[start_index + len(start_marker):end_index].strip()
+                vulnerable_snippets_raw = json.loads(json_string)
+
+                if not isinstance(vulnerable_snippets_raw, list):
+                    raise TypeError(f"Gemini output not a list: {type(vulnerable_snippets_raw)}")
+
+                for item in vulnerable_snippets_raw:
+                    if not isinstance(item, dict) or "file_path" not in item or "line_numbers" not in item:
+                        raise ValueError(f"Invalid item format in Gemini output: {item}")
+                    vulnerable_snippets.append(item)
+            else:
+                raise ValueError("JSON markers not found in Gemini output.")
+
+        except (json.JSONDecodeError, TypeError, ValueError) as e:
+            logger.error(f"Error processing Gemini output for {cve_id}: {e}. Raw output: {gemini_output}")
+            # vulnerable_snippets remains empty
+
+    except ValueError as e: # For repo path issues
+        logger.warning(str(e))  # Log the specific error message
+        # vulnerable_snippets remains empty
+
+    except Exception as e:  # Catch any other unexpected exceptions
+        logger.error(f"Unexpected error during Gemini analysis for {cve_id}: {e}")
+        # vulnerable_snippets remains empty
+
+    if not vulnerable_snippets:
+        logger.info(f"No vulnerable snippets found in {patch_file_path.name if patch_file_path else 'unknown patch file'}")
+
+    return {
+        "cve_id": cve_id,
+        "vulnerable_snippets": vulnerable_snippets,
+        "repo_name_from_patch": repo_name_from_patch,
+        "file_path_in_repo": None,
+    }
+
 def analyze_patch_file(patch_file_path: Path):  # Removed token_manager parameter
     """
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
@@ -341,102 +428,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
             "file_path_in_repo": file_path_in_repo,
         }
 
-    # Call Gemini model to analyze repository
-    try:
-        if repo_path and repo_path.exists() and repo_path.is_dir():
-            repo_name_for_prompt_raw = (
-                repo_name_from_patch if repo_name_from_patch else "unknown repository"
-            )
-            # Sanitize repo_name_for_prompt to remove potentially problematic characters for Gemini
-            repo_name_for_prompt = "".join(
-                c if c.isalnum() or c in [".", "_", "-"] else "_"
-                for c in repo_name_for_prompt_raw
-            )
-            cve_id_for_prompt = "".join(
-                c if c.isalnum() or c in [".", "_", "-"] else "_" for c in cve_id
-            )  # Sanitize CVE ID as well
-            prompt_text = f"""
-            Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
-            Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
-            Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
-            Each dictionary should contain 'file_path' and 'line_numbers' keys.
-            'file_path' is the path to the file in the repository.
-            'line_numbers' is a list of integers representing the vulnerable line numbers in that file.
-            Example:
-            ```json
-            [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
-            ```
-            """
-            logger.debug(
-                f"Prompt sent to Gemini API for {cve_id}: {prompt_text}"
-            )  # Log the prompt
-            response = model.generate_content(prompt_text)
-            gemini_output = response.text
-            logger.debug(f"Gemini Model Output for {cve_id}: {gemini_output}")
-
-            try:
-                start_marker = "```json"
-                end_marker = "```"
-                start_index = gemini_output.find(start_marker)
-                end_index = gemini_output.find(
-                    end_marker, start_index + len(start_marker)
-                )
-
-                if start_index != -1 and end_index != -1:
-                    json_string = gemini_output[
-                        start_index + len(start_marker) : end_index
-                    ].strip()
-                    vulnerable_snippets_raw = json.loads(json_string)
-
-                    if isinstance(vulnerable_snippets_raw, list):
-                        vulnerable_snippets = []
-                        for item in vulnerable_snippets_raw:
-                            if (
-                                isinstance(item, dict)
-                                and "file_path" in item
-                                and "line_numbers" in item
-                            ):
-                                vulnerable_snippets.append(item)
-                            else:
-                                logger.warning(
-                                    f"Unexpected item format in Gemini output for {cve_id}: {item}"
-                                )
-                    else:
-                        logger.warning(
-                            f"Gemini output for {cve_id} was not parsed as a list, but as: {type(vulnerable_snippets_raw)}. Attempting to use as is."
-                        )
-                        vulnerable_snippets = vulnerable_snippets_raw
-                else:
-                    logger.warning(
-                        f"JSON markers not found in Gemini output for {cve_id}. Raw output was: {gemini_output}"
-                    )
-                    vulnerable_snippets = []
-
-            except json.JSONDecodeError as e:
-                logger.error(
-                    f"Error parsing Gemini JSON output for {cve_id}: {e}. Raw output was: {gemini_output}"
-                )
-                vulnerable_snippets = []
-
-        else:
-            logger.warning(
-                f"Repository path {repo_path.absolute()} is invalid, skipping Gemini analysis."
-            )
-            vulnerable_snippets = []
-
-    except Exception as e:
-        logger.error(f"Error calling Gemini model for {cve_id}: {e}")
-        vulnerable_snippets = []
-
-    if not vulnerable_snippets:
-        logger.info(f"No vulnerable snippets found in {patch_file_path.name}")
-
-    return {
-        "cve_id": cve_id,
-        "vulnerable_snippets": vulnerable_snippets,
-        "repo_name_from_patch": repo_name_from_patch,
-        "file_path_in_repo": file_path_in_repo,
-    }
+    return analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model, logger)
 
 
 def main():
