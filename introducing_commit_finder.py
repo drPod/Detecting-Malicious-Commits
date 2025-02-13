@@ -469,6 +469,9 @@ def analyze_with_gemini(
                             "The error suggests the JSON structure is incorrect. "
                             "Ensure the JSON is a list of dictionaries, where each dictionary has 'file_path' and 'line_numbers' keys as described. "
                         )
+                    if json_string: # Add JSON snippet only if json_string is not None and not empty
+                        json_snippet = json_string[:200] + "..." if len(json_string) > 200 else json_string
+                        follow_up_prompt_text += f"Here is a snippet of the invalid JSON you provided: `{json_snippet}`. "
                     follow_up_prompt_text += (
                         f"Specifically, the parsing error was: {e}. " # Include the parsing error in the follow-up prompt
                         "Please provide a **corrected**, **valid** JSON response, **strictly** enclosed in ```json and ``` markers. "  # Stronger emphasis on correction and markers
