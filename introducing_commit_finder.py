@@ -28,7 +28,7 @@ OUTPUT_FILE = Path(
 )  # Output directory for results
 
 # Script settings
-LOG_LEVEL = logging.DEBUG  # Set default log level
+LOG_LEVEL = logging.INFO  # Set default log level
 CONTEXT_LINES_BEFORE = 2  # Number of context lines before vulnerable line
 CONTEXT_LINES_AFTER = 3  # Number of context lines after vulnerable line
 MAX_WORKERS = 12  # Number of threads for parallel processing
@@ -309,23 +309,37 @@ def analyze_with_gemini(
         prompt_part4 = f"'{repo_name_for_prompt}'.\n"
         prompt_part5 = "Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.\n"
         prompt_part6 = "Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.\n"
-        prompt_part7 = "Each dictionary should contain 'file_path' and 'line_numbers' keys.\n"
+        prompt_part7 = (
+            "Each dictionary should contain 'file_path' and 'line_numbers' keys.\n"
+        )
         prompt_part8 = "'file_path' is the path to the file in the repository.\n"
         prompt_part9 = "'line_numbers' is a list of integers representing the vulnerable line numbers in that file.\n"
-        prompt_part10 = "Example:\n```json\n[{\"file_path\": \"path/to/file.c\", \"line_numbers\": [123, 125]}, {\"file_path\": \"another/file.java\", \"line_numbers\": [50]}]\n```\n"
+        prompt_part10 = 'Example:\n```json\n[{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]\n```\n'
         prompt_part11 = "[DEBUG PROMPT END]"
 
         prompt_text = (
-            prompt_part1 + prompt_part2 + prompt_part3 + prompt_part4 +
-            prompt_part5 + prompt_part6 + prompt_part7 + prompt_part8 +
-            prompt_part9 + prompt_part10 + prompt_part11
+            prompt_part1
+            + prompt_part2
+            + prompt_part3
+            + prompt_part4
+            + prompt_part5
+            + prompt_part6
+            + prompt_part7
+            + prompt_part8
+            + prompt_part9
+            + prompt_part10
+            + prompt_part11
         )
 
-        logger.debug(f"Prompt part 1: {prompt_part1.strip()}") # Log each part separately
+        logger.debug(
+            f"Prompt part 1: {prompt_part1.strip()}"
+        )  # Log each part separately
         logger.debug(f"Prompt part 2: {prompt_part2.strip()}")
         logger.debug(f"Prompt part 3: {prompt_part3.strip()}")
         logger.debug(f"Prompt part 4: {prompt_part4.strip()}")
-        logger.debug(f"Prompt sent to Gemini API for {cve_id}: {prompt_text}") # Log full prompt
+        logger.debug(
+            f"Prompt sent to Gemini API for {cve_id}: {prompt_text}"
+        )  # Log full prompt
 
         try:  # Inner try for Gemini API interaction
             response = model.generate_content(prompt_text)
