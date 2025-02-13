@@ -630,90 +630,102 @@ def analyze_patch_file(patch_file_path: Path, models):  # Added models parameter
     """
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
-    vulnerable_snippets: List[Dict[str, Any]] = []
-    repo_path = None
-    repo_name_from_patch = None
-    file_path_in_repo = None
-    patch_content_str = ""
-    cve_id = patch_file_path.name.split("_")[0]
-    cve_data = load_cve_data(cve_id)
-    cwe_id = (
-        cve_data.get("vulnerability_details", {}).get("cwe_id") if cve_data else None
-    )
-
-    logger.info(f"Analyzing patch file: {patch_file_path.name}")
-
-    if patch_file_path.stat().st_size == 0:  # Check for empty patch file
-        logger.warning(f"Patch file {patch_file_path.name} is empty. Skipping.")
-        return {
-            "cve_id": cve_id,
-            "vulnerable_snippets": [],
-            "repo_name_from_patch": None,
-            "file_path_in_repo": None,
-        }
-
-    # Read patch file content
     try:
-        with open(patch_file_path, "r") as f:
-            patch_content_str = f.read()
-    except FileNotFoundError as e:
-        logger.error(
-            f"Patch file not found: {patch_file_path.absolute()}: {e}"
-        )  # Log absolute path
-        return {
-            "cve_id": cve_id,
-            "vulnerable_snippets": [],
-            "repo_name_from_patch": None,
-            "file_path_in_repo": None,
-        }
-
-    # Extract repo name from patch file name
-    repo_name_from_patch = extract_repo_name_from_patch_path(patch_file_path)
-    if repo_name_from_patch:
-        repo = repo_name_from_patch  # Use extracted repo name
-        repo_path = REPOS_DIR / repo_name_from_patch
-    else:
-        return {
-            "cve_id": cve_id,
-            "vulnerable_snippets": [],
-            "repo_name_from_patch": None,
-            "file_path_in_repo": None,
-        }
-
-    # --- On-demand cloning ---
-    if not repo_path.exists() or not (repo_path / ".git").exists():
-        logger.warning(
-            f"Working repository directory does not exist: {repo_path.absolute()}. Expecting it to be cloned externally."  # Log absolute path
+        vulnerable_snippets: List[Dict[str, Any]] = []
+        repo_path = None
+        repo_name_from_patch = None
+        file_path_in_repo = None
+        patch_content_str = ""
+        cve_id = patch_file_path.name.split("_")[0]
+        cve_data = load_cve_data(cve_id)
+        cwe_id = (
+            cve_data.get("vulnerability_details", {}).get("cwe_id") if cve_data else None
         )
-    # --- End on-demand cloning ---
 
-    # Reset repository to commit before CVE publication date
-    if (
-        repo_path.exists()
-        and repo_path.is_dir()
-        and cve_data
-        and (repo_path / ".git").exists()
-    ):  # Check for .git directory
-        if not reset_repo_to_before_cve_date(repo_path, cve_data):
-            logger.warning(
-                f"Failed to reset repository {repo_name_from_patch} for CVE {cve_id}. Analysis might be inaccurate."
-            )
+        logger.info(f"Analyzing patch file: {patch_file_path.name}")
+
+        if patch_file_path.stat().st_size == 0:  # Check for empty patch file
+            logger.warning(f"Patch file {patch_file_path.name} is empty. Skipping.")
+            return {
+                "cve_id": cve_id,
+                "vulnerable_snippets": [],
+                "repo_name_from_patch": None,
+                "file_path_in_repo": None,
+            }
+
+        # Read patch file content
+        try:
+            with open(patch_file_path, "r") as f:
+                patch_content_str = f.read()
+        except FileNotFoundError as e:
+            logger.error(
+                f"Patch file not found: {patch_file_path.absolute()}: {e}"
+            )  # Log absolute path
+            return {
+                "cve_id": cve_id,
+                "vulnerable_snippets": [],
+                "repo_name_from_patch": None,
+                "file_path_in_repo": None,
+            }
+
+        # Extract repo name from patch file name
+        repo_name_from_patch = extract_repo_name_from_patch_path(patch_file_path)
+        if repo_name_from_patch:
+            repo = repo_name_from_patch  # Use extracted repo name
+            repo_path = REPOS_DIR / repo_name_from_patch
         else:
-            logger.info(
-                f"Successfully reset repository {repo_name_from_patch} for CVE {cve_id}."
+            return {
+                "cve_id": cve_id,
+                "vulnerable_snippets": [],
+                "repo_name_from_patch": None,
+                "file_path_in_repo": None,
+            }
+
+        # --- On-demand cloning ---
+        if not repo_path.exists() or not (repo_path / ".git").exists():
+            logger.warning(
+                f"Working repository directory does not exist: {repo_path.absolute()}. Expecting it to be cloned externally."  # Log absolute path
             )
-    else:
-        logger.warning(
-            f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset."  # Log absolute path
-        )
+        # --- End on-demand cloning ---
 
-    vulnerable_snippets: List[Dict[str, Any]] = (
-        []
-    )  # Initialize vulnerable_snippets here
+        # Reset repository to commit before CVE publication date
+        if (
+            repo_path.exists()
+            and repo_path.is_dir()
+            and cve_data
+            and (repo_path / ".git").exists()
+        ):  # Check for .git directory
+            if not reset_repo_to_before_cve_date(repo_path, cve_data):
+                logger.warning(
+                    f"Failed to reset repository {repo_name_from_patch} for CVE {cve_id}. Analysis might be inaccurate."
+                )
+            else:
+                logger.info(
+                    f"Successfully reset repository {repo_name_from_patch} for CVE {cve_id}."
+                )
+        else:
+            logger.warning(
+                f"Repository path {repo_path.absolute()} invalid or CVE data missing or not a git repo. Skipping repository reset."  # Log absolute path
+            )
 
-    return analyze_with_gemini(
-        repo_path, repo_name_from_patch, cve_id, patch_file_path, models
-    )  # Pass model parameter
+        vulnerable_snippets: List[Dict[str, Any]] = (
+            []
+        )  # Initialize vulnerable_snippets here
+
+        return {
+            **analyze_with_gemini(
+                repo_path, repo_name_from_patch, cve_id, patch_file_path, models
+            ),  # Pass model parameter
+            "file_path_in_repo": str(repo_path) if repo_path else None  # Add repo path to result
+        }
+    except Exception as e:  # Catch any error in analyze_patch_file
+        logger.exception(f"Error in analyze_patch_file for {patch_file_path.name}: {e}")  # Log full exception with traceback
+        return {  # Return error result
+            "cve_id": cve_id,
+            "vulnerable_snippets": [],
+            "repo_name_from_patch": repo_name_from_patch,
+            "file_path_in_repo": None,
+        }
 
 
 def main():
