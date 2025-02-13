@@ -347,6 +347,7 @@ def analyze_with_gemini(
             retry_count = 0
             max_retries = 15
             base_delay = 1  # seconds
+            max_delay = 300  # seconds (5 minutes max delay)
 
             while retry_count <= max_retries:
                 current_model = genai.GenerativeModel(model_name)
@@ -368,7 +369,7 @@ def analyze_with_gemini(
                     if "exceeded quota" in str(e) or "RateLimitError" in str(e):  # Adjust error checking as needed
                         retry_count += 1
                         if retry_count <= max_retries:
-                            delay = base_delay * (2**retry_count)  # Exponential backoff
+                            delay = min(base_delay * (2**retry_count), max_delay)  # Exponential backoff with max cap
                             logger.warning(
                                 f"Rate limit encountered for model '{model_name}' on CVE: {cve_id}, retry {retry_count}/{max_retries}. Waiting {delay} seconds before retrying."
                             )
