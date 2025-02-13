@@ -303,20 +303,22 @@ def analyze_with_gemini(
 
         logger.debug(f"Checkpoint before prompt construction for {cve_id}")
 
-        prompt_text = f"""
-        [DEBUG PROMPT START]
-        Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
-        Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
-        Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
-        Each dictionary should contain 'file_path' and 'line_numbers' keys.
-        'file_path' is the path to the file in the repository.
-        'line_numbers' is a list of integers representing the vulnerable line numbers in that file.
-        Example:
-        ```json
-        [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
-        ```
-        [DEBUG PROMPT END]
-        """
+        # prompt_text = f"""
+        # [DEBUG PROMPT START]
+        # Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
+        # Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
+        # Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
+        # Each dictionary should contain 'file_path' and 'line_numbers' keys.
+        # 'file_path' is the path to the file in the repository.
+        # 'line_numbers' is a list of integers representing the vulnerable line numbers in that file.
+        # Example:
+        # ```json
+        # [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
+        # ```
+        # [DEBUG PROMPT END]
+        # """
+
+        prompt_text = "This is a test prompt. No f-string formatting."
 
         logger.debug(f"Prompt sent to Gemini API for {cve_id}: {prompt_text}")
 
