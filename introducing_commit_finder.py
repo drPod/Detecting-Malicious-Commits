@@ -12,6 +12,8 @@ from io import StringIO
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 import google.generativeai as genai  # For Gemini model integration
+import google.api_core.exceptions  # For Google API exceptions
+import google.generativeai.types.generation_types  # For Gemini specific types
 import subprocess  # For running git blame
 
 # --- Configuration ---
