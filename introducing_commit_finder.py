@@ -352,7 +352,7 @@ def analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path
         "file_path_in_repo": None,
     }
 
-def analyze_patch_file(patch_file_path: Path):  # Removed token_manager parameter
+def analyze_patch_file(patch_file_path: Path, model):  # Added model parameter
     """
     Analyzes a patch file to identify vulnerable code snippets and generate git blame commands.
     """
@@ -437,7 +437,7 @@ def analyze_patch_file(patch_file_path: Path):  # Removed token_manager paramete
         []
     )  # Initialize vulnerable_snippets here
 
-    return analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, gemini_model) # Pass initialized model
+    return analyze_with_gemini(repo_path, repo_name_from_patch, cve_id, patch_file_path, model) # Pass model parameter
 
 
 def main():
