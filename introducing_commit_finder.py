@@ -469,59 +469,62 @@ def main():
         parents=True, exist_ok=True
     )  # Create output directory if it doesn't exist
 
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {
-            executor.submit(
-                analyze_patch_file,
-                patch_file,
-            ): patch_file  # Removed token_manager from function call
-            for patch_file in patch_files_to_process
-        }
-        for future in tqdm(
-            as_completed(futures), total=len(futures), desc="Analyzing Patches"
-        ):
-            patch_file = futures[future]
-            try:
-                analysis_result = future.result()
-                if analysis_result["vulnerable_snippets"]:
-                    logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
-                    output_file_path_cve = (
-                        OUTPUT_FILE / f"{analysis_result['cve_id']}.json"
-                    )
-                    try:
-                        with open(output_file_path_cve, "w") as outfile:
-                            json.dump(
-                                analysis_result["vulnerable_snippets"],
-                                outfile,
-                                indent=2,
+    executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)  # Create executor outside try block
+    try:
+        with executor:  # Use context manager for proper shutdown
+            futures = {
+                executor.submit(
+                    analyze_patch_file,
+                    patch_file,
+                ): patch_file  # Removed token_manager from function call
+                for patch_file in patch_files_to_process
+            }
+            for future in tqdm(
+                as_completed(futures), total=len(futures), desc="Analyzing Patches"
+            ):
+                patch_file = futures[future]
+                try:
+                    analysis_result = future.result()
+                    if analysis_result["vulnerable_snippets"]:
+                        logger.info(f"\n--- Analysis for {analysis_result['cve_id']} ---")
+                        output_file_path_cve = (
+                            OUTPUT_FILE / f"{analysis_result['cve_id']}.json"
+                        )
+                        try:
+                            with open(output_file_path_cve, "w") as outfile:
+                                json.dump(
+                                    analysis_result["vulnerable_snippets"],
+                                    outfile,
+                                    indent=2,
+                                )
+                            logger.info(
+                                f"Vulnerable lines saved to {output_file_path_cve.absolute()}"
                             )
-                        logger.info(
-                            f"Vulnerable lines saved to {output_file_path_cve.absolute()}"
-                        )
-                    except Exception as e:
-                        logger.error(
-                            f"Error saving vulnerable lines to {output_file_path_cve.absolute()}: {e}"
-                        )
+                        except Exception as e:
+                            logger.error(
+                                f"Error saving vulnerable lines to {output_file_path_cve.absolute()}: {e}"
+                            )
 
-                    # Log the structured data
-                    for vuln_file_info in analysis_result["vulnerable_snippets"]:
-                        logger.info(f"  File: {vuln_file_info['file_path']}")
-                        logger.info(
-                            f"  Vulnerable Lines: {vuln_file_info['line_numbers']}"
-                        )
-                        logger.info("---")  # Separator for different file info blocks
+                        # Log the structured data
+                        for vuln_file_info in analysis_result["vulnerable_snippets"]:
+                            logger.info(f"  File: {vuln_file_info['file_path']}")
+                            logger.info(
+                                f"  Vulnerable Lines: {vuln_file_info['line_numbers']}"
+                            )
+                            logger.info("---")  # Separator for different file info blocks
 
-                else:
-                    logger.info(f"No vulnerable snippets found in {patch_file.name}")
-            except KeyError as e:
-                logger.error(f"KeyError accessing analysis result: {e}")
-            except Exception as e:
-                logger.error(f"Error analyzing {patch_file.name}: {e}")
-            finally:
-                PROCESSED_PATCHES.add(
-                    patch_file.name
-                )  # Mark as processed after each file
-                save_state()  # Save state after each file
+                    else:
+                        logger.info(f"No vulnerable snippets found in {patch_file.name}")
+                except Exception as e:
+                    logger.error(f"Error analyzing {patch_file.name}: {e}")
+                finally:
+                    PROCESSED_PATCHES.add(patch_file.name)  # Mark as processed after each file
+    except KeyboardInterrupt:
+        logger.info("Script interrupted by user. Shutting down executor...")
+        executor.shutdown(wait=False)  # Cancel pending tasks, but don't wait for current ones to finish immediately
+        logger.info("Executor shutdown initiated.")
+    finally:  # Ensure state is saved even on normal completion or interruption
+        save_state()  # Save state at the end
 
     logger.info("\nAnalysis completed.")
     logger.info(f"Script finished at {datetime.now().isoformat()}")
