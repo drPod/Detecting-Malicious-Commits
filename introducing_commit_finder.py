@@ -303,24 +303,29 @@ def analyze_with_gemini(
 
         logger.debug(f"Checkpoint before prompt construction for {cve_id}")
 
-        # prompt_text = f"""
-        # [DEBUG PROMPT START]
-        # Analyze the patch for CVE ID {cve_id_for_prompt} applied to the repository named '{repo_name_for_prompt}'.
-        # Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.
-        # Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.
-        # Each dictionary should contain 'file_path' and 'line_numbers' keys.
-        # 'file_path' is the path to the file in the repository.
-        # 'line_numbers' is a list of integers representing the vulnerable line numbers in that file.
-        # Example:
-        # ```json
-        # [{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]
-        # ```
-        # [DEBUG PROMPT END]
-        # """
+        prompt_part1 = "[DEBUG PROMPT START]\nAnalyze the patch for CVE ID "
+        prompt_part2 = f"{cve_id_for_prompt} "
+        prompt_part3 = "applied to the repository named "
+        prompt_part4 = f"'{repo_name_for_prompt}'.\n"
+        prompt_part5 = "Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.\n"
+        prompt_part6 = "Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.\n"
+        prompt_part7 = "Each dictionary should contain 'file_path' and 'line_numbers' keys.\n"
+        prompt_part8 = "'file_path' is the path to the file in the repository.\n"
+        prompt_part9 = "'line_numbers' is a list of integers representing the vulnerable line numbers in that file.\n"
+        prompt_part10 = "Example:\n```json\n[{\"file_path\": \"path/to/file.c\", \"line_numbers\": [123, 125]}, {\"file_path\": \"another/file.java\", \"line_numbers\": [50]}]\n```\n"
+        prompt_part11 = "[DEBUG PROMPT END]"
 
-        prompt_text = "This is a test prompt. No f-string formatting."
+        prompt_text = (
+            prompt_part1 + prompt_part2 + prompt_part3 + prompt_part4 +
+            prompt_part5 + prompt_part6 + prompt_part7 + prompt_part8 +
+            prompt_part9 + prompt_part10 + prompt_part11
+        )
 
-        logger.debug(f"Prompt sent to Gemini API for {cve_id}: {prompt_text}")
+        logger.debug(f"Prompt part 1: {prompt_part1.strip()}") # Log each part separately
+        logger.debug(f"Prompt part 2: {prompt_part2.strip()}")
+        logger.debug(f"Prompt part 3: {prompt_part3.strip()}")
+        logger.debug(f"Prompt part 4: {prompt_part4.strip()}")
+        logger.debug(f"Prompt sent to Gemini API for {cve_id}: {prompt_text}") # Log full prompt
 
         try:  # Inner try for Gemini API interaction
             response = model.generate_content(prompt_text)
