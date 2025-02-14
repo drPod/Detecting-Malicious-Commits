@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 import google.generativeai as genai
 import os
@@ -359,7 +360,7 @@ if __name__ == "__main__":
             logging.debug(f"Opened output file for appending: {output_file}")
         except Exception as e:
             logging.error(f"Error opening output file {output_file}: {e}")
-            return # Exit if we can't open the output file
+            sys.exit(1) # Exit if we can't open the output file
         for future in as_completed(futures):  # Process results as they become available
             cve_id, result = future.result()
             results[cve_id] = result
