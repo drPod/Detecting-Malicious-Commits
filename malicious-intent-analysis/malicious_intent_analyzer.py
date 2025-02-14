@@ -30,12 +30,12 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-pro")
 
 
-def analyze_with_gemini(cve_description: str, references: list):
+def analyze_with_gemini(cve_id: str, cve_description: str, references: list):
     """
     Analyzes CVE description and references using Gemini to determine malicious intent.
     """
     logging.debug(
-        f"Analyzing CVE description for malicious intent."
+        f"CVE: {cve_id} - Analyzing CVE description for malicious intent."
     )  # Log before prompt construction
 
     prompt_text = "Analyze the following CVE description and associated references to determine if the vulnerability was likely introduced with malicious intent. "
@@ -74,6 +74,7 @@ def analyze_with_gemini(cve_description: str, references: list):
     retry_count = 0
     max_retries = 10
     while retry_count <= max_retries:
+        logging.debug(f"CVE: {cve_id} - Gemini Prompt: {prompt_text}")
         try:
             response = model.generate_content(prompt_text)
             gemini_output = response.text  # Get text content directly
@@ -85,7 +86,7 @@ def analyze_with_gemini(cve_description: str, references: list):
                 json_string = gemini_output  # Try to parse the whole output if markers are missing
 
             gemini_json = json.loads(json_string)
-            logging.debug(f"Successfully parsed JSON output from Gemini.")
+            logging.debug(f"CVE: {cve_id} - Successfully parsed JSON output from Gemini.")
             return gemini_json
         except json.JSONDecodeError:
             if json_retry_count < max_json_retries:
@@ -165,11 +166,19 @@ def analyze_with_gemini(cve_description: str, references: list):
             elif isinstance(
                 e, google.generativeai.types.generation_types.BlockedPromptException
             ):
-                logging.warning(f"Gemini API blocked the prompt. No retry.")
+                logging.warning(f"CVE: {cve_id} - Gemini API blocked the prompt. No retry.")
                 return {
                     "malicious_intent_likely": False,
                     "reason": f"Gemini API blocked the prompt: {e}",
                 }  # No retry for blocked prompt
+            elif "Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`" in str(e) and "finish_reason" in str(e):
+                logging.error(f"CVE: {cve_id} - Gemini API returned an empty response (finish_reason 3). Inspecting safety ratings.")
+                safety_ratings_match = re.search(r"safety_ratings are: \[(.*?)\],", str(e))
+                safety_ratings_str = safety_ratings_match.group(1) if safety_ratings_match else "No safety ratings found in error message."
+                return {
+                    "malicious_intent_likely": False,
+                    "reason": f"Gemini API returned empty response due to safety filters or other issue (finish_reason 3). Safety Ratings: [{safety_ratings_str}] . Original error: {e}",
+                }
             else:
                 logging.error(
                     f"Gemini API error after max retries for CVE analysis: {e}"
@@ -187,9 +196,9 @@ def analyze_with_gemini(cve_description: str, references: list):
 
 
 def process_cve(cve_id, cve_description, references):
-    logging.info(f"Analyzing CVE: {cve_id}")
-    result = analyze_with_gemini(cve_description, references)
-    logging.info(f"Analysis for CVE {cve_id}: {result}")
+    logging.info(f"CVE: {cve_id} - Analyzing CVE: {cve_id}")
+    result = analyze_with_gemini(cve_id, cve_description, references)
+    logging.info(f"CVE: {cve_id} - Analysis for CVE {cve_id}: {result}")
     return cve_id, result
 
 
