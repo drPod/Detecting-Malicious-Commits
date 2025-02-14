@@ -5,3 +5,4 @@ nvd_data/
 data_completeness/
 patches/
 .aider*
+vulnerable_code_snippets/

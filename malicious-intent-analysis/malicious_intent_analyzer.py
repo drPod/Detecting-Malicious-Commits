@@ -1,19 +1,17 @@
 import json
+from pathlib import Path
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 import re
 import time
-import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Configure Gemini API - replace with your actual API key or setup
-genai.configure(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-pro")
 
 
@@ -27,7 +25,9 @@ def analyze_with_gemini(cve_description: str, references: list):
     prompt_text += "References:\n"
     for ref in references:
         tags_str = ", ".join(ref.get("tags", []))
-        prompt_text += "- URL: " + ref.get('url', 'N/A') + ", Tags: [" + tags_str + "]\n"
+        prompt_text += (
+            "- URL: " + ref.get("url", "N/A") + ", Tags: [" + tags_str + "]\n"
+        )
 
     prompt_text += """Based on the description and references, is it likely that this vulnerability was introduced with malicious intent?
 Consider factors such as:
@@ -55,7 +55,7 @@ Ensure your response is enclosed in ```json and ``` markers."""
             if json_match:
                 json_string = json_match.group(1)
             else:
-                json_string = gemini_output # Try to parse the whole output if markers are missing
+                json_string = gemini_output  # Try to parse the whole output if markers are missing
 
             gemini_json = json.loads(json_string)
             return gemini_json
@@ -70,40 +70,53 @@ Ensure your response is enclosed in ```json and ``` markers."""
                 correction_prompt += '"reason": "brief explanation of your reasoning"\n'
                 correction_prompt += "}\n"
                 correction_prompt += "```\n"
-                correction_prompt += "Ensure your response is enclosed in ```json and ``` markers."
+                correction_prompt += (
+                    "Ensure your response is enclosed in ```json and ``` markers."
+                )
                 response = model.generate_content(correction_prompt)
                 gemini_output = response.text
-                json_match = re.search(r"```json\s*(.*?)\s*```", gemini_output, re.DOTALL)
+                json_match = re.search(
+                    r"```json\s*(.*?)\s*```", gemini_output, re.DOTALL
+                )
                 if json_match:
                     json_string = json_match.group(1)
                     try:
                         gemini_json = json.loads(json_string)
                         return gemini_json
                     except json.JSONDecodeError:
-                        pass # Still invalid after correction prompt, fall through to retry/fail
+                        pass  # Still invalid after correction prompt, fall through to retry/fail
 
-            return {"malicious_intent_likely": False, "reason": f"Could not parse Gemini JSON output even after correction: {gemini_output}"}
+            return {
+                "malicious_intent_likely": False,
+                "reason": f"Could not parse Gemini JSON output even after correction: {gemini_output}",
+            }
 
-        except genai.APIError as e: # Catch API errors, including rate limits
-            if e.status_code == 429 and retry_count < max_retries: # 429 is rate limit
-                wait_time = 2 ** retry_count # Exponential backoff
+        except genai.APIError as e:  # Catch API errors, including rate limits
+            if e.status_code == 429 and retry_count < max_retries:  # 429 is rate limit
+                wait_time = 2**retry_count  # Exponential backoff
                 print(f"Rate limit hit. Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
                 retry_count += 1
             else:
-                return {"malicious_intent_likely": False, "reason": f"Gemini API error: {e}"} # Propagate other API errors or max retries reached
-        except Exception as e: # Catch any other exceptions
-            return {"malicious_intent_likely": False, "reason": f"Gemini API error: {e}"} # Broader exception catch
+                return {
+                    "malicious_intent_likely": False,
+                    "reason": f"Gemini API error: {e}",
+                }  # Propagate other API errors or max retries reached
+        except Exception as e:  # Catch any other exceptions
+            return {
+                "malicious_intent_likely": False,
+                "reason": f"Gemini API error: {e}",
+            }  # Broader exception catch
+
+
 def process_cve(cve_id, cve_description, references):
-    print(f"Analyzing CVE: {cve_id}") # Optional: for logging/monitoring
+    print(f"Analyzing CVE: {cve_id}")  # Optional: for logging/monitoring
     result = analyze_with_gemini(cve_description, references)
-    print(f"Analysis for CVE {cve_id}: {result}") # Optional: for logging/monitoring
+    print(f"Analysis for CVE {cve_id}: {result}")  # Optional: for logging/monitoring
     return cve_id, result
 
+
 if __name__ == "__main__":
-    import os
-    import json
-    from pathlib import Path
 
     nvd_data_dir = Path("../nvd_data")
     output_file = Path("malicious_intent_analysis_results.json")
@@ -113,20 +126,24 @@ if __name__ == "__main__":
         exit(1)
 
     results = {}
-    with ThreadPoolExecutor(max_workers=10) as executor: # Adjust max_workers as needed
+    with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust max_workers as needed
         futures = []
-        for file_path in nvd_data_dir.glob("CVE-*.json"): # Assumes filenames start with CVE-
-            with open(file_path, 'r') as f:
+        for file_path in nvd_data_dir.glob(
+            "CVE-*.json"
+        ):  # Assumes filenames start with CVE-
+            with open(file_path, "r") as f:
                 cve_data = json.load(f)
-                cve_id = cve_data['cve_id']
-                description = cve_data['vulnerability_details']['description']
-                references = cve_data['references']
-                futures.append(executor.submit(process_cve, cve_id, description, references))
+                cve_id = cve_data["cve_id"]
+                description = cve_data["vulnerability_details"]["description"]
+                references = cve_data["references"]
+                futures.append(
+                    executor.submit(process_cve, cve_id, description, references)
+                )
 
         for future in as_completed(futures):
             cve_id, result = future.result()
             results[cve_id] = result
 
-    with open(output_file, 'w') as f:
+    with open(output_file, "w") as f:
         json.dump(results, f, indent=4)
     print(f"Analysis results saved to {output_file}")
