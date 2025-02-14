@@ -18,8 +18,11 @@ MAX_WORKERS = 12
 load_dotenv()
 
 # Setup logging
-logging.basicConfig(filename='malicious_intent_analyzer.log', level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    filename="malicious_intent_analyzer.log",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 logging.debug("Starting malicious intent analyzer script.")
 
 # Configure Gemini API - replace with your actual API key or setup
@@ -44,11 +47,12 @@ def analyze_with_gemini(cve_description: str, references: list):
         )
 
     prompt_text += "Based on the description and references, is it likely that this vulnerability was introduced with malicious intent? "
-    prompt_text += """Consider factors such as:
-- Keywords in the description suggesting intentional backdoor, sabotage, or malicious code.
-- References pointing to exploit code, discussions of malicious use, or indicators of compromise.
-- Tags like 'exploit', 'malware', 'backdoor' in the references.
-"""
+    prompt_text += (
+        "Consider factors such as: Keywords in the description suggesting intentional "
+        "backdoor, sabotage, or malicious code. References pointing to exploit code, "
+        "discussions of malicious use, or indicators of compromise. Tags like 'exploit', "
+        "'malware', 'backdoor' in the references."
+    )
     prompt_text += "Respond with a JSON object in the following format:\n"
     prompt_text += "```json\n"
     prompt_text += "{\n"
@@ -59,13 +63,13 @@ def analyze_with_gemini(cve_description: str, references: list):
     prompt_text += "Ensure your response is enclosed in ```json and ``` markers."
 
     json_retry_count = 0
-    max_json_retries = 0 # Only retry once if JSON is invalid
+    max_json_retries = 0  # Only retry once if JSON is invalid
     retry_count = 0
     max_retries = 10
     while retry_count <= max_retries:
         try:
             response = model.generate_content(prompt_text)
-            gemini_output = response.text # Get text content directly
+            gemini_output = response.text  # Get text content directly
 
             json_match = re.search(r"```json\s*(.*?)\s*```", gemini_output, re.DOTALL)
             if json_match:
@@ -79,7 +83,9 @@ def analyze_with_gemini(cve_description: str, references: list):
         except json.JSONDecodeError:
             if json_retry_count < max_json_retries:
                 correction_prompt = prompt_text + "\n\n"
-                logging.debug("Gemini output was not valid JSON. Requesting JSON correction.")
+                logging.debug(
+                    "Gemini output was not valid JSON. Requesting JSON correction."
+                )
                 correction_prompt += "**Response was not valid JSON.**\n\n"
                 correction_prompt += "Please provide your response again as a valid JSON object, and ensure it is enclosed in ```json and ``` markers.\n"
                 correction_prompt += "```json\n"
@@ -103,7 +109,7 @@ def analyze_with_gemini(cve_description: str, references: list):
                         return gemini_json
                     except json.JSONDecodeError:
                         pass  # Still invalid after correction prompt, fall through to retry/fail
-                json_retry_count += 1 # Increment JSON retry counter
+                json_retry_count += 1  # Increment JSON retry counter
             else:
                 logging.warning(f"Max JSON decode retries reached for CVE analysis.")
 
@@ -112,31 +118,59 @@ def analyze_with_gemini(cve_description: str, references: list):
                 "reason": f"Could not parse Gemini JSON output after correction attempts: {gemini_output}",
             }
 
-        except genai.APIError as e:
+        except google.api_core.exceptions.GoogleAPIError as e:
             if e.status_code == 429 and retry_count < max_retries:  # 429 is rate limit
                 wait_time = 2**retry_count  # Exponential backoff
                 logging.info(f"Rate limit hit. Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
                 retry_count += 1
-                logging.debug(f"Retrying Gemini API request, attempt {retry_count}/{max_retries}.")
-            elif isinstance(e, google.api_core.exceptions.ServiceUnavailable): # Explicitly check for ServiceUnavailable
+                logging.debug(
+                    f"Retrying Gemini API request, attempt {retry_count}/{max_retries}."
+                )
+            elif isinstance(
+                e, google.api_core.exceptions.ServiceUnavailable
+            ):  # Explicitly check for ServiceUnavailable
                 retry_count += 1
                 if retry_count <= max_retries:
                     wait_time = 5  # Fixed delay for ServiceUnavailable errors
-                    logging.warning(f"Service Unavailable (503) error encountered. Retrying in {wait_time} seconds... (Attempt {retry_count}/{max_retries})")
+                    logging.warning(
+                        f"Service Unavailable (503) error encountered. Retrying in {wait_time} seconds... (Attempt {retry_count}/{max_retries})"
+                    )
                     time.sleep(wait_time)
                 else:
-                    logging.error(f"Max retries reached for Service Unavailable error. Aborting.")
-                    return {"malicious_intent_likely": False, "reason": f"Gemini API Service Unavailable after max retries: {e}"}
-            elif isinstance(e, google.api_core.exceptions.InternalServerError): # Explicitly check for InternalServerError
-                logging.error(f"Internal Server Error (500) from Gemini API. This indicates a server-side issue. No retry.")
-                return {"malicious_intent_likely": False, "reason": f"Gemini API Internal Server Error: {e}"} # No retry for internal server error
-            elif isinstance(e, google.generativeai.types.generation_types.BlockedPromptError):
+                    logging.error(
+                        f"Max retries reached for Service Unavailable error. Aborting."
+                    )
+                    return {
+                        "malicious_intent_likely": False,
+                        "reason": f"Gemini API Service Unavailable after max retries: {e}",
+                    }
+            elif isinstance(
+                e, google.api_core.exceptions.InternalServerError
+            ):  # Explicitly check for InternalServerError
+                logging.error(
+                    f"Internal Server Error (500) from Gemini API. This indicates a server-side issue. No retry."
+                )
+                return {
+                    "malicious_intent_likely": False,
+                    "reason": f"Gemini API Internal Server Error: {e}",
+                }  # No retry for internal server error
+            elif isinstance(
+                e, google.generativeai.types.generation_types.BlockedPromptException
+            ):
                 logging.warning(f"Gemini API blocked the prompt. No retry.")
-                return {"malicious_intent_likely": False, "reason": f"Gemini API blocked the prompt: {e}"} # No retry for blocked prompt
+                return {
+                    "malicious_intent_likely": False,
+                    "reason": f"Gemini API blocked the prompt: {e}",
+                }  # No retry for blocked prompt
             else:
-                logging.error(f"Gemini API error after max retries for CVE analysis: {e}")
-                return {"malicious_intent_likely": False, "reason": f"Gemini API error: {e}"}  # For other API errors after max retries
+                logging.error(
+                    f"Gemini API error after max retries for CVE analysis: {e}"
+                )
+                return {
+                    "malicious_intent_likely": False,
+                    "reason": f"Gemini API error: {e}",
+                }  # For other API errors after max retries
         except Exception as e:  # Catch any other exceptions
             logging.error(f"Unexpected error during Gemini API call: {e}")
             return {
@@ -154,14 +188,16 @@ def process_cve(cve_id, cve_description, references):
 
 STATE_FILE = Path("malicious_intent_analyzer_state.json")
 
+
 def load_state():
     if STATE_FILE.exists():
-        with open(STATE_FILE, 'r') as f:
+        with open(STATE_FILE, "r") as f:
             return json.load(f)
     return {}
 
+
 def save_state(state):
-    with open(STATE_FILE, 'w') as f:
+    with open(STATE_FILE, "w") as f:
         json.dump(state, f, indent=4)
 
 
@@ -181,7 +217,9 @@ if __name__ == "__main__":
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = []
-        for file_path in tqdm(nvd_data_dir.glob("CVE-*.json"), desc="Processing CVE files"):  # Assumes filenames start with CVE-
+        for file_path in tqdm(
+            nvd_data_dir.glob("CVE-*.json"), desc="Processing CVE files"
+        ):  # Assumes filenames start with CVE-
             with open(file_path, "r") as f:
                 cve_data = json.load(f)
                 cve_id = cve_data.get("cve_id")  # Use .get() to avoid KeyError
@@ -204,12 +242,18 @@ if __name__ == "__main__":
         for future in as_completed(futures):  # Process results as they become available
             cve_id, result = future.result()
             results[cve_id] = result
-            processed_cves_state[cve_id] = result  # Save to state immediately after processing
+            processed_cves_state[cve_id] = (
+                result  # Save to state immediately after processing
+            )
             processed_cves_count += 1  # Increment counter
 
     with open(output_file, "w") as f:
         json.dump(results, f, indent=4)
     logging.debug(f"Analysis results saved to: {output_file}")
-    save_state(processed_cves_state)  # Save state after all are processed or in case of interrupt
-    logging.info(f"Analysis results saved to {output_file}. Processed {processed_cves_count} new CVEs in this run.")
+    save_state(
+        processed_cves_state
+    )  # Save state after all are processed or in case of interrupt
+    logging.info(
+        f"Analysis results saved to {output_file}. Processed {processed_cves_count} new CVEs in this run."
+    )
     logging.debug("Script finished execution.")
