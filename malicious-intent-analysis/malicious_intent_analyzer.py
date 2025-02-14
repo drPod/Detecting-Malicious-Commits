@@ -297,7 +297,9 @@ def is_scraper_running():
                     "references_url_scraper.py is running."
                 )  # Debug log when scraper is running
                 return True
-    logging.debug("references_url_scraper.py is not running.")  # Debug log when scraper is not running
+    logging.debug(
+        "references_url_scraper.py is not running."
+    )  # Debug log when scraper is not running
     return False
 
 
@@ -315,14 +317,18 @@ if __name__ == "__main__":
     processed_cves_state = load_state()
     processed_cves_count = 0  # Counter for processed CVEs in this run
     scraped_content_index = load_index()  # Load scraped content index
-    processed_cves_in_run: Set[str] = set(processed_cves_state.keys()) # Track CVEs processed in current run
+    processed_cves_in_run: Set[str] = set(
+        processed_cves_state.keys()
+    )  # Track CVEs processed in current run
 
     # Separate CVEs into those with scraped content and others
     cves_with_scraped_content_files = []
     remaining_cve_files = []
     all_cve_files = list(nvd_data_dir.glob("CVE-*.json"))
 
-    for file_path in all_cve_files:
+    futures = []
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        for file_path in all_cve_files:
             with open(file_path, "r") as f:
                 cve_data = json.load(f)
                 cve_id = cve_data.get("cve_id")
@@ -347,18 +353,16 @@ if __name__ == "__main__":
                     )
                 )
 
-        with open(output_file_path, "a") as output_file:
-            for future in as_completed(
-                futures
-            ):  # Process results as they become available
-                cve_id, result = future.result()
-                results[cve_id] = result
-                processed_cves_state[cve_id] = (
-                    result  # Save to state immediately after processing
-                )
-                processed_cves_count += 1  # Increment counter
-                json.dump({cve_id: result}, output_file)
-                output_file.write("\n")
+    with open(output_file, "a") as output_file:
+        for future in as_completed(futures):  # Process results as they become available
+            cve_id, result = future.result()
+            results[cve_id] = result
+            processed_cves_state[cve_id] = (
+                result  # Save to state immediately after processing
+            )
+            processed_cves_count += 1  # Increment counter
+            json.dump({cve_id: result}, output_file)
+            output_file.write("\n")
     logging.debug(f"Analysis results saved to: {output_file}")
     save_state(
         processed_cves_state
