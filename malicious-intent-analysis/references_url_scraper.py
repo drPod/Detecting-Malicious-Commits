@@ -11,6 +11,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 MAX_WORKERS = 12
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds
+DELAY_BETWEEN_REQUESTS = 1  # seconds, delay after each request to be respectful
 
 INDEX_FILE = "scraped_content_index.json"
 SCRAPED_CONTENT_DIR = "scraped_content"
@@ -99,15 +100,16 @@ def save_content_to_file(url, content, cve_id):
         try:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(content)
-            logging.info(f"CVE: {cve_id} - Content from {url} saved to {filename}")
+                logging.info(f"CVE: {cve_id} - Content from {url} saved to {filename}")
 
-            # Update index and save
-            index_data = load_index()
-            index_data.setdefault(cve_id, []).append({'url': url, 'filename': filename})
-            save_index(index_data)
+                # Update index and save (only if file writing was successful)
+                index_data = load_index()
+                index_data.setdefault(cve_id, []).append({'url': url, 'filename': filename})
+                save_index(index_data)
 
         except IOError as e:
             logging.error(f"CVE: {cve_id} - Error saving content to file {filename}: {e}")
+
     else:
         logging.warning(f"CVE: {cve_id} - No content to save for URL: {url}")
 
@@ -136,7 +138,7 @@ if __name__ == "__main__":
         scraped_content = scrape_url(url, cve_id)
         if scraped_content:
             save_content_to_file(url, scraped_content, cve_id)
-        time.sleep(1) # Be respectful
+        time.sleep(DELAY_BETWEEN_REQUESTS) # Be respectful
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = [executor.submit(process_url, pair) for pair in url_cve_pairs]
