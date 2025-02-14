@@ -101,19 +101,32 @@ def process_cve(cve_id, cve_description, references):
     return cve_id, result
 
 if __name__ == "__main__":
-    # Example Usage (replace with your actual CVE data loading logic)
-    cve_data_list = [
-        {"cve_id": "CVE-TEST-001", "description": "Test CVE description 1.", "references": [{"url": "http://example.com", "tags": ["test"]}]},
-        {"cve_id": "CVE-TEST-002", "description": "Test CVE description 2.", "references": [{"url": "http://example2.com", "tags": ["test2"]}]},
-        # ... more CVE data
-    ]
+    import os
+    import json
+    from pathlib import Path
 
+    nvd_data_dir = Path("../nvd_data")
+    output_file = Path("malicious_intent_analysis_results.json")
+
+    if not nvd_data_dir.is_dir():
+        print(f"Error: NVD data directory '{nvd_data_dir}' not found.")
+        exit(1)
+
+    results = {}
     with ThreadPoolExecutor(max_workers=10) as executor: # Adjust max_workers as needed
-        futures = [executor.submit(process_cve, cve_data['cve_id'], cve_data['description'], cve_data['references']) for cve_data in cve_data_list]
-        results = {}
+        futures = []
+        for file_path in nvd_data_dir.glob("CVE-*.json"): # Assumes filenames start with CVE-
+            with open(file_path, 'r') as f:
+                cve_data = json.load(f)
+                cve_id = cve_data['cve_id']
+                description = cve_data['vulnerability_details']['description']
+                references = cve_data['references']
+                futures.append(executor.submit(process_cve, cve_id, description, references))
+
         for future in as_completed(futures):
             cve_id, result = future.result()
             results[cve_id] = result
 
-    print("All analyses completed.")
-    print("Results:", results) # Or process/save the results as needed
+    with open(output_file, 'w') as f:
+        json.dump(results, f, indent=4)
+    print(f"Analysis results saved to {output_file}")
