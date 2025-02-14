@@ -34,7 +34,10 @@ def analyze_with_gemini(cve_description: str, references: list):
     """
     Analyzes CVE description and references using Gemini to determine malicious intent.
     """
-    logging.debug(f"Analyzing CVE description for malicious intent.")
+    logging.debug(
+        f"Analyzing CVE description for malicious intent."
+    )  # Log before prompt construction
+
     prompt_text = "Analyze the following CVE description and associated references to determine if the vulnerability was likely introduced with malicious intent. "
     prompt_text += "\n\n"
     prompt_text += "CVE Description: " + cve_description + ". "
@@ -54,12 +57,16 @@ def analyze_with_gemini(cve_description: str, references: list):
         "'malware', 'backdoor' in the references."
     )
     prompt_text += "Respond with a JSON object in the following format:\n"
+    prompt_text += "In the 'reason' field, briefly explain your reasoning. "
+    prompt_text += "Specifically, mention any keywords from the CVE description or tags from the references that support your decision. "
+    prompt_text += "Summarize the logic you used to determine if malicious intent is likely.\n"
     prompt_text += "```json\n"
     prompt_text += "{\n"
     prompt_text += '"malicious_intent_likely": true/false,\n'
     prompt_text += '"reason": "brief explanation of your reasoning"\n'
     prompt_text += "}\n"
     prompt_text += "```\n"
+    prompt_text += "Example of a good 'reason': 'Keywords like 'backdoor' and reference tags like 'malware' suggest malicious intent. The description mentions intentional code modification for unauthorized access.'\n"
     prompt_text += "Ensure your response is enclosed in ```json and ``` markers."
 
     json_retry_count = 0
