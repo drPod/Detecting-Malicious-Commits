@@ -3,6 +3,7 @@ import json
 import subprocess
 from pathlib import Path
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from typing import Optional
 
 # --- Configuration (consistent with introducing_commit_finder.py) ---
@@ -21,6 +22,7 @@ LOG_FILE = Path(
 )  # Log file for this script
 CONTEXT_LINES_BEFORE = 2
 CONTEXT_LINES_AFTER = 3
+MAX_WORKERS = 10  # Define MAX_WORKERS for multithreading
 
 # Setup logging
 logging.basicConfig(
@@ -195,8 +197,8 @@ def main():
 
     logger.info(f"Found {len(json_files)} JSON files to process in {OUTPUT_FILE_DIR.absolute()}.")
 
-    for json_file in json_files:
-        process_cve_json(json_file)
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        executor.map(process_cve_json, json_files)
 
     logger.info("Finished processing CVE JSON files.")
 
