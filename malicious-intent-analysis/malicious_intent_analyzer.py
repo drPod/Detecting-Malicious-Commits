@@ -26,8 +26,27 @@ logging.basicConfig(
 logging.debug("Starting malicious intent analyzer script.")
 
 # Configure Gemini API - replace with your actual API key or setup
+# WARNING: Disabling safety settings can lead to the model generating harmful content.
+#          This is generally NOT recommended and should only be done with extreme caution
+#          and for specific use cases where you understand and accept the risks.
+#          It is crucial to use the API responsibly and ethically.
+#
+#          If you proceed with disabling safety settings, ensure you have mechanisms
+#          in place to review and filter the generated content before it is used or displayed.
+#
+#          Use BLOCK_NONE with extreme caution and at your own risk.
+#          Consider BLOCK_ONLY_HIGH or BLOCK_MEDIUM_AND_ABOVE for a safer approach.
+
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel(
+    "gemini-pro",
+    safety_settings=[  # Disable all safety filters - USE WITH EXTREME CAUTION
+        {"category": genai.types.HarmCategory.HARM_CATEGORY_HARASSMENT, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
+        {"category": genai.types.HarmCategory.HARM_CATEGORY_HATE_SPEECH, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
+        {"category": genai.types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
+        {"category": genai.types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
+    ]
+)
 
 
 def analyze_with_gemini(cve_id: str, cve_description: str, references: list):
