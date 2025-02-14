@@ -119,36 +119,44 @@ def save_content_to_file(url, content, cve_id):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python references_url_scraper.py <url1> <cve_id1> [<url2> <cve_id2> ...]")
+    nvd_data_dir = Path("../nvd_data")
+    if not nvd_data_dir.is_dir():
+        logging.error(f"Error: NVD data directory '{nvd_data_dir}' not found.")
         sys.exit(1)
+    logging.info(f"Scanning NVD data directory: {nvd_data_dir}")
 
-    url_cve_pairs = []
-    args = sys.argv[1:]
-    if len(args) % 2 != 0:
-        print("Error: URLs and CVE IDs must be provided in pairs.")
-        sys.exit(1)
+    cve_url_list = []
+    for file_path in nvd_data_dir.glob("CVE-*.json"):
+        try:
+            with open(file_path, "r") as f:
+                cve_data = json.load(f)
+                cve_id = cve_data.get("cve_id")
+                if not cve_id:
+                    logging.warning(f"CVE ID not found in {file_path}. Skipping.")
+                    continue
 
-    for i in range(0, len(args), 2):
-        url = args[i]
-        cve_id = args[i+1]
-        url_cve_pairs.append((url, cve_id))
+                references = cve_data.get("references", [])
+                for ref in references:
+                    url = ref.get("url")
+                    if url:
+                        cve_url_list.append((url, cve_id))
+        except json.JSONDecodeError:
+            logging.error(f"Failed to decode JSON from file: {file_path}")
+        except Exception as e:
+            logging.error(f"Unexpected error reading file {file_path}: {e}")
 
-    logging.info(f"Starting scraping process for {len(url_cve_pairs)} URL(s) with {MAX_WORKERS} workers.")
+    logging.info(f"Found {len(cve_url_list)} URLs to scrape from NVD data.")
 
-    def process_url(url_cve_pair):
+    def process_url_cve_pair(url_cve_pair):
         """Processes a single URL and CVE ID pair."""
         url, cve_id = url_cve_pair
-        try:
-            scraped_content = scrape_url(url, cve_id)
-            if scraped_content:
-                save_content_to_file(url, scraped_content, cve_id)
-        except Exception as e:
-            logging.error(f"CVE: {cve_id} - Error processing URL {url} in thread: {e}")
+        scraped_content = scrape_url(url, cve_id)
+        if scraped_content:
+            save_content_to_file(url, scraped_content, cve_id)
         time.sleep(DELAY_BETWEEN_REQUESTS) # Be respectful
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = [executor.submit(process_url, pair) for pair in url_cve_pairs]
+        futures = [executor.submit(process_url_cve_pair, pair) for pair in cve_url_list]
         for future in as_completed(futures):
             future.result() # To catch any exceptions from threads
 
