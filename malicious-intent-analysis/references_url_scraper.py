@@ -78,40 +78,38 @@ def scrape_url(url, cve_id):
     return None # Should not reach here, but for clarity
 
 
-def save_content_to_file(url, content):
+def save_content_to_file(url, content, cve_id):
     """
-    Saves the scraped content to a file.
-    The filename is derived from the URL to make it unique and identifiable.
+    Saves the scraped content to a file and updates the index.
 
     Args:
         url (str): The original URL.
         content (str): The text content to save.
+        cve_id (str): The CVE ID associated with the URL.
     """
     if content:
         parsed_url = urlparse(url)
         base_filename = parsed_url.netloc + parsed_url.path.replace("/", "_")
-        safe_filename = "".join(
-            x if x.isalnum() or x in "._-" else "_" for x in base_filename
-        )  # Sanitize filename
+        safe_filename = "".join(x if x.isalnum() or x in "._-" else "_" for x in base_filename)
         if not safe_filename:
-            safe_filename = (
-                "unnamed_content"  # Fallback if filename is empty after sanitization
-            )
-        filename = f"scraped_content/{safe_filename}.txt"  # Save to a subdirectory 'scraped_content'
-        Path("scraped_content").as_posix().mkdir(
-            parents=True, exist_ok=True
-        )  # Ensure directory exists
+            safe_filename = "unnamed_content"
+        filename = f"{SCRAPED_CONTENT_DIR}/{safe_filename}.txt"
+        Path(SCRAPED_CONTENT_DIR).mkdir(parents=True, exist_ok=True)
 
         try:
-            with open(
-                filename, "w", encoding="utf-8"
-            ) as f:  # Explicitly use utf-8 encoding
+            with open(filename, "w", encoding="utf-8") as f:
                 f.write(content)
-            logging.info(f"Content from {url} saved to {filename}")
+            logging.info(f"CVE: {cve_id} - Content from {url} saved to {filename}")
+
+            # Update index and save
+            index_data = load_index()
+            index_data.setdefault(cve_id, []).append({'url': url, 'filename': filename})
+            save_index(index_data)
+
         except IOError as e:
-            logging.error(f"Error saving content to file {filename}: {e}")
+            logging.error(f"CVE: {cve_id} - Error saving content to file {filename}: {e}")
     else:
-        logging.warning(f"No content to save for URL: {url}")
+        logging.warning(f"CVE: {cve_id} - No content to save for URL: {url}")
 
 
 if __name__ == "__main__":
