@@ -223,17 +223,17 @@ if __name__ == "__main__":
     processed_cves_count = 0  # Counter for processed CVEs in this run
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        output_file_path = Path("malicious_intent_analysis_results.json")
         futures = []
         for file_path in tqdm(
             nvd_data_dir.glob("CVE-*.json"), desc="Processing CVE files"
         ):  # Assumes filenames start with CVE-
             with open(file_path, "r") as f:
                 cve_data = json.load(f)
-                cve_id = cve_data.get("cve_id")  # Use .get() to avoid KeyError
+                cve_id = cve_data.get("cve_id")
                 if not cve_id:
                     logging.warning(f"CVE ID not found in {file_path}. Skipping.")
                     logging.debug(f"Skipping file: {file_path} due to missing CVE ID.")
-                    continue  # Skip to the next file
 
                 if cve_id in processed_cves_state:
                     logging.info(f"CVE {cve_id} already processed. Skipping.")
@@ -246,16 +246,16 @@ if __name__ == "__main__":
                     executor.submit(process_cve, cve_id, description, references)
                 )
 
-        for future in as_completed(futures):  # Process results as they become available
-            cve_id, result = future.result()
-            results[cve_id] = result
-            processed_cves_state[cve_id] = (
-                result  # Save to state immediately after processing
-            )
-            processed_cves_count += 1  # Increment counter
-
-    with open(output_file, "w") as f:
-        json.dump(results, f, indent=4)
+        with open(output_file_path, "a") as output_file:
+            for future in as_completed(futures):  # Process results as they become available
+                cve_id, result = future.result()
+                results[cve_id] = result
+                processed_cves_state[cve_id] = (
+                    result  # Save to state immediately after processing
+                )
+                processed_cves_count += 1  # Increment counter
+                json.dump({cve_id: result}, output_file)
+                output_file.write("\n")
     logging.debug(f"Analysis results saved to: {output_file}")
     save_state(
         processed_cves_state
