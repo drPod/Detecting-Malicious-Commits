@@ -4,9 +4,11 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 import logging
+import psutil
 import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Set
 import google.api_core.exceptions
 import google.generativeai.types.generation_types
 from tqdm import tqdm
@@ -286,6 +288,19 @@ def save_state(state):
         json.dump(state, f, indent=4)
 
 
+def is_scraper_running():
+    """Check if references_url_scraper.py is running."""
+    for process in psutil.process_iter(["name", "cmdline"]):
+        if process.info["name"] == "python" or process.info["name"] == "python3":
+            if "references_url_scraper.py" in " ".join(process.info["cmdline"]):
+                logging.debug(
+                    "references_url_scraper.py is running."
+                )  # Debug log when scraper is running
+                return True
+    logging.debug("references_url_scraper.py is not running.")  # Debug log when scraper is not running
+    return False
+
+
 if __name__ == "__main__":
     logging.debug("Starting main execution block.")
     nvd_data_dir = Path("../nvd_data")
@@ -300,13 +315,14 @@ if __name__ == "__main__":
     processed_cves_state = load_state()
     processed_cves_count = 0  # Counter for processed CVEs in this run
     scraped_content_index = load_index()  # Load scraped content index
+    processed_cves_in_run: Set[str] = set(processed_cves_state.keys()) # Track CVEs processed in current run
 
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        output_file_path = Path("malicious_intent_analysis_results.json")
-        futures = []
-        for file_path in tqdm(
-            nvd_data_dir.glob("CVE-*.json"), desc="Processing CVE files"
-        ):  # Assumes filenames start with CVE-
+    # Separate CVEs into those with scraped content and others
+    cves_with_scraped_content_files = []
+    remaining_cve_files = []
+    all_cve_files = list(nvd_data_dir.glob("CVE-*.json"))
+
+    for file_path in all_cve_files:
             with open(file_path, "r") as f:
                 cve_data = json.load(f)
                 cve_id = cve_data.get("cve_id")
