@@ -100,7 +100,7 @@ def process_cve_json(json_file_path: Path):
     cve_id = Path(json_file_path).stem  # Filename without extension is CVE ID
     logger.info(f"Processing CVE: {cve_id} from {json_file_path}")
     
-    print(f"Processing JSON file: {json_file_path}")
+    print(f"  Processing JSON file: {json_file_path}")
     # --- Retrieve repo_name_from_patch from the top level of cve_data ---
     repo_name_from_patch = cve_data.get("repo_name_from_patch")
     if not repo_name_from_patch:
@@ -109,11 +109,16 @@ def process_cve_json(json_file_path: Path):
         )
         return  # Skip processing this CVE if repo_name is missing at CVE level
 
-    print(f"  repo_name_from_patch: {repo_name_from_patch}")
+    print(f"    repo_name_from_patch: {repo_name_from_patch}")
     repo_path = REPOS_DIR / repo_name_from_patch  # Construct repo_path here, once per CVE
-    print(f"  repo_path: {repo_path}")
+    print(f"    repo_path: {repo_path}")
 
-    for snippet_info in cve_data:
+    # --- Check if 'vulnerable_snippets' key exists and is a list ---
+    if 'vulnerable_snippets' not in cve_data or not isinstance(cve_data['vulnerable_snippets'], list):
+        logger.error(f"Expected 'vulnerable_snippets' list not found or invalid in {json_file_path}. Skipping CVE.")
+        return
+
+    for snippet_info in cve_data['vulnerable_snippets']: # Iterate over vulnerable_snippets list
         file_path = snippet_info.get("file_path")
         line_numbers = snippet_info.get("line_numbers")
         introducing_commits_dict = snippet_info.get("introducing_commits", {})
