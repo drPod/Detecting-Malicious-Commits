@@ -193,6 +193,7 @@ def process_cve_json(json_file_path: Path):
         # --- Extract Code Snippet ---
         code_snippet_content = extract_code_snippet(repo_path, file_path, line_numbers)
         if code_snippet_content:
+            print(f"    Snippet extracted for: {file_path}")
             # --- Save Snippet and Metadata ---
             cve_snippet_dir = EXTRACTED_SNIPPETS_DIR / "vulnerable" / cve_id
             cve_snippet_dir.mkdir(parents=True, exist_ok=True)
@@ -230,6 +231,11 @@ def process_cve_json(json_file_path: Path):
             logger.warning(
                 f"Failed to extract code snippet for {cve_id}, file: {file_path}, lines: {line_numbers}"
             )
+            print(f"    Snippet extraction failed for: {file_path}")
+        print("-" * 30)  # Separator for each snippet info
+
+    print("=" * 50)  # Separator for each CVE JSON file
+    logger.info(f"Finished processing CVE: {cve_id}")
 
 
 def main():
