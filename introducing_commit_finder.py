@@ -306,6 +306,90 @@ def parse_gemini_json_output(gemini_output: str, cve_id: str, attempt_number: in
         raise ValueError("JSON markers '```json' and '```' not found in Gemini output.")
 
 
+def construct_re_query_prompt_for_file_not_found(
+    cve_id: str, repo_name_from_patch: str, original_file_path: str
+) -> str:
+    """
+    Constructs a refined prompt for Gemini to correct a file path that was not found.
+    """
+    repo_name_for_prompt = "".join(
+        c if c.isalnum() or c in [".", "_", "-"] else "_"
+        for c in repo_name_from_patch or "unknown_repository"
+    )
+    cve_id_for_prompt = "".join(
+        c if c.isalnum() or c in [".", "_", "-"] else "_" for c in cve_id
+    )
+
+    prompt_part1 = "Correction needed:\n"
+    prompt_part2 = f"For CVE ID {cve_id_for_prompt} and repository '{repo_name_for_prompt}', you previously provided the file path '{original_file_path}'.\n"
+    prompt_part3 = "However, this file path was **not found** in the repository at the commit before the CVE publication date.\n"
+    prompt_part4 = "**Your task is to provide a corrected file path** for the same vulnerable code snippet.\n"
+    prompt_part5 = "It is crucial that the corrected file path is valid and exists in the repository at the historical commit (before the CVE).\n"
+    prompt_part6 = "If the original file path was incorrect due to a minor typo or case issue, please correct it.\n"
+    prompt_part7 = "If the file was moved or renamed, provide the current path of the vulnerable code in the historical version.\n"
+    prompt_part8 = "If you cannot find a valid corrected file path, or if the original file path was correct and the issue is on our side, please indicate that you cannot provide a corrected path.\n"
+    prompt_part9 = "Return your response as a JSON formatted list of dictionaries, exactly as before, enclosed in ```json and ``` markers.\n"
+    prompt_part10 = "If you cannot provide a corrected path, return an empty JSON list: ```json\n[]\n```\n"
+    prompt_part11 = "Example of corrected JSON response (if a correction is found):\n```json\n[{\"file_path\": \"corrected/path/to/file.c\", \"line_numbers\": [123, 125]}]\n```\n"
+    prompt_part12 = "[DEBUG RE-QUERY PROMPT END]"
+
+    re_query_prompt_text = (
+        prompt_part1
+        + prompt_part2
+        + prompt_part3
+        + prompt_part4
+        + prompt_part5
+        + prompt_part6
+        + prompt_part7
+        + prompt_part8
+        + prompt_part9
+        + prompt_part10
+        + prompt_part11
+        + prompt_part12
+    )
+    return re_query_prompt_text
+
+
+def re_analyze_with_gemini_for_corrected_path(
+    repo_path: Path,
+    repo_name_from_patch: str,
+    cve_id: str,
+    original_file_path: str,
+    models,
+):
+    """
+    Re-analyzes with Gemini to get a corrected file path.
+    """
+    re_query_prompt = construct_re_query_prompt_for_file_not_found(
+        cve_id, repo_name_from_patch, original_file_path
+    )
+    logger.info(f"Sending re-query prompt to Gemini for corrected file path for CVE: {cve_id}, original path: {original_file_path}")
+    logger.debug(f"Re-query prompt: {re_query_prompt}")
+
+    gemini_output = None
+    for model_name in models:  # Use the same models as in the initial analysis
+        current_model = genai.GenerativeModel(model_name)
+        try:
+            response = current_model.generate_content(re_query_prompt)
+            gemini_output = response.text
+            logger.debug(f"Gemini Re-query Output (Model: {model_name}) for CVE {cve_id}, original path {original_file_path}:\n{gemini_output}")
+            break  # If successful, break from model loop
+        except Exception as e:
+            logger.error(f"Error during Gemini re-query with model {model_name} for CVE {cve_id}, original path {original_file_path}: {e}")
+            continue  # Try next model if available
+
+    if not gemini_output:
+        logger.warning(f"No Gemini output received for re-query for CVE {cve_id}, original path: {original_file_path} after trying all models.")
+        return None  # Indicate failure to get re-query output
+
+    try:
+        corrected_snippets_raw = parse_gemini_json_output(gemini_output, cve_id, attempt_number=1)  # attempt_number=1 for re-query
+        return corrected_snippets_raw  # Return parsed snippets from re-query
+    except Exception as e:  # Parsing error in re-query output
+        logger.error(f"Error parsing Gemini re-query output for CVE {cve_id}, original path {original_file_path}: {e}")
+        return None  # Indicate parsing failure
+
+
 def analyze_with_gemini(
     repo_path: Path,
     repo_name_from_patch: str,
@@ -532,12 +616,48 @@ def analyze_with_gemini(
             file_path_in_repo = repo_path / snippet["file_path"]
             if not file_path_in_repo.exists() or not file_path_in_repo.is_file():
                 logger.warning(
-                    f"File '{snippet['file_path']}' from Gemini output not found in repository at {file_path_in_repo.absolute()}. Skipping git blame for this file."
+                    f"File '{snippet['file_path']}' from Gemini output not found in repository at {file_path_in_repo.absolute()}."
                 )
-                vulnerable_snippets_with_commits.append(
-                    {**snippet, "introducing_commits": {}}
-                )  # Keep snippet info, but no blame
-                continue
+                # --- Re-query Gemini for corrected file path ---
+                re_query_results = re_analyze_with_gemini_for_corrected_path(
+                    repo_path, repo_name_from_patch, cve_id, snippet["file_path"], models
+                )
+                if re_query_results and isinstance(re_query_results, list):
+                    if re_query_results:  # Check if the list is not empty - if it's empty, Gemini couldn't provide correction
+                        first_corrected_snippet = re_query_results[0]  # Take the first corrected snippet (assuming only one file path correction is needed per original snippet)
+                        corrected_file_path = first_corrected_snippet.get("file_path")
+                        corrected_line_numbers = first_corrected_snippet.get("line_numbers")
+                        if corrected_file_path and corrected_line_numbers:
+                            logger.info(f"Gemini provided a corrected file path: '{corrected_file_path}' for CVE: {cve_id}, original path: '{snippet['file_path']}'")
+                            snippet["file_path"] = corrected_file_path  # Update to corrected file path
+                            snippet["line_numbers"] = corrected_line_numbers  # Update line numbers as well, just in case
+                            file_path_in_repo = repo_path / snippet["file_path"]  # Re-evaluate file_path_in_repo with corrected path
+                            if file_path_in_repo.exists() and file_path_in_repo.is_file():  # Double check if corrected file path exists
+                                logger.info(f"Corrected file path '{snippet['file_path']}' found in repository. Proceeding with git blame.")
+                            else:
+                                logger.warning(f"Corrected file path '{snippet['file_path']}' from Gemini still not found in repository at {file_path_in_repo.absolute()}. Skipping git blame for this file.")
+                                vulnerable_snippets_with_commits.append(
+                                    {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
+                                )
+                                continue  # Skip to next snippet
+                        else:
+                            logger.warning("Corrected file path or line numbers missing in Gemini re-query response. Skipping git blame for original file path.")
+                            vulnerable_snippets_with_commits.append(
+                                {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
+                            )
+                            continue  # Skip to next snippet
+                    else:  # Gemini returned empty list in re-query, indicating no correction
+                        logger.info(f"Gemini could not provide a corrected file path for CVE: {cve_id}, original path: '{snippet['file_path']}'. Skipping git blame for this file.")
+                        vulnerable_snippets_with_commits.append(
+                            {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
+                        )
+                        continue  # Skip to next snippet
+                else:  # Re-query failed or parsing error
+                    logger.warning(f"Failed to get or parse corrected file path from Gemini for CVE: {cve_id}, original path: '{snippet['file_path']}'. Skipping git blame for this file.")
+                    vulnerable_snippets_with_commits.append(
+                        {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
+                    )
+                    continue  # Skip to next snippet
 
             introducing_commits_for_file: Dict[int, str] = (
                 {}
