@@ -7,6 +7,8 @@ import logging
 import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import google.api_core.exceptions
+import google.generativeai.types.generation_types
 from tqdm import tqdm
 
 # Define max workers in a variable
@@ -57,7 +59,7 @@ def analyze_with_gemini(cve_description: str, references: list):
     prompt_text += "Ensure your response is enclosed in ```json and ``` markers."
 
     json_retry_count = 0
-    max_json_retries = 1
+    max_json_retries = 0 # Only retry once if JSON is invalid
     retry_count = 0
     max_retries = 10
     while retry_count <= max_retries:
@@ -110,19 +112,31 @@ def analyze_with_gemini(cve_description: str, references: list):
                 "reason": f"Could not parse Gemini JSON output after correction attempts: {gemini_output}",
             }
 
-        except genai.APIError as e:  # Catch API errors, including rate limits
+        except genai.APIError as e:
             if e.status_code == 429 and retry_count < max_retries:  # 429 is rate limit
                 wait_time = 2**retry_count  # Exponential backoff
                 logging.info(f"Rate limit hit. Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
                 retry_count += 1
                 logging.debug(f"Retrying Gemini API request, attempt {retry_count}/{max_retries}.")
+            elif isinstance(e, google.api_core.exceptions.ServiceUnavailable): # Explicitly check for ServiceUnavailable
+                retry_count += 1
+                if retry_count <= max_retries:
+                    wait_time = 5  # Fixed delay for ServiceUnavailable errors
+                    logging.warning(f"Service Unavailable (503) error encountered. Retrying in {wait_time} seconds... (Attempt {retry_count}/{max_retries})")
+                    time.sleep(wait_time)
+                else:
+                    logging.error(f"Max retries reached for Service Unavailable error. Aborting.")
+                    return {"malicious_intent_likely": False, "reason": f"Gemini API Service Unavailable after max retries: {e}"}
+            elif isinstance(e, google.api_core.exceptions.InternalServerError): # Explicitly check for InternalServerError
+                logging.error(f"Internal Server Error (500) from Gemini API. This indicates a server-side issue. No retry.")
+                return {"malicious_intent_likely": False, "reason": f"Gemini API Internal Server Error: {e}"} # No retry for internal server error
+            elif isinstance(e, google.generativeai.types.generation_types.BlockedPromptError):
+                logging.warning(f"Gemini API blocked the prompt. No retry.")
+                return {"malicious_intent_likely": False, "reason": f"Gemini API blocked the prompt: {e}"} # No retry for blocked prompt
             else:
                 logging.error(f"Gemini API error after max retries for CVE analysis: {e}")
-                return {
-                    "malicious_intent_likely": False,
-                    "reason": f"Gemini API error: {e}",
-                }  # Propagate other API errors or max retries reached
+                return {"malicious_intent_likely": False, "reason": f"Gemini API error: {e}"}  # For other API errors after max retries
         except Exception as e:  # Catch any other exceptions
             logging.error(f"Unexpected error during Gemini API call: {e}")
             return {
