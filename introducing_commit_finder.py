@@ -799,10 +799,14 @@ def main():
                         )
                         try:
                             with open(output_file_path_cve, "w") as outfile:
+                                output_data = {
+                                    "repo_name_from_patch": analysis_result["repo_name_from_patch"],
+                                    "vulnerable_snippets": analysis_result["vulnerable_snippets"]
+                                }
                                 json.dump(
-                                    analysis_result["vulnerable_snippets"],
+                                    output_data,
                                     outfile,
-                                    indent=2,
+                                    indent=2
                                 )
                             logger.info(
                                 f"Vulnerable lines saved to {output_file_path_cve.absolute()}"
