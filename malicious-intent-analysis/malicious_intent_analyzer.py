@@ -7,6 +7,7 @@ import logging
 import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
 
 # Define max workers in a variable
 MAX_WORKERS = 10
@@ -152,9 +153,7 @@ if __name__ == "__main__":
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = []
-        for file_path in nvd_data_dir.glob(
-            "CVE-*.json"
-        ):  # Assumes filenames start with CVE-
+        for file_path in tqdm(nvd_data_dir.glob("CVE-*.json"), desc="Processing CVE files"):  # Assumes filenames start with CVE-
             with open(file_path, "r") as f:
                 cve_data = json.load(f)
                 cve_id = cve_data.get("cve_id")  # Use .get() to avoid KeyError
