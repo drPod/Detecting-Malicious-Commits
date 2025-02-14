@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 from pathlib import Path
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 MAX_WORKERS = 12
 MAX_RETRIES = 3
@@ -17,6 +18,8 @@ INDEX_FILE = "scraped_content_index.json"
 SCRAPED_CONTENT_DIR = "scraped_content"
 
 # Setup logging
+index_lock = threading.Lock()
+
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
@@ -24,16 +27,18 @@ logging.basicConfig(
 def load_index():
     """Loads the index from JSON file, or returns an empty dict if file not found."""
     try:
-        with open(INDEX_FILE, 'r') as f:
-            return json.load(f)
+        with index_lock:
+            with open(INDEX_FILE, 'r') as f:
+                return json.load(f)
     except FileNotFoundError:
         return {}
 
 def save_index(index_data):
     """Saves the index data to JSON file."""
     Path(SCRAPED_CONTENT_DIR).mkdir(parents=True, exist_ok=True) # Ensure directory exists before saving index
-    with open(INDEX_FILE, 'w') as f:
-        json.dump(index_data, f, indent=4)
+    with index_lock:
+        with open(INDEX_FILE, 'w') as f:
+            json.dump(index_data, f, indent=4)
 
 
 def scrape_url(url, cve_id):
@@ -75,8 +80,7 @@ def scrape_url(url, cve_id):
             time.sleep(RETRY_DELAY) # Wait before retrying
         else:
             logging.error(f"CVE: {cve_id} - Max retries reached for URL: {url}. Scraping failed.")
-            return None
-    return None # Should not reach here, but for clarity
+            return None # Explicitly return None after max retries
 
 
 def save_content_to_file(url, content, cve_id):
@@ -90,7 +94,7 @@ def save_content_to_file(url, content, cve_id):
     """
     if content:
         parsed_url = urlparse(url)
-        base_filename = parsed_url.netloc + parsed_url.path.replace("/", "_")
+        base_filename = parsed_url.netloc + "_" + parsed_url.path.lstrip('/').replace("/", "_")
         safe_filename = "".join(x if x.isalnum() or x in "._-" else "_" for x in base_filename)
         if not safe_filename:
             safe_filename = "unnamed_content"
@@ -135,9 +139,12 @@ if __name__ == "__main__":
     def process_url(url_cve_pair):
         """Processes a single URL and CVE ID pair."""
         url, cve_id = url_cve_pair
-        scraped_content = scrape_url(url, cve_id)
-        if scraped_content:
-            save_content_to_file(url, scraped_content, cve_id)
+        try:
+            scraped_content = scrape_url(url, cve_id)
+            if scraped_content:
+                save_content_to_file(url, scraped_content, cve_id)
+        except Exception as e:
+            logging.error(f"CVE: {cve_id} - Error processing URL {url} in thread: {e}")
         time.sleep(DELAY_BETWEEN_REQUESTS) # Be respectful
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
