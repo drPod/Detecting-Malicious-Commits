@@ -21,12 +21,8 @@ def analyze_with_gemini(cve_description: str, references: list):
     """
     Analyzes CVE description and references using Gemini to determine malicious intent.
     """
-    prompt_text = f"""
-    Analyze the following CVE description and associated references to determine if the vulnerability
-    was likely introduced with malicious intent."""
-    prompt_text += """
-
-    """
+    prompt_text = "Analyze the following CVE description and associated references to determine if the vulnerability "
+    prompt_text += "was likely introduced with malicious intent.\n\n"
     prompt_text += "CVE Description: " + cve_description + "\n\n"
     prompt_text += "References:\n"
     for ref in references:
@@ -65,18 +61,16 @@ Ensure your response is enclosed in ```json and ``` markers."""
             return gemini_json
         except json.JSONDecodeError:
             if retry_count < max_retries:
-                correction_prompt = prompt_text + """
-
-**Response was not valid JSON.**
-
-Please provide your response again as a valid JSON object, and ensure it is enclosed in ```json and ``` markers.
-```json
-{
-"malicious_intent_likely": true/false,
-"reason": "brief explanation of your reasoning"
-}
-```
-Ensure your response is enclosed in ```json and ``` markers."""
+                correction_prompt = prompt_text + "\n\n"
+                correction_prompt += "**Response was not valid JSON.**\n\n"
+                correction_prompt += "Please provide your response again as a valid JSON object, and ensure it is enclosed in ```json and ``` markers.\n"
+                correction_prompt += "```json\n"
+                correction_prompt += "{\n"
+                correction_prompt += '"malicious_intent_likely": true/false,\n'
+                correction_prompt += '"reason": "brief explanation of your reasoning"\n'
+                correction_prompt += "}\n"
+                correction_prompt += "```\n"
+                correction_prompt += "Ensure your response is enclosed in ```json and ``` markers."
                 response = model.generate_content(correction_prompt)
                 gemini_output = response.text
                 json_match = re.search(r"```json\s*(.*?)\s*```", gemini_output, re.DOTALL)
