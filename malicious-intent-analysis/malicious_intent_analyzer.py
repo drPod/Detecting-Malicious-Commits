@@ -10,14 +10,15 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
 # Define max workers in a variable
-MAX_WORKERS = 10
+MAX_WORKERS = 12
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Setup logging
-logging.basicConfig(filename='malicious_intent_analyzer.log', level=logging.INFO,
+logging.basicConfig(filename='malicious_intent_analyzer.log', level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s - %(message)s')
+logging.debug("Starting malicious intent analyzer script.")
 
 # Configure Gemini API - replace with your actual API key or setup
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -28,6 +29,7 @@ def analyze_with_gemini(cve_description: str, references: list):
     """
     Analyzes CVE description and references using Gemini to determine malicious intent.
     """
+    logging.debug(f"Analyzing CVE description for malicious intent.")
     prompt_text = "Analyze the following CVE description and associated references to determine if the vulnerability was likely introduced with malicious intent. "
     prompt_text += "\n\n"
     prompt_text += "CVE Description: " + cve_description + ". "
@@ -54,12 +56,14 @@ def analyze_with_gemini(cve_description: str, references: list):
     prompt_text += "```\n"
     prompt_text += "Ensure your response is enclosed in ```json and ``` markers."
 
+    json_retry_count = 0
+    max_json_retries = 1
     retry_count = 0
-    max_retries = 3
+    max_retries = 10
     while retry_count <= max_retries:
         try:
             response = model.generate_content(prompt_text)
-            gemini_output = response.text
+            gemini_output = response.text # Get text content directly
 
             json_match = re.search(r"```json\s*(.*?)\s*```", gemini_output, re.DOTALL)
             if json_match:
@@ -68,10 +72,12 @@ def analyze_with_gemini(cve_description: str, references: list):
                 json_string = gemini_output  # Try to parse the whole output if markers are missing
 
             gemini_json = json.loads(json_string)
+            logging.debug(f"Successfully parsed JSON output from Gemini.")
             return gemini_json
         except json.JSONDecodeError:
-            if retry_count < max_retries:
+            if json_retry_count < max_json_retries:
                 correction_prompt = prompt_text + "\n\n"
+                logging.debug("Gemini output was not valid JSON. Requesting JSON correction.")
                 correction_prompt += "**Response was not valid JSON.**\n\n"
                 correction_prompt += "Please provide your response again as a valid JSON object, and ensure it is enclosed in ```json and ``` markers.\n"
                 correction_prompt += "```json\n"
@@ -95,10 +101,13 @@ def analyze_with_gemini(cve_description: str, references: list):
                         return gemini_json
                     except json.JSONDecodeError:
                         pass  # Still invalid after correction prompt, fall through to retry/fail
+                json_retry_count += 1 # Increment JSON retry counter
+            else:
+                logging.warning(f"Max JSON decode retries reached for CVE analysis.")
 
             return {
                 "malicious_intent_likely": False,
-                "reason": f"Could not parse Gemini JSON output even after correction: {gemini_output}",
+                "reason": f"Could not parse Gemini JSON output after correction attempts: {gemini_output}",
             }
 
         except genai.APIError as e:  # Catch API errors, including rate limits
@@ -107,15 +116,18 @@ def analyze_with_gemini(cve_description: str, references: list):
                 logging.info(f"Rate limit hit. Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
                 retry_count += 1
+                logging.debug(f"Retrying Gemini API request, attempt {retry_count}/{max_retries}.")
             else:
+                logging.error(f"Gemini API error after max retries for CVE analysis: {e}")
                 return {
                     "malicious_intent_likely": False,
                     "reason": f"Gemini API error: {e}",
                 }  # Propagate other API errors or max retries reached
         except Exception as e:  # Catch any other exceptions
+            logging.error(f"Unexpected error during Gemini API call: {e}")
             return {
                 "malicious_intent_likely": False,
-                "reason": f"Gemini API error: {e}",
+                "reason": f"Unexpected error during Gemini API call: {e}",
             }  # Broader exception catch
 
 
@@ -140,12 +152,14 @@ def save_state(state):
 
 
 if __name__ == "__main__":
+    logging.debug("Starting main execution block.")
     nvd_data_dir = Path("../nvd_data")
     output_file = Path("malicious_intent_analysis_results.json")
 
     if not nvd_data_dir.is_dir():
         logging.error(f"Error: NVD data directory '{nvd_data_dir}' not found.")
         exit(1)
+    logging.debug(f"NVD data directory found: {nvd_data_dir}")
 
     results = {}
     processed_cves_state = load_state()
@@ -159,11 +173,13 @@ if __name__ == "__main__":
                 cve_id = cve_data.get("cve_id")  # Use .get() to avoid KeyError
                 if not cve_id:
                     logging.warning(f"CVE ID not found in {file_path}. Skipping.")
+                    logging.debug(f"Skipping file: {file_path} due to missing CVE ID.")
                     continue  # Skip to the next file
 
                 if cve_id in processed_cves_state:
                     logging.info(f"CVE {cve_id} already processed. Skipping.")
                     continue  # Skip already processed CVEs
+                logging.debug(f"Processing CVE: {cve_id} from {file_path}")
 
                 description = cve_data["vulnerability_details"]["description"]
                 references = cve_data["references"]
@@ -179,5 +195,7 @@ if __name__ == "__main__":
 
     with open(output_file, "w") as f:
         json.dump(results, f, indent=4)
+    logging.debug(f"Analysis results saved to: {output_file}")
     save_state(processed_cves_state)  # Save state after all are processed or in case of interrupt
     logging.info(f"Analysis results saved to {output_file}. Processed {processed_cves_count} new CVEs in this run.")
+    logging.debug("Script finished execution.")
