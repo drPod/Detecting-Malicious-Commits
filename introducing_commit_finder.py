@@ -460,7 +460,7 @@ def analyze_with_gemini(
         prompt_part9 = "'file_path' is the path to the file in the repository *at the historical commit*.\n"
         prompt_part10 = "'line_numbers' is a list of integers representing the vulnerable line numbers in that file *at the historical commit*.\n"
         prompt_part11 = 'Example:\n```json\n[{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]\n```\n'
-        prompt_part12 = "[DEBUG PROMPT END]"
+        prompt_part12 = "[DEBUG PROMPT END]\n"
         prompt_part13 = "**Important:** Ensure the file paths you provide are correct for the repository version *before* the vulnerability.\n"
 
         prompt_text = (
@@ -637,6 +637,10 @@ def analyze_with_gemini(
     )  # Log vulnerable_snippets before return
 
     # Git blame analysis to find introducing commits
+    if not vulnerable_snippets: # Add check here, before git blame
+        logger.warning(f"No vulnerable snippets identified by Gemini for CVE: {cve_id}. Skipping git blame. `introducing_commits` will be empty.")
+        return {"cve_id": cve_id, "vulnerable_snippets": [], "repo_name_from_patch": repo_name_from_patch, "file_path_in_repo": None}
+
     if vulnerable_snippets and repo_path and (repo_path / ".git").exists():
         vulnerable_snippets_with_commits: List[Dict[str, Any]] = []
         for snippet in vulnerable_snippets:
@@ -786,6 +790,10 @@ def analyze_with_gemini(
                 {**snippet, "introducing_commits": introducing_commits_for_file}
             )  # Add blame results
         vulnerable_snippets = vulnerable_snippets_with_commits  # Replace original snippets with enriched ones
+        for enriched_snippet in vulnerable_snippets: # Check after git blame
+            if not enriched_snippet["introducing_commits"]: # Check if introducing_commits is empty
+                logger.warning(f"No introducing commits found after git blame for CVE: {cve_id}, file: {enriched_snippet['file_path']}, lines: {enriched_snippet['line_numbers']}. `introducing_commits` will be empty for this snippet.")
+
 
     if not vulnerable_snippets:
         logger.info(
