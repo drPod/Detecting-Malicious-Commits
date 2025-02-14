@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import google.api_core.exceptions
 import google.generativeai.types.generation_types
 from tqdm import tqdm
-from malicious_intent_analysis.references_url_scraper import load_index, SCRAPED_CONTENT_DIR
+from references_url_scraper import load_index, SCRAPED_CONTENT_DIR
 
 # Define max workers in a variable
 MAX_WORKERS = 12
@@ -62,7 +62,9 @@ model = genai.GenerativeModel(
 )
 
 
-def analyze_with_gemini(cve_id: str, cve_description: str, references: list, scraped_content_index):
+def analyze_with_gemini(
+    cve_id: str, cve_description: str, references: list, scraped_content_index
+):
     """
     Analyzes CVE description and references using Gemini to determine malicious intent.
     """
@@ -83,16 +85,20 @@ def analyze_with_gemini(cve_id: str, cve_description: str, references: list, scr
         # Include scraped content if available
         if cve_id in scraped_content_index:
             for item in scraped_content_index[cve_id]:
-                if item['url'] == ref_url:
-                    content_filename = item['filename']
+                if item["url"] == ref_url:
+                    content_filename = item["filename"]
                     content_path = Path(content_filename)
                     if content_path.exists():
                         try:
-                            with open(content_path, "r", encoding="utf-8") as content_file:
+                            with open(
+                                content_path, "r", encoding="utf-8"
+                            ) as content_file:
                                 scraped_text = content_file.read()
                                 prompt_text += f"\n---\nScraped Content from {ref_url}:\n{scraped_text}\n---\n"
                         except Exception as e:
-                            logging.error(f"CVE: {cve_id} - Error reading scraped content file {content_filename}: {e}")
+                            logging.error(
+                                f"CVE: {cve_id} - Error reading scraped content file {content_filename}: {e}"
+                            )
     prompt_text += (
         "Consider factors such as: Keywords in the description suggesting intentional "
         "backdoor, sabotage, or malicious code. References pointing to exploit code, "
@@ -258,7 +264,9 @@ def analyze_with_gemini(cve_id: str, cve_description: str, references: list, scr
 
 def process_cve(cve_id, cve_description, references, scraped_content_index):
     logging.info(f"CVE: {cve_id} - Analyzing CVE: {cve_id}")
-    result = analyze_with_gemini(cve_id, cve_description, references, scraped_content_index)
+    result = analyze_with_gemini(
+        cve_id, cve_description, references, scraped_content_index
+    )
     logging.info(f"CVE: {cve_id} - Analysis for CVE {cve_id}: {result}")
     return cve_id, result
 
@@ -314,7 +322,13 @@ if __name__ == "__main__":
                 description = cve_data["vulnerability_details"]["description"]
                 references = cve_data["references"]
                 futures.append(
-                    executor.submit(process_cve, cve_id, description, references, scraped_content_index)
+                    executor.submit(
+                        process_cve,
+                        cve_id,
+                        description,
+                        references,
+                        scraped_content_index,
+                    )
                 )
 
         with open(output_file_path, "a") as output_file:
