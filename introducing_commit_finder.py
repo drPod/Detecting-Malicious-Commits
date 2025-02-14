@@ -276,6 +276,33 @@ def extract_repo_name_from_patch_path(patch_file_path: Path) -> Optional[str]:
         return None
 
 
+def extract_file_paths_from_patch(patch_file_path: Path) -> List[str]:
+    """
+    Extracts file paths from a patch file (lines starting with '--- a/' and '+++ b/').
+    Returns a list of unique file paths.
+    """
+    file_paths = set()
+    try:
+        with open(patch_file_path, 'r') as f:
+            for line in f:
+                if line.startswith("--- a/") or line.startswith("+++ b/"):
+                    parts = line.split(" ", 2)
+                    if len(parts) > 1:
+                        file_path = parts[1].strip()
+                        if file_path and file_path != "/dev/null": # Ignore /dev/null paths
+                            file_paths.add(file_path)
+    except FileNotFoundError:
+        logger.error(f"Patch file not found: {patch_file_path}")
+        return []
+    except Exception as e:
+        logger.error(f"Error reading patch file {patch_file_path}: {e}")
+        return []
+
+    if not file_paths:
+        logger.info(f"No file paths found in patch file: {patch_file_path}")
+
+    return list(file_paths) # Return as a list
+
 def parse_gemini_json_output(gemini_output: str, cve_id: str, attempt_number: int) -> List[Dict[str, Any]]:
     """Parses JSON from Gemini output with improved robustness and error handling."""
     start_marker = "```json"
@@ -614,11 +641,12 @@ def analyze_with_gemini(
         vulnerable_snippets_with_commits: List[Dict[str, Any]] = []
         for snippet in vulnerable_snippets:
             file_path_in_repo = repo_path / snippet["file_path"]
+            original_gemini_file_path = snippet["file_path"] # Store original Gemini path for logging
             if not file_path_in_repo.exists() or not file_path_in_repo.is_file():
                 logger.warning(
                     f"File '{snippet['file_path']}' from Gemini output not found in repository at {file_path_in_repo.absolute()}."
                 )
-                # --- Re-query Gemini for corrected file path ---
+                # --- 1. Re-query Gemini for corrected file path ---
                 re_query_results = re_analyze_with_gemini_for_corrected_path(
                     repo_path, repo_name_from_patch, cve_id, snippet["file_path"], models
                 )
@@ -635,7 +663,7 @@ def analyze_with_gemini(
                             if file_path_in_repo.exists() and file_path_in_repo.is_file():  # Double check if corrected file path exists
                                 logger.info(f"Corrected file path '{snippet['file_path']}' found in repository. Proceeding with git blame.")
                             else:
-                                logger.warning(f"Corrected file path '{snippet['file_path']}' from Gemini still not found in repository at {file_path_in_repo.absolute()}. Skipping git blame for this file.")
+                                logger.warning(f"Corrected file path '{snippet['file_path']}' from Gemini still not found in repository at {file_path_in_repo.absolute()}.")
                                 vulnerable_snippets_with_commits.append(
                                     {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
                                 )
@@ -653,12 +681,33 @@ def analyze_with_gemini(
                         )
                         continue  # Skip to next snippet
                 else:  # Re-query failed or parsing error
-                    logger.warning(f"Failed to get or parse corrected file path from Gemini for CVE: {cve_id}, original path: '{snippet['file_path']}'. Skipping git blame for this file.")
-                    vulnerable_snippets_with_commits.append(
-                        {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
-                    )
-                    continue  # Skip to next snippet
+                    logger.warning(f"Failed to get corrected file path from Gemini for CVE: {cve_id}, original path: '{snippet['file_path']}'.")
+                    # Fallback to patch file paths
 
+                if not file_path_in_repo.exists() or not file_path_in_repo.is_file(): # Check again if file_path_in_repo still doesn't exist after re-query attempt (or if re-query was skipped)
+                    # --- 2. Fallback: Extract file paths from patch file ---
+                    patch_file_paths = extract_file_paths_from_patch(patch_file_path)
+                    found_patch_file_path = None
+                    for patch_file_path_candidate in patch_file_paths:
+                        candidate_path_in_repo = repo_path / patch_file_path_candidate
+                        if candidate_path_in_repo.exists() and candidate_path_in_repo.is_file():
+                            found_patch_file_path = patch_file_path_candidate
+                            break # Use the first valid path found in patch
+
+                    if found_patch_file_path:
+                        logger.info(f"Using file path from patch file: '{found_patch_file_path}' as fallback for CVE: {cve_id}, original Gemini path: '{original_gemini_file_path}'.")
+                        snippet["file_path"] = found_patch_file_path # Update snippet with patch file path
+                        file_path_in_repo = repo_path / snippet["file_path"] # Re-evaluate file_path_in_repo with patch file path
+                    else:
+                        logger.warning(f"No file path from patch file found in repository for CVE: {cve_id}, original Gemini path: '{original_gemini_file_path}'. Skipping git blame for this file.")
+                        vulnerable_snippets_with_commits.append(
+                            {**snippet, "introducing_commits": {}}  # Append with empty introducing_commits
+                        )
+                        continue # Skip to next snippet if no path from patch either
+                else:
+                    logger.info(f"Using original Gemini file path '{snippet['file_path']}' (or corrected path) for git blame for CVE: {cve_id}.") # Log if original or corrected path is used
+
+            # --- Proceed with git blame (using potentially corrected or patch-fallback file path) ---
             introducing_commits_for_file: Dict[int, str] = (
                 {}
             )  # line_number: commit_hash
