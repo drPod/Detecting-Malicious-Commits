@@ -100,6 +100,16 @@ def process_cve_json(json_file_path: Path):
     cve_id = Path(json_file_path).stem  # Filename without extension is CVE ID
     logger.info(f"Processing CVE: {cve_id} from {json_file_path}")
 
+    # --- Retrieve repo_name_from_patch from the top level of cve_data ---
+    repo_name_from_patch = cve_data.get("repo_name_from_patch")
+    if not repo_name_from_patch:
+        logger.error(
+            f"Repository name missing at the top level of JSON data for CVE: {cve_id} from {json_file_path}"
+        )
+        return  # Skip processing this CVE if repo_name is missing at CVE level
+
+    repo_path = REPOS_DIR / repo_name_from_patch  # Construct repo_path here, once per CVE
+
     for snippet_info in cve_data:
         file_path = snippet_info.get("file_path")
         line_numbers = snippet_info.get("line_numbers")
@@ -128,15 +138,7 @@ def process_cve_json(json_file_path: Path):
             )
             continue
 
-        repo_name_from_patch = snippet_info.get("repo_name_from_patch")
-        if not repo_name_from_patch:
-            logger.error(
-                f"Repository name missing from snippet info for {cve_id}, file: {file_path}"
-            )
-            continue
-
-        repo_path = REPOS_DIR / repo_name_from_patch
-        if not repo_path.exists() or not (repo_path / ".git").exists():
+        if not repo_path.exists() or not (repo_path / ".git").exists():  # Check repo_path validity only once per CVE
             logger.warning(
                 f"Repository not found at: {repo_path}. Skipping snippet extraction for {cve_id}, file: {file_path}"
             )
