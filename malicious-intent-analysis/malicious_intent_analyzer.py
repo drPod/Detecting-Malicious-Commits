@@ -19,30 +19,31 @@ def analyze_with_gemini(cve_description: str, references: list):
     """
     Analyzes CVE description and references using Gemini to determine malicious intent.
     """
-    prompt_text = "Analyze the following CVE description and associated references to determine if the vulnerability "
-    prompt_text += "was likely introduced with malicious intent.\n\n"
-    prompt_text += "CVE Description: " + cve_description + "\n\n"
-    prompt_text += "References:\n"
+    prompt_text = "Analyze the following CVE description and associated references to determine if the vulnerability was likely introduced with malicious intent. "
+    prompt_text += "\n\n"
+    prompt_text += "CVE Description: " + cve_description + ". "
+    prompt_text += "\n\n"
+    prompt_text += "References: " + "\n"
     for ref in references:
         tags_str = ", ".join(ref.get("tags", []))
         prompt_text += (
             "- URL: " + ref.get("url", "N/A") + ", Tags: [" + tags_str + "]\n"
         )
 
-    prompt_text += """Based on the description and references, is it likely that this vulnerability was introduced with malicious intent?
-Consider factors such as:
+    prompt_text += "Based on the description and references, is it likely that this vulnerability was introduced with malicious intent? "
+    prompt_text += """Consider factors such as:
 - Keywords in the description suggesting intentional backdoor, sabotage, or malicious code.
 - References pointing to exploit code, discussions of malicious use, or indicators of compromise.
 - Tags like 'exploit', 'malware', 'backdoor' in the references.
-
-Respond with a JSON object in the following format:
-```json
-{
-"malicious_intent_likely": true/false,
-"reason": "brief explanation of your reasoning"
-}
-```
-Ensure your response is enclosed in ```json and ``` markers."""
+"""
+    prompt_text += "Respond with a JSON object in the following format:\n"
+    prompt_text += "```json\n"
+    prompt_text += "{\n"
+    prompt_text += '"malicious_intent_likely": true/false,\n'
+    prompt_text += '"reason": "brief explanation of your reasoning"\n'
+    prompt_text += "}\n"
+    prompt_text += "```\n"
+    prompt_text += "Ensure your response is enclosed in ```json and ``` markers."
 
     retry_count = 0
     max_retries = 3
