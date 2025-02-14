@@ -340,15 +340,17 @@ def analyze_with_gemini(
         prompt_part2 = f"{cve_id_for_prompt} "
         prompt_part3 = "applied to the repository named "
         prompt_part4 = f"'{repo_name_for_prompt}'.\n"
-        prompt_part5 = "Identify the lines in the patched files that are vulnerable and need to be analyzed with git blame to find the introducing commit.\n"
-        prompt_part6 = "Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.\n"
-        prompt_part7 = (
+        prompt_part5 = "**Crucially, analyze the repository as it was *before* the vulnerability was introduced, specifically at the commit just prior to the CVE publication date.**\n"
+        prompt_part6 = "Identify the lines in the patched files that are vulnerable *in that historical version of the repository* and need to be analyzed with git blame to find the introducing commit.\n"
+        prompt_part7 = "Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers.\n"
+        prompt_part8 = (
             "Each dictionary should contain 'file_path' and 'line_numbers' keys.\n"
         )
-        prompt_part8 = "'file_path' is the path to the file in the repository.\n"
-        prompt_part9 = "'line_numbers' is a list of integers representing the vulnerable line numbers in that file.\n"
-        prompt_part10 = 'Example:\n```json\n[{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]\n```\n'
-        prompt_part11 = "[DEBUG PROMPT END]"
+        prompt_part9 = "'file_path' is the path to the file in the repository *at the historical commit*.\n"
+        prompt_part10 = "'line_numbers' is a list of integers representing the vulnerable line numbers in that file *at the historical commit*.\n"
+        prompt_part11 = 'Example:\n```json\n[{"file_path": "path/to/file.c", "line_numbers": [123, 125]}, {"file_path": "another/file.java", "line_numbers": [50]}]\n```\n'
+        prompt_part12 = "[DEBUG PROMPT END]"
+        prompt_part13 = "**Important:** Ensure the file paths you provide are correct for the repository version *before* the vulnerability.\n"
 
         prompt_text = (
             prompt_part1
@@ -356,12 +358,15 @@ def analyze_with_gemini(
             + prompt_part3
             + prompt_part4
             + prompt_part5
-            + "Return a JSON formatted list of dictionaries enclosed in ```json and ``` markers. **Ensure the JSON is valid and contains no comments or any text outside the JSON block.**\n"
+            + prompt_part6
             + prompt_part7
             + prompt_part8
             + prompt_part9
             + prompt_part10
+            + "**Ensure the JSON is valid and contains no comments or any text outside the JSON block.**\n"
             + prompt_part11
+            + prompt_part12
+            + prompt_part13
         )
 
         logger.debug(
