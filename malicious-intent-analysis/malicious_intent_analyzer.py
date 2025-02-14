@@ -100,3 +100,26 @@ Ensure your response is enclosed in ```json and ``` markers."""
                 return {"malicious_intent_likely": False, "reason": f"Gemini API error: {e}"} # Propagate other API errors or max retries reached
         except Exception as e: # Catch any other exceptions
             return {"malicious_intent_likely": False, "reason": f"Gemini API error: {e}"} # Broader exception catch
+def process_cve(cve_id, cve_description, references):
+    print(f"Analyzing CVE: {cve_id}") # Optional: for logging/monitoring
+    result = analyze_with_gemini(cve_description, references)
+    print(f"Analysis for CVE {cve_id}: {result}") # Optional: for logging/monitoring
+    return cve_id, result
+
+if __name__ == "__main__":
+    # Example Usage (replace with your actual CVE data loading logic)
+    cve_data_list = [
+        {"cve_id": "CVE-TEST-001", "description": "Test CVE description 1.", "references": [{"url": "http://example.com", "tags": ["test"]}]},
+        {"cve_id": "CVE-TEST-002", "description": "Test CVE description 2.", "references": [{"url": "http://example2.com", "tags": ["test2"]}]},
+        # ... more CVE data
+    ]
+
+    with ThreadPoolExecutor(max_workers=10) as executor: # Adjust max_workers as needed
+        futures = [executor.submit(process_cve, cve_data['cve_id'], cve_data['description'], cve_data['references']) for cve_data in cve_data_list]
+        results = {}
+        for future in as_completed(futures):
+            cve_id, result = future.result()
+            results[cve_id] = result
+
+    print("All analyses completed.")
+    print("Results:", results) # Or process/save the results as needed
