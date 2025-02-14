@@ -27,6 +27,7 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 logging.debug("Starting malicious intent analyzer script.")
+logging.debug(f"Current working directory: {os.getcwd()}")
 
 # Configure Gemini API - replace with your actual API key or setup
 # WARNING: Disabling safety settings can lead to the model generating harmful content.
@@ -354,6 +355,11 @@ if __name__ == "__main__":
                 )
 
     with open(output_file, "a") as output_file:
+        try:
+            logging.debug(f"Opened output file for appending: {output_file}")
+        except Exception as e:
+            logging.error(f"Error opening output file {output_file}: {e}")
+            return # Exit if we can't open the output file
         for future in as_completed(futures):  # Process results as they become available
             cve_id, result = future.result()
             results[cve_id] = result
@@ -361,8 +367,11 @@ if __name__ == "__main__":
                 result  # Save to state immediately after processing
             )
             processed_cves_count += 1  # Increment counter
-            json.dump({cve_id: result}, output_file)
-            output_file.write("\n")
+            try:
+                json.dump({cve_id: result}, output_file)
+                output_file.write("\n")
+            except Exception as e:
+                logging.error(f"Error writing to output file for CVE {cve_id}: {e}")
     logging.debug(f"Analysis results saved to: {output_file}")
     save_state(
         processed_cves_state
