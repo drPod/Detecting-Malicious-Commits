@@ -41,11 +41,23 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel(
     "gemini-pro",
     safety_settings=[  # Disable all safety filters - USE WITH EXTREME CAUTION
-        {"category": genai.types.HarmCategory.HARM_CATEGORY_HARASSMENT, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
-        {"category": genai.types.HarmCategory.HARM_CATEGORY_HATE_SPEECH, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
-        {"category": genai.types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
-        {"category": genai.types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE},
-    ]
+        {
+            "category": genai.types.HarmCategory.HARM_CATEGORY_HARASSMENT,
+            "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE,
+        },
+        {
+            "category": genai.types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE,
+        },
+        {
+            "category": genai.types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE,
+        },
+        {
+            "category": genai.types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            "threshold": genai.types.HarmBlockThreshold.BLOCK_NONE,
+        },
+    ],
 )
 
 
@@ -78,7 +90,9 @@ def analyze_with_gemini(cve_id: str, cve_description: str, references: list):
     prompt_text += "Respond with a JSON object in the following format:\n"
     prompt_text += "In the 'reason' field, briefly explain your reasoning. "
     prompt_text += "Specifically, mention any keywords from the CVE description or tags from the references that support your decision. "
-    prompt_text += "Summarize the logic you used to determine if malicious intent is likely.\n"
+    prompt_text += (
+        "Summarize the logic you used to determine if malicious intent is likely.\n"
+    )
     prompt_text += "```json\n"
     prompt_text += "{\n"
     prompt_text += '"malicious_intent_likely": true/false,\n'
@@ -105,7 +119,9 @@ def analyze_with_gemini(cve_id: str, cve_description: str, references: list):
                 json_string = gemini_output  # Try to parse the whole output if markers are missing
 
             gemini_json = json.loads(json_string)
-            logging.debug(f"CVE: {cve_id} - Successfully parsed JSON output from Gemini.")
+            logging.debug(
+                f"CVE: {cve_id} - Successfully parsed JSON output from Gemini."
+            )
             return gemini_json
         except json.JSONDecodeError:
             if json_retry_count < max_json_retries:
@@ -185,15 +201,29 @@ def analyze_with_gemini(cve_id: str, cve_description: str, references: list):
             elif isinstance(
                 e, google.generativeai.types.generation_types.BlockedPromptException
             ):
-                logging.warning(f"CVE: {cve_id} - Gemini API blocked the prompt. No retry.")
+                logging.warning(
+                    f"CVE: {cve_id} - Gemini API blocked the prompt. No retry."
+                )
                 return {
                     "malicious_intent_likely": False,
                     "reason": f"Gemini API blocked the prompt: {e}",
                 }  # No retry for blocked prompt
-            elif "Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`" in str(e) and "finish_reason" in str(e):
-                logging.error(f"CVE: {cve_id} - Gemini API returned an empty response (finish_reason 3). Inspecting safety ratings.")
-                safety_ratings_match = re.search(r"safety_ratings are: \[(.*?)\],", str(e))
-                safety_ratings_str = safety_ratings_match.group(1) if safety_ratings_match else "No safety ratings found in error message."
+            elif "Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`" in str(
+                e
+            ) and "finish_reason" in str(
+                e
+            ):
+                logging.error(
+                    f"CVE: {cve_id} - Gemini API returned an empty response (finish_reason 3). Inspecting safety ratings."
+                )
+                safety_ratings_match = re.search(
+                    r"safety_ratings are: \[(.*?)\],", str(e)
+                )
+                safety_ratings_str = (
+                    safety_ratings_match.group(1)
+                    if safety_ratings_match
+                    else "No safety ratings found in error message."
+                )
                 return {
                     "malicious_intent_likely": False,
                     "reason": f"Gemini API returned empty response due to safety filters or other issue (finish_reason 3). Safety Ratings: [{safety_ratings_str}] . Original error: {e}",
@@ -275,7 +305,9 @@ if __name__ == "__main__":
                 )
 
         with open(output_file_path, "a") as output_file:
-            for future in as_completed(futures):  # Process results as they become available
+            for future in as_completed(
+                futures
+            ):  # Process results as they become available
                 cve_id, result = future.result()
                 results[cve_id] = result
                 processed_cves_state[cve_id] = (
