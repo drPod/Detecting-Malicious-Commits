@@ -24,20 +24,24 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
+
 def load_index():
     """Loads the index from JSON file, or returns an empty dict if file not found."""
     try:
         with index_lock:
-            with open(INDEX_FILE, 'r') as f:
+            with open(INDEX_FILE, "r") as f:
                 return json.load(f)
     except FileNotFoundError:
         return {}
 
+
 def save_index(index_data):
     """Saves the index data to JSON file."""
-    Path(SCRAPED_CONTENT_DIR).mkdir(parents=True, exist_ok=True) # Ensure directory exists before saving index
+    Path(SCRAPED_CONTENT_DIR).mkdir(
+        parents=True, exist_ok=True
+    )  # Ensure directory exists before saving index
     with index_lock:
-        with open(INDEX_FILE, 'w') as f:
+        with open(INDEX_FILE, "w") as f:
             json.dump(index_data, f, indent=4)
 
 
@@ -54,33 +58,49 @@ def scrape_url(url, cve_id):
     """
     for attempt in range(MAX_RETRIES + 1):
         try:
-            logging.info(f"CVE: {cve_id} - Scraping URL: {url} (Attempt {attempt+1}/{MAX_RETRIES+1})")
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+            logging.info(
+                f"CVE: {cve_id} - Scraping URL: {url} (Attempt {attempt+1}/{MAX_RETRIES+1})"
+            )
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+            }
             response = requests.get(url, headers=headers, timeout=15)
             response.raise_for_status()
 
-            soup = BeautifulSoup(response.content, 'html.parser')
-            text_content = ' '.join(soup.stripped_strings)
+            soup = BeautifulSoup(response.content, "html.parser")
+            text_content = " ".join(soup.stripped_strings)
 
             logging.info(f"CVE: {cve_id} - Successfully scraped content from: {url}")
             return text_content
 
         except requests.exceptions.HTTPError as e:
-            logging.error(f"CVE: {cve_id} - HTTP Error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}")
+            logging.error(
+                f"CVE: {cve_id} - HTTP Error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}"
+            )
         except requests.exceptions.ConnectionError as e:
-            logging.error(f"CVE: {cve_id} - Connection Error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}")
+            logging.error(
+                f"CVE: {cve_id} - Connection Error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}"
+            )
         except requests.exceptions.Timeout as e:
-            logging.error(f"CVE: {cve_id} - Timeout Error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}")
+            logging.error(
+                f"CVE: {cve_id} - Timeout Error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}"
+            )
         except requests.exceptions.RequestException as e:
-            logging.error(f"CVE: {cve_id} - Request Exception scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}")
+            logging.error(
+                f"CVE: {cve_id} - Request Exception scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}"
+            )
         except Exception as e:
-            logging.error(f"CVE: {cve_id} - Unexpected error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}")
+            logging.error(
+                f"CVE: {cve_id} - Unexpected error scraping {url} (Attempt {attempt+1}/{MAX_RETRIES+1}): {e}"
+            )
 
         if attempt < MAX_RETRIES:
-            time.sleep(RETRY_DELAY) # Wait before retrying
+            time.sleep(RETRY_DELAY)  # Wait before retrying
         else:
-            logging.error(f"CVE: {cve_id} - Max retries reached for URL: {url}. Scraping failed.")
-            return None # Explicitly return None after max retries
+            logging.error(
+                f"CVE: {cve_id} - Max retries reached for URL: {url}. Scraping failed."
+            )
+            return None  # Explicitly return None after max retries
 
 
 def save_content_to_file(url, content, cve_id):
@@ -94,8 +114,12 @@ def save_content_to_file(url, content, cve_id):
     """
     if content:
         parsed_url = urlparse(url)
-        base_filename = parsed_url.netloc + "_" + parsed_url.path.lstrip('/').replace("/", "_")
-        safe_filename = "".join(x if x.isalnum() or x in "._-" else "_" for x in base_filename)
+        base_filename = (
+            parsed_url.netloc + "_" + parsed_url.path.lstrip("/").replace("/", "_")
+        )
+        safe_filename = "".join(
+            x if x.isalnum() or x in "._-" else "_" for x in base_filename
+        )
         if not safe_filename:
             safe_filename = "unnamed_content"
         filename = f"{SCRAPED_CONTENT_DIR}/{safe_filename}.txt"
@@ -108,11 +132,15 @@ def save_content_to_file(url, content, cve_id):
 
                 # Update index and save (only if file writing was successful)
                 index_data = load_index()
-                index_data.setdefault(cve_id, []).append({'url': url, 'filename': filename})
+                index_data.setdefault(cve_id, []).append(
+                    {"url": url, "filename": filename}
+                )
                 save_index(index_data)
 
         except IOError as e:
-            logging.error(f"CVE: {cve_id} - Error saving content to file {filename}: {e}")
+            logging.error(
+                f"CVE: {cve_id} - Error saving content to file {filename}: {e}"
+            )
 
     else:
         logging.warning(f"CVE: {cve_id} - No content to save for URL: {url}")
@@ -153,11 +181,11 @@ if __name__ == "__main__":
         scraped_content = scrape_url(url, cve_id)
         if scraped_content:
             save_content_to_file(url, scraped_content, cve_id)
-        time.sleep(DELAY_BETWEEN_REQUESTS) # Be respectful
+        time.sleep(DELAY_BETWEEN_REQUESTS)  # Be respectful
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = [executor.submit(process_url_cve_pair, pair) for pair in cve_url_list]
         for future in as_completed(futures):
-            future.result() # To catch any exceptions from threads
+            future.result()  # To catch any exceptions from threads
 
     logging.info("Scraping process completed for all URLs.")
