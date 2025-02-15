@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 
 MAX_WORKERS = 12
-MAX_RETRIES = 3
+MAX_RETRIES = 0
 RETRY_DELAY = 5  # seconds
 DELAY_BETWEEN_REQUESTS = 1  # seconds, delay after each request to be respectful
 
@@ -154,7 +154,9 @@ if __name__ == "__main__":
     logging.info(f"Scanning NVD data directory: {nvd_data_dir}")
 
     cve_url_list = []
-    existing_index = load_index()  # Load existing index to check for already scraped URLs
+    existing_index = (
+        load_index()
+    )  # Load existing index to check for already scraped URLs
     for file_path in nvd_data_dir.glob("CVE-*.json"):
         try:
             with open(file_path, "r") as f:
@@ -171,7 +173,9 @@ if __name__ == "__main__":
                         # Check if URL is already in the index for this CVE
                         already_scraped = False
                         if cve_id in existing_index:
-                            already_scraped = any(item['url'] == url for item in existing_index[cve_id])
+                            already_scraped = any(
+                                item["url"] == url for item in existing_index[cve_id]
+                            )
                         if not already_scraped:
                             cve_url_list.append((url, cve_id))
         except json.JSONDecodeError:
