@@ -154,6 +154,7 @@ if __name__ == "__main__":
     logging.info(f"Scanning NVD data directory: {nvd_data_dir}")
 
     cve_url_list = []
+    existing_index = load_index()  # Load existing index to check for already scraped URLs
     for file_path in nvd_data_dir.glob("CVE-*.json"):
         try:
             with open(file_path, "r") as f:
@@ -167,7 +168,12 @@ if __name__ == "__main__":
                 for ref in references:
                     url = ref.get("url")
                     if url:
-                        cve_url_list.append((url, cve_id))
+                        # Check if URL is already in the index for this CVE
+                        already_scraped = False
+                        if cve_id in existing_index:
+                            already_scraped = any(item['url'] == url for item in existing_index[cve_id])
+                        if not already_scraped:
+                            cve_url_list.append((url, cve_id))
         except json.JSONDecodeError:
             logging.error(f"Failed to decode JSON from file: {file_path}")
         except Exception as e:
